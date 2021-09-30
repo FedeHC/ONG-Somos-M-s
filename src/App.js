@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-
+import CategoriesForm from "./features/CategoriesForm";
 
 function App() {
   return (
-    <div >
-      <h1>App Screen</h1>
+    <div className="App">
+      <h1>Categorias</h1>
+      <CategoriesForm />
     </div>
   );
 }
