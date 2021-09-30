@@ -3,6 +3,8 @@ import { Formik, Form, ErrorMessage, useField } from "formik";
 import * as yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "./CategoriesForm.scss";
+
 
 // Max. file size (= 10 MB)
 const MAX_FILE_SIZE = 10485760;
