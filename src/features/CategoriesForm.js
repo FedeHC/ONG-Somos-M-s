@@ -55,6 +55,7 @@ function CategoriesForm() {
         )})
   });
 
+  // Handler for form submission in Formik component:
   const submitHandler = (values, { setSubmitting }) => {
     setTimeout(() => {
       alert(JSON.stringify(values, null, 2));
@@ -62,6 +63,7 @@ function CategoriesForm() {
     }, 400);
   };
 
+  // Rendering Formik form component:
   return (
     <Formik initialValues={initialValues}
             validationSchema={schema}
