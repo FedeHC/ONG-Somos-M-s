@@ -7,11 +7,12 @@ import * as Yup from 'yup';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import { Heading } from '@chakra-ui/layout';
+import { Center, Heading } from '@chakra-ui/layout';
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Select } from '@chakra-ui/select';
+
 
 
 
@@ -70,7 +71,7 @@ const Formnovedades = () => {
   
   
   return (
-    <div>
+    <Center>
     <Formik
       initialValues={ isObjEmpty(object2) ? initialValues : object2}
       validationSchema={formSchema}
@@ -84,7 +85,7 @@ const Formnovedades = () => {
               })
          )
          :(
-            axios.patch(`http://ongapi.alkemy.org/api/news/${object2.id}`, { values })
+            axios.put(`http://ongapi.alkemy.org/api/news/${object2.id}`, { values })
               .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -94,9 +95,9 @@ const Formnovedades = () => {
       }}
     >
       {(formik) => (
-        <Form className="loginForm">
+        <Form >
         <Heading m={4}>Formulario Novedades</Heading>
-          <Field name="title">
+          <Field mt={5} className="input" name="title">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.title && form.touched.title}>
                 <FormLabel htmlFor="title">Titulo</FormLabel>
@@ -105,7 +106,7 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
-          <Field name="content">
+          <Field mt={5} className="input" name="content">
             {({ form }) => (
               <FormControl
                 isInvalid={form.errors.content && form.touched.content}
@@ -121,7 +122,7 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
-          <Field name="category">
+          <Field mt={5} className="input" name="category">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.category && form.touched.category}>
                 <FormLabel htmlFor="category">Categoria</FormLabel>
@@ -136,7 +137,7 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
-          <Field name="image">
+          <Field mt={5} className="input" name="image">
             {({form }) => (
               <FormControl isInvalid={form.errors.image && form.touched.image}>
                 <FormLabel htmlFor="image">Imagen</FormLabel>
@@ -157,7 +158,7 @@ const Formnovedades = () => {
         </Form>
       )}
     </Formik>
-  </div>
+  </Center>
   );
 }
 
