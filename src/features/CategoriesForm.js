@@ -34,7 +34,7 @@ function CategoriesForm({ form }) {
   const initialValues = {
     name: form?.name ? form.name : "",
     description: form?.description ? form.description : "",
-    image: "", 
+    image: form?.image ? form.image : "", 
   };
 
   // Yup schema for Formik component:
@@ -59,12 +59,42 @@ function CategoriesForm({ form }) {
         )})
   });
 
-  // Handler for form submission in Formik component:
-  const submitHandler = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  // Async handler for sending form data used by the Formik component:
+  const submitHandler = async (values, {setStatus, resetForm, setSubmitting }) => {
+    try {
+      let response, string, method;
+      // If form object is received in props, submit by PUT method:
+      if(form && form.id) {
+        string = `${API_URL}/categories/${form.id}`;
+        method = "PUT";
+      }
+      // Otherwise by POST method:
+      else {
+        string = `${API_URL}/categories`;
+        method = "POST"
+      }
+
+      // API:
+      response = await fetch(string, 
+                             { method: method,
+                               body: JSON.stringify(values),
+                               headers: { "Content-Type": "application/json" }
+                             });
+      
+      if(response.status === 200) {
+        console.log("# Data sent with success.");
+        resetForm({});
+        setStatus({ success: true });
+      }
+      else {
+        console.error("# Data can't be sent.");
+        setStatus({ success: false });
+      }
+    }
+    catch(error) {
+      console.error(`# Error on fetch (PUT):\n- Details: ${error}`);
+    }
+    setSubmitting(false);
   };
 
   // Rendering Formik form component:
