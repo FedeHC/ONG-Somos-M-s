@@ -13,6 +13,13 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./FormActivities.css";
 import { Formik, Form, Field } from "formik";
 
+const obj = !!Math.round(Math.random() * 1) && {
+  name: "Actividad de prueba",
+  description: "Descripción de prueba",
+  file: undefined,
+  id: 1,
+};
+
 export const FormActivities = () => {
   function validateName(value) {
     let error;
@@ -36,12 +43,20 @@ export const FormActivities = () => {
     <VStack mt="2rem">
       <Container maxW="container.md" className="editFormCreationActivities">
         <Formik
-          initialValues={{ name: "" }}
+          initialValues={{
+            name: obj ? obj.name : "",
+            file: obj ? obj.file : undefined,
+          }}
           onSubmit={(values, actions) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              actions.setSubmitting(false);
-            }, 1000);
+            fetch(obj ? `/activities/:${obj.id}` : "/activities/create", {
+              method: obj ? "PATCH" : "POST",
+              body: JSON.stringify(values),
+            })
+              .then((response) => response.json())
+              .then((result) => console.log(result))
+              .catch((error) =>
+                console.log(`Fallo el ${obj ? `PATCH` : `POST`}`)
+              );
           }}
         >
           {(props) => (
@@ -69,7 +84,7 @@ export const FormActivities = () => {
 
               <CKEditor
                 editor={ClassicEditor}
-                data="<p></p>"
+                data={`<p>${obj ? obj.description : ""}</p>`}
                 onReady={(editor) => {}}
                 onChange={(event, editor) => {
                   const data = editor.getData();
