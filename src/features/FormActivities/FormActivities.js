@@ -8,6 +8,9 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "./FormActivities.css";
 
 export const FormActivities = () => {
   const [value, setValue] = React.useState("");
@@ -26,16 +29,26 @@ export const FormActivities = () => {
         </FormControl>
 
         <Text mb="8px">Descripción: </Text>
-        <Textarea
-          value={value}
-          onChange={handleInputChange}
-          placeholder="Descripción de actividad"
-          size="md"
-          variant="outline"
-          mb="1rem"
+        <CKEditor
+          editor={ClassicEditor}
+          data="<p></p>"
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+            console.log("Editor is ready to use!", editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onBlur={(event, editor) => {
+            console.log("Blur.", editor);
+          }}
+          onFocus={(event, editor) => {
+            console.log("Focus.", editor);
+          }}
         />
-        
-        <FormControl mb="1rem" id="image" isRequired>
+
+        <FormControl mt="1rem" mb="1rem" id="image" isRequired>
           <FormLabel>Imagen</FormLabel>
           <input type="file" accept=".png, .jpg" />
         </FormControl>
