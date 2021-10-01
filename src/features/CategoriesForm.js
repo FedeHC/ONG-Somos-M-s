@@ -69,11 +69,13 @@ function CategoriesForm() {
         {(formik) => {
           return (
             <Form>
+              {/* Name input */}
               <TextInput label="Nombre:"
                          name="name"
                          type="text" />
               <br /><br />
 
+              {/* Description input */}
               <label name="image">Descripción: </label>
               <br />
               <CKEditor editor={ ClassicEditor }
@@ -88,6 +90,7 @@ function CategoriesForm() {
                             className="error" />
               <br />
 
+              {/* Image file input */}
               <label name="image">Imagen: </label>
               <br />
               <input id="image"
@@ -96,14 +99,14 @@ function CategoriesForm() {
                      onChange={ (event) => {
                       const files = event.target.files;
                       let myFiles = Array.from(files);
-                      formik.setFieldValue("image", myFiles[0]); }}
-                    />
+                      formik.setFieldValue("image", myFiles[0]); }} />
               <br />
               <ErrorMessage name="image"
                             component="div"
                             className="error" />
               <br /><br />
 
+              {/* Submit button */}
               <button type="submit">Enviar</button>
             </Form>
           );
