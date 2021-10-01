@@ -25,11 +25,11 @@ const TextInput = ({ label, ...props }) => {
   );
 };
 
-function CategoriesForm() {
+function CategoriesForm({ form }) {
   // Initial form values for Formik component:
   const initialValues = {
-    name: "",
-    description: "",
+    name: form?.name ? form.name : "",
+    description: form?.description ? form.description : "",
     image: "", 
   };
 
@@ -83,7 +83,7 @@ function CategoriesForm() {
               <CKEditor editor={ ClassicEditor }
                         id="description"
                         name="description"
-                        data=""
+                        data={initialValues.description}
                         onChange={ (event, editor) => {
                           const data = editor.getData();
                           formik.setFieldValue("description", data) }} />
