@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +12,7 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-contro
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Select } from '@chakra-ui/select';
-import useAxios from '../../../hooks/useAxios';
+
 
 
 // validaciones
@@ -40,6 +41,9 @@ const object2 = {
 
 
 const Formnovedades = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [response, setResponse] = useState([]);
 
   const initialValues ={
     title: "",
@@ -49,10 +53,18 @@ const Formnovedades = () => {
   };
 
   // categories
-  const { response, error, loading} = useAxios({
-    method: 'Get',
-    url: 'http://ongapi.alkemy.org/api/categories',
-  });
+  useEffect(() => {
+    axios.get("http://ongapi.alkemy.org/api/categories")
+      .then((response) => {
+        setResponse(response.data);
+        console.log(response);
+        setLoading(false);
+      })
+      .catch((error) =>{
+        setError(error);
+        setLoading(false);
+      })
+  }, [])
   
   const isObjEmpty = (obj) => {
     return Object.keys(obj).length === 0;
@@ -65,6 +77,7 @@ const Formnovedades = () => {
       initialValues={ isObjEmpty(object2) ? initialValues : object2}
       validationSchema={formSchema}
       onSubmit={(values) => {
+
         console.log(values);
       }}
     >
@@ -127,7 +140,7 @@ const Formnovedades = () => {
             )}
           </Field>
           <Button mt={4} colorScheme="teal" type="submit">
-            Ingresar
+           {isObjEmpty(object2) ? "Enviar" : "Guardar"}
           </Button>
         </Form>
       )}
