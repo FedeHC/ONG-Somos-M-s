@@ -26,38 +26,46 @@ const TextInput = ({ label, ...props }) => {
 };
 
 function CategoriesForm() {
+  // Initial form values for Formik component:
+  const initialValues = {
+    name: "",
+    description: "",
+    image: "", 
+  };
+
+  // Yup schema for Formik component:
+  const schema = yup.object().shape({
+    name: yup.string()
+      .required("Campo requerido.")
+      .min(4, "Debe contener al menos 4 caracteres."),
+    description: yup.string()
+      .required("Campo requerido."),
+    image: yup.mixed()
+      .required("Campo requerido.")
+      .test("fileSize",
+            "El archivo es mayor a 10 MB",
+            (file) => file && file.size <= MAX_FILE_SIZE)
+      .test("type",
+            "Solo se aceptan los sig. formatos de imágen: jpeg, jpg y png",
+            (file) => {
+        return file && (
+          file.type === "image/jpeg" ||
+          file.type === "image/jpg" ||
+          file.type === "image/png"
+        )})
+  });
+
+  const submitHandler = (values, { setSubmitting }) => {
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
+  };
+
   return (
-    <Formik initialValues={
-      { name: "",
-        description: "",
-        image: "", 
-      }}
-      validationSchema={yup.object().shape({
-        name: yup.string()
-          .required("Campo requerido.")
-          .min(4, "Debe contener al menos 4 caracteres."),
-        description: yup.string()
-          .required("Campo requerido."),
-        image: yup.mixed()
-          .required("Campo requerido.")
-          .test("fileSize",
-                "El archivo es mayor a 10 MB",
-                (file) => file && file.size <= MAX_FILE_SIZE)
-          .test("type",
-                "Solo se aceptan los sig. formatos de imágen: jpeg, jpg y png",
-                (file) => {
-            return file && (
-              file.type === "image/jpeg" ||
-              file.type === "image/jpg" ||
-              file.type === "image/png"
-            )})
-      })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }} >
+    <Formik initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={submitHandler} >
         {(formik) => {
           return (
             <Form>
