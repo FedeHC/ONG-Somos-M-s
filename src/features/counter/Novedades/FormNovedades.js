@@ -29,10 +29,8 @@ const formSchema = Yup.object().shape({
 });
 
 // example object novedades
-const object1 = {
-  
-}
 const object2 = {
+  id:"1",
   title: "hola mundo",
   content: "<p> ejemplo de contenido </p>",
   category:"Eventos",
@@ -77,8 +75,22 @@ const Formnovedades = () => {
       initialValues={ isObjEmpty(object2) ? initialValues : object2}
       validationSchema={formSchema}
       onSubmit={(values) => {
-
-        console.log(values);
+        isObjEmpty(object2)
+         ?(
+            axios.post(`http://ongapi.alkemy.org/api/news`, { values })
+              .then(res => {
+                console.log(res);
+                console.log(res.data);
+              })
+         )
+         :(
+            axios.patch(`http://ongapi.alkemy.org/api/news/${object2.id}`, { values })
+              .then(res => {
+                console.log(res);
+                console.log(res.data);
+              })
+         )
+          console.log(values);
       }}
     >
       {(formik) => (
