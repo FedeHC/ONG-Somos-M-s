@@ -10,6 +10,7 @@ import { Heading } from '@chakra-ui/layout';
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
+import { Select } from '@chakra-ui/select';
 
 
 // validaciones
@@ -18,6 +19,8 @@ const formSchema = Yup.object().shape({
         .min(4,"Se requieren 4 caracteres como mínimo")
         .required("Requerido"),
   content: Yup.string()
+        .required("Requerido"),
+  category: Yup.string()
         .required("Requerido"),
 });
 
@@ -69,6 +72,19 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
+          <Field name="category">
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.category && form.touched.category}>
+                <FormLabel htmlFor="category">Categoria</FormLabel>
+                  <Select placeholder="elija una Categoria" {...field}>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </Select>
+                <FormErrorMessage>{form.errors.category}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field> 
           <Button mt={4} colorScheme="teal" type="submit">
             Ingresar
           </Button>
