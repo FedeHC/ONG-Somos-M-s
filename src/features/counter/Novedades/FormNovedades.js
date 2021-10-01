@@ -11,6 +11,7 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-contro
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Select } from '@chakra-ui/select';
+import useAxios from '../../../hooks/useAxios';
 
 
 // validaciones
@@ -27,9 +28,18 @@ const formSchema = Yup.object().shape({
 });
 
 
-
-
 const Formnovedades = () => {
+  
+  // categories
+  const { response, error, loading} = useAxios({
+    method: 'Get',
+    url: 'http://ongapi.alkemy.org/api/categories',
+  });
+  
+
+
+
+
   return (
     <div>
     <Formik
@@ -78,11 +88,13 @@ const Formnovedades = () => {
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.category && form.touched.category}>
                 <FormLabel htmlFor="category">Categoria</FormLabel>
-                  <Select placeholder="elija una Categoria" {...field}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </Select>
+                  {
+                    !loading 
+                     && ( error 
+                     ? <Input value={error} isDisabled />
+                     : <Select placeholder="elija una Categoria" {...field}>
+                        {response.data.map(category => <option key={category.id}>{category.name}</option>)}
+                       </Select>)}
                 <FormErrorMessage>{form.errors.category}</FormErrorMessage>
               </FormControl>
             )}
