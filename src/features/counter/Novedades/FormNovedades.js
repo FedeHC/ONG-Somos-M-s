@@ -3,15 +3,21 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import { Heading } from '@chakra-ui/layout';
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 
+
 // validaciones
 const formSchema = Yup.object().shape({
   title: Yup.string()
         .min(4,"Se requieren 4 caracteres como mínimo")
+        .required("Requerido"),
+  content: Yup.string()
         .required("Requerido"),
 });
 
@@ -45,7 +51,24 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
-          
+          <Field name="content">
+            {({ form }) => (
+              <FormControl
+                isInvalid={form.errors.content && form.touched.content}
+              >
+                <FormLabel htmlFor="content">Contenido</FormLabel>
+                <CKEditor editor={ ClassicEditor }
+                    id="content"
+                    name="content"
+                    data=""
+                    onChange={ (e,editor) => {
+                      const data = editor.getData();
+                      formik.setFieldValue("content", data)
+                    }} />
+                <FormErrorMessage>{form.errors.content}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
           <Button mt={4} colorScheme="teal" type="submit">
             Ingresar
           </Button>
