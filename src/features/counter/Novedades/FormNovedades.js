@@ -22,6 +22,8 @@ const formSchema = Yup.object().shape({
         .required("Requerido"),
   category: Yup.string()
         .required("Requerido"),
+  image: Yup.string()
+        .required("Requerido")
 });
 
 
@@ -84,7 +86,22 @@ const Formnovedades = () => {
                 <FormErrorMessage>{form.errors.category}</FormErrorMessage>
               </FormControl>
             )}
-          </Field> 
+          </Field>
+          <Field name="image">
+            {({form }) => (
+              <FormControl isInvalid={form.errors.image && form.touched.image}>
+                <FormLabel htmlFor="image">Imagen</FormLabel>
+                <Input id="image"
+                  type="file"
+                  onChange={ (event) => {
+                    const files = event.target.files;
+                    let myFiles = Array.from(files);
+                    formik.setFieldValue("image", myFiles[0]);
+                  }} />
+                <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
           <Button mt={4} colorScheme="teal" type="submit">
             Ingresar
           </Button>
