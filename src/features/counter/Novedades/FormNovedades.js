@@ -27,28 +27,42 @@ const formSchema = Yup.object().shape({
         .required("Requerido")
 });
 
+// example object novedades
+const object1 = {
+  
+}
+const object2 = {
+  title: "hola mundo",
+  content: "<p> ejemplo de contenido </p>",
+  category:"Eventos",
+  image:""
+}
+
 
 const Formnovedades = () => {
-  
+
+  const initialValues ={
+    title: "",
+    content: "",
+    category:"",
+    image:""
+  };
+
   // categories
   const { response, error, loading} = useAxios({
     method: 'Get',
     url: 'http://ongapi.alkemy.org/api/categories',
   });
   
-
-
-
-
+  const isObjEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  }
+  
+  
   return (
     <div>
     <Formik
-      initialValues={{
-        title: "",
-        content: "",
-        category:"",
-        image:""
-      }}
+      initialValues={ isObjEmpty(object2) ? initialValues : object2}
       validationSchema={formSchema}
       onSubmit={(values) => {
         console.log(values);
@@ -73,9 +87,7 @@ const Formnovedades = () => {
               >
                 <FormLabel htmlFor="content">Contenido</FormLabel>
                 <CKEditor editor={ ClassicEditor }
-                    id="content"
-                    name="content"
-                    data=""
+                    data={formik.values.content}
                     onChange={ (e,editor) => {
                       const data = editor.getData();
                       formik.setFieldValue("content", data)
