@@ -17,6 +17,10 @@ const ContactSchema = Yup.object().shape({
  email: Yup.string()
        .required("Requerido")
        .email("Email invalido"),
+ phone: Yup.string()
+ .required("Requerido")
+ .matches(/^[0-9]+$/, "Solo ingresar números")
+ .min(8, 'minimo 8 números')
 });
 
 
@@ -27,7 +31,7 @@ const Formcontact = () => {
       initialValues={{
        name:"",
        email:"",
-       phone:Number,
+       phone:"",
        message:""
       }}
       validationSchema={ContactSchema}
@@ -50,9 +54,18 @@ const Formcontact = () => {
           <Field name="email">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.email && form.touched.email}>
-                <FormLabel htmlFor="title">Correo electrónico</FormLabel>
-                <Input {...field} id="title" />
+                <FormLabel htmlFor="email">Correo electrónico</FormLabel>
+                <Input {...field} id="email" />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="phone">
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.phone && form.touched.phone}>
+                <FormLabel htmlFor="phone">Numero de telefono</FormLabel>
+                <Input {...field} type="tel" id="phone" />
+                <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
