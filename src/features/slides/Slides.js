@@ -1,141 +1,137 @@
-import React, { useState } from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import React from "react";
+import { Formik, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import * as Yup from "yup";
+
+const API_URL = "http://ongapi.alkemy.org/api";
 
 const MAX_FILE_SIZE = 10485760;
 
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Este campo es requerido")
-    .min(4, "Se requieren 4 caracteres como mínimo"),
-  description: Yup.string().required("Este campo es requerido"),
-  order: Yup.string().required("Este campo es requerido").min(1, "blablabla"),
-  image: Yup.mixed()
-    .required("Campo requerido.")
-    .test(
-      "fileSize",
-      "El archivo es mayor a 10 MB",
-      (file) => file && file.size <= MAX_FILE_SIZE
-    )
-    .test(
-      "type",
-      "Solo se aceptan los sig. formatos de imágen: jpeg, jpg y png",
-      (file) => {
+const Slides = ({ form }) => {
+  const initialValues = {
+    name: form?.name ? form.name : "",
+    description: form?.description ? form.description : "",
+    image: form?.image ? form.image : "",
+  };
+
+  const schema = Yup.object().shape({
+    name: Yup.string()
+      .required("Este campo es requerido.")
+      .min(4, "Debe contener al menos 4 caracteres."),
+    description: Yup.string().required("Este campo es requerido."),
+    image: Yup.mixed()
+      .required("Este campo es requerido.")
+      .test(
+        "fileSize",
+        "El archivo es mayor a 10 MB",
+        (file) => file && file.size <= MAX_FILE_SIZE
+      )
+      .test("type", "Sólo PNG y JPG", (file) => {
         return (
           file &&
           (file.type === "image/jpeg" ||
             file.type === "image/jpg" ||
             file.type === "image/png")
         );
+      }),
+  });
+
+  const submitHandler = async (
+    values,
+    { setStatus, resetForm, setSubmitting }
+  ) => {
+    try {
+      let response, string, method;
+      if (form && form.id) {
+        string = `${API_URL}/slides/${form.id}`;
+        method = "PUT";
       }
-    ),
-});
+      else {
+        string = `${API_URL}/slides`;
+        method = "POST";
+      }
 
-const Slides = () => (
-  <Formik
-    initialValues={{
-      name: "",
-      description: "",
-      order: "",
-      image: "",
-    }}
-    validationSchema={SignupSchema}
-    onSubmit={({values}) => {
-      console.log(values);
-    }}
-  >
-    {({ handleSubmit, values, handleChange, handleBlur, setFieldValue }) => (
-      <Form onSubmit={handleSubmit}>
-        <Field name="name">
-          {({ field, form }) => (
-            <FormControl isInvalid={form.errors.name && form.touched.name}>
-              <FormLabel>Nombre</FormLabel>
-              <Input
-                {...field}
-                id="name"
-                placeholder="Nombre"
+      response = await fetch(string, {
+        method: method,
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.status === 200) {
+        console.log("Listo");
+        resetForm({});
+        setStatus({ success: true });
+      } else {
+        console.error("Error");
+        setStatus({ success: false });
+      }
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    }
+    setSubmitting(false);
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}
+      onSubmit={submitHandler}
+    >
+      {(formik) => {
+        return (
+          <Form>
+            <label>Nombre</label>
+            <div>
+              <input
                 isRequired
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                type="text"
+                name="name"
+                placeholder="Tu nombre acá"
               />
-              <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
+              <ErrorMessage name="name" component="div" className="error" />
+            </div>
 
-        <Field name="description">
-          {({ field, form }) => (
-            <FormControl
-              isInvalid={form.errors.description && form.touched.description}
-            >
-              <FormLabel id="description">Descripción</FormLabel>
-              <CKEditor
-                editor={ClassicEditor}
-                id="description"
-                name="description"
-                data=""
+            <label name="descripcion">Descripción</label>
+            <CKEditor
+              editor={ClassicEditor}
+              id="description"
+              name="description"
+              data={initialValues.description}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                formik.setFieldValue("description", data);
+              }}
+            />
+            <ErrorMessage
+              name="description"
+              component="div"
+              className="error"
+            />
+
+            <label name="image">Imágen</label>
+            <div>
+              <input
                 isRequired
-                onChange={(event, editor) => {
-                  const data = editor.getData();
-                  setFieldValue("description", data);
+                id="image"
+                name="image"
+                type="file"
+                onChange={(event) => {
+                  const files = event.target.files;
+                  let myFiles = Array.from(files);
+                  formik.setFieldValue("image", myFiles[0]);
                 }}
               />
-              <FormErrorMessage>{form.errors.description}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
+            </div>
 
-        <Field name="order">
-          {({ field, form }) => (
-            <FormControl isInvalid={form.errors.order && form.touched.order}>
-              <FormLabel>Order</FormLabel>
-              <Input
-                {...field}
-                id="order"
-                placeholder="Order"
-                isRequired
-                value={values.order}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <FormErrorMessage>{form.errors.order}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
+            <ErrorMessage name="image" component="div" className="error" />
 
-        <Field name="image">
-          {({ field, form }) => (
-            <FormControl>
-              <FormLabel>Imagen</FormLabel>
-              <Input
-                {...field}
-                type="file"
-                id="image"
-                value={values.image}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <FormErrorMessage>{form.errors.image}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
-
-        <Button mt={4} colorScheme="teal" type="submit">
-          Guardar
-        </Button>
-      </Form>
-    )}
-  </Formik>
-);
+            <button type="submit">Submit</button>
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+};
 
 export default Slides;
