@@ -8,7 +8,9 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-contro
 import { Textarea } from "@chakra-ui/react"
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
-import { Center } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react";
+import { Center} from "@chakra-ui/react"
+
 
 
 // validation
@@ -29,6 +31,11 @@ const ContactSchema = Yup.object().shape({
 
 const Formcontact = () => {
  return (
+
+  <Box
+  p={4}
+  borderWidth="1px"
+  rounded="lg">
   <Center>
     <Formik
       initialValues={{
@@ -66,7 +73,7 @@ const Formcontact = () => {
           <Field name="phone">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.phone && form.touched.phone}>
-                <FormLabel htmlFor="phone">Numero de telefono</FormLabel>
+                <FormLabel htmlFor="phone">Número de teléfono</FormLabel>
                 <Input {...field} type="tel" id="phone" />
                 <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
               </FormControl>
@@ -88,8 +95,8 @@ const Formcontact = () => {
         </Form>
       )}
     </Formik>
-   
-  </Center>
+    </Center>
+  </Box>
  );
 }
 
