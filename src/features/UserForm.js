@@ -18,6 +18,12 @@ const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .required("Requerido")
     .min(4, "Se requieren 4 caracteres como mínimo"),
+  role: Yup.string().required("Requerido"),
+  image: Yup.mixed()
+    .required("Requerido")
+    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
+      return file && (file.type === "image/jpg" || file.type === "image/png");
+    }),
 });
 
 const LoginForm = () => {
@@ -52,6 +58,42 @@ const LoginForm = () => {
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input {...field} id="email" />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="role">
+            {({ field, form }) => (
+              <FormControl
+                id="role"
+                isInvalid={form.errors.role && form.touched.role}
+              >
+                <FormLabel>Rol</FormLabel>
+                <Select {...field} id="role">
+                  <option value="Administrador">Administrador</option>
+                  <option value="Usuario">Usuario</option>
+                </Select>
+                <FormErrorMessage>{form.errors.role}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="image">
+            {({ field, form }) => (
+              <FormControl
+                id="image"
+                isInvalid={form.errors.image && form.touched.image}
+              >
+                <FormLabel>Foto de perfil</FormLabel>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  onChange={(event) => {
+                    const files = event.target.files;
+                    let myFiles = Array.from(files);
+                    form.setFieldValue("image", myFiles[0]);
+                  }}
+                />
+                <FormErrorMessage>{form.errors.image}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
