@@ -21,11 +21,23 @@ const obj = !!Math.round(Math.random() * 1) && {
 };
 
 export const FormActivities = () => {
+  const url = `API${obj ? `/activities/${obj.id}` : "/activities/create"}`;
+
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .required("El nombre es obligatorio")
       .min(3, "Se requieren 3 caracteres como mínimo"),
-    image: Yup.mixed().required("La imagen es obligatoria"),
+    image: Yup.mixed()
+      .required("La imagen es obligatoria")
+      .test(
+        "type",
+        "Formato de imagen incorrecto. Solo acepta archivos .png y .jpg",
+        (file) => {
+          return (
+            file && (file.type === "image/png" || file.type === "image/jpg")
+          );
+        }
+      ),
   });
 
   return (
@@ -40,7 +52,7 @@ export const FormActivities = () => {
           validationSchema={SignupSchema}
           onSubmit={(values) => {
             console.log(values);
-            fetch(obj ? `/activities/:${obj.id}` : "/activities/create", {
+            fetch(url, {
               method: obj ? "PATCH" : "POST",
               body: JSON.stringify(values),
             })
