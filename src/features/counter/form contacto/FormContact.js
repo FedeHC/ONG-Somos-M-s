@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import { Heading } from '@chakra-ui/layout';
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-control';
+import { Textarea } from "@chakra-ui/react"
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Center } from "@chakra-ui/react"
@@ -18,9 +19,11 @@ const ContactSchema = Yup.object().shape({
        .required("Requerido")
        .email("Email invalido"),
  phone: Yup.string()
- .required("Requerido")
- .matches(/^[0-9]+$/, "Solo ingresar números")
- .min(8, 'minimo 8 números')
+       .required("Requerido")
+       .matches(/^[0-9]+$/, "Solo ingresar números")
+       .min(8, 'minimo 8 números'),
+ message: Yup.string()
+      .required("Requerido")
 });
 
 
@@ -66,6 +69,15 @@ const Formcontact = () => {
                 <FormLabel htmlFor="phone">Numero de telefono</FormLabel>
                 <Input {...field} type="tel" id="phone" />
                 <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="message">
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.message && form.touched.message}>
+                <FormLabel htmlFor="message">Mensaje</FormLabel>
+                <Textarea {...field} placeholder="Escribe tu consulta" id="message" />
+                <FormErrorMessage>{form.errors.message}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
