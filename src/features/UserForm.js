@@ -11,7 +11,6 @@ import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
 import "./loginForm.scss";
-import axios from "axios";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
@@ -51,9 +50,6 @@ const LoginForm = () => {
         password: objetoPrueba ? objetoPrueba.password : "",
       }}
       validationSchema={SignupSchema}
-      /*       onSubmit={(values) => {
-        console.log(values);
-      }} */
       onSubmit={(values) => {
         console.log(JSON.stringify(values));
         fetch(objetoPrueba ? `${API_URL}:${objetoPrueba.id}` : { API_URL }, {
@@ -145,6 +141,7 @@ const LoginForm = () => {
                 <Input
                   {...field}
                   id="password"
+                  type="password"
                   placeholder={
                     objetoPrueba ? objetoPrueba.password : "password"
                   }
