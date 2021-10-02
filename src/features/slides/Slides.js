@@ -11,6 +11,7 @@ const MAX_FILE_SIZE = 10485760;
 const Slides = ({ form }) => {
   const initialValues = {
     name: form?.name ? form.name : "",
+    order: form?.order ? form.order : "",
     description: form?.description ? form.description : "",
     image: form?.image ? form.image : "",
   };
@@ -19,6 +20,8 @@ const Slides = ({ form }) => {
     name: Yup.string()
       .required("Este campo es requerido.")
       .min(4, "Debe contener al menos 4 caracteres."),
+    order: Yup.number()
+        .required("Este campo es requerido"),
     description: Yup.string().required("Este campo es requerido."),
     image: Yup.mixed()
       .required("Este campo es requerido.")
@@ -90,6 +93,13 @@ const Slides = ({ form }) => {
                 placeholder="Tu nombre acá"
               />
               <ErrorMessage name="name" component="div" className="error" />
+            </div>
+
+            <label>Order</label>
+            <div>
+              <input type="number" name="order" />
+              <ErrorMessage name="order" component="div" className="error" />
+
             </div>
 
             <label name="descripcion">Descripción</label>
