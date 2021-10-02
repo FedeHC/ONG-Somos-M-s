@@ -24,17 +24,23 @@ const SignupSchema = Yup.object().shape({
     .test("type", "Solo se aceptan formatos jpg y png", (file) => {
       return file && (file.type === "image/jpg" || file.type === "image/png");
     }),
+  password: Yup.string()
+    .required("Requerido")
+    .min(8, "Se requieren 8 caracteres como mínimo"),
 });
-/*   const objetoPrueba = {
-    name: "facu",
-    email: "facuf@gmail.com",
-    role: "Usuario",
-    image: undefined,
-    id: 1,
-  }; */
+/* const objetoPrueba = {
+  name: "facu",
+  email: "facuf@gmail.com",
+  role: "Usuario",
+  image: undefined,
+  id: 1,
+}; */
 let objetoPrueba;
 
 const LoginForm = () => {
+  // URL API:
+  const API_URL = "http://ongapi.alkemy.org/api/users";
+
   return (
     <Formik
       initialValues={{
@@ -42,14 +48,25 @@ const LoginForm = () => {
         email: objetoPrueba ? objetoPrueba.email : "",
         role: objetoPrueba ? objetoPrueba.role : "",
         image: undefined,
+        password: objetoPrueba ? objetoPrueba.password : "",
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
+      /*       onSubmit={(values) => {
         console.log(values);
+      }} */
+      onSubmit={(values) => {
+        console.log(JSON.stringify(values));
+        fetch(objetoPrueba ? `${API_URL}:${objetoPrueba.id}` : { API_URL }, {
+          method: objetoPrueba ? "PATCH" : "POST",
+          body: JSON.stringify(values),
+        })
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log(error));
       }}
     >
       {({ errors, touched }) => (
-        <Form className="loginForm">
+        <Form className="userForm">
           <Heading m={4}>
             {objetoPrueba ? "Editar usuario" : "Crear usuario"}
           </Heading>
@@ -116,6 +133,23 @@ const LoginForm = () => {
                   }}
                 />
                 <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="password">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.password && form.touched.password}
+              >
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input
+                  {...field}
+                  id="password"
+                  placeholder={
+                    objetoPrueba ? objetoPrueba.password : "password"
+                  }
+                />
+                <FormErrorMessage>{form.errors.password}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
