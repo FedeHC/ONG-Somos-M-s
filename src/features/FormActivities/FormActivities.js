@@ -8,46 +8,38 @@ import {
   FormErrorMessage,
   Button,
 } from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "./FormActivities.css";
-import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 const obj = !!Math.round(Math.random() * 1) && {
-  name: "Actividad de prueba",
+  name: "Nombre de prueba",
   description: "Descripción de prueba",
-  file: undefined,
+  image: undefined,
   id: 1,
 };
 
 export const FormActivities = () => {
-  function validateName(value) {
-    let error;
-    if (!value) {
-      error = "El nombre es requerido";
-    } else if (value.length < 3) {
-      error = "El nombre deber contener al menos 3 caracteres";
-    }
-    return error;
-  }
-
-  function validateFile(value) {
-    let error;
-    if (!value) {
-      error = "La imagen es requerida";
-    }
-    return error;
-  }
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .required("El nombre es obligatorio")
+      .min(3, "Se requieren 3 caracteres como mínimo"),
+    image: Yup.mixed().required("La imagen es obligatoria"),
+  });
 
   return (
     <VStack mt="2rem">
-      <Container maxW="container.md" className="editFormCreationActivities">
+      <Container maxW="container.md">
         <Formik
           initialValues={{
             name: obj ? obj.name : "",
-            file: obj ? obj.file : undefined,
+            description: obj ? obj.description : "",
+            image: undefined,
           }}
-          onSubmit={(values, actions) => {
+          validationSchema={SignupSchema}
+          onSubmit={(values) => {
+            console.log(values);
             fetch(obj ? `/activities/:${obj.id}` : "/activities/create", {
               method: obj ? "PATCH" : "POST",
               body: JSON.stringify(values),
@@ -59,17 +51,15 @@ export const FormActivities = () => {
               );
           }}
         >
-          {(props) => (
+          {({ errors, touched }) => (
             <Form>
-              <Field name="name" validate={validateName}>
+              <Field name="name">
                 {({ field, form }) => (
                   <FormControl
                     isInvalid={form.errors.name && form.touched.name}
-                    mb="1rem"
                     isRequired
                   >
                     <FormLabel htmlFor="name">Nombre</FormLabel>
-
                     <Input
                       {...field}
                       id="name"
@@ -80,49 +70,51 @@ export const FormActivities = () => {
                 )}
               </Field>
 
-              <FormLabel htmlFor="name">Descripción:</FormLabel>
+              <FormControl mt="1rem">
+                <FormLabel htmlFor="name">Descripción:</FormLabel>
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={`<p>${obj ? obj.description : ""}</p>`}
+                  onReady={(editor) => {}}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    console.log({ event, editor, data });
+                  }}
+                  onBlur={(event, editor) => {
+                    console.log("Blur.", editor);
+                  }}
+                  onFocus={(event, editor) => {
+                    console.log("Focus.", editor);
+                  }}
+                />
+              </FormControl>
 
-              <CKEditor
-                editor={ClassicEditor}
-                data={`<p>${obj ? obj.description : ""}</p>`}
-                onReady={(editor) => {}}
-                onChange={(event, editor) => {
-                  const data = editor.getData();
-                  console.log({ event, editor, data });
-                }}
-                onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
-                }}
-                onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
-                }}
-              />
-
-              <Field name="file" validate={validateFile}>
-                {({ field, form }) => (
+              <Field name="image">
+                {({ form }) => (
                   <FormControl
-                    isInvalid={form.errors.name && form.touched.name}
                     mt="1rem"
-                    mb="1rem"
+                    id="image"
+                    isInvalid={form.errors.image && form.touched.image}
                     isRequired
                   >
-                    <FormLabel htmlFor="file">Imagen</FormLabel>
-                    <Field
-                      name="file"
+                    <FormLabel>Imagen</FormLabel>
+                    <input
+                      id="image"
+                      name="image"
                       type="file"
-                      accept="image/png,image/jpg"
+                      accept="image/png, image/jpg"
+                      onChange={(event) => {
+                        const files = event.target.files;
+                        let myFiles = Array.from(files);
+                        form.setFieldValue("image", myFiles[0]);
+                      }}
                     />
-                    <FormErrorMessage>{form.errors.file}</FormErrorMessage>
+                    <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
 
-              <Button
-                mt="1rem"
-                colorScheme="teal"
-                isLoading={props.isSubmitting}
-                type="submit"
-              >
+              <Button mt="1rem" colorScheme="teal" type="submit">
                 Guardar
               </Button>
             </Form>
