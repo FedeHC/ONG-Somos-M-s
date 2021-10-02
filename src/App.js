@@ -7,7 +7,7 @@ function App() {
   return (
 
     <ChakraProvider>
-      {/* <Slides /> */}
+      <Slides />
     </ChakraProvider>
     
    
