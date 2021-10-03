@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Container, Heading, Stack, Text } from '@chakra-ui/layout';
+import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
+import { Image } from '@chakra-ui/image';
 
 const Organization = () => {
 
@@ -60,6 +61,29 @@ const Organization = () => {
         </Button>
       </Stack>
     </Stack>
+    <Flex
+      flex={1}
+      justify={'center'}
+      align={'center'}
+      position={'relative'}
+      w={'full'}>
+      <Box
+        position={'relative'}
+        height={'300px'}
+        rounded={'2xl'}
+        boxShadow={'2xl'}
+        width={'full'}
+        overflow={'hidden'}>
+        <Image
+          alt={'Hero Image'}
+          fit={'cover'}
+          align={'center'}
+          w={'100%'}
+          h={'100%'}
+          src={OrganizationData.image}
+        />
+      </Box>
+    </Flex>
   </Stack>
 </Container>
  );
