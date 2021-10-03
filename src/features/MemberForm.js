@@ -1,4 +1,6 @@
 import React from "react";
+import "./loginForm.scss";
+
 import {
   FormControl,
   FormLabel,
@@ -6,17 +8,22 @@ import {
   Input,
   Heading,
 } from "@chakra-ui/react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
-import * as Yup from "yup";
-
+import ReactHtmlParser from "react-html-parser";
 const MemberForm = () => {
+  const initialValues = {
+    name: "",
+    image: "",
+    social: "",
+    social2: "",
+    description: "",
+  };
   return (
     <Formik
-      initialValues={{
-        name: "",
-        image: "",
-      }}
+      initialValues={initialValues}
       onSubmit={(values) => {
         console.log(values);
       }}
@@ -51,6 +58,52 @@ const MemberForm = () => {
                   }}
                 />
                 <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="description">
+            {({ field, form }) => (
+              <FormControl
+                id="description"
+                isInvalid={form.errors.description && form.touched.description}
+              >
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={initialValues.description}
+                  value={initialValues.description}
+                  onInit={(editor) => {
+                    // You can store the "editor" and use when it's needed.
+                    console.log("Editor is ready to use!", editor);
+                  }}
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    form.setFieldValue("description", data);
+                  }}
+                />
+                <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
+          <Field name="social">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.social && form.touched.social}
+              >
+                <FormLabel htmlFor="social">Link Redes Sociales 1</FormLabel>
+                <Input {...field} id="social" placeholder="social" />
+                <FormErrorMessage>{form.errors.social}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="social2">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.social2 && form.touched.social2}
+              >
+                <FormLabel htmlFor="social2">Link Redes Sociales</FormLabel>
+                <Input {...field} id="social2" placeholder="social2" />
+                <FormErrorMessage>{form.errors.social2}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
