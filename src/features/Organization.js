@@ -47,7 +47,17 @@ const Organization = () => {
       <Stack
         spacing={{ base: 4, sm: 6 }}
         direction={{ base: 'column', sm: 'row' }}>
-        
+        <Button
+          rounded={'full'}
+          size={'lg'}
+          fontWeight={'normal'}
+          px={6}
+          colorScheme={"teal"}
+          bg={'teal.400'}
+          _hover={{ bg: 'teal.500' }}
+          >
+          Editar
+        </Button>
       </Stack>
     </Stack>
   </Stack>
