@@ -15,12 +15,14 @@ const obj = !!Math.round(Math.random() * 1) && {
   title: "Título de prueba",
   description: "Descripción de prueba",
   image: undefined,
+  due_date: new Date().toISOString().substr(0, 10),
   id: 1,
 };
 
 export const FormProjects = () => {
-  const date = new Date();
-  var today = date.toISOString().substr(0, 10);
+  const today = new Date();
+
+  var yesterday = new Date(today.setDate(today.getDate() - 1));
 
   const SignupSchema = Yup.object().shape({
     title: Yup.string()
@@ -40,6 +42,13 @@ export const FormProjects = () => {
           );
         }
       ),
+    due_date: Yup.date()
+      .min(
+        yesterday,
+        `La fecha de finalización no pueder ser anterior a ${today.toLocaleDateString()}`
+      )
+      .nullable()
+      .default(null),
   });
 
   return (
@@ -50,6 +59,7 @@ export const FormProjects = () => {
             title: obj ? obj.title : "",
             description: obj ? obj.description : "",
             image: undefined,
+            due_date: obj ? obj.due_date : null,
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
@@ -118,6 +128,21 @@ export const FormProjects = () => {
                       }}
                     />
                     <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Field id="due_date" name="due_date">
+                {({ form, field }) => (
+                  <FormControl
+                    mt="1rem"
+                    id="due_date"
+                    defaultValue="01/01/2021"
+                    isInvalid={form.errors.due_date && form.touched.due_date}
+                  >
+                    <FormLabel>Fecha de Finalización</FormLabel>
+                    <Input {...field} id="due_date" type="date" />
+                    <FormErrorMessage>{form.errors.due_date}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
