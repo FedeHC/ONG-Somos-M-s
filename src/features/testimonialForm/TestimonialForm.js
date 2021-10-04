@@ -14,10 +14,9 @@ import { Heading } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 
 function TestimonialForm({ testimonial }) {
-  console.log(testimonial);
   const templateInitialValues = {
-    name: 'pepe',
-    description: 'holandaaa',
+    name: '',
+    description: '',
     image: '',
   };
   const initialValues = testimonial ? testimonial : templateInitialValues;
@@ -25,7 +24,7 @@ function TestimonialForm({ testimonial }) {
     <Formik
       initialValues={initialValues}
       validationSchema={testimonialSchema}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values) => {
         const methodHTTP = testimonial ? 'put' : 'post';
         const url = testimonial
           ? `/testimonials/${testimonial.id}`
@@ -33,6 +32,7 @@ function TestimonialForm({ testimonial }) {
 
         const response = await requestAxios(methodHTTP, url, values);
         console.log(response);
+        alert(JSON.stringify(values))
       }}
     >
       {(formik) => {
