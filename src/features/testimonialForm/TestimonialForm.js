@@ -66,7 +66,7 @@ function TestimonialForm({ testimonial }) {
                     data={formik.values.description}
                     onChange={(e, editor) => {
                       const data = editor.getData();
-                      formik.setFieldValue('content', data);
+                      formik.setFieldValue('description', data);
                     }}
                   />
                   <FormErrorMessage>{form.errors.description}</FormErrorMessage>
