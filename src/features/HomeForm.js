@@ -13,11 +13,53 @@ import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
 
+const SignupSchema = Yup.object().shape({
+  description: Yup.string()
+    .required("Requerido")
+    .min(20, "Se requieren 20 caracteres como mínimo"),
+  imageSlice1: Yup.mixed()
+    .required("Requerido")
+    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
+      return file && (file.type === "image/jpg" || file.type === "image/png");
+    }),
+  imageSlice2: Yup.mixed()
+    .required("Requerido")
+    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
+      return file && (file.type === "image/jpg" || file.type === "image/png");
+    }),
+  imageSlice3: Yup.mixed()
+    .required("Requerido")
+    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
+      return file && (file.type === "image/jpg" || file.type === "image/png");
+    }),
+  textSlice1: Yup.string().required("Requerido"),
+  textSlice2: Yup.string().required("Requerido"),
+  textSlice3: Yup.string().required("Requerido"),
+});
+
+const objeto = {
+  description: "facu facu facu facu facu facu",
+  image: "",
+  social: "facebook.com",
+  social2: "instagram.com",
+  id: 1,
+};
+//let objeto;
+
 const HomeForm = () => {
+  const initialValues = {
+    description: objeto ? objeto.description : "",
+    imageSlice1: objeto ? objeto.imageSlice1 : "",
+    imageSlice2: objeto ? objeto.imageSlice2 : "",
+    imageSlice3: objeto ? objeto.imageSlice3 : "",
+    textSlice1: objeto ? objeto.textSlice1 : "",
+    textSlice2: objeto ? objeto.textSlice2 : "",
+    textSlice3: objeto ? objeto.textSlice3 : "",
+  };
   return (
     <Formik
-      //initialValues={initialValues}
-      //validationSchema={SignupSchema}
+      initialValues={initialValues}
+      validationSchema={SignupSchema}
       onSubmit={(values) => {
         console.log(values);
       }}
@@ -34,12 +76,8 @@ const HomeForm = () => {
               >
                 <CKEditor
                   editor={ClassicEditor}
-                  //data={initialValues.description}
-                  //value={initialValues.description}
-                  onInit={(editor) => {
-                    // You can store the "editor" and use when it's needed.
-                    console.log("Editor is ready to use!", editor);
-                  }}
+                  data={initialValues.description}
+                  value={initialValues.description}
                   onChange={(event, editor) => {
                     const data = editor.getData();
                     form.setFieldValue("description", data);
