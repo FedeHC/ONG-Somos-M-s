@@ -7,7 +7,6 @@ import Title from './features/title/Title';
 function App() {
   return (
     <div className="App">
-     <Title text="Título" image="https://fondosmil.com/fondo/17010.jpg"/>
     </div>
   );
 }
