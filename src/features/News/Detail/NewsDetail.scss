@@ -1,13 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+
 .newsImage {
   width: 100%;
   border-radius: 10px;
+  box-shadow: 10px 10px 8px #888888;
 }
 
 .newsText {
   border-radius: 10px;
-  background-color: #fcfc88;
+  box-shadow: 10px 10px 8px #888888;
+  padding: 10px;
 }
 
 .simpleGrid {
   font-family: "Montserrat";
+  .title {
+    font-size: 32px;
+  }
+  .content {
+    font-size: 20px;
+  }
 }
