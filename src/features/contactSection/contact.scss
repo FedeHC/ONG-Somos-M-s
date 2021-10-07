@@ -1,0 +1,31 @@
+.container {
+  display: grid;
+  height: 50vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "info contactForm"
+    "map contactForm";
+  grid-gap: 1rem;
+}
+
+#contactForm {
+  background-color: red;
+  grid-area: contactForm;
+}
+#map {
+  background-color: black;
+  grid-area: map;
+}
+#info {
+  background-color: green;
+  grid-area: info;
+}
+
+@media only screen and(max-width:550px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-areas: "info" "map" "contactForm";
+  }
+}
