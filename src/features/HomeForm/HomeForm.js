@@ -12,7 +12,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
-import Slice from "./Slice";
 
 const SignupSchema = Yup.object().shape({
   description: Yup.string()
@@ -92,9 +91,7 @@ const HomeForm = () => {
             )}
           </Field>
 
-          <Slice SliceNumber="imageSlice1" />
-
-          {/* <Field name="imageSlice1">
+          <Field name="imageSlice1">
             {({ field, form }) => (
               <FormControl
                 m={2}
@@ -115,7 +112,7 @@ const HomeForm = () => {
                 <FormErrorMessage>{form.errors.imageSlice1}</FormErrorMessage>
               </FormControl>
             )}
-          </Field> */}
+          </Field>
           <Field name="textSlice1">
             {({ field, form }) => (
               <FormControl
