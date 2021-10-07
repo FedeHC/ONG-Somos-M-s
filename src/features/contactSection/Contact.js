@@ -1,9 +1,10 @@
 import React from "react";
-/* import Title from "./Title";
- */ import "./contact.scss";
+import "./contact.scss";
 import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { FiMail } from "react-icons/fi";
+import FormContact from "../counter/form contacto/FormContact";
+import Title from "./features/title/Title";
 
 const Contact = () => {
   let objeto = {
@@ -16,12 +17,14 @@ const Contact = () => {
   };
   return (
     <>
+      <Title text="Contacto" />
+
       <div className="container">
         <div id="info">
-          <h1>Contactate con Nosotros!</h1>
+          <p className="listTitle">Envianos un mensaje</p>
           <h1>Nos interesa saber tu opinión sobre nuestras actividades!</h1>
           <ul className="list">
-            <li>
+            <li className="listItem">
               <FaFacebookSquare className="facebook" />
               Facebook: www.facebook.com/{objeto.facebook}
             </li>
@@ -38,8 +41,13 @@ const Contact = () => {
             </li>
           </ul>
         </div>
-        <div id="map">map</div>
-        <div id="contactForm">form</div>
+        <div id="map">
+          <h1>Encuentranos en un mapa!</h1>
+          <h1>Espacio reservado para el mapa</h1>
+        </div>
+        <div id="contactForm">
+          <FormContact />
+        </div>
       </div>
     </>
   );
