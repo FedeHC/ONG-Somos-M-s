@@ -17,7 +17,7 @@ const Activities = ({ mainTitle }) => {
             {/* MAIN TITLE */}
             <Title text={mainTitle} />
 
-            {/* Activities goes from here */}
+            {/* Activities go from here */}
 
           </VStack>
         </Flex>
