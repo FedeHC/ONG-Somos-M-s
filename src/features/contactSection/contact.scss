@@ -10,16 +10,47 @@
 }
 
 #contactForm {
-  background-color: red;
   grid-area: contactForm;
+  padding: 2rem;
 }
 #map {
-  background-color: black;
   grid-area: map;
+  padding: 2rem;
 }
 #info {
-  background-color: green;
   grid-area: info;
+  padding: 2rem;
+}
+.list {
+  list-style: none;
+  li {
+    margin: 0.5rem;
+  }
+}
+
+.facebook,
+.instagram,
+.mail,
+.phone,
+.twitter,
+.linkedin {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.facebook {
+  color: #4267b2;
+}
+.instagram {
+  color: #833ab4;
+}
+.mail {
+  color: red;
+}
+.phone {
+  color: #4267b2;
 }
 
 @media only screen and(max-width:550px) {
