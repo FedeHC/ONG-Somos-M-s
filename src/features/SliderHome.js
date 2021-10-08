@@ -1,9 +1,12 @@
 import React from 'react';
 
+//react slide
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+//icons
+import { IoChevronForwardOutline, IoChevronBackOutline } from "react-icons/io5";
 
 //data example
 const data = [
@@ -25,16 +28,38 @@ const data = [
   },
 ]
 
-const settings = {
-  autoplay:true,
-  autoplaySpeed:5000,
-  initialSlide:1,
-  infinite:true,
-};
 
 const Sliderhome = () => {
+
+  const PreviousBtn = (props) => {
+    const { className, onClick } = props;
+    return (
+      <div className={className} onClick={onClick}>
+        <IoChevronBackOutline className="icon" />
+      </div>
+    );
+  };
+  const NextBtn = (props) => {
+    const { className, onClick } = props;
+    return (
+      <div className={className} onClick={onClick}>
+        <IoChevronForwardOutline className="icon" />
+      </div>
+    );
+  };
+
+
+  const settings = {
+    autoplay:true,
+    autoplaySpeed:5000,
+    initialSlide:1,
+    infinite:true,
+    prevArrow:<PreviousBtn />,
+    nextArrow:<NextBtn />,
+  };
+
   return (
-    <div>
+    <div style={{ margin: "30px" }} className="carousel">
       <Slider {...settings}>
         {data.map((item) => (
               <div key={item.title}>
