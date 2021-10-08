@@ -1,13 +1,13 @@
-import React from "react";
-import UserForm from "./features/UserForm";
-import { ChakraProvider } from "@chakra-ui/react";
+import React from 'react';
+import logo from './logo.svg';
+import { Counter } from './features/counter/Counter';
+import './App.css';
+import NewsDetail from './features/activities/detail/Detail';
 
 function App() {
   return (
-    <div>
-      <ChakraProvider>
-        <UserForm />
-      </ChakraProvider>
+    <div className="App">
+      <ActivitiesDetail />
     </div>
   );
 }
