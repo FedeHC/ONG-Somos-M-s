@@ -34,3 +34,14 @@
 .imageCard{
   position: relative;
 }
+img{
+  position: relative;
+}
+.textContainer{
+  position: absolute;
+  bottom: 0;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.09) ,rgba(0, 0, 0, 0.150),rgba(0, 0, 0, 0.400), rgba(0, 0, 0, 0.600), rgba(0, 0, 0, 0.700),rgba(0, 0, 0, 0.750), rgba(0, 0, 0, 0.800), rgba(0, 0, 0, 0.850), rgba(0, 0, 0, 0.800), rgba(0, 0, 0, 0.950), rgba(0, 0, 0, 0.950), rgb(0, 0, 0));
+  width: 100%;
+  color: aliceblue;
+  padding: 0 2rem;
+}
