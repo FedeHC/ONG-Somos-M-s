@@ -1,0 +1,23 @@
+.imageDiv img {
+  width: 100vw;
+  height: 200px;
+  background-size: cover;
+}
+
+
+.titleDiv {
+  width: 100%;
+}
+
+.titleDiv h1 {
+  position: absolute;
+  margin-top: 70px;
+  left: 40%;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  color: red;
+}
+
+.img{
+  width: 100%;
+}
