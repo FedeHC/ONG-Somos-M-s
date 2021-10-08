@@ -15,7 +15,9 @@ const Card = () => {
   return (
     <div>
       <figure className="card">
-      <img src={datosApi.image} alt={datosApi.title} />
+      <img src={datosApi.image} alt={datosApi.title}
+        onError={(e)=>{e.target.onerror = null; e.target.src=`https://via.placeholder.com/2000/fff0f0/00000/?text=SomosMas.com`}}
+       />
       <figcaption>
         <h3>{datosApi.title}</h3>
         <p>
