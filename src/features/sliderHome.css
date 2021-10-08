@@ -21,3 +21,16 @@
 .slick-next::before {
   display: none;
 }
+.icon{
+  color: gray;
+  font-size: 50px;
+}
+.icon:hover{
+  transition: all ease 0.3s;
+  color: black;
+  text-shadow: 0px 0px 50px rgba(0,0,0,1);
+  transform: scale(1.5);
+}
+.imageCard{
+  position: relative;
+}
