@@ -25,13 +25,27 @@ const data = [
   },
 ]
 
+const settings = {
+  autoplay:true,
+  autoplaySpeed:5000,
+  initialSlide:1,
+  infinite:true,
+};
 
 const Sliderhome = () => {
   return (
     <div>
-      <Slider  >
-          
-        </Slider>
+      <Slider {...settings}>
+        {data.map((item) => (
+              <div key={item.title}>
+                <img src={item.image} alt="" style={{ width: "100%", height: "40vh" }} />
+                <div className="textContainer">
+                  <h2>{item.title}</h2>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))}    
+      </Slider>
     </div>
   );
 }
