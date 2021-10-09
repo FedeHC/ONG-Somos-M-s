@@ -49,19 +49,23 @@ const objeto = {
 };
 //let objeto;
 
+const isObjEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
+};
+
 const HomeForm = () => {
   const initialValues = {
-    description: objeto ? objeto.description : "",
-    imageSlice1: objeto ? objeto.imageSlice1 : "",
-    imageSlice2: objeto ? objeto.imageSlice2 : "",
-    imageSlice3: objeto ? objeto.imageSlice3 : "",
-    textSlice1: objeto ? objeto.textSlice1 : "",
-    textSlice2: objeto ? objeto.textSlice2 : "",
-    textSlice3: objeto ? objeto.textSlice3 : "",
+    description: "",
+    imageSlice1: "",
+    imageSlice2: "",
+    imageSlice3: "",
+    textSlice1: "",
+    textSlice2: "",
+    textSlice3: "",
   };
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={isObjEmpty(objeto) ? initialValues : objeto}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
         console.log(values);
