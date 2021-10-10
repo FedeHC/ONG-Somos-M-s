@@ -10,7 +10,6 @@ import {
   TableCaption,
   Button,
 } from "@chakra-ui/react";
-import LinkButton from "./LinkButton";
 import { Link } from "react-router-dom";
 
 const MemberList = () => {
@@ -38,6 +37,12 @@ const MemberList = () => {
   ];
   return (
     <div className="listaMiembros">
+      <div className="header">
+        <p>Lista de miembros</p>
+        <Link className="link-button" to="/backoffice/members/create">
+          <Button colorScheme="blue">Crear Miembro</Button>
+        </Link>
+      </div>
       <Table variant="simple" size="sm" className="table">
         <TableCaption>Miembros actuales del equipo</TableCaption>
         <Thead>
