@@ -1,9 +1,9 @@
 import React from "react";
-import { ChakraProvider, Container, SimpleGrid, Link } from "@chakra-ui/react";
+import { ChakraProvider, Container, SimpleGrid, Button } from "@chakra-ui/react";
 import UsersTable from "./UsersTable";
 
 
-const UsersList = () => {
+const UsersList = ({ data }) => {
   return (
     <ChakraProvider>
       <Container>
@@ -12,21 +12,13 @@ const UsersList = () => {
                     marginTop={10}>
 
           {/* CREATE USER LINK */}
-          <Link href="/backoffice/users/create"
-                bg="gray.100"
-                padding={2}><b>Create User</b></Link>
+          <Button href="/backoffice/users/create"
+                  type="button"
+                  colorScheme="gray"
+                  padding={2}>Create User</Button>
 
           {/* USERS TABLE */}
-          {/* Using mocking data */}
-          <UsersTable data={[ { id: 0, 
-                                name: "User1",
-                                email: "user.one@mail.com"},
-                              { id: 1, 
-                                name: "User2",
-                                email: "user.two@mail.com"},
-                              { id: 2, 
-                                name: "User3",
-                                email: "user.three@mail.com"} ]} />
+          <UsersTable data={data}/>
 
         </SimpleGrid>
       </Container>
