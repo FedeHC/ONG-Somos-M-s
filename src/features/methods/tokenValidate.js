@@ -2,10 +2,10 @@ export const tokenValidate = (tokenName) => {
   const token = localStorage.getItem(tokenName);
 
   if (token !== null) {
-    const HeaderAuthorization = {
-      Bearer: token,
+    const Header = {
+      " Authorization": "Bearer" + token,
     };
 
-    return HeaderAuthorization;
+    return Header;
   }
 };
