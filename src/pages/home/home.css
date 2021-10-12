@@ -1,0 +1,34 @@
+.title__main{
+    font-size: 4rem;
+    text-align: center;
+}
+.news__container{
+    width: 100%;
+    background-color: #00214D;
+}
+.news__container h3{
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+}
+.btn__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+.news__flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.news__card{
+    padding: 3rem;
+}
+@media (min-width: 600px) {
+    .news__flex{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}
