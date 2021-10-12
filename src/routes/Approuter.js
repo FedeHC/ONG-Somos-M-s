@@ -7,7 +7,7 @@ const AppRouter = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/backoffice/home" component={MemberForm} />
+          <Route exact path="/backoffice/members/edit" component={MemberForm} />
         </Switch>
       </div>
     </Router>
