@@ -38,14 +38,13 @@ const SignupSchema = Yup.object().shape({
 });
 
 const objeto = {
+  description: "<p>texto de prueba 111111</p>",
   imageSlice1: "",
   imageSlice2: "",
   imageSlice3: "",
   textSlice1: "texto1",
   textSlice2: "texto2",
   textSlice3: "texto3",
-  description: "",
-  id: 1,
 };
 /* let objeto = {};
  */
@@ -55,7 +54,7 @@ const isObjEmpty = (obj) => {
 
 const HomeForm = () => {
   const initialValues = {
-    description: "",
+    description: "<p>texto de prueba 111111</p>",
     imageSlice1: "",
     imageSlice2: "",
     imageSlice3: "",
