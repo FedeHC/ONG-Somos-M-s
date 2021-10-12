@@ -3,7 +3,8 @@ import { Formik, Form, ErrorMessage, useField } from "formik";
 import * as yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "./OrgForm.scss";
+import { ChakraProvider, Container, SimpleGrid,
+         Button, Input } from "@chakra-ui/react";
 
 
 // Max. file size for input file upload:
@@ -17,10 +18,10 @@ const TextInput = ({ label, ...props }) => {
       <label htmlFor={props.id || props.name}>{label}</label>
       <br />
 
-      <input className="text-input" {...field} {...props} />
+      <Input className="text-input" {...field} {...props} />
 
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <div style={{ color: "lightcoral" }}>{meta.error}</div>
       ) : null}
     </>
   );
@@ -85,67 +86,76 @@ function OrgForm() {
 
   // Rendering Formik form component:
   return (
-    <Formik initialValues={initialValues}
-            validationSchema={schema}
-            onSubmit={submitHandler} >
-        {(formik) => {
-          return (
-            <Form>
-              {/* Name input */}
-              <TextInput label="Nombre:"
-                         name="name"
-                         type="text" />
-              <br /><br />
+    <ChakraProvider>
+      <Container maxW="sm" textAlign="left">
+        <SimpleGrid columns={1}
+                    spacing={10}
+                    marginTop={10}>
+          <Formik initialValues={initialValues}
+                  validationSchema={schema}
+                  onSubmit={submitHandler} >
+              {(formik) => {
+                return (
+                  <Form>
+                    {/* Name input */}
+                    <TextInput label="Nombre:"
+                              name="name"
+                              type="text" />
+                    <br /><br />
 
-              {/* Logo file input */}
-              <label name="logo">Logo: </label>
-              <br />
-              <input id="logo"
-                     name="logo"
-                     type="file"
-                     onChange={ (event) => {
-                      const files = event.target.files;
-                      let myFiles = Array.from(files);
-                      formik.setFieldValue("logo", myFiles[0]); }} />
-              <br />
-              <ErrorMessage name="logo"
-                            component="div"
-                            className="error" />
-              <br /><br />
+                    {/* Logo file input */}
+                    <label name="logo">Logo: </label>
+                    <br />
+                    <input id="logo"
+                          name="logo"
+                          type="file"
+                          onChange={ (event) => {
+                            const files = event.target.files;
+                            let myFiles = Array.from(files);
+                            formik.setFieldValue("logo", myFiles[0]); }} />
+                    <br />
+                    <ErrorMessage name="logo">
+                      { msg => <div style={{ color: "lightcoral" }}>{msg}</div> }
+                    </ErrorMessage>
+                    <br /><br />
 
-              {/* shortDescription input */}
-              <label name="shortDescription">Descripción corta: </label>
-              <br />
-              <CKEditor editor={ ClassicEditor }
-                        id="shortDescription"
-                        name="shortDescription"
-                        data={initialValues.shortDescription}
-                        onChange={ (event, editor) => {
-                          const data = editor.getData();
-                          formik.setFieldValue("shortDescription", data) }} />
-              <ErrorMessage name="shortDescription"
-                            component="div"
-                            className="error" />
-              <br />
+                    {/* shortDescription input */}
+                    <label name="shortDescription">Descripción corta: </label>
+                    <br />
+                    <CKEditor editor={ ClassicEditor }
+                              id="shortDescription"
+                              name="shortDescription"
+                              data={initialValues.shortDescription}
+                              onChange={ (event, editor) => {
+                                const data = editor.getData();
+                                formik.setFieldValue("shortDescription", data) }} />
+                    <ErrorMessage name="shortDescription">
+                      { msg => <div style={{ color: "lightcoral" }}>{msg}</div> }
+                    </ErrorMessage>
+                    <br />
 
-              {/* longDescription input */}
-              <TextInput label="Descripción larga:"
-                         name="longDescription"
-                         type="text" />
-              <br /><br />
+                    {/* longDescription input */}
+                    <TextInput label="Descripción larga:"
+                              name="longDescription"
+                              type="text" />
+                    <br /><br />
 
-              {/* links input */}
-              <TextInput label="Links: "
-                         name="links"
-                         type="text" />
-              <br /><br />
+                    {/* links input */}
+                    <TextInput label="Links: "
+                              name="links"
+                              type="text" />
+                    <br /><br />
 
-              {/* Submit button */}
-              <button type="submit">Enviar</button>
-            </Form>
-          );
-      }}
-    </Formik>
+                    {/* Submit button */}
+                    <Button colorScheme="gray"
+                            type="submit">Enviar</Button>
+                  </Form>
+                );
+            }}
+          </Formik>
+        </SimpleGrid>
+      </Container>
+    </ChakraProvider>
   );
 }
 
