@@ -38,17 +38,17 @@ const SignupSchema = Yup.object().shape({
 });
 
 const objeto = {
-  description: "facu facu facu facu facu facu",
   imageSlice1: "",
   imageSlice2: "",
   imageSlice3: "",
   textSlice1: "texto1",
   textSlice2: "texto2",
   textSlice3: "texto3",
+  description: "",
   id: 1,
 };
-//let objeto;
-
+/* let objeto = {};
+ */
 const isObjEmpty = (obj) => {
   return Object.keys(obj).length === 0;
 };
@@ -79,9 +79,11 @@ const HomeForm = () => {
             {({ field, form }) => (
               <FormControl
                 id="description"
+                name="description"
                 isInvalid={form.errors.description && form.touched.description}
               >
                 <CKEditor
+                  id="description"
                   editor={ClassicEditor}
                   data={initialValues.description}
                   value={initialValues.description}
