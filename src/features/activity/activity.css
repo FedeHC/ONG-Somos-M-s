@@ -1,0 +1,15 @@
+.activity__container{
+    width: 30vw;
+    height: 850px;
+}
+.activity__img{
+    width: 100%;
+}
+.activity__name{
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+}
+.activity__description p{
+    text-align: center;
+}
