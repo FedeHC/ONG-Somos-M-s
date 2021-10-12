@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from "react-router-dom"
+
 import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { Image } from '@chakra-ui/image';
@@ -35,7 +37,7 @@ const Organization = () => {
             position: 'absolute',
             bottom: 1,
             left: 0,
-            bg: 'teal.400',
+            bg: '#3289fc',
             zIndex: -1,
           }}>
           {OrganizationData.name}
@@ -48,17 +50,19 @@ const Organization = () => {
       <Stack
         spacing={{ base: 4, sm: 6 }}
         direction={{ base: 'column', sm: 'row' }}>
-        <Button
-          rounded={'full'}
-          size={'lg'}
-          fontWeight={'normal'}
-          px={6}
-          colorScheme={"teal"}
-          bg={'teal.400'}
-          _hover={{ bg: 'teal.500' }}
-          >
-          Editar
-        </Button>
+        <Link to="/backoffice/organization/edit">
+          <Button
+            rounded={'full'}
+            size={'lg'}
+            fontWeight={'normal'}
+            px={6}
+            colorScheme={"#00214D"}
+            bg={'#00214D'}
+            _hover={{ bg: '#00214D.100' }}
+            >
+            Editar
+          </Button>        
+        </Link>
       </Stack>
     </Stack>
     <Flex
