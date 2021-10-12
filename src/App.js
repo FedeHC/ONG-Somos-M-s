@@ -3,14 +3,16 @@ import './App.css';
 import { FormActivities } from "./features/FormActivities/FormActivities";
 import Slides from './features/slides/Slides';
 import { ChakraProvider } from "@chakra-ui/react";
+import Members from './features/about/Members';
 
 function App() {
   return (
     <div className="App">
-      <ActivitiesDetail />
+      {/* <ActivitiesDetail /> */}
 
       <ChakraProvider>
-        <FormActivities />;
+        {/* <FormActivities />; */}
+        <Members />
       </ChakraProvider>
     </div>
   );
