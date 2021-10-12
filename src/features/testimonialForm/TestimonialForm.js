@@ -29,10 +29,8 @@ function TestimonialForm({ testimonial }) {
         const url = testimonial
           ? `/testimonials/${testimonial.id}`
           : '/testimonials';
-
         const response = await requestAxios(methodHTTP, url, values);
         console.log(response);
-        alert(JSON.stringify(values))
       }}
     >
       {(formik) => {
