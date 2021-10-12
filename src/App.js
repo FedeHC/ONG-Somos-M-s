@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { FormActivities } from "./features/FormActivities/FormActivities";
 import { ChakraProvider } from "@chakra-ui/react";
-import "./App.css";
 
 function App() {
   return (
