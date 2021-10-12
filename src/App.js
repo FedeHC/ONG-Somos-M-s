@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
-import NewsDetail from './features/activities/detail/Detail';
 import { FormActivities } from "./features/FormActivities/FormActivities";
 import { ChakraProvider } from "@chakra-ui/react";
+import "./App.css";
 
 function App() {
   return (
