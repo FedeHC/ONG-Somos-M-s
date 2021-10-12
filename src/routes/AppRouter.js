@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import About from "./pages/About/About";
+import About from "../pages/About/About";
 
 const AppRouter = () => {
  return (
