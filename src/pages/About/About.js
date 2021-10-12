@@ -1,10 +1,10 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Container, Flex, VStack, Heading, Text } from "@chakra-ui/react";
-import Title from "./features/activities/detail/title";
+import Title from "../../features/activities/detail/title";
 
 
-const About = ({ mainTitle, sectionTitle, sectionText }) => {
+const About = ({ mainTitle, sectionTitle, text }) => {
   return (
     <ChakraProvider>
       <Container>
@@ -21,7 +21,7 @@ const About = ({ mainTitle, sectionTitle, sectionText }) => {
             <Heading size="xl">{sectionTitle}</Heading>
 
             {/* SECTION PARAGRAPH */}
-            <Text paddingBottom="10%">{sectionText}</Text>
+            <Text paddingBottom="10%">{text}</Text>
 
           </VStack>
         </Flex>
