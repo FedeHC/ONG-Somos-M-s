@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
-import NewsDetail from "./features/activities/detail/Detail";
+import { ChakraProvider } from "@chakra-ui/react";
+import Approuter from "./routes/Approuter.js";
 
 function App() {
   return (
     <div className="App">
-      <ActivitiesDetail />
+      <ChakraProvider>
+        <Approuter />
+      </ChakraProvider>
     </div>
   );
 }
