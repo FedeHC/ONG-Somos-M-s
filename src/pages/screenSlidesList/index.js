@@ -10,20 +10,26 @@ import {
   Image,
   Box,
 } from "@chakra-ui/react";
-import { AiTwotoneEdit, AiOutlineClose, AiFillPlusCircle } from "react-icons/ai";
+import {
+  AiTwotoneEdit,
+  AiOutlineClose,
+  AiFillPlusCircle,
+} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const ScreenSlidesList = () => {
   return (
     <div>
-      <Box display="flex" mt="2" justifyContent='flex-start'>
-      
-        <Button // link to /backoffice/categorías/create
-          rightIcon={<AiFillPlusCircle />}
-          colorScheme="teal" 
-          variant="solid" 
-        >
-          Crear Slide  
-        </Button>
+      <Box display="flex" mt="2" justifyContent="flex-start">
+        <Link to="/backoffice/slides/create">
+          <Button
+            rightIcon={<AiFillPlusCircle />}
+            colorScheme="teal"
+            variant="solid"
+          >
+            Crear Slide
+          </Button>
+        </Link>
       </Box>
       <div className="container">
         <Table size="lg" variant="striped" colorScheme="teal">
@@ -31,7 +37,7 @@ const ScreenSlidesList = () => {
             <Tr className="trTop">
               <Th>Title</Th>
               <Th>Image</Th>
-              <Th >order</Th>
+              <Th>order</Th>
               <Th>Acciones</Th>
             </Tr>
           </Thead>
