@@ -7,7 +7,11 @@ const AppRouter = () => {
   <Router>
   <div>
     <Switch>
-      <Route exact path="/nosotros" component={About} />
+      <Route exact path="/nosotros">
+        <About mainTitle="Nosotros"
+               sectionTitle="Sobre Nosotros"
+               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..." />
+      </Route>
     </Switch>
   </div>
   </Router>
