@@ -14,10 +14,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.22.0",
-<<<<<<< HEAD
-=======
     "ckeditor5": "^30.0.0",
->>>>>>> ba8e140e20d40a86e5e48518a858f2cd2c67a04e
     "formik": "^2.2.9",
     "framer-motion": "4",
     "react": "^16.13.1",
