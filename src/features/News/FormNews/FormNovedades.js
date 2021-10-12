@@ -39,7 +39,7 @@ const object2 = {
 }
 
 
-const Formnovedades = () => {
+const FormNovedades = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [response, setResponse] = useState([]);
@@ -152,7 +152,7 @@ const Formnovedades = () => {
               </FormControl>
             )}
           </Field>
-          <Button mt={4} colorScheme="teal" type="submit">
+          <Button mt={4} width="100%" colorScheme="teal" type="submit">
            {isObjEmpty(object2) ? "Enviar" : "Guardar"}
           </Button>
         </Form>
@@ -162,4 +162,4 @@ const Formnovedades = () => {
   );
 }
 
-export default Formnovedades;
+export default FormNovedades;
