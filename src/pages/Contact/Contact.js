@@ -19,7 +19,7 @@ const Contact = () => {
     <>
       <Title text="Contacto" />
 
-      <div className="container">
+      <div className="contactContainer">
         <div id="info">
           <p className="listTitle">Envianos un mensaje</p>
           <h1>Nos interesa saber tu opinión sobre nuestras actividades!</h1>

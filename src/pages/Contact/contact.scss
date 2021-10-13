@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap");
-.container {
+.contactContainer {
   display: grid;
   height: 70hv;
   grid-template-columns: 1fr 1fr;
@@ -67,7 +67,7 @@
 }
 
 @media only screen and(max-width:550px) {
-  .container {
+  .contactContainer {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 2fr;
     grid-template-areas: "info" "map" "contactForm";
