@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import UsersList from "../pages/UsersList/UsersList";
 import About from "../pages/About/About";
 import OrgForm from "../features/OrgForm/OrgForm";
+import FormNovedades from '../features/news/FormNews/FormNovedades';
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
                  sectionTitle="Sobre Nosotros"
                  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."/>
           <Route exact path="/backoffice/organization/edit" component={OrgForm}/>
+          <Route path="/backoffice/news" component={FormNovedades}/>
         </Switch>
       </div>
     </Router>
