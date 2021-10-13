@@ -1,9 +1,11 @@
 import React from 'react';
 
+import "./members.css";
+
+
 const Members = () => {
  return (
-  <div>
-   
+  <div className="containerMembers">
   </div>
  );
 }
