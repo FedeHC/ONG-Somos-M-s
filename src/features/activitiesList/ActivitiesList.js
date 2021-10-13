@@ -41,6 +41,12 @@ const ActivitiesList = () => {
 
   return (
     <div className="activityList">
+      <div className="header">
+        <p>Lista de actividades</p>
+        <Link className="link-button" to="/backoffice/activities/create">
+          <Button colorScheme="blue">Crear Actividad</Button>
+        </Link>
+      </div>
       <Table variant="simple" size="sm" className="table">
         <TableCaption>Actividades actuales</TableCaption>
         <Thead>
