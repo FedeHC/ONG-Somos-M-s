@@ -1,0 +1,8 @@
+.email___container{
+    display: flex;
+    align-items: center;
+}
+
+.email__field{
+    width: 25rem;
+}

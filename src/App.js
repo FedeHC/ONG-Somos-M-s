@@ -1,18 +1,13 @@
 import React from 'react';
 import './App.css';
-import { FormActivities } from "./features/FormActivities/FormActivities";
-import Slides from './features/slides/Slides';
-import { ChakraProvider } from "@chakra-ui/react";
-import Members from './features/about/Members';
+import {ChakraProvider} from "@chakra-ui/react";
+import AppRouter from './routes/AppRouter';
 
 function App() {
   return (
     <div className="App">
-      {/* <ActivitiesDetail /> */}
-
       <ChakraProvider>
-        {/* <FormActivities />; */}
-        <Members />
+        <AppRouter/>;
       </ChakraProvider>
     </div>
   );
