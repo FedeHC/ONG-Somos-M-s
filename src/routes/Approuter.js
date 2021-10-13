@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MemberForm from "../features/MemberForm/MemberForm";
+import Contact from "../pages/Contact/Contact";
 
 const AppRouter = () => {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path="/backoffice/members/edit" component={MemberForm} />
+          <Route exact path="/contacto" component={Contact} />
         </Switch>
       </div>
     </Router>
