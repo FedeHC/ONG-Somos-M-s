@@ -8,6 +8,7 @@ import Organization from '../features/organization/Organization';
 import TestimonialForm from '../features/testimonialForm/TestimonialForm';
 import Donations from '../pages/donations';
 import Gracias from '../pages/gracias';
+import NewsScreen from '../pages/NewsScreen/NewsScreen';
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route exact path="backoffice/testimonials" component={TestimonialForm}/>
           <Route exact path="/donar" component={Donations}/>
           <Route exact path="/gracias" component={Gracias}/>
+          <Route exact path="/backoffice/news" component={NewsScreen}/>
         </Switch>
       </div>
     </Router>
