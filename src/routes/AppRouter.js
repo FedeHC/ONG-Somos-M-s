@@ -6,6 +6,8 @@ import MemberForm from "../features/MemberForm/MemberForm";
 import CategoriesBackOffice from '../pages/categoriesBackOffice';
 import Organization from '../features/organization/Organization';
 import TestimonialForm from '../features/testimonialForm/TestimonialForm';
+import Donations from '../pages/donations';
+import Gracias from '../pages/gracias';
 
 const AppRouter = () => {
   return (
@@ -18,6 +20,8 @@ const AppRouter = () => {
           <Route exact path="/backoffice/categories" component={CategoriesBackOffice}/>
           <Route path="/backoffice/organization" component={Organization}/>
           <Route exact path="backoffice/testimonials" component={TestimonialForm}/>
+          <Route exact path="/donar" component={Donations}/>
+          <Route exact path="/gracias" component={Gracias}/>
         </Switch>
       </div>
     </Router>
