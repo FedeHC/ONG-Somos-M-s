@@ -1,13 +1,14 @@
-const methodGetPrivate = async (endpoint, id = null, headers) => {
+import { tokenValidate } from '../features/methods/tokenValidate';
+
+const methodGetPrivate = async (endpoint, id = null) => {
   try {
     const response = await axios.get(`${url}/${endpoint}/${id || ""}`, {
-      headers,
+      headers: tokenValidate(),
     });
-    return response; 
+    return response;
   } catch (error) {
-    console.error(error);
-    return error; 
+    return error;
   }
 };
 
-export default methodGetPrivate;
+export default methodGetPrivate; 
