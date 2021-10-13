@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import ScreenSlidesList from '../pages/screenSlidesList';
 import HomeForm from "../features/HomeForm/HomeForm";
 import MemberForm from "../features/MemberForm/MemberForm";
+import CategoriesBackOffice from '../pages/categoriesBackOffice';
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
           <Route exact path="/backoffice/slides" component={ScreenSlidesList}/>
           <Route exact path="/backoffice/home" component={HomeForm}/>
           <Route exact path="/backoffice/members/edit" component={MemberForm}/>
+          <Route exact path="/backoffice/categories" component={CategoriesBackOffice}/>
         </Switch>
       </div>
     </Router>
