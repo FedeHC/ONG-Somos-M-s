@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import UsersList from "../pages/UsersList/UsersList";
 import About from "../pages/About/About";
+import OrgForm from "../features/OrgForm/OrgForm";
 
 const AppRouter = () => {
   return (
@@ -15,10 +16,11 @@ const AppRouter = () => {
               email: "user.two@mail.com"
             }]}/>
           </Route>
-          <Route exact path="/nosotros"></Route>
+          < exact path="/nosotros"/>
           <About mainTitle="Nosotros"
                  sectionTitle="Sobre Nosotros"
                  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."/>
+          <Route exact path="/backoffice/organization/edit" component={OrgForm}/>
         </Switch>
       </div>
     </Router>
