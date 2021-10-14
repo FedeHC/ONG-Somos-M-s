@@ -21,7 +21,9 @@ const obj = !!Math.round(Math.random() * 1) && {
 };
 
 export const FormActivities = () => {
-  const url = `API${obj ? `/activities/${obj.id}` : "/activities/create"}`;
+  const url = obj
+    ? REACT_APP_ACTIVITIES + obj.id
+    : REACT_APP_ACTIVITIES + "/create";
 
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
