@@ -1,4 +1,5 @@
 import { tokenValidate } from "../features/methods/tokenValidate";
+import axios from "axios";
 
 // PATCH
 export const methodPatchPrivate = async (endpoint, id = null, body) => {
@@ -7,8 +8,17 @@ export const methodPatchPrivate = async (endpoint, id = null, body) => {
     const response = await axios.patch(`${url}/${endpoint}/${id}`, body, {
       headers: tokenValidate(),
     });
-    return(response);
+    return response;
   } catch (error) {
-    return(error);
+    return error;
+  }
+};
+
+// POST
+export const methodPostPrivate = async (endpoint, body, headers) => {
+  try {
+    return await axios.post(`${"url"}/${endpoint}`, body, { headers });
+  } catch (error) {
+    console.error(error);
   }
 };
