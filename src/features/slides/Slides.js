@@ -20,8 +20,7 @@ const Slides = ({ form }) => {
     name: Yup.string()
       .required("Este campo es requerido.")
       .min(4, "Debe contener al menos 4 caracteres."),
-    order: Yup.number()
-        .required("Este campo es requerido"),
+    order: Yup.number().required("Este campo es requerido"),
     description: Yup.string().required("Este campo es requerido."),
     image: Yup.mixed()
       .required("Este campo es requerido.")
@@ -47,11 +46,10 @@ const Slides = ({ form }) => {
     try {
       let response, string, method;
       if (form && form.id) {
-        string = `${API_URL}/slides/${form.id}`;
+        string = REACT_APP_SLIDES + form.id;
         method = "PUT";
-      }
-      else {
-        string = `${API_URL}/slides`;
+      } else {
+        string = REACT_APP_SLIDES;
         method = "POST";
       }
 
@@ -99,7 +97,6 @@ const Slides = ({ form }) => {
             <div>
               <input type="number" name="order" />
               <ErrorMessage name="order" component="div" className="error" />
-
             </div>
 
             <label name="descripcion">Descripción</label>
