@@ -7,8 +7,8 @@ export const methodPatchPrivate = async (endpoint, id = null, body) => {
     const response = await axios.patch(`${url}/${endpoint}/${id}`, body, {
       headers: tokenValidate(),
     });
-    console.log(response);
+    return(response);
   } catch (error) {
-    console.error(error);
+    return(error);
   }
 };
