@@ -17,7 +17,7 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const ScreenSlidesList = () => {
+const SlidesScreen = () => {
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="flex-start">
@@ -68,4 +68,4 @@ const ScreenSlidesList = () => {
   );
 };
 
-export default ScreenSlidesList;
+export default SlidesScreen;
