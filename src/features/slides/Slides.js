@@ -4,8 +4,6 @@ import * as Yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-const API_URL = "http://ongapi.alkemy.org/api";
-
 const MAX_FILE_SIZE = 10485760;
 
 const Slides = ({ form }) => {
@@ -46,10 +44,10 @@ const Slides = ({ form }) => {
     try {
       let response, string, method;
       if (form && form.id) {
-        string = REACT_APP_SLIDES + form.id;
+        string = REACT_APP_ENDPOINT_SLIDES + form.id;
         method = "PUT";
       } else {
-        string = REACT_APP_SLIDES;
+        string = REACT_APP_ENDPOINT_SLIDES;
         method = "POST";
       }
 
