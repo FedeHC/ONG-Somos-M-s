@@ -21,7 +21,7 @@ const obj = !!Math.round(Math.random() * 1) && {
 };
 
 export const FormActivities = () => {
-  const url = obj ? REACT_APP_ACTIVITIES + obj.id : REACT_APP_ACTIVITIES_CREATE;
+  const url = obj ? REACT_APP_ENDPOINT_ACTIVITIES + obj.id : REACT_APP_ENDPOINT_ACTIVITIES_CREATE;
 
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
