@@ -44,10 +44,10 @@ const Slides = ({ form }) => {
     try {
       let response, string, method;
       if (form && form.id) {
-        string = REACT_APP_ENDPOINT_SLIDES + form.id;
+        string = REACT_APP_ENDPOINT_SLIDES_EDIT + form.id;
         method = "PUT";
       } else {
-        string = REACT_APP_ENDPOINT_SLIDES;
+        string = REACT_APP_ENDPOINT_SLIDES_CREATE;
         method = "POST";
       }
 
