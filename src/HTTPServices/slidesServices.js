@@ -1,38 +1,71 @@
 import axios from "axios";
-import { tokenValidate } from "../methods/tokenValidate";
+import { useEffect, useState } from "react";
+import { tokenValidate } from "../features/methods/tokenValidate";
 
-export const listSlides = async (endpoint, body) => {
-  try {
-    const response = await axios.get(endpoint, tokenValidate(), body);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+// Listar todos los Slides o mostrar uno especifico por ID
+export const useListSlides = (endpoint, body) => {
+  const [listSlides, setListSlides] = useState({ data: null, error: null });
+
+  useEffect(() => {
+    axios
+      .get(endpoint, {
+        headers: tokenValidate("tokenName"),
+        body,
+      })
+      .then((data) => setListSlides(data))
+      .catch((error) => setListSlides(error));
+  }, [endpoint]);
+
+  return listSlides;
 };
 
-export const createSlides = async (endpoint, body) => {
-  try {
-    const response = await axios.post(endpoint, tokenValidate(), body);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+// Crear un nuevo Slide
+export const useCreateSlide = (endpoint, body) => {
+  const [newSlide, setNewSlide] = useState({ data: null, error: null });
+
+  useEffect(() => {
+    axios
+      .post(endpoint, {
+        headers: tokenValidate("tokenName"),
+        body,
+      })
+      .then((data) => setNewSlide({ data, error: null }))
+      .catch((error) => setNewSlide({ data: null, error }));
+  }, [endpoint]);
+
+  return newSlide;
 };
 
-export const editSlides = async (endpoint, body) => {
-  try {
-    const response = await axios.put(endpoint, tokenValidate(), body);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+// Editar un Slide
+export const useEditSlide = (endpoint, body) => {
+  const [slide, setSlide] = useState({ data: null, error: null });
+
+  useEffect(() => {
+    axios
+      .put(endpoint, {
+        headers: tokenValidate("tokenName"),
+        body,
+      })
+      .then((data) => setSlide({ data, error: null }))
+      .catch((error) => setSlide({ data: null, error }));
+  }, [endpoint]);
+
+  return slide;
 };
 
-export const deleteSlides = async (endpoint, body) => {
-  try {
-    const response = await axios.delete(endpoint, tokenValidate(), body);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+// Eliminar un Slide
+export const useDeleteSlide = (endpoint, body) => {
+  const [deleteSlide, setDeleteSlide] = useState({ data: null, error: null });
+
+  useEffect(() => {
+    axios
+      .delete(endpoint, {
+        headers: tokenValidate("tokenName"),
+        body: body,
+      })
+      .then((data) => setDeleteSlide({ data, error: null }))
+      .catch((error) => setDeleteSlide({ data: null, error }));
+  }, [endpoint]);
+
+  return deleteSlide;
 };
