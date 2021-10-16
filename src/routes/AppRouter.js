@@ -8,15 +8,16 @@ import Organization from "../features/organization/Organization";
 import TestimonialForm from "../features/testimonialForm/TestimonialForm";
 import Donations from "../pages/donations";
 import Gracias from "../pages/gracias";
+import Contact from "../pages/Contact/Contact";
 import NewsScreen from "../pages/NewsScreen/NewsScreen";
-import MemberList from "../features/memberList/MemberList";
+import ActivitiesList from "../features/activitiesList/ActivitiesList";
 
 const AppRouter = () => {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path="/backoffice/members" component={MemberList} />
+          <Route exact path="/contacto" component={Contact} />
           <Route exact path="/backoffice/slides" component={ScreenSlidesList} />
           <Route exact path="/backoffice/home" component={HomeForm} />
           <Route exact path="/backoffice/members/edit" component={MemberForm} />
@@ -34,6 +35,11 @@ const AppRouter = () => {
           <Route exact path="/donar" component={Donations} />
           <Route exact path="/gracias" component={Gracias} />
           <Route exact path="/backoffice/news" component={NewsScreen} />
+          <Route
+            exact
+            path="/backoffice/activities"
+            component={ActivitiesList}
+          />
         </Switch>
       </div>
     </Router>
