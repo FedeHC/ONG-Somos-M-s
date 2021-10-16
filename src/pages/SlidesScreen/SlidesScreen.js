@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Container,
   VStack,
@@ -19,13 +19,11 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useListSlides } from "../../HTTPServices/slidesServices";
-import axios from "axios";
-import { tokenValidate } from "../../features/methods/tokenValidate";
 
 const SlidesScreen = () => {
-  const list = useListSlides("http://ongapi.alkemy.org/api/slides");
+  const { data } = useListSlides("http://ongapi.alkemy.org/api/slides");
 
-  console.log(list);
+  console.log(data);
 
   return (
     <VStack mt="2rem">
@@ -52,6 +50,7 @@ const SlidesScreen = () => {
               </Tr>
             </Thead>
             <Tbody>
+              {}
               <Tr>
                 <Td>Esto es un Slide</Td>
                 <Td>

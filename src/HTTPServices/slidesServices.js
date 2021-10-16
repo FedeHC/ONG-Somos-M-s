@@ -14,7 +14,7 @@ export const useListSlides = (endpoint, body) => {
       })
       .then((data) => setListSlides(data))
       .catch((error) => setListSlides(error));
-  }, [endpoint]);
+  }, [endpoint, body]);
 
   return listSlides;
 };
@@ -31,7 +31,7 @@ export const useCreateSlide = (endpoint, body) => {
       })
       .then((data) => setNewSlide({ data, error: null }))
       .catch((error) => setNewSlide({ data: null, error }));
-  }, [endpoint]);
+  }, [endpoint, body]);
 
   return newSlide;
 };
@@ -48,7 +48,7 @@ export const useEditSlide = (endpoint, body) => {
       })
       .then((data) => setSlide({ data, error: null }))
       .catch((error) => setSlide({ data: null, error }));
-  }, [endpoint]);
+  }, [endpoint, body]);
 
   return slide;
 };
@@ -65,7 +65,7 @@ export const useDeleteSlide = (endpoint, body) => {
       })
       .then((data) => setDeleteSlide({ data, error: null }))
       .catch((error) => setDeleteSlide({ data: null, error }));
-  }, [endpoint]);
+  }, [endpoint, body]);
 
   return deleteSlide;
 };
