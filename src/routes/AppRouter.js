@@ -10,6 +10,7 @@ import Donations from "../pages/donations";
 import Gracias from "../pages/gracias";
 import Contact from "../pages/Contact/Contact";
 import NewsScreen from "../pages/NewsScreen/NewsScreen";
+import ActivitiesList from "../features/activitiesList/ActivitiesList";
 
 const AppRouter = () => {
   return (
@@ -34,6 +35,11 @@ const AppRouter = () => {
           <Route exact path="/donar" component={Donations} />
           <Route exact path="/gracias" component={Gracias} />
           <Route exact path="/backoffice/news" component={NewsScreen} />
+          <Route
+            exact
+            path="/backoffice/activities"
+            component={ActivitiesList}
+          />
         </Switch>
       </div>
     </Router>
