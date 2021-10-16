@@ -21,9 +21,7 @@ import { Link } from "react-router-dom";
 import { useListSlides } from "../../HTTPServices/slidesServices";
 
 const SlidesScreen = () => {
-  const { data } = useListSlides("http://ongapi.alkemy.org/api/slides");
-
-  console.log(data);
+  const { data } = useListSlides(process.env.REACT_APP_ENDPOINT_SLIDES);
 
   return (
     <VStack mt="2rem">
@@ -50,26 +48,27 @@ const SlidesScreen = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {}
-              <Tr>
-                <Td>Esto es un Slide</Td>
-                <Td>
-                  <Image
-                    htmlWidth="200px"
-                    src="http://ongapi.alkemy.org/storage/X3uSu5XCJ3.jpeg"
-                    alt="Segun Adebayo"
-                  />
-                </Td>
-                <Td>3</Td>
-                <Td>
-                  <Button colorScheme="yellow" variant="solid">
-                    <AiTwotoneEdit />
-                  </Button>
-                  <Button ml={5} colorScheme="red" variant="solid">
-                    <AiOutlineClose />
-                  </Button>
-                </Td>
-              </Tr>
+              {data?.data.map((slide, i) => (
+                <Tr key={i}>
+                  <Td>{slide.name}</Td>
+                  <Td>
+                    <Image
+                      htmlWidth="200px"
+                      src={slide.image}
+                      alt="Segun Adebayo"
+                    />
+                  </Td>
+                  <Td>{slide.order}</Td>
+                  <Td>
+                    <Button colorScheme="yellow" variant="solid">
+                      <AiTwotoneEdit />
+                    </Button>
+                    <Button ml={5} colorScheme="red" variant="solid">
+                      <AiOutlineClose />
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </div>
