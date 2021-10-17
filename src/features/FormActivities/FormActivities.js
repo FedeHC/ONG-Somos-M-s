@@ -12,17 +12,21 @@ import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
+import { useParams } from "react-router-dom";
+import { /* showActivities, */ createActivity, updateActivity } from "../../services/apiActivities";
 
+
+const obj = null;
+/*
 const obj = !!Math.round(Math.random() * 1) && {
   name: "Nombre de prueba",
   description: "Descripción de prueba",
   image: undefined,
   id: 1,
 };
+*/
 
-export const FormActivities = () => {
-  const url = obj ? REACT_APP_ENDPOINT_ACTIVITIES + obj.id : REACT_APP_ENDPOINT_ACTIVITIES_CREATE;
-
+const FormActivities = () => {
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .required("El nombre es obligatorio")
@@ -136,3 +140,5 @@ export const FormActivities = () => {
     </VStack>
   );
 };
+
+export default FormActivities;
