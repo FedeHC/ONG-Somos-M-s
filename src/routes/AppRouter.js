@@ -11,12 +11,14 @@ import Gracias from "../pages/gracias";
 import Contact from "../pages/Contact/Contact";
 import NewsScreen from "../pages/NewsScreen/NewsScreen";
 import ActivitiesList from "../features/activitiesList/ActivitiesList";
+import Home from "../pages/home";
 
 const AppRouter = () => {
   return (
     <Router>
       <div>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/contacto" component={Contact} />
           <Route exact path="/backoffice/slides" component={ScreenSlidesList} />
           <Route exact path="/backoffice/home" component={HomeForm} />
