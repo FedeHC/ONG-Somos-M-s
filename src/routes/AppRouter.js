@@ -12,12 +12,14 @@ import Contact from "../pages/Contact/Contact";
 import NewsScreen from "../pages/NewsScreen/NewsScreen";
 import SlideForm from "../features/SlideForm/SlideForm";
 import ActivitiesList from "../features/activitiesList/ActivitiesList";
+import Home from "../pages/home";
 
 const AppRouter = () => {
   return (
     <Router>
       <div>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route
             exact
             path="/backoffice/slidesScreen"
