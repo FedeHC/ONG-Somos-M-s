@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+.listaMiembros {
+  width: 50% !important;
+  margin: 2rem;
+}
+
+.profilePhoto {
+  height: 50px;
+  width: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  p {
+    font-size: 20px;
+  }
+}
+
+.buttonField {
+  text-align: center !important;
+}
+
+.acciones {
+  text-align: center !important;
+}
+
+.EditButton {
+  margin-right: 10px;
+}

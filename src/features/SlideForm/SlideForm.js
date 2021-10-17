@@ -1,14 +1,16 @@
 import React from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import {Formik, Form, ErrorMessage} from "formik";
 import * as Yup from "yup";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-const API_URL = "http://ongapi.alkemy.org/api";
+import {
+  useCreateSlide,
+  useEditSlide,
+} from "../../HTTPServices/slidesServices";
 
 const MAX_FILE_SIZE = 10485760;
 
-const Slides = ({ form }) => {
+const SlideForm = ({form}) => {
   const initialValues = {
     name: form?.name ? form.name : "",
     order: form?.order ? form.order : "",
@@ -20,8 +22,7 @@ const Slides = ({ form }) => {
     name: Yup.string()
       .required("Este campo es requerido.")
       .min(4, "Debe contener al menos 4 caracteres."),
-    order: Yup.number()
-        .required("Este campo es requerido"),
+    order: Yup.number().required("Este campo es requerido"),
     description: Yup.string().required("Este campo es requerido."),
     image: Yup.mixed()
       .required("Este campo es requerido.")
@@ -40,39 +41,12 @@ const Slides = ({ form }) => {
       }),
   });
 
-  const submitHandler = async (
-    values,
-    { setStatus, resetForm, setSubmitting }
-  ) => {
-    try {
-      let response, string, method;
-      if (form && form.id) {
-        string = `${API_URL}/slides/${form.id}`;
-        method = "PUT";
-      }
-      else {
-        string = `${API_URL}/slides`;
-        method = "POST";
-      }
-
-      response = await fetch(string, {
-        method: method,
-        body: JSON.stringify(values),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.status === 200) {
-        console.log("Listo");
-        resetForm({});
-        setStatus({ success: true });
-      } else {
-        console.error("Error");
-        setStatus({ success: false });
-      }
-    } catch (error) {
-      console.error(`Error: ${error}`);
+  const submitHandler = async (values) => {
+    if (form && form.id) {
+      useEditSlide(REACT_APP_ENDPOINT_SLIDES_EDIT + form.id, values);
+    } else {
+      useCreateSlide(REACT_APP_ENDPOINT_SLIDES_CREATE, values);
     }
-    setSubmitting(false);
   };
 
   return (
@@ -92,14 +66,13 @@ const Slides = ({ form }) => {
                 name="name"
                 placeholder="Tu nombre acá"
               />
-              <ErrorMessage name="name" component="div" className="error" />
+              <ErrorMessage name="name" component="div" className="error"/>
             </div>
 
             <label>Order</label>
             <div>
-              <input type="number" name="order" />
-              <ErrorMessage name="order" component="div" className="error" />
-
+              <input type="number" name="order"/>
+              <ErrorMessage name="order" component="div" className="error"/>
             </div>
 
             <label name="descripcion">Descripción</label>
@@ -134,7 +107,7 @@ const Slides = ({ form }) => {
               />
             </div>
 
-            <ErrorMessage name="image" component="div" className="error" />
+            <ErrorMessage name="image" component="div" className="error"/>
 
             <button type="submit">Submit</button>
           </Form>
@@ -144,4 +117,4 @@ const Slides = ({ form }) => {
   );
 };
 
-export default Slides;
+export default SlideForm;
