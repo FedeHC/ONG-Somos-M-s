@@ -12,7 +12,6 @@ import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
-import { useParams } from "react-router-dom";
 import { /* showActivities, */ createActivity, updateActivity } from "../../services/apiActivities";
 
 
