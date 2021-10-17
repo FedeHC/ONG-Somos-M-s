@@ -11,7 +11,7 @@ export const methodGetPublic = async (endpoint, id = null) => {
 
 export const methodPostPublic = async (endpoint, body) => {
   try {
-    return await axios.post(`${"url"}/${endpoint}`, body);
+    return await axios.post(`${"http://ongapi.alkemy.org/api"}/${endpoint}`, body);
   } catch (error) {
     return error;
   }

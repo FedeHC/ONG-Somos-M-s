@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ScreenSlidesList from "../pages/screenSlidesList";
+import SlidesScreen from "../pages/SlidesScreen/SlidesScreen";
 import HomeForm from "../features/HomeForm/HomeForm";
 import MemberForm from "../features/MemberForm/MemberForm";
 import CategoriesBackOffice from "../pages/categoriesBackOffice";
@@ -10,6 +10,7 @@ import Donations from "../pages/donations";
 import Gracias from "../pages/gracias";
 import Contact from "../pages/Contact/Contact";
 import NewsScreen from "../pages/NewsScreen/NewsScreen";
+import SlideForm from "../features/SlideForm/SlideForm";
 import ActivitiesList from "../features/activitiesList/ActivitiesList";
 import Home from "../pages/home";
 
@@ -19,6 +20,16 @@ const AppRouter = () => {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/backoffice/slidesScreen"
+            component={SlidesScreen}
+          />
+          <Route
+            exact
+            path="/backoffice/slidesScreen/form"
+            component={SlideForm}
+          />
           <Route exact path="/contacto" component={Contact} />
           <Route exact path="/backoffice/slides" component={ScreenSlidesList} />
           <Route exact path="/backoffice/home" component={HomeForm} />
