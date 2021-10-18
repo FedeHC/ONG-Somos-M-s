@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Backoffice from "../backoffice/home/Backoffice";
 import HomeForm from "../backoffice/home/HomeForm/HomeForm";
@@ -18,7 +18,7 @@ import OrgForm from "../backoffice/organization/OrgForm/OrgForm";
 import UsersList from "../backoffice/users/UsersList/UsersList";
 import UserForm from "../backoffice/users/UserForm/UserForm";
 import TestimonialForm from "../backoffice/testimonials/testimonialForm/TestimonialForm";
-import { FormProjects } from "../backoffice/projects/FormProjects/FormProjects";
+import {FormProjects} from "../backoffice/projects/FormProjects/FormProjects";
 import Home from "../pages/home";
 import News from "../pages/news/News";
 import NewsDetail from "../pages/news/Detail/NewsDetail";
@@ -28,7 +28,7 @@ import Gracias from "../pages/gracias";
 import Activities from "../pages/Activities/Activities";
 import ActivitiesDetail from "../pages/Activities/details/Detail";
 import LoginForm from "../pages/login/LoginForm";
-import { Register } from "../pages/register/Register";
+import {Register} from "../pages/register/Register";
 
 const AppRouter = () => {
   return (
@@ -36,19 +36,19 @@ const AppRouter = () => {
       <div>
         <Switch>
           {/* public */}
-          <Route exact path="/" component={Home} />
-          <Route exact path="/novedades" component={News} />
-          <Route exact path="/novedades/:id" component={NewsDetail} />
-          <Route exact path="/contacto" component={Contact} />
-          <Route exact path="/donar" component={Donations} />
-          <Route exact path="/gracias" component={Gracias} />
-          <Route exact path="/actividades" component={Activities} />
-          <Route exact path="/actividades/:id" component={ActivitiesDetail} />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/register" component={Register} />
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/novedades" component={News}/>
+          <Route exact path="/novedades/:id" component={NewsDetail}/>
+          <Route exact path="/contacto" component={Contact}/>
+          <Route exact path="/donar" component={Donations}/>
+          <Route exact path="/gracias" component={Gracias}/>
+          <Route exact path="/actividades" component={Activities}/>
+          <Route exact path="/actividades/:id" component={ActivitiesDetail}/>
+          <Route exact path="/login" component={LoginForm}/>
+          <Route exact path="/register" component={Register}/>
           {/* backoffice */}
-          <Route exact path="/backoffice" component={Backoffice} />
-          <Route exact path="/backoffice/home" component={HomeForm} />
+          <Route exact path="/backoffice" component={Backoffice}/>
+          <Route exact path="/backoffice/home" component={HomeForm}/>
           <Route
             exact
             path="/backoffice/activities"
@@ -80,14 +80,14 @@ const AppRouter = () => {
             path="/backoffice/categories/edit "
             component={CategoriesForm}
           />
-          <Route exact path="/backoffice/members" component={MemberList} />
+          <Route exact path="/backoffice/members" component={MemberList}/>
           <Route
             exact
             path="/backoffice/members/create"
             component={MemberForm}
           />
-          <Route exact path="/backoffice/members/edit" component={MemberForm} />
-          <Route exact path="/backoffice/news" component={NewsScreen} />
+          <Route exact path="/backoffice/members/edit" component={MemberForm}/>
+          <Route exact path="/backoffice/news" component={NewsScreen}/>
           <Route
             exact
             path="/backoffice/news/create"
@@ -118,9 +118,9 @@ const AppRouter = () => {
             path="/backoffice/projects/edit"
             component={FormProjects}
           />
-          <Route exact path="/backoffice/slides" component={SlidesScreen} />
-          <Route exact path="/backoffice/slides/create" component={SlideForm} />
-          <Route exact path="/backoffice/slides/edit" component={SlideForm} />
+          <Route exact path="/backoffice/slides" component={SlidesScreen}/>
+          <Route exact path="/backoffice/slides/create" component={SlideForm}/>
+          <Route exact path="/backoffice/slides/edit" component={SlideForm}/>
           <Route
             exact
             path="/backoffice/testimonials/create"
@@ -131,9 +131,9 @@ const AppRouter = () => {
             path="/backoffice/testimonials/edit"
             component={TestimonialForm}
           />
-          <Route exact path="/backoffice/users" component={UsersList} />
-          <Route exact path="/backoffice/users/create" component={UserForm} />
-          <Route exact path="/backoffice/users/edit" component={UserForm} />
+          <Route exact path="/backoffice/users" component={UsersList}/>
+          <Route exact path="/backoffice/users/create" component={UserForm}/>
+          <Route exact path="/backoffice/users/edit" component={UserForm}/>
         </Switch>
       </div>
     </Router>

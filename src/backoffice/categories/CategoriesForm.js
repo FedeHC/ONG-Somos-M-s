@@ -4,10 +4,7 @@ import * as yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./CategoriesForm.scss";
-import { putCategory, postCategory } from "../services/apiCategories";
-
-// URL API:
-const API_URL = "http://ongapi.alkemy.org/api";
+import { putCategory, postCategory } from "../../services/apiCategories";
 
 // Max. file size for input file upload:
 const MAX_FILE_SIZE = 10485760; // 10 MB.
@@ -73,10 +70,10 @@ function CategoriesForm({ form }) {
         // one moment, you must define the headers
         try {
           if (form) {
-            const response = await putCategory(values, headers);
+            const response = await putCategory(values);
             return response;
           } else {
-            const response = await postCategory(values, headers);
+            const response = await postCategory(values);
             return response;
           }
         } catch (err) {
