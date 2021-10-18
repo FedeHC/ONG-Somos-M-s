@@ -19,7 +19,6 @@ import UsersList from "../backoffice/users/UsersList/UsersList";
 import UserForm  from "../backoffice/users/UserForm/UserForm";
 import TestimonialForm from "../backoffice/testimonials/testimonialForm/TestimonialForm";
 import { FormProjects } from "../backoffice/projects/FormProjects/FormProjects";
-
 import Home from "../pages/home";
 import News from "../pages/news/News";
 import NewsDetail from "../pages/news/Detail/NewsDetail";
@@ -30,7 +29,6 @@ import Activities from "../pages/activities/Activities";
 import ActivitiesDetail from "../pages/activities/details/Detail";
 import LoginForm    from "../pages/login/LoginForm";
 import { Register } from "../pages/register/Register";
-
 
 const AppRouter = () => {
   return (
@@ -52,30 +50,30 @@ const AppRouter = () => {
           {/* backoffice */}
           <Route exact path="/backoffice" component={Backoffice} />
           <Route exact path="/backoffice/home" component={HomeForm} />
-          <Route exact path="/backoffice/categories" component={CategoriesBackOffice} />
-          <Route exact path="/backoffice/categories/create " component={CategoriesForm} />
-          <Route exact path="/backoffice/categories/edit " component={CategoriesForm} />
-          <Route exact path="/backoffice/news" component={NewsScreen} />
-          <Route exact path="/backoffice/news/create" component={FormNovedades} />
-          <Route exact path="/backoffice/news/edit" component={FormNovedades} />
           <Route exact path="/backoffice/activities" component={ActivitiesList} />
           <Route exact path="/backoffice/activities/create" component={FormActivities} />
           <Route exact path="/backoffice/activities/edit" component={FormActivities} />
+          <Route exact path="/backoffice/categories" component={CategoriesBackOffice} />
+          <Route exact path="/backoffice/categories/create " component={CategoriesForm} />
+          <Route exact path="/backoffice/categories/edit " component={CategoriesForm} />
+          <Route exact path="/backoffice/members" component={MemberList} />
+          <Route exact path="/backoffice/members/create" component={MemberForm} />
+          <Route exact path="/backoffice/members/edit" component={MemberForm} />
+          <Route exact path="/backoffice/news" component={NewsScreen} />
+          <Route exact path="/backoffice/news/create" component={FormNovedades} />
+          <Route exact path="/backoffice/news/edit" component={FormNovedades} />
+          <Route exact path="/backoffice/organization" component={Organization} />
+          <Route exact path="/backoffice/organization/edit" component={OrgForm} />
+          <Route exact path="/backoffice/projects/create" component={FormProjects} />
+          <Route exact path="/backoffice/projects/edit" component={FormProjects} />
           <Route exact path="/backoffice/slides" component={SlidesScreen} />
           <Route exact path="/backoffice/slides/create" component={SlideForm} />
           <Route exact path="/backoffice/slides/edit" component={SlideForm} />
-          <Route exact path="/backoffice/members" component={MemberList} />
-          <Route exact path="/backoffice/create" component={MemberForm} />
-          <Route exact path="/backoffice/edit" component={MemberForm} />
-          <Route exact path="/backoffice/organization" component={Organization} />
-          <Route exact path="/backoffice/organization/edit" component={OrgForm} />
+          <Route exact path="/backoffice/testimonials/create" component={TestimonialForm} />
+          <Route exact path="/backoffice/testimonials/edit" component={TestimonialForm} />
           <Route exact path="/backoffice/users" component={UsersList} />
           <Route exact path="/backoffice/users/create" component={UserForm} />
           <Route exact path="/backoffice/users/edit" component={UserForm} />
-          <Route exact path="backoffice/testimonials/create" component={TestimonialForm} />
-          <Route exact path="backoffice/testimonials/edit" component={TestimonialForm} />
-          <Route exact path="backoffice/projects/create" component={FormProjects} />
-          <Route exact path="backoffice/projects/edit" component={FormProjects} />
         </Switch>
       </div>
     </Router>

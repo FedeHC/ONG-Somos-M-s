@@ -8,21 +8,25 @@ import {
   FormErrorMessage,
   Button,
 } from "@chakra-ui/react";
-import { Formik, Form, Field } from "formik";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+import {Formik, Form, Field} from "formik";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
+import { /* showActivities, */ createActivity, updateActivity} from "../../services/apiActivities";
 
+
+const obj = null;
+/*
 const obj = !!Math.round(Math.random() * 1) && {
   name: "Nombre de prueba",
   description: "Descripción de prueba",
   image: undefined,
   id: 1,
 };
+*/
 
-export const FormActivities = () => {
-  const url = obj ? process.env.REACT_APP_ENDPOINT_ACTIVITIES + obj.id : process.env.REACT_APP_ENDPOINT_ACTIVITIES_CREATE;
 
+const FormActivities = () => {
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .required("El nombre es obligatorio")
@@ -34,7 +38,7 @@ export const FormActivities = () => {
         "Formato de imagen incorrecto. Solo acepta archivos .png y .jpg",
         (file) => {
           return (
-            file && (file.type === "image/png" || file.type === "image/jpg")
+            file && (file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg")
           );
         }
       ),
@@ -45,76 +49,57 @@ export const FormActivities = () => {
       <Container maxW="container.md">
         <Formik
           initialValues={{
-            name: obj ? obj.name : "",
-            description: obj ? obj.description : "",
+            name: "",
+            description: "",
             image: undefined,
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            console.log(values);
-            fetch(url, {
-              method: obj ? "PATCH" : "POST",
-              body: JSON.stringify(values),
-            })
-              .then((response) => response.json())
-              .then((result) => console.log(result))
-              .catch((error) =>
-                console.log(`Fallo el ${obj ? `PATCH` : `POST`}`)
-              );
+            obj ? updateActivity(obj.current, obj.current.id) : createActivity(values);
           }}
         >
-          {({ errors, touched }) => (
+          {({errors, touched}) => (
             <Form>
               <Field name="name">
-                {({ field, form }) => (
-                  <FormControl
-                    isInvalid={form.errors.name && form.touched.name}
-                    isRequired
-                  >
-                    <FormLabel htmlFor="name">Nombre</FormLabel>
-                    <Input
-                      {...field}
-                      id="name"
-                      placeholder="Nombre de actividad"
-                    />
-                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                  </FormControl>
+                {({field, form}) => (
+                  <>
+                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                      <FormLabel htmlFor="name">Nombre</FormLabel>
+                      <Input
+                        {...field}
+                        id="name"
+                        placeholder="Nombre de actividad"
+                      />
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl mt="1rem">
+                      <FormLabel htmlFor="name">Descripción:</FormLabel>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={`<p>${obj ? obj.description : ""}</p>`}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          form.setFieldValue("description", data);
+                        }}
+                      />
+                    </FormControl>
+                  </>
                 )}
               </Field>
 
-              <FormControl mt="1rem">
-                <FormLabel htmlFor="name">Descripción:</FormLabel>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={`<p>${obj ? obj.description : ""}</p>`}
-                  onReady={(editor) => {}}
-                  onChange={(event, editor) => {
-                    const data = editor.getData();
-                    console.log({ event, editor, data });
-                  }}
-                  onBlur={(event, editor) => {
-                    console.log("Blur.", editor);
-                  }}
-                  onFocus={(event, editor) => {
-                    console.log("Focus.", editor);
-                  }}
-                />
-              </FormControl>
-
               <Field name="image">
-                {({ form }) => (
+                {({form}) => (
                   <FormControl
                     mt="1rem"
                     id="image"
                     isInvalid={form.errors.image && form.touched.image}
-                    isRequired
                   >
                     <FormLabel>Imagen</FormLabel>
                     <input
                       id="image"
                       name="image"
                       type="file"
-                      accept="image/png, image/jpg"
                       onChange={(event) => {
                         const files = event.target.files;
                         let myFiles = Array.from(files);
@@ -136,3 +121,5 @@ export const FormActivities = () => {
     </VStack>
   );
 };
+
+export default FormActivities;
