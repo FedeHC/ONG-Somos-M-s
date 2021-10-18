@@ -18,7 +18,7 @@ import {
   AiFillPlusCircle,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useListSlides } from "../../HTTPServices/slidesServices";
+import { useListSlides } from "../../services/slidesServices";
 
 const SlidesScreen = () => {
   const { data } = useListSlides(process.env.REACT_APP_ENDPOINT_SLIDES);

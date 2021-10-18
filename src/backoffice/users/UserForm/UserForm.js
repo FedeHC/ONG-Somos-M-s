@@ -10,7 +10,7 @@ import {
 import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
-import "./loginForm.scss";
+import "./userForm.scss";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
@@ -36,7 +36,7 @@ const SignupSchema = Yup.object().shape({
 }; */
 let objetoPrueba;
 
-const LoginForm = () => {
+const UserForm = () => {
   // URL API:
   const API_URL = "http://ongapi.alkemy.org/api/users";
 
@@ -160,4 +160,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default UserForm;

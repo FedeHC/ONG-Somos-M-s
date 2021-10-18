@@ -1,7 +1,7 @@
 import React from "react";
-import Title from "./Title.js";
 import { Box, SimpleGrid, Divider } from "@chakra-ui/react";
 import "./NewsDetail.scss";
+import Title from "../../../features/title/Title";
 
 const NewsDetail = (props) => {
   let objetoPrueba = {

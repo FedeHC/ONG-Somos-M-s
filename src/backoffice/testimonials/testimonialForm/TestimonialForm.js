@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import testimonialSchema from '../../config/testimonialSchema';
-import requestAxios from '../../helpers/requestAxios';
+import testimonialSchema from '../../../config/testimonialSchema';
+import requestAxios from '../../../helpers/requestAxios';
 import {
   FormControl,
   FormErrorMessage,

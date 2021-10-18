@@ -6,7 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   useCreateSlide,
   useEditSlide,
-} from "../../HTTPServices/slidesServices";
+} from "../../../services/slidesServices";
 
 const MAX_FILE_SIZE = 10485760;
 
@@ -43,9 +43,9 @@ const SlideForm = ({form}) => {
 
   const submitHandler = async (values) => {
     if (form && form.id) {
-      useEditSlide(REACT_APP_ENDPOINT_SLIDES_EDIT + form.id, values);
+      // useEditSlide(REACT_APP_ENDPOINT_SLIDES_EDIT + form.id, values);
     } else {
-      useCreateSlide(REACT_APP_ENDPOINT_SLIDES_CREATE, values);
+      // useCreateSlide(REACT_APP_ENDPOINT_SLIDES_CREATE, values);
     }
   };
 

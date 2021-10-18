@@ -3,7 +3,7 @@ import "./contact.scss";
 import { GrInstagram } from "react-icons/gr";
 import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
-import FormContact from "../../features/counter/form contacto/FormContact";
+import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
 
 const Contact = () => {
