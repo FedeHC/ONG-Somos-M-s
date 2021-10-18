@@ -6,7 +6,7 @@ import {
   AiFillPlusCircle,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { getCategories } from "../../services/apiCategories";
+import { getCategories } from "../../../services/apiCategories";
 const CategoriesBackOffice = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
