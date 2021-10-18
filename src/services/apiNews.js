@@ -6,19 +6,19 @@ import {
 } from "./privateApiService";
 
 export const getNews = async (id = null) => {
-  return await methodGetPublic("activities", id);
+  return await methodGetPublic("news", id);
 };
 
 export const createNews = async (body) => {
-  return await methodPostPrivate("activities", body);
+  return await methodPostPrivate("news", body);
 };
 
 export const updateNews = async (body, id) => {
-  return await methodPutPrivate("activities", id, body);
+  return await methodPutPrivate("news", id, body);
 };
 
 export const deleteNews = async (id) => {
-  return await methodDeletePrivate(`activities/${id}`, id);
+  return await methodDeletePrivate(`news/${id}`, id);
 };
 
 export const tokenValidation = () => {
