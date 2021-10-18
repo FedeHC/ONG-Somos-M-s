@@ -4,7 +4,7 @@ import { tokenValidate } from "./tokenValidate";
 const url = "http://ongapi.alkemy.org/api";
 
 // POST
-export const methodPostPrivate = async (endpoint, body) => {
+export const methodPostPrivate = async (endpoint, body, id = null) => {
   try {
 
     const response = await axios.post(`${url}/${endpoint}`, body, {
@@ -18,22 +18,22 @@ export const methodPostPrivate = async (endpoint, body) => {
 };
 
 // PUT
-export const methodPutPrivate = async (endpoint, id=null, body) => {
+export const methodPutPrivate = async (endpoint, id = null, body) => {
   try {
     !id && new Error("No existe id");
 
     const response = await axios.put(`${url}/${endpoint}/${id}`, body, {
-      headers: tokenValidate()
+      headers: tokenValidate(),
     });
 
     return response;
   } catch (error) {
     return error;
   }
-}
+};
 
 // PATCH
-export const methodPatchPrivate = async (endpoint, id=null, body) => {
+export const methodPatchPrivate = async (endpoint, id = null, body) => {
   try {
     !id && new Error("No existe id");
 
@@ -52,12 +52,12 @@ export const methodDeletePrivate = async (endpoint, id) => {
   try {
     !id && new Error("No existe id");
 
-    const response = await axios.put(`${url}/${endpoint}/${id}`, {
-      headers: tokenValidate()
+    const response = await axios.delete(`${url}/${endpoint}/${id}`, {
+      headers: tokenValidate(),
     });
 
     return response;
   } catch (error) {
     return error;
   }
-}
+};
