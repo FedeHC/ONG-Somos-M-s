@@ -7,12 +7,12 @@ export const getCategories = async(id = null) => {
   return resp;
 };
 
-export const postCategory = async(body, headers) => {
-  const resp = await methodPostPrivate(endpointCategories, body, headers);
+export const postCategory = async(body) => {
+  const resp = await methodPostPrivate(endpointCategories, body);
   return resp;
 };
 
-export const putCategory = async(body, headers) => {
-  const resp = await methodPutPrivate(endpointCategories, body, headers);
+export const putCategory = async(idCategory , body) => {
+  const resp = await methodPutPrivate(endpointCategories, idCategory, body);
   return resp;
 };
