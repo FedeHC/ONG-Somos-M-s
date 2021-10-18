@@ -1,11 +1,11 @@
 import axios from "axios";
-import { tokenValidate } from "../features/methods/tokenValidate";
+import { tokenValidate } from "./tokenValidate";
 
 // PATCH
 export const methodPatchPrivate = async (endpoint, id = null, body) => {
   try {
     !id && new Error("No existe id");
-    const response = await axios.patch(`${url}/${endpoint}/${id}`, body, {
+    const response = await axios.patch(`${"url"}/${endpoint}/${id}`, body, {
       headers: tokenValidate(),
     });
     return response;
@@ -28,7 +28,7 @@ export const methodPostPrivate = async (endpoint, body, headers) => {
 export const methodPutPrivate = async (endpoint, id = null, body) => {
   try {
     !id && new Error("No existe id");
-    const response = await axios.put(`${url}/${endpoint}/${id}`, body, {
+    const response = await axios.put(`${"url"}/${endpoint}/${id}`, body, {
       headers:tokenValidate()
     });
     return response;

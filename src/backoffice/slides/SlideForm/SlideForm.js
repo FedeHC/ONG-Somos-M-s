@@ -6,7 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   useCreateSlide,
   useEditSlide,
-} from "../../../HTTPServices/slidesServices";
+} from "../../../services/slidesServices";
 
 const MAX_FILE_SIZE = 10485760;
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { tokenValidate } from "../features/methods/tokenValidate";
+import { tokenValidate } from "./tokenValidate";
 
 // Listar todos los Slides o mostrar uno especifico por ID
 export const useListSlides = (endpoint, body) => {
