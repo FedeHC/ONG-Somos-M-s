@@ -18,7 +18,7 @@ export const updateNews = async (body, id) => {
 };
 
 export const deleteNews = async (id) => {
-  return await methodDeletePrivate(`news/${id}`, id);
+  return await methodDeletePrivate("news", id);
 };
 
 export const tokenValidation = () => {
