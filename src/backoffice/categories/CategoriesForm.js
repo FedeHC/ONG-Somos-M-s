@@ -6,9 +6,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./CategoriesForm.scss";
 import { putCategory, postCategory } from "../../services/apiCategories";
 
-// URL API:
-const API_URL = "http://ongapi.alkemy.org/api";
-
 // Max. file size for input file upload:
 const MAX_FILE_SIZE = 10485760; // 10 MB.
 
