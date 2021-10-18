@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./CategoriesForm.scss";
-import { putCategory, postCategory } from "../services/apiCategories";
+import { putCategory, postCategory } from "../../services/apiCategories";
 
 // URL API:
 const API_URL = "http://ongapi.alkemy.org/api";
@@ -73,14 +73,14 @@ function CategoriesForm({ form }) {
         // one moment, you must define the headers
         try {
           if (form) {
-            const response = await putCategory(values, headers);
+            const response = await putCategory(values);
             return response;
           } else {
-            const response = await postCategory(values, headers);
+            const response = await postCategory(values);
             return response;
           }
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }}
     >

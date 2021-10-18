@@ -8,12 +8,14 @@ import {
   FormErrorMessage,
   Button,
 } from "@chakra-ui/react";
-import {Formik, Form, Field} from "formik";
-import {CKEditor} from "@ckeditor/ckeditor5-react";
+import { Formik, Form, Field } from "formik";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
-import { /* showActivities, */ createActivity, updateActivity} from "../../services/apiActivities";
-
+import {
+  /* showActivities, */ createActivity,
+  updateActivity,
+} from "../../../services/apiActivities";
 
 const obj = null;
 /*
@@ -24,7 +26,6 @@ const obj = !!Math.round(Math.random() * 1) && {
   id: 1,
 };
 */
-
 
 const FormActivities = () => {
   const SignupSchema = Yup.object().shape({
@@ -38,7 +39,10 @@ const FormActivities = () => {
         "Formato de imagen incorrecto. Solo acepta archivos .png y .jpg",
         (file) => {
           return (
-            file && (file.type === "image/png" || file.type === "image/jpg" || file.type === "image/jpeg")
+            file &&
+            (file.type === "image/png" ||
+              file.type === "image/jpg" ||
+              file.type === "image/jpeg")
           );
         }
       ),
@@ -55,15 +59,19 @@ const FormActivities = () => {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            obj ? updateActivity(obj.current, obj.current.id) : createActivity(values);
+            obj
+              ? updateActivity(obj.current, obj.current.id)
+              : createActivity(values);
           }}
         >
-          {({errors, touched}) => (
+          {({ errors, touched }) => (
             <Form>
               <Field name="name">
-                {({field, form}) => (
+                {({ field, form }) => (
                   <>
-                    <FormControl isInvalid={form.errors.name && form.touched.name}>
+                    <FormControl
+                      isInvalid={form.errors.name && form.touched.name}
+                    >
                       <FormLabel htmlFor="name">Nombre</FormLabel>
                       <Input
                         {...field}
@@ -89,7 +97,7 @@ const FormActivities = () => {
               </Field>
 
               <Field name="image">
-                {({form}) => (
+                {({ form }) => (
                   <FormControl
                     mt="1rem"
                     id="image"
