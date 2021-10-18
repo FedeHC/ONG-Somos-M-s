@@ -10,6 +10,7 @@ import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Box } from "@chakra-ui/react";
 import { Center} from "@chakra-ui/react"
+import { postContact } from '../../../services/ApiContact';
 
 
 
@@ -45,8 +46,10 @@ const Formcontact = () => {
        message:""
       }}
       validationSchema={ContactSchema}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async(values,{resetForm}) => {
+        const resp = await postContact(values);
+        console.log(resp.data);
+        resetForm({});
       }}
     >
       {(formik) => (
