@@ -30,16 +30,16 @@ const formSchema = Yup.object().shape({
 });
 
 // example object novedades
-/* const object2 = {
-  id: 614,
+const object2 = {
+  id: 620,
   name: "hola mundo",
   content: "<p> ejemplo de contenido </p>",
   category: "Eventos",
   image: "",
-}; */
+};
 
-const object2 = {};
-
+/* const object2 = {};
+ */
 const FormNovedades = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -80,7 +80,6 @@ const FormNovedades = () => {
           isObjEmpty(object2)
             ? createNews(values)
             : updateNews(values, values.id);
-          console.log(values);
         }}
       >
         {(formik) => (
