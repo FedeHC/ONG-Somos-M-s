@@ -2,24 +2,13 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./News.css";
 import axios from "axios";
+import { getNews } from "../../services/apiNews";
 
 const News = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://ongapi.alkemy.org/api/news")
-      .then((response) => {
-        setNewsList(response.data.data);
-        console.log(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+    getNews().then((response) => setNewsList(response.data.data));
   }, []);
 
   return (
