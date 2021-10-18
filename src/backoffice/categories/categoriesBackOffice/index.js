@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from "@chakra-ui/react";
 import {
   AiTwotoneEdit,
@@ -6,7 +6,13 @@ import {
   AiFillPlusCircle,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../services/apiCategories";
 const CategoriesBackOffice = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getCategories()
+    .then(response => setData(response.data))
+  }, [])
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="flex-start">
@@ -30,9 +36,10 @@ const CategoriesBackOffice = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Categoria test</Td>
-              <Td>7/10/2021</Td>
+          {data?.map((category) => (
+            <Tr key={category.name}>
+              <Td>{category.name}</Td>
+              <Td>{category.created_at}</Td>
               <Td>
                 <Button colorScheme="yellow" variant="solid">
                   <AiTwotoneEdit />
@@ -42,18 +49,8 @@ const CategoriesBackOffice = () => {
                 </Button>
               </Td>
             </Tr>
-            <Tr>
-              <Td>Categoria test 2</Td>
-              <Td>11/10/2021</Td>
-              <Td>
-                <Button colorScheme="yellow" variant="solid">
-                  <AiTwotoneEdit />
-                </Button>
-                <Button ml={5} colorScheme="red" variant="solid">
-                  <AiOutlineClose />
-                </Button>
-              </Td>
-            </Tr>
+            ))
+          }
           </Tbody>
         </Table>
       </div>

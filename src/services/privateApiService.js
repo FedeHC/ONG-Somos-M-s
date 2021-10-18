@@ -6,7 +6,6 @@ const url = "http://ongapi.alkemy.org/api";
 // POST
 export const methodPostPrivate = async (endpoint, body) => {
   try {
-    !id && new Error("No existe id");
 
     const response = await axios.post(`${url}/${endpoint}`, body, {
       headers: tokenValidate(),
