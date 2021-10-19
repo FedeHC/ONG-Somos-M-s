@@ -37,3 +37,34 @@ Skeleton disponible para cualquier componente en src/features/skeleton/SkeletonC
 Dentro del archivo encontraremos el component <Skeleton /> proporcionado por la libreria ChakraUI el cual cuenta con una propiedad "isLoading". Si la misma se encuentra en "false" muestra el componente y si se encuentra en "true" no lo muestra
 
 ---
+
+### Spinner
+
+_The react-spinner-loader provides simple React SVG spinner component which can be implemented for async await operation before data loads to the view._
+
+_You can pass by props the type, color, width and height._
+
+_Spinner type={type} color={color} height={height} width={width}_
+
+_By default the component comes with the following data:_
+
+| type | color | height | width |
+| ------ | ------ | ------ | ------ |
+| ThreeDots | blue | 80 | 80 |
+
+_The types of spinner that are available are:_
+* Audio
+* BallTriangle
+* Bars
+* Circles
+* Grid
+* Hearts
+* Oval
+* Puff
+* Rings
+* TailSpin
+* ThreeDots
+
+_You can pass the colors you want and the measures you need_
+
+---
