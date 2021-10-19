@@ -1,7 +1,7 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Container, Flex, VStack } from "@chakra-ui/react";
-import Title from "./features/activities/detail/title";
+import Title from "../../features/title/Title";
 
 
 const Activities = ({ mainTitle }) => {

@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import CardNews from "../../features/cardNews";
+import { getHome } from "../../services/apiHome";
 import "./home.css";
+import { SkeletonComponent } from "../../features/skeleton/SkeletonComponent";
+
 const Home = () => {
+  const [titleText, setTitleText] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const title = async () => {
+      const welcomeText = await getHome();
+      setTitleText(welcomeText);
+      setLoading(false);
+    };
+    title();
+  }, []);
+
   return (
     <div>
-      <h1 className="title__main">Somos Más</h1>
+      {!loading && (
+        <h1 className="title__main">
+          {titleText.data ? titleText.data.data.welcome_text : "Hola"}
+        </h1>
+      )}
       <section className="news__container">
         <h3>Ultimas Novedades</h3>
         <div className="news__flex">
