@@ -3,7 +3,10 @@ import { methodPostPrivate, methodPutPrivate, methodDeletePrivate } from "./priv
 
 
 export const getNews = async (id = null) => {
-  return await methodGetPublic("news?limit=10", id);
+  if(id)
+    return await methodGetPublic("news", id);
+  else
+    return await methodGetPublic("news?limit=10");  // Limit results to 10.
 };
 
 export const createNews = async (body) => {
