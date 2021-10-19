@@ -19,3 +19,17 @@ export const errorAlert = (title, text) =>{
   toast:true
 })
 };
+
+export const questionAlert = async(title, text , confirmText) => {
+ const resp = await Swal.fire({
+   title: title || 'Estás seguro?',
+   text: text || "¡Esta acción es irreversible!",
+   icon: 'warning',
+   toast:true,
+   showCancelButton: true,
+   confirmButtonColor: '#3085d6',
+   cancelButtonColor: '#d33',
+   confirmButtonText: confirmText || 'Si, Borrar!'
+ })
+ return resp.isConfirmed;
+};
