@@ -9,3 +9,13 @@ export const succesAlert = (title, text) =>{
   toast:true
  })
 };
+
+export const errorAlert = (title, text) =>{
+ Swal.fire({
+  icon: 'error',
+  title: title || 'Oops...',
+  text:  text || 'Ocurrió un error inesperado.!!',
+  confirmButtonColor:"#00214D",
+  toast:true
+})
+};
