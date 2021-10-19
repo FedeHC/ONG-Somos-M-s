@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 import { AiTwotoneEdit, AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";

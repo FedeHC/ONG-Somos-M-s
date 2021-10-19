@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./News.css";
-import axios from "axios";
 import { getNews } from "../../services/apiNews";
 
 const News = () => {
