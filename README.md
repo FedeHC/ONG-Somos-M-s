@@ -37,3 +37,50 @@ Skeleton disponible para cualquier componente en src/features/skeleton/SkeletonC
 Dentro del archivo encontraremos el component <Skeleton /> proporcionado por la libreria ChakraUI el cual cuenta con una propiedad "isLoading". Si la misma se encuentra en "false" muestra el componente y si se encuentra en "true" no lo muestra
 
 ---
+
+### Alerts
+
+Disponible en src/features/alert/alert.js.
+
+#### Uso
+
+* successAlert() puede o no recibir parámetros título y texto, devuelve un alert de éxito
+```js
+  successAlert("titulo","texto");
+```
+* errorAlert() puede o no recibir parámetros título y texto, devuelve un alert de error
+```js
+  errorAlert("titulo","texto");
+```
+* questionAlert() puede o no recibir parámetros título, texto y texto del botón confirmar , retorna un booleano, trabaja de manera asincrónica
+```js
+  const respuesta = await questionAlert("titulo","texto","texto del boton confirmar");
+```
+#### Ejemplo de uso
+* Si, se usa sin parámentros tiene texto por default
+ ```jsx
+const success =() =>{
+    successAlert();
+}
+const error =() =>{
+    errorAlert();
+}
+const question =async() =>{
+   const resp = await questionAlert();
+   resp && (successAlert() )
+}
+
+const alertExample = () => {
+    return (
+        <div>
+            <button onClick={success}>success</button>
+            <hr />
+            <button onClick={error}>error</button>
+            <hr />
+            <button onClick={question}>question</button>
+        </div>
+    )
+}
+
+```
+---
