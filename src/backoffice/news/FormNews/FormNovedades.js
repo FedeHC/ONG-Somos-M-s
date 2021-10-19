@@ -1,159 +1,135 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-
+import { useParams } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Center, Heading,
+         FormControl, FormErrorMessage, FormLabel,
+         Input, Button, Select } from "@chakra-ui/react";
+import { getNews, createNews, updateNews } from "../../../services/apiNews";
 
-import { Center, Heading } from "@chakra-ui/layout";
-import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-} from "@chakra-ui/form-control";
-import { Input } from "@chakra-ui/input";
-import { Button } from "@chakra-ui/button";
-import { Select } from "@chakra-ui/select";
 
-import { createNews, updateNews } from "../../../services/apiNews";
-
-// validaciones
+// SCHEMA
 const formSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(4, "Se requieren 4 caracteres como mínimo")
-    .required("Requerido"),
+  name: Yup.string().required("Requerido").min(4, "Se requieren 4 caracteres como mínimo"),
   content: Yup.string().required("Requerido"),
   category: Yup.string().required("Requerido"),
   image: Yup.string().required("Requerido"),
 });
 
-// example object novedades
-const object2 = {
-  id: 620,
-  name: "hola mundo",
-  content: "<p> ejemplo de contenido </p>",
-  category: "Eventos",
-  image: "",
-};
-
-/* const object2 = {};
- */
 const FormNovedades = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [response, setResponse] = useState([]);
+  const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
 
-  const initialValues = {
-    name: "",
-    content: "",
-    category: "",
-    image: "",
-  };
-
-  // categories
+  // NEWS ARRAY/OBJECT
   useEffect(() => {
-    axios
-      .get("http://ongapi.alkemy.org/api/categories")
-      .then((response) => {
-        setResponse(response.data);
-        console.log(response);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
+    const fetchData = async () => {
+      const result = await getNews(id);
+      setResponse(result.data.data);
+    }  
+    fetchData();
+    }, [id]);
 
-  const isObjEmpty = (obj) => {
-    return Object.keys(obj).length === 0;
+  // INITIAL FORMIK VALUES
+  const initialValues = {
+    name: response?.name || "",
+    content: response?.content || "",
+    category: response?.category || "",
+    image: response?.image || "",
   };
 
   return (
     <Center>
-      <Formik
-        initialValues={isObjEmpty(object2) ? initialValues : object2}
-        validationSchema={formSchema}
-        onSubmit={(values) => {
-          isObjEmpty(object2)
-            ? createNews(values)
-            : updateNews(values, values.id);
-        }}
-      >
+      {/* FORM */}
+      <Formik initialValues={initialValues}
+              enableReinitialize
+              validationSchema={formSchema}
+              onSubmit={(values) => id ? updateNews(values, id) : createNews(values)} >
         {(formik) => (
           <Form>
+            {/* TITLE */}
             <Heading m={4}>Formulario Novedades</Heading>
-            <Field mt={5} className="input" name="name">
+
+            {/* NAME INPUT */}
+            <Field mt={5}
+                   className="input"
+                   name="name">
               {({ field, form }) => (
-                <FormControl isInvalid={form.errors.title && form.touched.name}>
+                <FormControl isInvalid={form.errors.name && form.touched.name}>
                   <FormLabel htmlFor="name">Titulo</FormLabel>
-                  <Input {...field} id="name" placeholder="Titulo" />
+                  <Input {...field}
+                         placeholder="Nombre" />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Field mt={5} className="input" name="content">
-              {({ form }) => (
-                <FormControl
-                  isInvalid={form.errors.content && form.touched.content}
-                >
+
+            {/* CONTENT INPUT */}
+            <Field mt={5}
+                   className="input"
+                   name="content">
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.content && form.touched.content} >
                   <FormLabel htmlFor="content">Contenido</FormLabel>
-                  <CKEditor
-                    editor={ClassicEditor}
-                    data={formik.values.content}
-                    onChange={(e, editor) => {
-                      const data = editor.getData();
-                      formik.setFieldValue("content", data);
-                    }}
-                  />
+                  <CKEditor editor={ClassicEditor}
+                            data={formik.values.content}
+                            onChange={(e, editor) => {
+                              const data = editor.getData();
+                              formik.setFieldValue("content", data);
+                            }} />
                   <FormErrorMessage>{form.errors.content}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Field mt={5} className="input" name="category">
+
+            {/* CATEGORY SELECT/INPUT */}
+            <Field mt={5}
+                   className="input"
+                   name="category">
               {({ field, form }) => (
-                <FormControl
-                  isInvalid={form.errors.category && form.touched.category}
-                >
-                  <FormLabel htmlFor="category">Categoria</FormLabel>
-                  {!loading &&
-                    (error ? (
-                      <Input value={error} isDisabled />
-                    ) : (
-                      <Select placeholder="elija una Categoria" {...field}>
-                        {response.data.map((category) => (
-                          <option key={category.id}>{category.name}</option>
-                        ))}
-                      </Select>
-                    ))}
+                <FormControl isInvalid={form.errors.category && form.touched.category} >
+                  <FormLabel htmlFor="category">Categoría</FormLabel>
+                    {/* If not id in url, show select input with categories */}
+                    {!id 
+                      ? <Select placeholder="Elija una categoría" {...field}>
+                          {response.map((res) => (
+                            <option key={res.id}>{res.category_id}</option>
+                          ))}
+                        </Select>
+                      /* If id in url, show input with current id category (if exists) */
+                      : <Input {...field}
+                               placeholder="ID de categoria" />
+                    }
                   <FormErrorMessage>{form.errors.category}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Field mt={5} className="input" name="image">
+
+            {/* IMAGE INPUT */}
+            <Field mt={5}
+                   className="input"
+                   name="image">
               {({ form }) => (
-                <FormControl
-                  isInvalid={form.errors.image && form.touched.image}
-                >
+                <FormControl isInvalid={form.errors.image && form.touched.image} >
                   <FormLabel htmlFor="image">Imagen</FormLabel>
-                  <Input
-                    id="image"
-                    type="file"
-                    onChange={(event) => {
-                      const files = event.target.files;
-                      let myFiles = Array.from(files);
-                      formik.setFieldValue("image", myFiles[0]);
-                    }}
-                  />
+                  <Input id="image"
+                         type="file"
+                         onChange={(event) => {
+                           const files = event.target.files;
+                           let myFiles = Array.from(files);
+                           formik.setFieldValue("image", myFiles[0]);
+                         }} />
                   <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Button mt={4} width="100%" colorScheme="teal" type="submit">
-              {isObjEmpty(object2) ? "Enviar" : "Guardar"}
-            </Button>
+
+            {/* SEND BUTTON */}
+            <Button mt={4}
+                    width="100%"
+                    colorScheme="teal"
+                    type="submit">Enviar</Button>
           </Form>
         )}
       </Formik>
