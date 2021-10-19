@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export const succesAlert = (title, text) =>{
+export const successAlert = (title, text) =>{
  Swal.fire({
   icon: 'success',
   title: title || 'Hecho',
@@ -29,7 +29,7 @@ export const questionAlert = async(title, text , confirmText) => {
    showCancelButton: true,
    confirmButtonColor: '#3085d6',
    cancelButtonColor: '#d33',
-   confirmButtonText: confirmText || 'Si, Borrar!'
+   confirmButtonText: confirmText || 'Si, Adelante!'
  })
  return resp.isConfirmed;
 };
