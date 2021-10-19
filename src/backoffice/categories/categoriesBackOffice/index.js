@@ -10,9 +10,8 @@ import { getCategories } from "../../../services/apiCategories";
 const CategoriesBackOffice = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
-    getCategories()
-    .then(response => setData(response.data))
-  }, [])
+    getCategories().then((response) => setData(response.data));
+  }, []);
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="flex-start">
@@ -36,21 +35,20 @@ const CategoriesBackOffice = () => {
             </Tr>
           </Thead>
           <Tbody>
-          {data?.map((category) => (
-            <Tr key={category.name}>
-              <Td>{category.name}</Td>
-              <Td>{category.created_at}</Td>
-              <Td>
-                <Button colorScheme="yellow" variant="solid">
-                  <AiTwotoneEdit />
-                </Button>
-                <Button ml={5} colorScheme="red" variant="solid">
-                  <AiOutlineClose />
-                </Button>
-              </Td>
-            </Tr>
-            ))
-          }
+            {data?.map((category) => (
+              <Tr key={category.name}>
+                <Td>{category.name}</Td>
+                <Td>{category.created_at}</Td>
+                <Td>
+                  <Button colorScheme="yellow" variant="solid">
+                    <AiTwotoneEdit />
+                  </Button>
+                  <Button ml={5} colorScheme="red" variant="solid">
+                    <AiOutlineClose />
+                  </Button>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </div>

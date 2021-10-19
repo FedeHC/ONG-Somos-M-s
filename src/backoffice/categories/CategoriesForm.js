@@ -77,7 +77,7 @@ function CategoriesForm({ form }) {
             return response;
           }
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }}
     >

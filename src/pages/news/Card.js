@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Badge, Image, StarIcon } from "@chakra-ui/react";
+import { Box, Badge, Image } from "@chakra-ui/react";
 
 const Card = ({ news }) => {
   return (
