@@ -129,7 +129,7 @@ const AppRouter = () => {
           />
           <Route exact path="/backoffice/users" component={UsersList} />
           <Route exact path="/backoffice/users/create" component={UserForm} />
-          <Route exact path="/backoffice/users/edit" component={UserForm} />
+          <Route exact path="/backoffice/users/edit/:id" component={UserForm} />
         </Switch>
       </div>
     </Router>
