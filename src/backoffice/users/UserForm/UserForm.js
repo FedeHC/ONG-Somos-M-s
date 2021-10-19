@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   FormControl,
   FormLabel,
@@ -11,6 +12,7 @@ import { Formik, Form, Field } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
 import "./userForm.scss";
+import { getUsers, createUser, updateUser } from "../../../services/apiUsers";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
@@ -18,7 +20,7 @@ const SignupSchema = Yup.object().shape({
     .required("Requerido")
     .min(4, "Se requieren 4 caracteres como mínimo"),
   role: Yup.string().required("Requerido"),
-  image: Yup.mixed()
+  profile_image: Yup.mixed()
     .required("Requerido")
     .test("type", "Solo se aceptan formatos jpg y png", (file) => {
       return file && (file.type === "image/jpg" || file.type === "image/png");
@@ -27,45 +29,52 @@ const SignupSchema = Yup.object().shape({
     .required("Requerido")
     .min(8, "Se requieren 8 caracteres como mínimo"),
 });
-/* const objetoPrueba = {
+/* const objeto = {
+  id: 520,
   name: "facu",
   email: "facuf@gmail.com",
   role: "Usuario",
-  image: undefined,
-  id: 1,
+  profile_image: undefined,
+  password: "asdwasdwads",
 }; */
-let objetoPrueba;
+/* let objeto = {};
+ */
+
+const initialValues = {
+  name: "",
+  email: "",
+  role: "",
+  profile_image: undefined,
+  password: "",
+};
+
+const isObjEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
+};
 
 const UserForm = () => {
-  // URL API:
-  const API_URL = "http://ongapi.alkemy.org/api/users";
+  const [user, setUser] = useState({});
+  const [id, setId] = useState("");
+
+  useEffect(() => {
+    let url = window.location.href;
+    let id = url.substring(url.lastIndexOf("/") + 1);
+    getUsers(id).then((response) => setUser(response.data.data));
+    setId(id);
+  }, []);
 
   return (
     <Formik
-      initialValues={{
-        name: objetoPrueba ? objetoPrueba.name : "",
-        email: objetoPrueba ? objetoPrueba.email : "",
-        role: objetoPrueba ? objetoPrueba.role : "",
-        image: undefined,
-        password: objetoPrueba ? objetoPrueba.password : "",
-      }}
+      initialValues={isObjEmpty(user) ? initialValues : user}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        console.log(JSON.stringify(values));
-        fetch(objetoPrueba ? `${API_URL}:${objetoPrueba.id}` : { API_URL }, {
-          method: objetoPrueba ? "PATCH" : "POST",
-          body: JSON.stringify(values),
-        })
-          .then((response) => response.json())
-          .then((result) => console.log(result))
-          .catch((error) => console.log(error));
+        console.log(values);
+        isObjEmpty(user) ? createUser(values) : updateUser(values, id);
       }}
     >
       {({ errors, touched }) => (
         <Form className="userForm">
-          <Heading m={4}>
-            {objetoPrueba ? "Editar usuario" : "Crear usuario"}
-          </Heading>
+          <Heading m={4}>{user ? "Editar usuario" : "Crear usuario"}</Heading>
           <Field name="name">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.name && form.touched.name}>
@@ -73,7 +82,7 @@ const UserForm = () => {
                 <Input
                   {...field}
                   id="name"
-                  placeholder={objetoPrueba ? objetoPrueba.name : "name"}
+                  placeholder={user ? user.name : "name"}
                 />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
@@ -86,7 +95,7 @@ const UserForm = () => {
                 <Input
                   {...field}
                   id="email"
-                  placeholder={objetoPrueba ? objetoPrueba.email : "email"}
+                  placeholder={user ? user.email : "email"}
                 />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
               </FormControl>
@@ -99,11 +108,7 @@ const UserForm = () => {
                 isInvalid={form.errors.role && form.touched.role}
               >
                 <FormLabel>Rol</FormLabel>
-                <Select
-                  {...field}
-                  id="role"
-                  placeholder={objetoPrueba ? objetoPrueba.role : "role"}
-                >
+                <Select {...field} id="role" placeholder="Selecciona el rol">
                   <option value="Administrador">Administrador</option>
                   <option value="Usuario">Usuario</option>
                 </Select>
@@ -111,24 +116,26 @@ const UserForm = () => {
               </FormControl>
             )}
           </Field>
-          <Field name="image">
+          <Field name="profile_image">
             {({ field, form }) => (
               <FormControl
-                id="image"
-                isInvalid={form.errors.image && form.touched.image}
+                id="profile_image"
+                isInvalid={
+                  form.errors.profile_image && form.touched.profile_image
+                }
               >
                 <FormLabel>Foto de perfil</FormLabel>
                 <input
-                  id="image"
-                  name="image"
+                  id="profile_image"
+                  name="profile_image"
                   type="file"
                   onChange={(event) => {
                     const files = event.target.files;
                     let myFiles = Array.from(files);
-                    form.setFieldValue("image", myFiles[0]);
+                    form.setFieldValue("profile_image", myFiles[0]);
                   }}
                 />
-                <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                <FormErrorMessage>{form.errors.profile_image}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -142,9 +149,7 @@ const UserForm = () => {
                   {...field}
                   id="password"
                   type="password"
-                  placeholder={
-                    objetoPrueba ? objetoPrueba.password : "password"
-                  }
+                  placeholder={user ? user.password : "password"}
                 />
                 <FormErrorMessage>{form.errors.password}</FormErrorMessage>
               </FormControl>
@@ -152,7 +157,7 @@ const UserForm = () => {
           </Field>
 
           <Button mt={4} colorScheme="teal" type="submit">
-            Ingresar
+            {user ? "Guardar" : "Crear"}
           </Button>
         </Form>
       )}
