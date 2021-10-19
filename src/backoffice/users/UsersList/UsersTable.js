@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { getUsers, deleteUser } from "../../../services/apiUsers";
-import {
-  Link,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Button,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
 
 const UsersTable = () => {
   const [userList, setUserList] = useState([]);

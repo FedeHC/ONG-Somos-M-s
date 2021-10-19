@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ChakraProvider,
-  Container,
-  SimpleGrid,
-  Button,
-} from "@chakra-ui/react";
+import { Container, SimpleGrid, Button } from "@chakra-ui/react";
 import UsersTable from "./UsersTable";
 
 const UsersList = () => {

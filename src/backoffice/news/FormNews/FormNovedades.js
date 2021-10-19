@@ -17,7 +17,7 @@ import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 import { Select } from "@chakra-ui/select";
 
-import { createNews, updateNews, getNews } from "../../../services/apiNews";
+import { createNews, updateNews } from "../../../services/apiNews";
 
 // validaciones
 const formSchema = Yup.object().shape({
