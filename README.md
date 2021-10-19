@@ -37,3 +37,35 @@ Skeleton disponible para cualquier componente en src/features/skeleton/SkeletonC
 Dentro del archivo encontraremos el component <Skeleton /> proporcionado por la libreria ChakraUI el cual cuenta con una propiedad "isLoading". Si la misma se encuentra en "false" muestra el componente y si se encuentra en "true" no lo muestra
 
 ---
+
+---
+
+### ProgressBar
+
+    La barra de progreso es usada para visualizar el status de una tarea que lleva mucho tiempo o consiste en diferentes pasos.
+
+    Importación:
+
+    import { Progress } from "@chakra-ui/react"
+
+    Uso:
+
+    <Progress value={80} />
+
+    Tamanos de barra de progreso:
+
+    Hay dos maneras en las que puedes incrementar la altura de la barra de progreso:
+
+    *Puedes agregar un prop tamano para incrementar el mismo.
+    *Puedes usar la propiedad height para setear la altura manualmente.
+
+    <Progress colorScheme="green" size="lg" value={20} />
+    <Progress colorScheme="green" height="32px" value={20} />
+
+    Progreso animado:
+
+    Para visualizar un progreso animado, pasa el prop isIndeterminate.
+
+    <Progress size="xs" isIndeterminate />
+
+---
