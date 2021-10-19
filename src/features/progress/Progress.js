@@ -1,8 +1,12 @@
 import React from "react";
-import { Progress } from "@chakra-ui/react";
+import { Progress, ChakraProvider, Box } from "@chakra-ui/react";
 
-const Progress = () => {
-  return <Progress size="xs" isIndeterminate />;
-};
+function ProgressBar() {
+  return (
+    <Box p={4} w="50%">
+      <Progress isIndeterminate hasStripe size="md" />
+    </Box>
+  );
+}
 
-export default Progress;
+export default ProgressBar;
