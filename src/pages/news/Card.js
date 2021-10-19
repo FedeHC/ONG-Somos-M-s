@@ -1,23 +1,15 @@
 import React from "react";
 import { Box, Badge, Image, StarIcon } from "@chakra-ui/react";
 
-const Card = () => {
-
-  const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
-    imageAlt: "Rear view of modern home with pool",
-    title: "Novedad",
-    description: "Bla bla bla bla bla bla bla bla bla",
-  };
-
+const Card = ({ news }) => {
   return (
     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Image src={property.imageUrl} alt={property.imageAlt} />
+      <Image src={news.image} alt="imagen" />
 
       <Box p="3">
         <Box display="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">
-            New
+            Noticia
           </Badge>
           <Box
             color="gray.500"
@@ -26,9 +18,7 @@ const Card = () => {
             fontSize="xs"
             textTransform="uppercase"
             ml="2"
-          >
-            
-          </Box>
+          ></Box>
         </Box>
 
         <Box
@@ -38,14 +28,10 @@ const Card = () => {
           lineHeight="tight"
           isTruncated
         >
-          {property.title}
+          {news.name}
         </Box>
 
-        <Box>
-          {property.description}
-        </Box>
-
-        
+        <Box>{news.content}</Box>
       </Box>
     </Box>
   );

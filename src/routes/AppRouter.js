@@ -46,7 +46,6 @@ const AppRouter = () => {
           <Route exact path="/actividades/:id" component={ActivitiesDetail} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/register" component={Register} />
-
           {/* backoffice */}
           <Route exact path="/backoffice" component={Backoffice} />
           <Route exact path="/backoffice/home" component={HomeForm} />
@@ -93,7 +92,11 @@ const AppRouter = () => {
             path="/backoffice/news/create"
             component={FormNovedades}
           />
-          <Route exact path="/backoffice/news/edit" component={FormNovedades} />
+          <Route
+            exact
+            path="/backoffice/news/edit/:id"
+            component={FormNovedades}
+          />
           <Route
             exact
             path="/backoffice/organization"

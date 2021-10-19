@@ -22,7 +22,7 @@ const Home = () => {
     <div>
       {
         !loading && (
-            <h1 className="title__main">{titleText.data.data.welcome_text}</h1>
+            <h1 className="title__main">{titleText.data ? titleText.data.data.welcome_text : 'Hola'}</h1>
         )
       }
       <section className="news__container">

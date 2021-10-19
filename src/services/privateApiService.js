@@ -4,7 +4,7 @@ import { tokenValidate } from "./tokenValidate";
 const url = "http://ongapi.alkemy.org/api";
 
 // POST
-export const methodPostPrivate = async (endpoint, body) => {
+export const methodPostPrivate = async (endpoint, body, id = null) => {
   try {
     const response = await axios.post(`${url}/${endpoint}`, body, {
       headers: tokenValidate(),
