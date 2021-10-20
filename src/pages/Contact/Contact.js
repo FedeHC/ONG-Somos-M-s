@@ -6,6 +6,7 @@ import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
 import Mapview from "./map/MapView";
 import { convertFloat } from "./map/arrayToFloat";
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
 
 import "./map/map.css";
 import "./contact.scss";
@@ -48,7 +49,32 @@ const Contact = () => {
         </div>
         <div id="map">
           <h1>Encuentranos en un mapa!</h1>
-          <Mapview address={convertFloat(objeto.address)} />
+          {
+            objeto.address 
+            ? (
+              <Mapview address={convertFloat(objeto.address)} />
+            )
+            :(
+              <Alert
+                status="error"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                height="200px"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  Oops..
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                Al parecer ocurrió un error, prueba recargar la página!!.
+                </AlertDescription>
+              </Alert>
+            )
+          }
+          
         </div>
         <div id="contactForm">
           <FormContact />
