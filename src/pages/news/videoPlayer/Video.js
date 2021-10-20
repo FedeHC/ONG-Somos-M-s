@@ -26,6 +26,10 @@ const Video = () => {
        setConfigVideo({url:null});
        setIsPlaying(false);
     };
+    const handleMuted = () => {
+     setConfigVideo({...configVideo,  muted: !configVideo.muted })
+     console.log(configVideo.muted);
+   }
 
 
     const {url, controls, volume, muted} = configVideo;
@@ -46,6 +50,9 @@ const Video = () => {
                     </Button>
                     <Button colorScheme={"red"} onClick={handleStop}>
                      Stop
+                    </Button>
+                    <Button colorScheme={"red"} onClick={handleMuted}>
+                     Mute
                     </Button>
                 </div>
             <hr />
