@@ -12,7 +12,8 @@ const CardNews = () => {
     id: 546,
     name: "Somos Más",
     slug: null,
-    content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diamnonumy eirmod tempor.",
+    content:
+      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diamnonumy eirmod tempor.",
     image: "http://ongapi.alkemy.org/storage/iufqw2I1pQ.jpeg",
   };
   const { image, name, content } = testimonio;
@@ -27,7 +28,7 @@ const CardNews = () => {
       p={6}
       overflow={"hidden"}
       mb={3}
-      mt={3} 
+      mt={3}
       mx={3}
     >
       <Box h={"210px"} bg={"gray.100"} mt={-6} mx={-6} mb={6} pos={"relative"}>
