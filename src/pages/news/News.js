@@ -16,12 +16,12 @@ const News = () => {
       <div>
         <h1>Acá va el título</h1>
       </div>
-      <div>
+      <div className="video-container">
        <Video />
       </div>
       <div className="containerCard">
-        {newsList.map((news) => (
-          <Card news={news} />
+        {newsList.map((news, i) => (
+          <Card key={i} news={news} />
         ))}
       </div>
     </div>
