@@ -7,9 +7,12 @@ import { Heading } from "@chakra-ui/react"
 
 const News = () => {
   const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getNews().then((response) => setNewsList(response.data.data));
+    setLoading(false);
   }, []);
 
   return (
@@ -21,9 +24,13 @@ const News = () => {
        <Video />
       </div>
       <div className="containerCard">
-        {newsList.map((news, i) => (
+        { loading 
+            ? <div>cargando...</div>
+            : ( 
+              newsList.map((news, i) => (
           <Card key={i} news={news} />
-        ))}
+              ) ))
+        }
       </div>
     </div>
   );
