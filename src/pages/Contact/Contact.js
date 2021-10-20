@@ -5,6 +5,7 @@ import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
+import Mapview from "./map/MapView";
 
 const Contact = () => {
   let objeto = {
@@ -14,6 +15,7 @@ const Contact = () => {
     phone: 111232312,
     linkedin: "somosMas",
     twitter: "SomosMas",
+    address: "[-34.55881726737178, -58.47476996280374]",
   };
   return (
     <>
@@ -43,7 +45,7 @@ const Contact = () => {
         </div>
         <div id="map">
           <h1>Encuentranos en un mapa!</h1>
-          <h1>Espacio reservado para el mapa</h1>
+          <Mapview />
         </div>
         <div id="contactForm">
           <FormContact />
