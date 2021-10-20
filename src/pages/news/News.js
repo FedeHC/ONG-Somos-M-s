@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./News.css";
 import { getNews } from "../../services/apiNews";
+import Video from "./videoPlayer/Video";
 
 const News = () => {
   const [newsList, setNewsList] = useState([]);
@@ -14,6 +15,9 @@ const News = () => {
     <div>
       <div>
         <h1>Acá va el título</h1>
+      </div>
+      <div>
+       <Video />
       </div>
       <div className="containerCard">
         {newsList.map((news) => (
