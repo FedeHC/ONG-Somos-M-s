@@ -3,6 +3,7 @@ import Card from "./Card";
 import "./News.css";
 import { getNews } from "../../services/apiNews";
 import Video from "./videoPlayer/Video";
+import { Heading } from "@chakra-ui/react"
 
 const News = () => {
   const [newsList, setNewsList] = useState([]);
@@ -12,9 +13,9 @@ const News = () => {
   }, []);
 
   return (
-    <div>
+    <div className="novedades-container">
       <div>
-        <h1>Acá va el título</h1>
+        <Heading>Últimas novedades</Heading>
       </div>
       <div className="video-container">
        <Video />

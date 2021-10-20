@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react"
 import { IoPlay, IoPause, IoStop, IoVolumeMute } from "react-icons/io5";
 
 const Video = () => {
@@ -33,15 +34,17 @@ const Video = () => {
 
   const { url, controls, volume, muted } = configVideo;
   return (
-    <div>
-      <Box m={5}>
-        <h1>Ultimos Eventos</h1>
+      <Box w="100%" h="100%">
+        <Heading size="xl" >Últimos Eventos</Heading>
         <ReactPlayer
+          width="100%"
+          height="100%"
           url={url}
           controls={controls}
           playing={isPlaying}
           muted={muted}
           volume={volume}
+          className="video"
         />
         <div className="controllers">
           <Button m={2} colorScheme={"green"} onClick={handlePlay}>
@@ -67,7 +70,6 @@ const Video = () => {
           ))}
         </Box>
       </Box>
-    </div>
   );
 };
 
