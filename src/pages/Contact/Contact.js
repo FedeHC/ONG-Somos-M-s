@@ -1,11 +1,13 @@
 import React from "react";
-import "./contact.scss";
 import { GrInstagram } from "react-icons/gr";
 import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
 import Mapview from "./map/MapView";
+
+import "./map/map.css";
+import "./contact.scss";
 
 const Contact = () => {
   let objeto = {
