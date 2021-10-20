@@ -5,12 +5,12 @@ import { Box } from "@chakra-ui/react"
 
 const Video = () => {
 
-    const [isPlaying, setIsPlaying] = useState(false)
     const videos =[
      "https://www.youtube.com/watch?v=DeTimoK9qrg",
      "https://www.youtube.com/watch?v=Zp8aZmqf_rU",
      "https://www.youtube.com/watch?v=4YnSk1gI_Oo"
     ]
+    const [isPlaying, setIsPlaying] = useState(false)
      
     const [configVideo, setConfigVideo] = useState({
      url: "https://www.youtube.com/watch?v=DeTimoK9qrg",
@@ -21,7 +21,11 @@ const Video = () => {
 
     const handlePlay = () => {
        setIsPlaying(!isPlaying);
-    }
+    };
+    const handleStop = () => {
+       setConfigVideo({url:null});
+       setIsPlaying(false);
+    };
 
 
     const {url, controls, volume, muted} = configVideo;
@@ -38,7 +42,10 @@ const Video = () => {
                   />
                 <div className="controllers">
                     <Button colorScheme={"green"} onClick={handlePlay}>
-                    {isPlaying ? 'Stop' : 'Play'}
+                    {isPlaying ? 'Pause' : 'Play'}
+                    </Button>
+                    <Button colorScheme={"red"} onClick={handleStop}>
+                     Stop
                     </Button>
                 </div>
             <hr />
