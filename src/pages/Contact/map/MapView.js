@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { MapContainer , TileLayer } from "react-leaflet";
 
+import "leaflet/dist/leaflet.css";
 
-const Mapview = () => {
+
+const Mapview = (props) => {
 
  const [state, setState] = useState({
-  currentLocation:[51.505, -0.09],
+  currentLocation: props.address,
   zoom: 16,
   });
 

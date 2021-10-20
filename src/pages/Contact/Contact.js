@@ -5,6 +5,7 @@ import { FiMail } from "react-icons/fi";
 import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
 import Mapview from "./map/MapView";
+import { convertFloat } from "./map/arrayToFloat";
 
 import "./map/map.css";
 import "./contact.scss";
@@ -47,7 +48,7 @@ const Contact = () => {
         </div>
         <div id="map">
           <h1>Encuentranos en un mapa!</h1>
-          <Mapview />
+          <Mapview address={convertFloat(objeto.address)} />
         </div>
         <div id="contactForm">
           <FormContact />
