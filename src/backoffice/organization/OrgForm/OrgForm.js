@@ -1,161 +1,178 @@
-import React from "react";
-import { Formik, Form, ErrorMessage, useField } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { ChakraProvider, Container, SimpleGrid,
-         Button, Input } from "@chakra-ui/react";
+import { Container, VStack,
+         FormLabel, Input, Textarea, Button, Center } from "@chakra-ui/react";
+import { showOrg, editOrg } from "../../../services/apiOrganization";
 
 
 // Max. file size for input file upload:
 const MAX_FILE_SIZE = 10485760; // 10 MB.
 
-
-const TextInput = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <br />
-
-      <Input className="text-input" {...field} {...props} />
-
-      {meta.touched && meta.error ? (
-        <div style={{ color: "lightcoral" }}>{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-
-
 function OrgForm() {
-  // Initial form values for Formik component:
+  const [orgData, setOrgData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await showOrg();
+        setOrgData(response.data.data);
+      }
+      catch(error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // INITIAL FORM VALUES
   const initialValues = {
-    name: "",
-    logo: "",
-    shortDescription: "",
-    longDescription: "",
-    links: ""
+    name: orgData?.name || "",
+    logo: orgData?.logo || "",
+    short_description: orgData?.short_description || "",
+    long_description: orgData?.long_description || "",
+    facebook_url: orgData?.facebook_url || "",
+    linkedin_url: orgData?.linkedin_url || "",
+    instagram_url: orgData?.instagram_url || "",
+    twitter_url: orgData?.twitter_url || ""
   };
 
-  // Yup schema for Formik component:
+  // YUP SCHEMA:
   const schema = yup.object().shape({
     name: yup.string().required("Campo requerido."),
-    logo: yup.mixed().required("Campo requerido.")            
-             .test("type",
-                   "Solo se aceptan los sig. formatos de imágen: jpeg, jpg y png",
-                   (file) => {
-               return file && (
-                 file.type === "image/jpeg" ||
-                 file.type === "image/jpg" ||
-                 file.type === "image/png"
-               )})
-              .test("fileSize",
-                    "El archivo es mayor a 10 MB",
-                    (file) => file && file.size <= MAX_FILE_SIZE),
-    shortDescription: yup.string().required("Campo requerido."),
-    longDescription: yup.string().required("Campo requerido."),
-    links: yup.string().url("Debe contener una URL válida (Ej: https://www.google.com.ar).")     
+    logo: yup.mixed()
+             .required("Campo requerido.")
+             .test("type", "Solo se aceptan los sig. formatos de imágen: jpeg, jpg y png",
+                   (file) => file && (file.type === "image/jpeg" ||
+                                      file.type === "image/jpg" ||
+                                      file.type === "image/png"))
+             .test("fileSize", "El archivo es mayor a 10 MB",
+                   (file) => file && file.size <= MAX_FILE_SIZE),
+    short_description: yup.string().required("Campo requerido."),
+    long_description: yup.string().required("Campo requerido."),
+    facebook_url: yup.string().url("Debe contener una URL válida. Ejemplo: https://www.facebook.com/organizacion"),
+    linkedin_url: yup.string().url("Debe contener una URL válida. Ejemplo: https://www.linkedin.com/in/organizacion"),
+    instagram_url: yup.string().url("Debe contener una URL válida. Ejemplo: https://www.instagram.com/organizacion"),
+    twitter_url: yup.string().url("Debe contener una URL válida. Ejemplo: https://twitter.com/organizacion")
   });
 
-  // Async handler for sending form data used by the Formik component:
-  const submitHandler = async (values, {setStatus, resetForm, setSubmitting }) => {
-    try {      
-      // API:
-      const response = await fetch("", 
-                                   { method: "",
-                                     body: JSON.stringify(values),
-                                     headers: { "Content-Type": "application/json" }
-                                   });
-      
-      if(response.status === 200) {
-        console.log("# Data sent with success.");
-        resetForm({});
-        setStatus({ success: true });
-      }
-      else {
-        console.error("# Data can't be sent.");
-        setStatus({ success: false });
-      }
-    }
-    catch(error) {
-      console.error(`# Error on fetch:\n- Details: ${error}`);
-    }
-    setSubmitting(false);
-  };
-
-  // Rendering Formik form component:
   return (
-    <ChakraProvider>
-      <Container maxW="sm" textAlign="left">
-        <SimpleGrid columns={1}
-                    spacing={10}
-                    marginTop={10}>
+      <Container maxW="md" textAlign="left">
+        <VStack spacing={30}
+                columns={1}
+                my={10}>
           <Formik initialValues={initialValues}
                   validationSchema={schema}
-                  onSubmit={submitHandler} >
-              {(formik) => {
-                return (
-                  <Form>
-                    {/* Name input */}
-                    <TextInput label="Nombre:"
-                              name="name"
-                              type="text" />
-                    <br /><br />
+                  enableReinitialize
+                  onSubmit={(values) => editOrg(values)} >
+            {(formik) => {
+              return (
+                <Form>
+                  {/* NAME */}
+                  <FormLabel name="name">Nombre:</FormLabel>
+                  <Input id="name"
+                         type="text"
+                         {...formik.getFieldProps('name')} />
+                  <ErrorMessage name="name">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
 
-                    {/* Logo file input */}
-                    <label name="logo">Logo: </label>
-                    <br />
-                    <input id="logo"
-                          name="logo"
-                          type="file"
-                          onChange={ (event) => {
-                            const files = event.target.files;
-                            let myFiles = Array.from(files);
-                            formik.setFieldValue("logo", myFiles[0]); }} />
-                    <br />
-                    <ErrorMessage name="logo">
-                      { msg => <div style={{ color: "lightcoral" }}>{msg}</div> }
-                    </ErrorMessage>
-                    <br /><br />
+                  {/* LOGO */}
+                  <FormLabel name="logo"
+                             mt={5}>Logo: </FormLabel>                  
+                  <input id="logo"
+                         name="logo"
+                         type="file"
+                         onChange={(event) => {
+                           const files = event.target.files;
+                           let myFiles = Array.from(files);
+                           formik.setFieldValue("logo", myFiles[0]);
+                         }} />
 
-                    {/* shortDescription input */}
-                    <label name="shortDescription">Descripción corta: </label>
-                    <br />
-                    <CKEditor editor={ ClassicEditor }
-                              id="shortDescription"
-                              name="shortDescription"
-                              data={initialValues.shortDescription}
-                              onChange={ (event, editor) => {
-                                const data = editor.getData();
-                                formik.setFieldValue("shortDescription", data) }} />
-                    <ErrorMessage name="shortDescription">
-                      { msg => <div style={{ color: "lightcoral" }}>{msg}</div> }
-                    </ErrorMessage>
-                    <br />
+                  <ErrorMessage name="logo">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
 
-                    {/* longDescription input */}
-                    <TextInput label="Descripción larga:"
-                              name="longDescription"
-                              type="text" />
-                    <br /><br />
+                  {/* SHORT_DESCRIPTION */}
+                  <FormLabel name="short_description"
+                             mt={5}>Descripción corta: </FormLabel>
+                  <CKEditor editor={ClassicEditor}
+                            id="short_description"
+                            name="short_description"
+                            data={initialValues.short_description}
+                            onChange={(event, editor) => {
+                              const data = editor.getData();
+                              formik.setFieldValue("short_description", data)
+                            }} />
+                  <ErrorMessage name="short_description">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
 
-                    {/* links input */}
-                    <TextInput label="Links: "
-                              name="links"
-                              type="text" />
-                    <br /><br />
+                  {/* LONG_DESCRIPTION */}
+                  <FormLabel name="long_description"
+                             mt={5}>Descripción larga:</FormLabel>
+                  <Textarea id="long_description"
+                            rows={10}
+                            type="text"
+                            {...formik.getFieldProps('long_description')} />
+                  <ErrorMessage name="long_description">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
 
-                    {/* Submit button */}
-                    <Button colorScheme="gray"
-                            type="submit">Enviar</Button>
-                  </Form>
-                );
+                  {/* FACEBOOK */}
+                  <FormLabel name="facebook_url"
+                             mt={5}>Facebook:</FormLabel>
+                  <Input id="facebook_url"
+                         type="text"
+                         {...formik.getFieldProps('facebook_url')} />
+                  <ErrorMessage name="facebook_url">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
+
+                  {/* LINKEDIN */}
+                  <FormLabel name="linkedin_url"
+                             mt={5}>LinkedIn:</FormLabel>
+                  <Input id="linkedin_url"
+                         type="text"
+                         {...formik.getFieldProps('linkedin_url')} />
+                  <ErrorMessage name="linkedin_url">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
+
+                  {/* INSTAGRAM */}
+                  <FormLabel name="instagram_url"
+                             mt={5}>Instagram:</FormLabel>
+                  <Input id="instagram_url"
+                         type="text"
+                         {...formik.getFieldProps('instagram_url')} />
+                  <ErrorMessage name="instagram_url">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
+                  
+                  {/* TWITTER */}
+                  <FormLabel name="twitter_url"
+                             mt={5}>Twitter:</FormLabel>
+                  <Input id="twitter_url"
+                         type="text"
+                         {...formik.getFieldProps('twitter_url')} />
+                  <ErrorMessage name="twitter_url">
+                    {(msg) => <div style={{ color: "lightcoral" }}>{msg}</div>}
+                  </ErrorMessage>
+
+                  {/* SUBMIT */}
+                  <Center>
+                    <Button colorScheme="blue"
+                            mt={5}
+                            type="submit">Editar</Button>
+                  </Center>
+                </Form>
+              );
             }}
           </Formik>
-        </SimpleGrid>
+        </VStack>
       </Container>
-    </ChakraProvider>
   );
 }
 
