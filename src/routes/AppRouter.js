@@ -14,8 +14,6 @@ import SlidesScreen from "../backoffice/slides/SlidesScreen";
 import SlideForm from "../backoffice/slides/SlideForm/SlideForm";
 import MemberList from "../backoffice/members/memberList/MemberList";
 import MemberForm from "../backoffice/members/MemberForm/MemberForm";
-import Organization from "../backoffice/organization/Organization";
-import OrgForm from "../backoffice/organization/OrgForm/OrgForm";
 import UsersList from "../backoffice/users/UsersList/UsersList";
 import UserForm from "../backoffice/users/UserForm/UserForm";
 import TestimonialForm from "../backoffice/testimonials/testimonialForm/TestimonialForm";
@@ -30,6 +28,8 @@ import Activities from "../pages/Activities/Activities";
 import ActivitiesDetail from "../pages/Activities/details/Detail";
 import LoginForm from "../pages/login/LoginForm";
 import { Register } from "../pages/register/Register";
+import Organization from "../backoffice/organization/Organization";
+import OrgForm from "../backoffice/organization/OrgForm/OrgForm";
 
 
 // We need to map the `scale` prop we define below to the transform style property:
@@ -116,6 +116,8 @@ const AppRouter = () => {
           <Route exact path="/backoffice/users" component={UsersList} />
           <Route exact path="/backoffice/users/create" component={UserForm} />
           <Route exact path="/backoffice/users/edit/:id" component={UserForm} />
+          <Route exact path="/backoffice/organization" component={Organization} />
+          <Route exact path="/backoffice/organization/edit" component={OrgForm} />
         </AnimatedSwitch>
       </div>
     </Router>
