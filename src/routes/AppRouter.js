@@ -35,7 +35,6 @@ import { Register } from "../pages/register/Register";
 import Organization from "../backoffice/organization/Organization";
 import OrgForm from "../backoffice/organization/OrgForm/OrgForm";
 
-
 // We need to map the `scale` prop we define below to the transform style property:
 function mapStyles(styles) {
   return {
