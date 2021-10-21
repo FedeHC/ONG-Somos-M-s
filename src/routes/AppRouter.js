@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { spring, AnimatedSwitch } from "react-router-transition";
 import '../App.css'
-import Backoffice from "../backoffice/home/Backoffice";
+
 import HomeForm from "../backoffice/home/HomeForm/HomeForm";
+import Backoffice from "../backoffice/home/Backoffice";
 import FormNovedades from "../backoffice/news/FormNews/FormNovedades";
 import NewsScreen from "../backoffice/news/NewsScreen";
 import CategoriesForm from "../backoffice/categories/CategoriesForm";
@@ -20,7 +21,10 @@ import UsersList from "../backoffice/users/UsersList/UsersList";
 import UserForm from "../backoffice/users/UserForm/UserForm";
 import TestimonialForm from "../backoffice/testimonials/testimonialForm/TestimonialForm";
 import { FormProjects } from "../backoffice/projects/FormProjects/FormProjects";
+
+import PublicNavBar from "../features/publicNavBar/PublicNavBar";
 import Home from "../pages/home";
+import About from "../pages/About/About";
 import News from "../pages/news/News";
 import NewsDetail from "../pages/news/Detail/NewsDetail";
 import Contact from "../pages/Contact/Contact";
@@ -68,9 +72,15 @@ const bounceTransition = {
 };
 
 const AppRouter = () => {
+  const isPrivate = window.location.href.includes("backoffice") ? true : false;
+
   return (
     <Router>
       <div>
+        {/* NAVBAR */}
+        {isPrivate ? '' : <PublicNavBar />}
+
+        {/* ANIMATEDSWITCH */}
         <AnimatedSwitch atEnter={bounceTransition.atEnter}
                         atLeave={bounceTransition.atLeave}
                         atActive={bounceTransition.atActive}
@@ -79,6 +89,7 @@ const AppRouter = () => {
 
           {/* PUBLIC */}
           <Route exact path="/" component={Home} />
+          <Route exact path="/nosotros" component={About} />
           <Route exact path="/novedades" component={News} />
           <Route exact path="/novedades/:id" component={NewsDetail} />
           <Route exact path="/contacto" component={Contact} />
