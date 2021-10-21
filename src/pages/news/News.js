@@ -5,14 +5,22 @@ import { getNews } from "../../services/apiNews";
 import Video from "./videoPlayer/Video";
 import { Heading } from "@chakra-ui/react"
 
+
 const News = () => {
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    getNews().then((response) => setNewsList(response.data.data));
-    setLoading(false);
+    const fetchData = async () => {
+      try {
+        const results = await getNews();
+        setNewsList(results.data.data);
+      }
+      catch(error) {
+        console.error(error);
+      }
+    }
+    fetchData();
   }, []);
 
   return (

@@ -1,68 +1,68 @@
 import React, { useEffect, useState } from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from "@chakra-ui/react";
-import { AiTwotoneEdit, AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Table, Thead, Tbody, Tr, Th, Td, Button, Link } from "@chakra-ui/react";
+// import { AiTwotoneEdit, AiOutlineClose } from "react-icons/ai";
 import "./NewsScreen.css";
-import { getNews, deleteNews } from "../../services/apiNews";
+import { getNews } from "../../services/apiNews";
+
 
 const NewsScreen = () => {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
-    getNews().then((response) => setNewsList(response.data.data));
+    const fetchData = async () => {
+      try {
+        const results = await getNews();
+        setNewsList(results.data.data);
+      }
+      catch(error) {
+        console.error(error);
+      }
+    }
+    fetchData();
   }, []);
 
-  const editNews = (id) => {
-    window.location.href = `/backoffice/news/edit/${id}`;
-  };
-  const deleteNew = (id) => {
-    deleteNews(id);
-  };
   return (
     <div>
-      <Link to="/backoffice/news/create">Crear novedad</Link>
+      <Link href={process.env.REACT_APP_ENDPOINT_NEWS_CREATE}>
+        <Button colorScheme="teal">Crear novedad</Button>
+      </Link>
+
       <div className="container">
         <Table size="lg" variant="striped" colorScheme="teal">
           <Thead>
             <Tr className="trTop">
-              <Th>Name</Th>
-              <Th>Image</Th>
-              <Th>createdAt</Th>
-              <Th>Editar</Th>
-              <Th>Eliminar</Th>
+              <Th>Nombre</Th>
+              <Th>Imagen</Th>
+              <Th>Fecha</Th>
+              <Th>Acciones</Th>
             </Tr>
           </Thead>
           <Tbody>
             {newsList.length > 0
               ? newsList.map((news) => (
-                  <Tr>
+                  <Tr key={news.id}>
                     <Td>{news.name}</Td>
                     <Td>
                       <img className="profilePhoto" src={news.image} alt="" />
                     </Td>
                     <Td>{news.created_at}</Td>
                     <Td className="buttonField">
-                      <Button
-                        className="EditButton"
-                        colorScheme="yellow"
-                        variant="solid"
-                        onClick={() => {
-                          editNews(news.id);
-                        }}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        colorScheme="red"
-                        variant="solid"
-                        onClick={() => deleteNew(news.id)}
-                      >
-                        Eliminar
-                      </Button>
+                      <Link href={process.env.REACT_APP_ENDPOINT_NEWS_EDIT + news.id}>
+                        <Button className="EditButton"
+                                colorScheme="yellow"
+                                variant="solid">Editar</Button>
+                      </Link>
+                      <Link href={process.env.REACT_APP_ENDPOINT_NEWS_DELETE + news.id}>
+                        <Button colorScheme="red"
+                                variant="solid">Eliminar</Button>
+                      </Link>
                     </Td>
                   </Tr>
                 ))
-              : "no se encontaron noticias"}
+              : <Tr>
+                  <Td colSpan={4}>No se encontraron noticias.</Td>
+                </Tr>
+            }
           </Tbody>
         </Table>
       </div>

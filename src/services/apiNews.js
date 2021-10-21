@@ -1,12 +1,12 @@
 import { methodGetPublic } from "./publicApiService";
-import {
-  methodPostPrivate,
-  methodPutPrivate,
-  methodDeletePrivate,
-} from "./privateApiService";
+import { methodPostPrivate, methodPutPrivate, methodDeletePrivate } from "./privateApiService";
+
 
 export const getNews = async (id = null) => {
-  return await methodGetPublic("news", id);
+  if(id)
+    return await methodGetPublic("news", id);
+  else
+    return await methodGetPublic("news?limit=10");  // Limit results to 10.
 };
 
 export const createNews = async (body) => {
@@ -19,13 +19,4 @@ export const updateNews = async (body, id) => {
 
 export const deleteNews = async (id) => {
   return await methodDeletePrivate("news", id);
-};
-
-export const tokenValidation = () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    return {
-      Authorization: `Bearer ${token}`,
-    };
-  }
 };
