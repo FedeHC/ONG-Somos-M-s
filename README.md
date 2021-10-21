@@ -84,3 +84,49 @@ const alertExample = () => {
 
 ```
 ---
+### Lazy Load Image
+
+Available in src/features/lazyLoadImage/.
+
+#### How to use. LazyLoadImage receive by props:
+
+* src
+* alt
+* height
+* width
+
+```js
+  <LazyLoadImage
+      src={src} 
+      alt={alt}
+      height={height}
+      width={width}
+  />
+```
+_To change the size of the Skeleton you must send by props:_
+
+* heightSkeleton
+* widthSkeleton
+
+```js
+  <LazyLoadImage
+      src={'urlImage'} 
+      alt={'text'}
+      height={'300px'}
+      width={'300px'}
+      heightSkeleton={'300px'}
+      heightSkeleton={'300px'}
+  />
+```
+#### Default comes this data:
+
+```js
+  <LazyLoadImage
+      alt={'text image'}
+      height={'340px'}
+      width={'340px'}
+      heightSkeleton={'340px'}
+      heightSkeleton={'340px'}
+  />
+```
+---
