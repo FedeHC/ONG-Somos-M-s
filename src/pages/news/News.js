@@ -2,23 +2,35 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./News.css";
 import { getNews } from "../../services/apiNews";
+import Video from "./videoPlayer/Video";
+import { Heading } from "@chakra-ui/react"
 
 const News = () => {
   const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getNews().then((response) => setNewsList(response.data.data));
+    setLoading(false);
   }, []);
 
   return (
-    <div>
+    <div className="novedades-container">
       <div>
-        <h1>Acá va el título</h1>
+        <Heading>Últimas novedades</Heading>
+      </div>
+      <div className="video-container">
+       <Video />
       </div>
       <div className="containerCard">
-        {newsList.map((news) => (
-          <Card news={news} />
-        ))}
+        { loading 
+            ? <div>cargando...</div>
+            : ( 
+              newsList.map((news, i) => (
+          <Card key={i} news={news} />
+              ) ))
+        }
       </div>
     </div>
   );

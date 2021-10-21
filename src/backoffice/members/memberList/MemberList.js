@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./memberList.scss";
 import {
   Table,
@@ -11,30 +11,23 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { deleteMembers, getMembers } from "../../../services/apiMembers";
+
 
 const MemberList = () => {
-  let miembros = [
-    {
-      name: "facundo ferrer",
-      image:
-        "https://www.movilzona.es/app/uploads-movilzona.es/2019/05/Foto-de-Perfil-en-WhatsApp.jpg?x=480&y=375&quality=40",
-    },
-    {
-      name: "facundo",
-      image:
-        "https://www.movilzona.es/app/uploads-movilzona.es/2019/05/Foto-de-Perfil-en-WhatsApp.jpg?x=480&y=375&quality=40",
-    },
-    {
-      name: "facundo",
-      image:
-        "https://www.movilzona.es/app/uploads-movilzona.es/2019/05/Foto-de-Perfil-en-WhatsApp.jpg?x=480&y=375&quality=40",
-    },
-    {
-      name: "facundo",
-      image:
-        "https://www.movilzona.es/app/uploads-movilzona.es/2019/05/Foto-de-Perfil-en-WhatsApp.jpg?x=480&y=375&quality=40",
-    },
-  ];
+
+  const handleDelete = (id) => {
+    deleteMembers(id); 
+  }
+
+  const [members, setMembers] = useState([]);  
+  useEffect(() => {
+    getMembers().then((response) => {
+      setMembers(response.data.data); 
+      console.log(response.data.data);
+    }) 
+  }, [])
+
   return (
     <div className="listaMiembros">
       <div className="header">
@@ -53,14 +46,16 @@ const MemberList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {miembros.length > 0
-            ? miembros.map((member) => (
+          {members?.length > 0
+            ? members.map((member) => (
+              <div key={member.id}>
                 <Tr>
                   <Td>{member.name}</Td>
                   <Td>
                     <img className="profilePhoto" src={member.image} alt="" />
                   </Td>
                   <Td className="buttonField">
+                    <Link to="/backoffice/members/edit">
                     <Button
                       className="EditButton"
                       colorScheme="yellow"
@@ -68,11 +63,13 @@ const MemberList = () => {
                     >
                       Editar
                     </Button>
-                    <Button colorScheme="red" variant="solid">
+                    </Link>
+                    <Button colorScheme="red" variant="solid" onClick={() => handleDelete(member.id)}>
                       Eliminar
                     </Button>
                   </Td>
                 </Tr>
+                </div>
               ))
             : "no se encontaron miembros"}
         </Tbody>
