@@ -52,13 +52,3 @@ const PopUp = ({ setaceptarTerminos }) => {
 };
 
 export default PopUp;
-
-{
-  /* <div className="modall">
-        <PDFReader />
-        <div className="buttons">
-          <button>aceptar</button>
-          <button>cancelar</button>
-        </div>
-      </div> */
-}
