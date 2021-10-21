@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -14,11 +14,13 @@ import {
 } from "@chakra-ui/react";
 
 import "./donations.css";
+import Mercadopago from "./MercadoPago";
 
 const DonationsSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
 });
 const Donations = ({ text }) => {
+  const [pagar, setPagar] = useState(false);
   const textToShow = text ? text : "Esto es un texto de prueba";
   return (
     <Flex
@@ -55,7 +57,9 @@ const Donations = ({ text }) => {
               email: "",
             }}
             validationSchema={DonationsSchema}
-            onSubmit={(values) => {}}
+            onSubmit={(values) => {
+              setPagar(true);
+            }}
           >
             {({ errors, touched }) => (
               <Form
@@ -82,21 +86,25 @@ const Donations = ({ text }) => {
                     </FormControl>
                   )}
                 </Field>
-                <Button
-                  mb={errors.email ? "27px" : 0}
-                  ml={4}
-                  color="white"
-                  backgroundColor="#009EE3"
-                  variant="outline"
-                  _hover={{
-                    background: "#009EE3",
-                    color: "white",
-                  }}
-                  cursor="pointer"
-                  type="submit"
-                >
-                  Contribuir
-                </Button>
+                {
+                  pagar 
+                   ? <Mercadopago />
+                   : <Button
+                      mb={errors.email ? "27px" : 0}
+                      ml={4}
+                      color="white"
+                      backgroundColor="#009EE3"
+                      variant="outline"
+                      _hover={{
+                        background: "#009EE3",
+                        color: "white",
+                      }}
+                      cursor="pointer"
+                      type="submit"
+                    >
+                      Contribuir
+                    </Button>
+                }
               </Form>
             )}
           </Formik>
