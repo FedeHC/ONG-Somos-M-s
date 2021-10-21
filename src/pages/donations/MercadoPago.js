@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/button';
 import React, { useEffect } from 'react';
 
 const Mercadopago = () => {
@@ -20,9 +21,20 @@ const Mercadopago = () => {
   
 
  return (
-  <div>
-   
-  </div>
+  <Button
+    ml={4}
+    color="white"
+    backgroundColor="#009EE3"
+    variant="outline"
+    _hover={{
+      background: "#009EE3",
+      color: "white",
+    }}
+    cursor="pointer"
+    type="submit"
+    id={FORM_ID}
+  >
+  </Button>
  );
 }
 
