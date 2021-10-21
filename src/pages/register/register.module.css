@@ -1,17 +1,44 @@
-.register__container{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.form__container{
-    width: 40vw;
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.msg__error{
-    height: 15px;
+.register__container {
+  margin-top: 4rem;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  padding: 2rem;
+  border-radius: 10px;
+}
+.form__container {
+  width: 35vw;
 }
 
-.btn__signup{
-    margin-top: 10px;
+.msg__error {
+  height: 15px;
+}
+
+.btn__signup {
+  margin-top: 1.5rem;
+}
+
+.mensajeError {
+  color: #e74c3c;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.popUpContainer {
+  margin-top: 1.5rem;
+}
+
+.formTitle {
+  font-size: large;
+  font-weight: 600;
 }
