@@ -42,17 +42,20 @@ Dentro del archivo encontraremos el component <Skeleton /> proporcionado por la 
 
 _The react-spinner-loader provides simple React SVG spinner component which can be implemented for async await operation before data loads to the view._
 
-_You can pass by props the type, color, width and height._
+#### _You can pass by props the type, color, width and height._
 
-_Spinner type={type} color={color} height={height} width={width}_
+```js
+  <Spinner Spinner type={type} color={color} height={height} width={width} />
+```
 
-_By default the component comes with the following data:_
+#### _By default the component comes with the following data:_
 
-| type | color | height | width |
-| ------ | ------ | ------ | ------ |
-| ThreeDots | blue | 80 | 80 |
+```js
+  <Spinner type={'ThreeDots'} color={'blue'} height={80} width={80} />
+```
 
-_The types of spinner that are available are:_
+#### _The types of spinner that are available are:_
+
 * Audio
 * BallTriangle
 * Bars
@@ -65,8 +68,11 @@ _The types of spinner that are available are:_
 * TailSpin
 * ThreeDots
 
-_You can pass the colors you want and the measures you need_
+#### _You can pass the colors you want and the measures you need, example:_
 
+```js
+  <Spinner type={'Bars'} color={'red'} height={60} width={60} />
+```
 ---
 
 ### Alerts
