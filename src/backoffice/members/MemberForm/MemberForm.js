@@ -9,9 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, validateYupSchema } from "formik";
 import { Button } from "@chakra-ui/react";
 import * as Yup from "yup";
+import { createMember, updateMember } from "../../../services/apiMembers";
 
 const regMatch =
   /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+(\/)?.([\w?[a-zA-Z-_%/@?]+)*([^/\w?[a-zA-Z0-9_-]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/;
@@ -34,35 +35,37 @@ const SignupSchema = Yup.object().shape({
     .matches(regMatch, "Debe ingresar URL válida"),
 });
 
-const objeto = {
-  name: "facu",
-  image: "",
-  social: "facebook.com",
-  social2: "instagram.com",
-  description: "hola soy german",
-  id: 1,
-};
-//let objeto;
-
 const MemberForm = () => {
+  const isObjEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+
+  const obj = {
+    
+  };
+
   const initialValues = {
-    name: objeto ? objeto.name : "",
+    name: obj ? obj.name : "",
     image: "",
-    social: objeto ? objeto.social : "",
-    social2: objeto ? objeto.social2 : "",
-    description: objeto ? objeto.description : "",
+    social: obj ? obj.social : "",
+    social2: obj ? obj.social2 : "",
+    description: obj ? obj.description : "",
   };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        console.log(values);
+        isObjEmpty(obj)
+          ? createMember(values).then((response) => {
+            console.log(response)
+          })
+          : updateMember(values, values.id);
       }}
     >
       {({ errors, touched }) => (
         <Form className="userForm">
-          <Heading m={4}>{objeto ? "Editar miembro" : "Crear miembro"}</Heading>
+          <Heading m={4}>{obj.length > 1 ? "Editar miembro" : "Crear miembro"}</Heading>
           <Field name="name">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.name && form.touched.name}>
@@ -103,9 +106,8 @@ const MemberForm = () => {
                 <CKEditor
                   editor={ClassicEditor}
                   data={initialValues.description}
-                  value={initialValues.description}
-                  onInit={(editor) => {
-                    // You can store the "editor" and use when it's needed.
+                  value={initialValues.description || ""}
+                  onReady={(editor) => {
                     console.log("Editor is ready to use!", editor);
                   }}
                   onChange={(event, editor) => {
