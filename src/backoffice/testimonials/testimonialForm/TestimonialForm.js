@@ -27,8 +27,8 @@ function TestimonialForm({ testimonial }) {
       onSubmit={async (values) => {
         const methodHTTP = testimonial ? 'put' : 'post';
         const url = testimonial
-          ? `/testimonials/${testimonial.id}`
-          : '/testimonials';
+          ? `/${process.env.REACT_APP_ENDPOINT_TESTIMONIALS}/${testimonial.id}`
+          : `/${process.env.REACT_APP_ENDPOINT_TESTIMONIALS}`;
         const response = await requestAxios(methodHTTP, url, values);
         console.log(response);
       }}

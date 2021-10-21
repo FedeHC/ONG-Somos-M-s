@@ -68,3 +68,51 @@ _The types of spinner that are available are:_
 _You can pass the colors you want and the measures you need_
 
 ---
+
+### Alerts
+
+Disponible en src/features/alert/alert.js.
+
+#### Uso
+
+* successAlert() puede o no recibir parámetros título y texto, devuelve un alert de éxito
+```js
+  successAlert("titulo","texto");
+```
+* errorAlert() puede o no recibir parámetros título y texto, devuelve un alert de error
+```js
+  errorAlert("titulo","texto");
+```
+* questionAlert() puede o no recibir parámetros título, texto y texto del botón confirmar , retorna un booleano, trabaja de manera asincrónica
+```js
+  const respuesta = await questionAlert("titulo","texto","texto del boton confirmar");
+```
+#### Ejemplo de uso
+* Si, se usa sin parámentros tiene texto por default
+
+ ```js
+const success =() =>{
+    successAlert();
+}
+const error =() =>{
+    errorAlert();
+}
+const question =async() =>{
+   const resp = await questionAlert();
+   resp && (successAlert() )
+}
+
+const alertExample = () => {
+    return (
+        <div>
+            <button onClick={success}>success</button>
+            <hr />
+            <button onClick={error}>error</button>
+            <hr />
+            <button onClick={question}>question</button>
+        </div>
+    )
+}
+
+```
+---

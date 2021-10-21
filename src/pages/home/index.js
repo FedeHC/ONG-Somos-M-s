@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "@chakra-ui/button";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import CardNews from "../../features/cardNews";
-import { getHome } from "../../services/apiHome";
-import "./home.css";
-import { SkeletonComponent } from "../../features/skeleton/SkeletonComponent";
+import React, { useEffect, useState } from 'react';
+import { Button } from '@chakra-ui/button';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+import CardNews from '../../features/cardNews';
+import { getHome } from '../../services/apiHome';
+import './home.css';
+import { SkeletonComponent } from '../../features/skeleton/SkeletonComponent';
 
 const Home = () => {
-  const [titleText, setTitleText] = useState("");
+  const [titleText, setTitleText] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,11 +23,11 @@ const Home = () => {
     <div>
       {!loading && (
         <h1 className="title__main">
-          {titleText.data ? titleText.data.data.welcome_text : "Hola"}
+          {titleText.data ? titleText.data.data.welcome_text : 'Hola'}
         </h1>
       )}
       <section className="news__container">
-        <h3>Ultimas Novedades</h3>
+        <h3>Ultimas Novedadesa</h3>
         <div className="news__flex">
           <CardNews />
           <CardNews />
@@ -39,8 +39,8 @@ const Home = () => {
             color="white"
             variant="outline"
             _hover={{
-              background: "white",
-              color: "black",
+              background: 'white',
+              color: 'black',
             }}
           >
             Ver todas

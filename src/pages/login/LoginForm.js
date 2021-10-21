@@ -1,36 +1,36 @@
-import React from "react";
+import React from 'react';
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Heading,
-} from "@chakra-ui/react";
-import { Formik, Form, Field } from "formik";
-import { Button } from "@chakra-ui/react";
-import * as Yup from "yup";
-import "./loginForm.scss";
+} from '@chakra-ui/react';
+import { Formik, Form, Field } from 'formik';
+import { Button } from '@chakra-ui/react';
+import * as Yup from 'yup';
+import './loginForm.scss';
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("email Invalido").required("Requerido"),
+  email: Yup.string().email('email Invalido').required('Requerido'),
 
   password: Yup.string()
-    .required("Requerido")
-    .min(6, "Se requieren 6 caracteres como mínimo")
-    .matches(/^(?=.*[@$!%*#?&])/, "1 caracter especial requerido")
-    .matches(/(?=.*\d)/, "al menos 1 numero requerido")
-    .matches(/(?=\w*[a-z])/, "al menos 1 letra requerida"),
+    .required('Requerido')
+    .min(6, 'Se requieren 6 caracteres como mínimo')
+    .matches(/^(?=.*[@$!%*#?&])/, '1 caracter especial requerido')
+    .matches(/(?=.*\d)/, 'al menos 1 numero requerido')
+    .matches(/(?=\w*[a-z])/, 'al menos 1 letra requerida'),
 });
 
 const LoginForm = () => (
   <div>
     <Formik
       initialValues={{
-        email: "",
-        password: "",
+        email: '',
+        password: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         console.log(values);
       }}
     >

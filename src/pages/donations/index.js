@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -12,11 +12,15 @@ import {
   FormControl,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import './donations.css'
+
+import "./donations.css";
+import Mercadopago from "./MercadoPago";
+
 const DonationsSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
 });
 const Donations = ({ text }) => {
+  const [pagar, setPagar] = useState(false);
   const textToShow = text ? text : "Esto es un texto de prueba";
   return (
     <Flex
@@ -24,7 +28,7 @@ const Donations = ({ text }) => {
       align={"center"}
       justify={"center"}
       py={12}
-      bg={'#00214D'}
+      bg={"#00214D"}
     >
       <Stack
         width={600}
@@ -54,12 +58,17 @@ const Donations = ({ text }) => {
             }}
             validationSchema={DonationsSchema}
             onSubmit={(values) => {
-              console.log(values);
+              setPagar(true);
             }}
           >
             {({ errors, touched }) => (
-              <Form className="email___container" spacing={4} direction={{ base: "column", md: "row" }} w={"full"}>
-                <Field name="email" width={'550px'}>
+              <Form
+                className="email___container"
+                spacing={4}
+                direction={{ base: "column", md: "row" }}
+                w={"full"}
+              >
+                <Field name="email" width={"550px"}>
                   {({ field, form }) => (
                     <FormControl
                       isInvalid={form.errors.email && form.touched.email}
@@ -71,27 +80,31 @@ const Donations = ({ text }) => {
                         placeholder={"john@doe.net"}
                         rounded={"full"}
                         border={0}
-                        width={'350px'}
+                        width={"350px"}
                       />
                       <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
-                <Button
-                  mb={errors.email ? '27px' : 0}
-                  ml={4}
-                  color="white"
-                  backgroundColor="#007eb5"
-                  variant="outline"
-                  _hover={{
-                    background: "#32b3ff",
-                    color: "white",
-                  }}
-                  cursor="pointer"
-                  type="submit"
-                >
-                  Contribuir
-                </Button>
+                {
+                  pagar 
+                   ? <Mercadopago />
+                   : <Button
+                      mb={errors.email ? "27px" : 0}
+                      ml={4}
+                      color="white"
+                      backgroundColor="#009EE3"
+                      variant="outline"
+                      _hover={{
+                        background: "#009EE3",
+                        color: "white",
+                      }}
+                      cursor="pointer"
+                      type="submit"
+                    >
+                      Contribuir
+                    </Button>
+                }
               </Form>
             )}
           </Formik>
