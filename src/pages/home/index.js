@@ -5,25 +5,23 @@ import CardNews from '../../features/cardNews';
 import { getHome } from '../../services/apiHome';
 import './home.css';
 import { SkeletonComponent } from '../../features/skeleton/SkeletonComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNosotros } from '../../app/slices/nosotrosReducer';
 
 const Home = () => {
-  const [titleText, setTitleText] = useState('');
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const title = async () => {
-      const welcomeText = await getHome();
-      setTitleText(welcomeText);
-      setLoading(false);
-    };
-    title();
+    dispatch(getNosotros());
   }, []);
+
+  const {loading, error, nosotros} = useSelector(state => state.nosotros);
 
   return (
     <div>
       {!loading && (
         <h1 className="title__main">
-          {titleText.data ? titleText.data.data.welcome_text : 'Hola'}
+          {nosotros.welcome_text}
         </h1>
       )}
       <section className="news__container">
