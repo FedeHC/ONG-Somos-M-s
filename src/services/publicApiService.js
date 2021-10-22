@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 
-const url = "http://ongapi.alkemy.org/api";
+const url = process.env.REACT_APP_ENDPOINT_MAIN_URL;
 
 // GET
 export const methodGetPublic = async (endpoint, id=null) => {
   try {
-    return await axios.get(`${url}/${endpoint}/${id || ""}`);
+    return await axios.get(`${url}/${endpoint}${id ? '/'+id : ''}`);
   } catch (error) {
     return error;
   }

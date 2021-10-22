@@ -1,10 +1,15 @@
 import React from "react";
-import "./contact.scss";
 import { GrInstagram } from "react-icons/gr";
 import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import FormContact from "./form contacto/FormContact";
 import Title from "../../features/title/Title";
+import Mapview from "./map/MapView";
+import { convertFloat } from "./map/arrayToFloat";
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
+
+import "./map/map.css";
+import "./contact.scss";
 
 const Contact = () => {
   let objeto = {
@@ -14,6 +19,7 @@ const Contact = () => {
     phone: 111232312,
     linkedin: "somosMas",
     twitter: "SomosMas",
+    address: "[-34.55881726737178, -58.47476996280374]",
   };
   return (
     <>
@@ -43,7 +49,32 @@ const Contact = () => {
         </div>
         <div id="map">
           <h1>Encuentranos en un mapa!</h1>
-          <h1>Espacio reservado para el mapa</h1>
+          {
+            objeto.address 
+            ? (
+              <Mapview address={convertFloat(objeto.address)} />
+            )
+            :(
+              <Alert
+                status="error"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                height="200px"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  Oops..
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                Al parecer ocurrió un error, prueba recargar la página!!.
+                </AlertDescription>
+              </Alert>
+            )
+          }
+          
         </div>
         <div id="contactForm">
           <FormContact />

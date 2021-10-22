@@ -38,6 +38,43 @@ Dentro del archivo encontraremos el component <Skeleton /> proporcionado por la 
 
 ---
 
+### Spinner
+
+_The react-spinner-loader provides simple React SVG spinner component which can be implemented for async await operation before data loads to the view._
+
+#### _You can pass by props the type, color, width and height._
+
+```js
+  <Spinner Spinner type={type} color={color} height={height} width={width} />
+```
+
+#### _By default the component comes with the following data:_
+
+```js
+  <Spinner type={'ThreeDots'} color={'blue'} height={80} width={80} />
+```
+
+#### _The types of spinner that are available are:_
+
+* Audio
+* BallTriangle
+* Bars
+* Circles
+* Grid
+* Hearts
+* Oval
+* Puff
+* Rings
+* TailSpin
+* ThreeDots
+
+#### _You can pass the colors you want and the measures you need, example:_
+
+```js
+  <Spinner type={'Bars'} color={'red'} height={60} width={60} />
+```
+---
+
 ### Alerts
 
 Disponible en src/features/alert/alert.js.
@@ -58,7 +95,8 @@ Disponible en src/features/alert/alert.js.
 ```
 #### Ejemplo de uso
 * Si, se usa sin parámentros tiene texto por default
- ```jsx
+
+ ```js
 const success =() =>{
     successAlert();
 }
@@ -83,4 +121,80 @@ const alertExample = () => {
 }
 
 ```
+---
+### Lazy Load Image
+
+Available in src/features/lazyLoadImage/.
+
+#### How to use. LazyLoadImage receive by props:
+
+* src
+* alt
+* height
+* width
+
+```js
+  <LazyLoadImage
+      src={src} 
+      alt={alt}
+      height={height}
+      width={width}
+  />
+```
+_To change the size of the Skeleton you must send by props:_
+
+* heightSkeleton
+* widthSkeleton
+
+```js
+  <LazyLoadImage
+      src={'urlImage'} 
+      alt={'text'}
+      height={'300px'}
+      width={'300px'}
+      heightSkeleton={'300px'}
+      heightSkeleton={'300px'}
+  />
+```
+#### Default comes this data:
+
+```js
+  <LazyLoadImage
+      alt={'text image'}
+      height={'340px'}
+      width={'340px'}
+      heightSkeleton={'340px'}
+      heightSkeleton={'340px'}
+  />
+```
+---
+
+### ProgressBar
+
+    La barra de progreso es usada para visualizar el status de una tarea que lleva mucho tiempo o consiste en diferentes pasos.
+
+    Importación:
+
+    import { Progress } from "@chakra-ui/react"
+
+    Uso:
+
+    <Progress value={80} />
+
+    Tamanos de barra de progreso:
+
+    Hay dos maneras en las que puedes incrementar la altura de la barra de progreso:
+
+    *Puedes agregar un prop tamano para incrementar el mismo.
+    *Puedes usar la propiedad height para setear la altura manualmente.
+
+    <Progress colorScheme="green" size="lg" value={20} />
+    <Progress colorScheme="green" height="32px" value={20} />
+
+    Progreso animado:
+
+    Para visualizar un progreso animado, pasa el prop isIndeterminate.
+
+    <Progress size="xs" isIndeterminate />
+
 ---
