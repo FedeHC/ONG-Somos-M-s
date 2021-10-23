@@ -7,11 +7,11 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../../services/apiCategories";
+import { useSelector } from "react-redux";
 const CategoriesBackOffice = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    getCategories().then((response) => setData(response.data));
-  }, []);
+ 
+  const {categoriasList, loading, error} = useSelector(state => state.categorias);
+
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="flex-start">
@@ -35,8 +35,8 @@ const CategoriesBackOffice = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.map((category) => (
-              <Tr key={category.name}>
+            {!loading && categoriasList.map((category) => (
+              <Tr key={category.id}>
                 <Td>{category.name}</Td>
                 <Td>{category.created_at}</Td>
                 <Td>
