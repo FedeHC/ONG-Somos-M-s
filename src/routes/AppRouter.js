@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { spring, AnimatedSwitch } from "react-router-transition";
 import { Box } from "@chakra-ui/react";
@@ -36,6 +36,8 @@ import Activities from "../pages/Activities/Activities";
 import ActivitiesDetail from "../pages/Activities/details/Detail";
 import LoginForm from "../pages/login/LoginForm";
 import { Register } from "../pages/register/Register";
+import { useDispatch } from "react-redux";
+import { getNovedades } from "../app/novedades/novedadesReducer";
 
 
 // We need to map the `scale` prop we define below to the transform style property:
@@ -75,6 +77,10 @@ const bounceTransition = {
 
 const AppRouter = () => {
   const isPrivate = window.location.href.includes("backoffice") ? true : false;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getNovedades());
+  }, []);
 
   return (
     <Box display="flex"
