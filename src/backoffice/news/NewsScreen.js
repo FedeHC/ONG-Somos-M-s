@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Button, Link } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 // import { AiTwotoneEdit, AiOutlineClose } from "react-icons/ai";
 import "./NewsScreen.css";
 import { getNews } from "../../services/apiNews";
 
 
 const NewsScreen = () => {
-  const [newsList, setNewsList] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await getNews();
-        setNewsList(results.data.data);
-      }
-      catch(error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, []);
+   const {novedadesList, loading, error} = useSelector(state => state.novedades);
 
   return (
     <div>
@@ -38,8 +26,8 @@ const NewsScreen = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {newsList.length > 0
-              ? newsList.map((news) => (
+            {!loading
+              ? novedadesList.map((news) => (
                   <Tr key={news.id}>
                     <Td>{news.name}</Td>
                     <Td>
@@ -60,7 +48,7 @@ const NewsScreen = () => {
                   </Tr>
                 ))
               : <Tr>
-                  <Td colSpan={4}>No se encontraron noticias.</Td>
+                  <Td colSpan={4}>cargando...</Td>
                 </Tr>
             }
           </Tbody>
