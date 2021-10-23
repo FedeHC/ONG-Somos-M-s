@@ -20,7 +20,6 @@ import {
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getList } from '../../reducers/slides';
-import { slidesList } from '../../services/slidesServices';
 
 const SlidesScreen = () => {
   const dispatch = useDispatch();
