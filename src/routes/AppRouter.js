@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { spring, AnimatedSwitch } from "react-router-transition";
 import '../App.css'
@@ -34,6 +34,8 @@ import LoginForm from "../pages/login/LoginForm";
 import { Register } from "../pages/register/Register";
 import Organization from "../backoffice/organization/Organization";
 import OrgForm from "../backoffice/organization/OrgForm/OrgForm";
+import { useDispatch } from "react-redux";
+import { getNosotros } from "../app/nosotros/nosotrosReducer";
 
 // We need to map the `scale` prop we define below to the transform style property:
 function mapStyles(styles) {
@@ -72,6 +74,12 @@ const bounceTransition = {
 
 const AppRouter = () => {
   const isPrivate = window.location.href.includes("backoffice") ? true : false;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNosotros());
+  }, []);
 
   return (
     <Router>
