@@ -16,7 +16,11 @@ const categoriasSlice = createSlice({
   loading:false,
   error:null
  },
- reducers:{},
+ reducers:{
+   setCategoria(state, action){
+       state.categoriasActive = action.payload;
+   }
+ },
  extraReducers:{
    //get
    [getCategorias.pending]:(state, action) =>{
@@ -33,5 +37,5 @@ const categoriasSlice = createSlice({
  } 
 });
 
-
+export const { setCategoria } = categoriasSlice.actions;
 export default categoriasSlice.reducer;
