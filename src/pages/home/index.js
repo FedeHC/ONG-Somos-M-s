@@ -6,7 +6,7 @@ import { getHome } from '../../services/apiHome';
 import './home.css';
 import { SkeletonComponent } from '../../features/skeleton/SkeletonComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNosotros } from '../../app/slices/nosotrosReducer';
+import {getNosotros} from '../../app/nosotros/nosotrosReducer';
 
 const Home = () => {
   const dispatch = useDispatch();
