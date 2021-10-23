@@ -1,5 +1,5 @@
-import React from "react";
-import "./activitiesList.scss";
+import React from 'react';
+import './activitiesList.scss';
 import {
   Table,
   Thead,
@@ -9,36 +9,13 @@ import {
   Td,
   TableCaption,
   Button,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const ActivitiesList = () => {
-  let actividades = [
-    {
-      name: "feria",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-06-21",
-    },
-    {
-      name: "merendero",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-08-21",
-    },
-    {
-      name: "donaciones",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "20-06-21",
-    },
-    {
-      name: "misa",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-05-21",
-    },
-  ];
 
+  const { actividadesList, loading, error } = useSelector(
+    state => state.actividades);
   return (
     <div className="activityList">
       <div className="header">
@@ -58,8 +35,8 @@ const ActivitiesList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {actividades.length > 0
-            ? actividades.map((activity) => (
+          {actividadesList.length > 0
+            ? actividadesList.map(activity => (
                 <Tr>
                   <Td>{activity.name}</Td>
                   <Td>
@@ -69,7 +46,7 @@ const ActivitiesList = () => {
                       alt=""
                     />
                   </Td>
-                  <Td>{activity.createdAt}</Td>
+                  <Td>{activity.created_at}</Td>
 
                   <Td className="buttonField">
                     <Button
@@ -86,7 +63,7 @@ const ActivitiesList = () => {
                   </Td>
                 </Tr>
               ))
-            : "no se encontaron actividades"}
+            : 'no se encontaron actividades'}
         </Tbody>
       </Table>
     </div>
