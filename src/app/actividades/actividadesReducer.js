@@ -14,8 +14,14 @@ const actividadesSlice = createSlice({
  name:"actividades",
  initialState:{
   actividadesList:[],
+  actividadActive:{},
   loading:false,
   error:null
+ },
+ reducers:{
+   setActividades(state,action){
+      state.actividadActive = action.payload;
+   }
  },
  extraReducers:{
    //get
@@ -33,4 +39,6 @@ const actividadesSlice = createSlice({
  }
 });
 
+
+export const {setActividades} = actividadesSlice.actions;
 export default actividadesSlice.reducer;

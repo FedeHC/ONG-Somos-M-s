@@ -11,11 +11,19 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActividades } from '../../../app/actividades/actividadesReducer';
 const ActivitiesList = () => {
+  const dispatch = useDispatch();
 
   const { actividadesList, loading, error } = useSelector(
     state => state.actividades);
+
+  const handleEdit = (activity) => {
+    dispatch(setActividades(activity));
+  };
+
+
   return (
     <div className="activityList">
       <div className="header">
@@ -53,6 +61,7 @@ const ActivitiesList = () => {
                       className="EditButton"
                       colorScheme="yellow"
                       variant="solid"
+                      onClick={()=>handleEdit(activity)}
                     >
                       Editar
                     </Button>
