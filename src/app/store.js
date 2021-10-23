@@ -7,4 +7,8 @@ export default configureStore({
   reducer: {
     nosotros
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
