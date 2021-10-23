@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   VStack,
@@ -19,14 +19,17 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { listSlides } from '../../reducers/slidesReducer';
+import { getList } from '../../reducers/slides';
+import { slidesList } from '../../services/slidesServices';
 
 const SlidesScreen = () => {
   const dispatch = useDispatch();
 
-  dispatch(listSlides());
+  useEffect(() => {
+    dispatch(getList());
+  }, []);
 
-  const { slides } = useSelector(state => state);
+  const { slides } = useSelector(state => state.slides);
 
   return (
     <VStack mt="2rem">
@@ -53,7 +56,7 @@ const SlidesScreen = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {slides?.data.map((slide, i) => (
+              {slides?.map((slide, i) => (
                 <Tr key={i}>
                   <Td>{slide.name}</Td>
                   <Td>

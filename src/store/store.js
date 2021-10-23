@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { slidesReducer } from '../reducers/slidesReducer';
+import slides from '../reducers/slides';
 
 export default configureStore({
   reducer: {
-    slides: slidesReducer,
+    slides: slides,
   },
 });
