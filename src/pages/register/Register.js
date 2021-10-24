@@ -1,36 +1,41 @@
-import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useState, useEffect } from 'react';
+
+import { Formik, Form, Field } from 'formik';
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Button,
-} from "@chakra-ui/react";
-import { signupSchema, mostrarErrorTyc } from "../../config/signupSchema";
-import PopUp from "../../features/pdfReader/PopUp";
-
-import styles from "./register.module.css";
+} from '@chakra-ui/react';
+import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
+import GoogleMaps from '../../features/googleMaps/GoogleMaps';
+import PopUp from '../../features/pdfReader/PopUp';
+import styles from './register.module.css';
 
 export const Register = () => {
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
+  const [mapLocation, setMapLocation] = useState('');
 
+  useEffect(() => {
+    console.log(mapLocation);
+  }, [mapLocation]);
   return (
     <div className={styles.pageContainer}>
       <div className={styles.register__container}>
         <p className={styles.formTitle}>Registro</p>
-
         <Formik
           initialValues={{
-            email: "",
-            password: "",
-            passwordConfirmation: "",
+            email: '',
+            password: '',
+            passwordConfirmation: '',
           }}
           validationSchema={signupSchema}
-          onSubmit={(values) => {
+          onSubmit={values => {
             if (aceptarTerminos) {
-              alert(JSON.stringify(values));
-              console.log(values);
+              const values0 = Object.assign(values, mapLocation);
+              alert(JSON.stringify(values0));
+              console.log(values0);
             } else {
               mostrarErrorTyc();
             }
@@ -50,7 +55,6 @@ export const Register = () => {
                   </FormControl>
                 )}
               </Field>
-
               <Field name="password">
                 {({ field, form }) => (
                   <FormControl
@@ -70,7 +74,6 @@ export const Register = () => {
                   </FormControl>
                 )}
               </Field>
-
               <Field name="passwordConfirmation">
                 {({ field, form }) => (
                   <FormControl
@@ -95,10 +98,11 @@ export const Register = () => {
                   </FormControl>
                 )}
               </Field>
-
+              <div className={styles.mapContainer}>
+                <GoogleMaps setMapLocation={setMapLocation} />
+              </div>
               <div className={styles.popUpContainer}>
                 <PopUp setaceptarTerminos={setaceptarTerminos} />
-
                 <small id="error" className={styles.mensajeError}>
                   Debe aceptar los Tyc
                 </small>
