@@ -4,24 +4,12 @@ import "./News.css";
 import { getNews } from "../../services/apiNews";
 import Video from "./videoPlayer/Video";
 import { Heading } from "@chakra-ui/react"
+import { useSelector } from "react-redux";
 
 
 const News = () => {
-  const [newsList, setNewsList] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await getNews();
-        setNewsList(results.data.data);
-      }
-      catch(error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, []);
+  const {novedadesList, loading, error} = useSelector(state => state.novedades);
 
   return (
     <div className="novedades-container">
@@ -35,8 +23,8 @@ const News = () => {
         { loading 
             ? <div>cargando...</div>
             : ( 
-              newsList.map((news, i) => (
-          <Card key={i} news={news} />
+              novedadesList.map((news) => (
+          <Card key={news.id} news={news} />
               ) ))
         }
       </div>
