@@ -7,14 +7,13 @@ import { IoPlay, IoPause, IoStop, IoVolumeMute } from "react-icons/io5";
 
 const Video = () => {
   const videos = [
-    "https://www.youtube.com/watch?v=DeTimoK9qrg",
     "https://www.youtube.com/watch?v=Zp8aZmqf_rU",
     "https://www.youtube.com/watch?v=4YnSk1gI_Oo",
   ];
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [configVideo, setConfigVideo] = useState({
-    url: "https://www.youtube.com/watch?v=DeTimoK9qrg",
+    url: "https://www.youtube.com/watch?v=Zp8aZmqf_rU",
     controls: false,
     volume: 0.8,
     muted: false,

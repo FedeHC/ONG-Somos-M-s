@@ -37,6 +37,7 @@ import ActivitiesDetail from "../pages/Activities/details/Detail";
 import LoginForm from "../pages/login/LoginForm";
 import { Register } from "../pages/register/Register";
 import { useDispatch } from "react-redux";
+import { getNovedades } from "../app/novedades/novedadesReducer";
 import { getNosotros } from "../app/nosotros/nosotrosReducer";
 
 
@@ -77,11 +78,11 @@ const bounceTransition = {
 
 const AppRouter = () => {
   const isPrivate = window.location.href.includes("backoffice") ? true : false;
-
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(getNosotros());
+    dispatch(getNovedades());
   }, []);
 
   return (
