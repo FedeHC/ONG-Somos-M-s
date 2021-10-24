@@ -1,5 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
+//reducers
+import nosotros from './nosotros/nosotrosReducer';
+
 
 export default configureStore({
-  reducer: {},
+  reducer: {
+    nosotros
+  },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
