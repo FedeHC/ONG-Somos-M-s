@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { getUsers, deleteUser } from '../../../services/apiUsers';
+import React, { useEffect } from 'react';
+import { deleteUser } from '../../../services/apiUsers';
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
+import { getList } from '../../../reducers/users';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UsersTable = () => {
-  const [userList, setUserList] = useState([]);
-  useEffect(() => {
-    getUsers().then(response => {
-      console.log(response);
+  const { users } = useSelector(state => state.users);
+  const dispatch = useDispatch();
 
-      setUserList(response?.data?.data);
-    });
-    console.log(userList);
+  useEffect(() => {
+    dispatch(getList());
   }, []);
 
   const editUser = id => {
@@ -20,6 +19,7 @@ const UsersTable = () => {
   const deleteUsers = id => {
     deleteUser(id);
   };
+
   return (
     <Table variant="striped" colorScheme="gray">
       {/* TABLE HEAD */}
@@ -33,7 +33,7 @@ const UsersTable = () => {
 
       {/* TABLE BODY */}
       <Tbody>
-        {userList?.map(user => (
+        {users?.map(user => (
           <Tr key={user.id}>
             <Td>{user.name}</Td>
             <Td>{user.email}</Td>
