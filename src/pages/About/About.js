@@ -1,16 +1,50 @@
 import React from 'react';
 import './about.scss';
-import { Heading, Text } from '@chakra-ui/react';
+import { Heading, Text, Box } from '@chakra-ui/react';
 import Title from '../../features/title/Title';
 import LinkedinCard from './LinkedinCard';
 import { TwitterTweet } from 'react-social-plugins';
 import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
+import { useSelector } from 'react-redux';
 
 const About = () => {
+  const { name, short_description, long_description } = useSelector(
+    state => state.nosotros.nosotros,
+  );
   return (
     <>
+      <Title text={name} />
+
       <div className="aboutContainer">
+        <div className="TextContainer">
+          <Box w="50%" /* className="aboutText" */>
+            <Text
+              as={'span'}
+              position={'relative'}
+              fontSize="6xl"
+              _after={{
+                content: "''",
+                width: 'full',
+                height: '30%',
+                position: 'absolute',
+                bottom: 1,
+                left: 0,
+                bg: 'linkedin.400',
+                zIndex: -1,
+              }}
+            >
+              {name}
+            </Text>
+            <Box
+              color="gray.500"
+              fontSize="lg"
+              textAlign={['center']}
+              dangerouslySetInnerHTML={{ __html: long_description }}
+            />
+          </Box>
+        </div>
+
         <div className="linkedinCard">
           <div className="card1">
             <LinkedinCard />

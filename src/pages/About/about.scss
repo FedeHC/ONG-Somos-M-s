@@ -3,6 +3,17 @@
   margin: 0;
 }
 
+.TextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutText {
+  width: 50%;
+  
+}
+
 .tweetsSection {
   padding-left: 5rem;
   padding-right: 5rem;

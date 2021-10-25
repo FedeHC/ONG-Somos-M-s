@@ -1,11 +1,15 @@
 import React from 'react';
+import Sidebar from './Sidebar/Sidebar';
+import './Backoffice.css'; 
 
 const Backoffice = () => {
-    return (
-        <div>
-            <h1>Bienvenido al Backoffice</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <div className="flex">
+        <Sidebar />
+      </div>
+    </div>
+  );
+};
 
-export default Backoffice; 
+export default Backoffice;
