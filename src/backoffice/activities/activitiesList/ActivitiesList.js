@@ -1,5 +1,5 @@
-import React from "react";
-import "./activitiesList.scss";
+import React from 'react';
+import './activitiesList.scss';
 import {
   Table,
   Thead,
@@ -9,35 +9,20 @@ import {
   Td,
   TableCaption,
   Button,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActividades } from '../../../app/actividades/actividadesReducer';
 const ActivitiesList = () => {
-  let actividades = [
-    {
-      name: "feria",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-06-21",
-    },
-    {
-      name: "merendero",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-08-21",
-    },
-    {
-      name: "donaciones",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "20-06-21",
-    },
-    {
-      name: "misa",
-      image:
-        "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-      createdAt: "14-05-21",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const { actividadesList, loading, error } = useSelector(
+    state => state.actividades);
+
+  const handleEdit = (activity) => {
+    dispatch(setActividades(activity));
+  };
+
 
   return (
     <div className="activityList">
@@ -58,8 +43,8 @@ const ActivitiesList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {actividades.length > 0
-            ? actividades.map((activity) => (
+          {actividadesList.length > 0
+            ? actividadesList.map(activity => (
                 <Tr>
                   <Td>{activity.name}</Td>
                   <Td>
@@ -69,13 +54,14 @@ const ActivitiesList = () => {
                       alt=""
                     />
                   </Td>
-                  <Td>{activity.createdAt}</Td>
+                  <Td>{activity.created_at}</Td>
 
                   <Td className="buttonField">
                     <Button
                       className="EditButton"
                       colorScheme="yellow"
                       variant="solid"
+                      onClick={()=>handleEdit(activity)}
                     >
                       Editar
                     </Button>
@@ -86,7 +72,7 @@ const ActivitiesList = () => {
                   </Td>
                 </Tr>
               ))
-            : "no se encontaron actividades"}
+            : 'no se encontaron actividades'}
         </Tbody>
       </Table>
     </div>
