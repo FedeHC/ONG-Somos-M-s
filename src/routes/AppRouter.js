@@ -6,6 +6,7 @@ import { mapStyles, bounceTransition } from "../features/AnimatedSwitch/Animated
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import { useDispatch } from "react-redux";
+import { getActividades } from "../app/actividades/actividadesReducer";
 import { getNovedades } from "../app/novedades/novedadesReducer";
 import { getNosotros } from "../app/nosotros/nosotrosReducer";
 
