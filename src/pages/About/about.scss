@@ -1,0 +1,84 @@
+.aboutContainer {
+  width: 100%;
+  margin: 0;
+}
+
+.TextContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutText {
+  width: 50%;
+  
+}
+
+.tweetsSection {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.tweets {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.info {
+  grid-area: info;
+  padding: 2rem;
+}
+
+.cardText {
+  padding-top: 3rem;
+}
+
+.linkedinCard {
+  grid-area: linkedinCard;
+  padding: 2rem;
+  border-bottom: solid 1px rgb(207, 207, 207);
+  border-radius: 6px;
+  display: grid;
+  margin: 0;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'card1 card1Text';
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.facebookLogo,
+.twitterLogo,
+.instagramLogo {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+}
+
+.facebookLogo {
+  color: #4267b2;
+}
+.instagramLogo {
+  color: #833ab4;
+}
+.twitterLogo {
+  color: #1da1f2;
+}
+
+a.social {
+  margin: 0 1rem;
+  transition: transform 250ms;
+  display: inline-block;
+}
+
+a.social:hover {
+  transform: translateY(-2px);
+}
