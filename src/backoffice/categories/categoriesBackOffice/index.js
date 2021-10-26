@@ -7,11 +7,14 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getCategories } from "../../../services/apiCategories";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategoria } from "../../../app/categorias/categoriasReducer";
 const CategoriesBackOffice = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    getCategories().then((response) => setData(response.data));
-  }, []);
+  const dispatch = useDispatch();
+  const {categoriasList, loading, error} = useSelector(state => state.categorias);
+  const handleEdit = (category) =>{
+      dispatch(setCategoria(category));
+  }
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="flex-start">
@@ -35,12 +38,12 @@ const CategoriesBackOffice = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.map((category) => (
-              <Tr key={category.name}>
+            {!loading && categoriasList.map((category) => (
+              <Tr key={category.id}>
                 <Td>{category.name}</Td>
                 <Td>{category.created_at}</Td>
                 <Td>
-                  <Button colorScheme="yellow" variant="solid">
+                  <Button colorScheme="yellow" variant="solid" onClick={()=>handleEdit(category)}>
                     <AiTwotoneEdit />
                   </Button>
                   <Button ml={5} colorScheme="red" variant="solid">

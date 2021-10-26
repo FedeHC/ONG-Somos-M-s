@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getActividades } from "../app/actividades/actividadesReducer";
 import { getNovedades } from "../app/novedades/novedadesReducer";
 import { getNosotros } from "../app/nosotros/nosotrosReducer";
+import { getCategorias } from "../app/categorias/categoriasReducer";
 
 
 const AppRouter = () => {
@@ -20,6 +21,7 @@ const AppRouter = () => {
     dispatch(getActividades());
     dispatch(getNosotros());
     dispatch(getNovedades());
+    dispatch(getCategorias());
   }, []);
 
   return (
