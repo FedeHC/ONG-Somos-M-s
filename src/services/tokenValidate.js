@@ -1,13 +1,11 @@
-export const tokenValidate = (tokenName) => {
+export const tokenValidate = (tokenName=process.env.REACT_APP_NGO_TOKEN) => {
   const token = localStorage.getItem(tokenName);
+  let Header = null;
 
   if (token !== null) {
-    const Header = {
-      " Authorization": "Bearer" + token,
-    };
-    return Header;
-  } else {
-    const Header = null;
-    return Header;
+    Header = {
+      "Authorization": "Bearer" + token,
+    }
   }
+  return Header;
 };
