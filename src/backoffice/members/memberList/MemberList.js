@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./memberList.scss";
+import React, { useEffect } from 'react';
+import './memberList.scss';
 import {
   Table,
   Thead,
@@ -9,24 +9,23 @@ import {
   Td,
   TableCaption,
   Button,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { deleteMembers, getMembers } from "../../../services/apiMembers";
-
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { deleteMembers } from '../../../services/apiMembers';
+import { useDispatch, useSelector } from 'react-redux';
+import { getList } from '../../../reducers/members';
 
 const MemberList = () => {
+  const { members } = useSelector(state => state.members);
+  const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    deleteMembers(id); 
-  }
-
-  const [members, setMembers] = useState([]);  
   useEffect(() => {
-    getMembers().then((response) => {
-      setMembers(response.data.data); 
-      console.log(response.data.data);
-    }) 
-  }, [])
+    dispatch(getList());
+  }, []);
+
+  const handleDelete = id => {
+    deleteMembers(id);
+  };
 
   return (
     <div className="listaMiembros">
@@ -47,31 +46,35 @@ const MemberList = () => {
         </Thead>
         <Tbody>
           {members?.length > 0
-            ? members.map((member) => (
-              <div key={member.id}>
-                <Tr>
-                  <Td>{member.name}</Td>
-                  <Td>
-                    <img className="profilePhoto" src={member.image} alt="" />
-                  </Td>
-                  <Td className="buttonField">
-                    <Link to="/backoffice/members/edit">
-                    <Button
-                      className="EditButton"
-                      colorScheme="yellow"
-                      variant="solid"
-                    >
-                      Editar
-                    </Button>
-                    </Link>
-                    <Button colorScheme="red" variant="solid" onClick={() => handleDelete(member.id)}>
-                      Eliminar
-                    </Button>
-                  </Td>
-                </Tr>
+            ? members.map(member => (
+                <div key={member.id}>
+                  <Tr>
+                    <Td>{member.name}</Td>
+                    <Td>
+                      <img className="profilePhoto" src={member.image} alt="" />
+                    </Td>
+                    <Td className="buttonField">
+                      <Link to="/backoffice/members/edit">
+                        <Button
+                          className="EditButton"
+                          colorScheme="yellow"
+                          variant="solid"
+                        >
+                          Editar
+                        </Button>
+                      </Link>
+                      <Button
+                        colorScheme="red"
+                        variant="solid"
+                        onClick={() => handleDelete(member.id)}
+                      >
+                        Eliminar
+                      </Button>
+                    </Td>
+                  </Tr>
                 </div>
               ))
-            : "no se encontaron miembros"}
+            : 'no se encontaron miembros'}
         </Tbody>
       </Table>
     </div>
