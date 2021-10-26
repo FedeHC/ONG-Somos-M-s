@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getUsers } from '../services/apiUsers';
+import { getUsers } from '../../services/apiUsers';
 
-export const getList = createAsyncThunk(
-  'users/getList',
+export const getUserThunk = createAsyncThunk(
+  'users/getUserThunk',
 
   async (dispatch, getState) => {
     const { data } = await getUsers();
@@ -11,7 +11,7 @@ export const getList = createAsyncThunk(
 );
 
 const users = createSlice({
-  name: 'slides',
+  name: 'users',
 
   initialState: {
     users: [],
@@ -20,17 +20,17 @@ const users = createSlice({
   },
 
   extraReducers: {
-    [getList.pending]: (state, action) => {
+    [getUserThunk.pending]: (state, action) => {
       state.status = 'loading';
     },
 
-    [getList.fulfilled]: (state, action) => {
+    [getUserThunk.fulfilled]: (state, action) => {
       state.status = 'success';
 
       state.users = action.payload.data;
     },
 
-    [getList.rejected]: (state, action) => {
+    [getUserThunk.rejected]: (state, action) => {
       state.status = 'failed';
     },
   },

@@ -1,6 +1,6 @@
 import React from "react";
 // import Title from "../Title.js";
-import { Grid, GridItem, Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 // import "./NewsDetail.scss";
 
 const ActivitiesDetail = (props) => {

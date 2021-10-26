@@ -13,10 +13,10 @@ import {
 import { Link } from 'react-router-dom';
 import { deleteMembers } from '../../../services/apiMembers';
 import { useDispatch, useSelector } from 'react-redux';
-import { getList } from '../../../reducers/members';
-
+/* import { getList } from '../../../app/members/members';
+ */
 const MemberList = () => {
-  const { members } = useSelector(state => state.members);
+/*   const { members } = useSelector(state => state.members);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const MemberList = () => {
 
   const handleDelete = id => {
     deleteMembers(id);
-  };
+  }; */
 
   return (
     <div className="listaMiembros">
@@ -45,7 +45,7 @@ const MemberList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {members?.length > 0
+         {/*  {members?.length > 0
             ? members.map(member => (
                 <div key={member.id}>
                   <Tr>
@@ -74,7 +74,7 @@ const MemberList = () => {
                   </Tr>
                 </div>
               ))
-            : 'no se encontaron miembros'}
+            : 'no se encontaron miembros'} */}
         </Tbody>
       </Table>
     </div>

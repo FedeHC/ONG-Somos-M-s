@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getHome, postHome } from '../services/apiHome';
+import { getHome, postHome } from '../../services/apiHome';
 
 export const getNosotros = createAsyncThunk(
 	"nosotros/getNosotros",

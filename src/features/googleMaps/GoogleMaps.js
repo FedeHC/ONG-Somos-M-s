@@ -16,12 +16,12 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
-import { formatRelative } from 'date-fns';
-import MarkerIcon from './marker.png';
-
+// import { formatRelative } from 'date-fns';
+import MarkerIcon from '../assets/images/marker.png';
 import '@reach/combobox/styles.css';
 import mapStyles from './mapStyles';
 import './googleMaps.scss';
+
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -61,7 +61,7 @@ export default function GoogleMaps({ setMapLocation }) {
     setMapLocation({ lat, lng });
     setLng(lng);
     setLat(lat);
-  }, []);
+  }, [setMapLocation]);
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback(map => {
@@ -72,7 +72,7 @@ export default function GoogleMaps({ setMapLocation }) {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
     setMapLocation({ lat, lng });
-  }, []);
+  }, [setMapLocation]);
 
   if (loadError) return 'Error';
   if (!isLoaded) return 'Loading...';

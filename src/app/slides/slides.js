@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { slidesList } from '../services/slidesServices';
+import { slidesList } from '../../services/slidesServices';
 
-export const getList = createAsyncThunk(
-  'slides/getList',
+export const getSliceThunk = createAsyncThunk(
+  'slides/getSliceThunk',
   async (dispatch, getState) => {
     const { data } = await slidesList(process.env.REACT_APP_ENDPOINT_SLIDES);
     return data;
@@ -16,14 +16,14 @@ const slides = createSlice({
     status: null,
   },
   extraReducers: {
-    [getList.pending]: (state, action) => {
+    [getSliceThunk.pending]: (state, action) => {
       state.status = 'loading';
     },
-    [getList.fulfilled]: (state, action) => {
+    [getSliceThunk.fulfilled]: (state, action) => {
       state.status = 'success';
       state.slides = action.payload.data;
     },
-    [getList.rejected]: (state, action) => {
+    [getSliceThunk.rejected]: (state, action) => {
       state.status = 'failed';
     },
   },

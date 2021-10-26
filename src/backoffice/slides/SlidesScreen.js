@@ -19,16 +19,16 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getList } from '../../reducers/slides';
+// import { getList } from '../../app/slides/slides';
 
 const SlidesScreen = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getList());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getList());
+  // }, []);
 
-  const { slides } = useSelector(state => state.slides);
+  // const { slides } = useSelector(state => state.slides);
 
   return (
     <VStack mt="2rem">
@@ -55,7 +55,7 @@ const SlidesScreen = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {slides?.map((slide, i) => (
+              {/* {slides?.map((slide, i) => (
                 <Tr key={i}>
                   <Td>{slide.name}</Td>
                   <Td>
@@ -75,7 +75,7 @@ const SlidesScreen = () => {
                     </Button>
                   </Td>
                 </Tr>
-              ))}
+              ))} */}
             </Tbody>
           </Table>
         </div>

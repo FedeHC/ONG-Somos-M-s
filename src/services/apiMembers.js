@@ -1,7 +1,7 @@
 import { methodDeletePrivate, methodPostPrivate, methodPutPrivate } from "./privateApiService";
 import { methodGetPublic } from "./publicApiService";
 
-const membersEndPoint = process.env.REACT_APP_ENDPOINT_MEMBERS;
+const membersEndPoint = process.env.REACT_APP_ENDPOINT_MEMBERS || "members";
 
 export const getMembers = async (id = null) => {
   return await methodGetPublic(membersEndPoint, id);

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Formik, Form, Field, validateYupSchema } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { createMember, updateMember } from '../../../services/apiMembers';

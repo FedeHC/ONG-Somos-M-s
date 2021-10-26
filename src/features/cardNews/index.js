@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   Image,
 } from "@chakra-ui/react";
-const CardNews = () => {
+const CardNews = ({news}) => {
   const testimonio = {
     id: 546,
     name: "Somos Más",

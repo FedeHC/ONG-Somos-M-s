@@ -12,36 +12,30 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 //data example
 const data = [
   {
-    image:
-      'https://images.unsplash.com/photo-1546768292-fb12f6c92568?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    title: 'tes1',
+    image: "https://pbs.twimg.com/media/FCaaiStWYAUQQJX?format=jpg&name=medium" ,
+    title: 'Talleres de verano',
     description:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+      'Dimos comienzo a los nuevos talleres de dibujo y pintura',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1501446529957-6226bd447c46?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1489&q=80',
-    title: 'test2',
+      'https://pbs.twimg.com/media/FCaK4JuXIAMMioA?format=jpg&name=small',
+    title: 'Jornada de juegos en el parque Avellaneda',
     description:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+      'Reportamos un éxito en evento realizado en nuestro aniversario',
   },
   {
     image:
-      'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80',
-    title: 'test3',
+      'https://pbs.twimg.com/media/FCbHF2pWYAAyy58?format=jpg&name=900x900',
+    title: 'Reinauguración de la pileta del club',
     description:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
+      'Los más chicos ya pudieron estrenar la nueva pileta luego de los arreglos',
   },
-  {
-    image:
-      'https://images.unsplash.com/photo-1475189778702-5ec9941484ae?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80',
-    title: 'test4',
-    description:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.',
-  },
+
 ];
 
 const Sliderhome = () => {
+
   const PreviousBtn = props => {
     const { className, onClick } = props;
     return (

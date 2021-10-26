@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react';
-import { deleteUser } from '../../../services/apiUsers';
+// import { deleteUser } from '../../../services/apiUsers';
 import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
-import { getList } from '../../../reducers/users';
+// import { getList } from '../../../app/users/users';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UsersTable = () => {
-  const { users } = useSelector(state => state.users);
-  const dispatch = useDispatch();
+  // const { users } = useSelector(state => state.users);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getList());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getList());
+  // }, []);
 
-  const editUser = id => {
-    window.location.href = `/backoffice/users/edit/${id}`;
-  };
+  // const editUser = id => {
+  //   window.location.href = `/backoffice/users/edit/${id}`;
+  // };
 
-  const deleteUsers = id => {
-    deleteUser(id);
-  };
+  // const deleteUsers = id => {
+  //   deleteUser(id);
+  // };
 
   return (
     <Table variant="striped" colorScheme="gray">
@@ -33,7 +33,7 @@ const UsersTable = () => {
 
       {/* TABLE BODY */}
       <Tbody>
-        {users?.map(user => (
+        {/* {users?.map(user => (
           <Tr key={user.id}>
             <Td>{user.name}</Td>
             <Td>{user.email}</Td>
@@ -56,7 +56,7 @@ const UsersTable = () => {
               </Button>
             </Td>
           </Tr>
-        ))}
+        ))} */}
       </Tbody>
     </Table>
   );

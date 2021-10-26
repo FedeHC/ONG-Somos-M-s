@@ -1,21 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Logo from "../assets/images/logo-ngo.png";
 import { Box, Flex, Stack,
-         Text, IconButton, Button, Link,
-         Collapse, Icon, Image,
+         Text, IconButton, Button,
+         Collapse, Icon, Image, Link as LinkChakra,
          Popover, PopoverTrigger, PopoverContent,
          useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon,
          ChevronDownIcon, ChevronRightIcon,} from '@chakra-ui/icons';
+import { PUBLIC_LINKS } from "../publicLinks/PublicLinks";
 
-
-const PUBLIC_LINKS = [
-  { label: "Inicio", href: '/' },
-  { label: "Nosotros", href: '/nosotros' },
-  { label: "Actividades", href: '/actividades' },
-  { label: "Novedades", href: '/novedades' },
-  { label: "Testimonios", href: '/testimonios' },
-  { label: "Contacto", href: '/contacto' },
-];
 
 const PublicNavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -47,7 +41,7 @@ const PublicNavBar = () => {
               justify={{ base: 'center', md: 'flex' }}>
 
           {/* LOGO */}
-          <Image src="http://ongapi.alkemy.org/storage/4ZR8wsUwr9.png"
+          <Image src={Logo}
                  w="100px"
                  alt="Logo Somos Más" />
 
@@ -65,7 +59,7 @@ const PublicNavBar = () => {
                spacing={3}>
 
           {/* LOGIN */}
-          <Link href={"/login"}>
+          <Link to="/login" >
           <Button display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
                   fontWeight={300}
@@ -77,7 +71,7 @@ const PublicNavBar = () => {
           </Link>
 
           {/* REGISTER */}
-          <Link href={"/register"}>
+          <Link to="/register">
             <Button display={{ base: 'none', md: 'inline-flex' }}
                     fontSize={'sm'}
                     fontWeight={300}
@@ -111,15 +105,16 @@ const DesktopNav = () => {
           <Popover trigger={'hover'}
                    placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link p={2}
-                    href={navItem.href ?? '#'}
-                    fontSize={'sm'}
-                    fontWeight={500}
-                    color={linkColor}
-                    _hover={{
-                      textDecoration: 'none',
-                      color: linkHoverColor,
-                    }}>{navItem.label}</Link>
+              <Link to={navItem.href ?? '#'}>
+                <LinkChakra p={2}
+                            fontSize={'sm'}
+                            fontWeight={500}
+                            color={linkColor}
+                            _hover={{
+                              textDecoration: 'none',
+                              color: linkHoverColor,
+                            }}>{navItem.label}</LinkChakra>
+              </Link>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -146,7 +141,7 @@ const DesktopNav = () => {
 // DESKTOP
 const DesktopSubNav = ({ label, href, subLabel })=> {
   return (
-    <Link href={href}
+    <Link to={href}
           role={'group'}
           display={'block'}
           p={2}
@@ -222,7 +217,9 @@ const MobileNavItem = ({ label, children, href })=> {
                borderColor={useColorModeValue('gray.200', 'gray.700')}
                align={'start'}>
           {children && children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label}
+                    py={2}
+                    to={child.href}>
                 {child.label}
               </Link>
           ))}
