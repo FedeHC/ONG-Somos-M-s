@@ -3,20 +3,14 @@ import { Button } from '@chakra-ui/button';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import CardNews from '../../features/cardNews';
 import { useSelector } from 'react-redux';
-import { SkeletonComponent } from '../../features/skeleton/SkeletonComponent';
-import {getNosotros} from '../../app/nosotros/nosotrosReducer';
 import './home.css';
 
 const Home = () => {
-  const {loading, error, nosotros} = useSelector(state => state.nosotros);
+  const { loading, error, nosotros } = useSelector(state => state.nosotros);
 
   return (
     <div>
-      {!loading && (
-        <h1 className="title__main">
-          {nosotros.welcome_text}
-        </h1>
-      )}
+      {!loading && <h1 className="title__main">{nosotros.welcome_text}</h1>}
       <section className="news__container">
         <h3>Ultimas Novedadesa</h3>
         <div className="news__flex">

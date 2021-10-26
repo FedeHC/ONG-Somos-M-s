@@ -12,17 +12,17 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActividades } from '../../../app/actividades/actividadesReducer';
+import { setActividades } from '../../../reducers/actividadesReducer';
 const ActivitiesList = () => {
   const dispatch = useDispatch();
 
   const { actividadesList, loading, error } = useSelector(
-    state => state.actividades);
+    state => state.actividades,
+  );
 
-  const handleEdit = (activity) => {
+  const handleEdit = activity => {
     dispatch(setActividades(activity));
   };
-
 
   return (
     <div className="activityList">
@@ -61,7 +61,7 @@ const ActivitiesList = () => {
                       className="EditButton"
                       colorScheme="yellow"
                       variant="solid"
-                      onClick={()=>handleEdit(activity)}
+                      onClick={() => handleEdit(activity)}
                     >
                       Editar
                     </Button>
