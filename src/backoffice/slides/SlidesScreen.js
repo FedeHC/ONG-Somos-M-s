@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import {
   Container,
   VStack,
@@ -11,17 +11,24 @@ import {
   Button,
   Image,
   Box,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
   AiOutlineClose,
   AiFillPlusCircle,
-} from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useListSlides } from "../../services/slidesServices";
+} from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getList } from '../../reducers/slides';
 
 const SlidesScreen = () => {
-  const { data } = useListSlides(process.env.REACT_APP_ENDPOINT_SLIDES);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getList());
+  }, []);
+
+  const { slides } = useSelector(state => state.slides);
 
   return (
     <VStack mt="2rem">
@@ -48,7 +55,7 @@ const SlidesScreen = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {data?.data.map((slide, i) => (
+              {slides?.map((slide, i) => (
                 <Tr key={i}>
                   <Td>{slide.name}</Td>
                   <Td>
