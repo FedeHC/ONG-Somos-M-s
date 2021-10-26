@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 //reducers
 import nosotros from './nosotros/nosotrosReducer';
 import novedades from './novedades/novedadesReducer';
@@ -10,8 +10,5 @@ export default configureStore({
     nosotros,
     actividades
   },
-  middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
 });

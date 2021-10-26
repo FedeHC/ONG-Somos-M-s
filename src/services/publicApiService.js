@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-
 const url = process.env.REACT_APP_ENDPOINT_MAIN_URL;
 
 // GET
-export const methodGetPublic = async (endpoint, id=null) => {
+export const methodGetPublic = async (endpoint, id = null) => {
   try {
-    return await axios.get(`${url}/${endpoint}${id ? '/'+id : ''}`);
+    const data = await axios.get(`${url}/${endpoint}${id ? '/' + id : ''}`);
+    return data;
   } catch (error) {
     return error;
   }
