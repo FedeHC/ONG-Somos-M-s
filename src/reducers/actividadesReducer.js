@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { showActivities } from '../../services/apiActivities';
+import { showActivities } from '../services/apiActivities';
 
 export const getActividades = createAsyncThunk(
   "actividades/getActividades",
