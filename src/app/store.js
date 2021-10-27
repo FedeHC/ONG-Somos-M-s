@@ -15,7 +15,8 @@ export default configureStore({
     actividades,
     categorias:categoriasReducer,
     slides,
-    users
+    users,
+    members
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
 });

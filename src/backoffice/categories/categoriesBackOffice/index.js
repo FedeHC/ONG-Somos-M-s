@@ -17,7 +17,7 @@ const CategoriesBackOffice = ({ history }) => {
 
   const handleEdit = category => {
     dispatch(setCategoria(category));
-    history.replace('/backoffice/categories/edit');
+    history.push('/backoffice/categories/edit');
   };
   return (
     <div>
@@ -28,6 +28,7 @@ const CategoriesBackOffice = ({ history }) => {
             colorScheme="blue"
             bgColor={'#00214D'}
             variant="solid"
+            m={3}
           >
             Crear Categoria
           </Button>

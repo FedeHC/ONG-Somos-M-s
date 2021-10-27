@@ -19,7 +19,7 @@ const ActivitiesList = ({ history }) => {
 
   const handleEdit = activity => {
     dispatch(setActividades(activity));
-    history.replace('/backoffice/activities/edit');
+    history.push('/backoffice/activities/edit');
   };
 
   return (
@@ -31,6 +31,7 @@ const ActivitiesList = ({ history }) => {
             colorScheme="blue"
             bgColor={'#00214D'}
             variant="solid"
+            m={3}
           >
             Crear Actividad
           </Button>
