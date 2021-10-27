@@ -1,12 +1,16 @@
 import { methodGetPublic, methodPostPublic } from "./publicApiService"
 
 
+const endPoint = process.env.REACT_APP_ENDPOINT_ORGANIZATION;
+
+// GET
 export const getHome = async() => {
-  const resp = await methodGetPublic("organization");
+  const resp = await methodGetPublic(endPoint);
   return resp;
 };
 
+// POST
 export const postHome = async(body) => {
-  const resp = await methodPostPublic("organization", body);
+  const resp = await methodPostPublic(endPoint, body);
   return resp;
 };

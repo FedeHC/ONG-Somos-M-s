@@ -1,13 +1,14 @@
 import { methodGetPublic, methodPostPublic } from "./publicApiService";
 
-const endpointContacts = process.env.REACT_APP_ENDPOINT_CONTACTS;
 
-export const postContact = async (body) => {
-  const resp = await methodPostPublic(endpointContacts, body);
-  return resp;
+const endPoint = process.env.REACT_APP_ENDPOINT_CONTACTS;
+
+// GET
+export const getContact = async (body) => {
+  return await methodGetPublic(endPoint);
 };
 
-export const getContact = async (body) => {
-  const resp = await methodGetPublic(endpointContacts);
-  return resp;
+// POST
+export const postContact = async (body) => {
+  return await methodPostPublic(endPoint, body);
 };
