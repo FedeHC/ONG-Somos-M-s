@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -7,15 +7,16 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Center, Heading, Box, Container,
          FormControl, FormErrorMessage, FormLabel,
          Input, Button, Select } from "@chakra-ui/react";
-import { getNews, createNews, updateNews } from "../../../services/apiNews";
+import { getNews, createNews, updateNews, deleteNews } from "../../../services/apiNews";
 
 
 const FormNovedades = () => {
   // STATE
   const [response, setResponse] = useState([]);
 
-  // ID
+  // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
+  const location = useLocation().pathname.toLocaleLowerCase();
 
   // NEWS ARRAY/OBJECT
   useEffect(() => {
@@ -25,6 +26,30 @@ const FormNovedades = () => {
     }  
     fetchData();
     }, [id]);
+
+  // HANDLER
+  const submitHandler = (values) => {
+    if(location.includes("create"))
+      createNews(values);
+    else if(location.includes("edit"))
+      updateNews(values, id)
+    else if(location.includes("delete"))
+      deleteNews(values, id)
+    else
+      return;
+  };
+
+  // FORM TITLE
+  const formTitle = () => {
+    if(location.includes("create"))
+      return "Creando";
+    else if(location.includes("edit"))
+      return "Editando";
+    else if(location.includes("delete"))
+      return "Borrando";
+    else
+      return "";
+  };
 
   // SCHEMA
   const formSchema = Yup.object().shape({
@@ -52,18 +77,17 @@ const FormNovedades = () => {
       <Formik initialValues={initialValues}
               enableReinitialize
               validationSchema={formSchema}
-              onSubmit={(values) => id
-                ? updateNews(values, id)
-                : createNews(values)} >
+              onSubmit={(values) => submitHandler(values)} >
         {(formik) => (
           // FORM
           <Form>
-            <Container maxW="2xl">
-              <Box mt={20}
-                  mb={20}
-                  p={10}
-                  borderRadius={10}
-                  boxShadow="dark-lg">
+            <Container>
+              <Box width="xl"
+                   mt={20}
+                   mb={20}
+                   p={10}
+                   borderRadius={10}
+                   boxShadow="dark-lg">
 
                 {/* TITLE */}
                 <Center bg="#00214d"
@@ -72,7 +96,7 @@ const FormNovedades = () => {
                         p={3}
                         borderRadius={10}>
                   <Heading size="xl"
-                          color="white">{id ? "Editando" : "Creando"} Novedad</Heading>
+                          color="white">{formTitle()} Novedad</Heading>
                 </Center>
 
                 {/* NAME INPUT */}
@@ -81,7 +105,7 @@ const FormNovedades = () => {
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.name && form.touched.name}
                                 mb={5}>
-                      <FormLabel htmlFor="name">Titulo:</FormLabel>
+                      <FormLabel htmlFor="name">Nombre:</FormLabel>
                       <Input {...field}
                             variant="flushed" />
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -116,7 +140,7 @@ const FormNovedades = () => {
                       <FormLabel htmlFor="category">Categoría:</FormLabel>
                         {/* If not id in url, show select input with categories */}
                         {!id 
-                          ? <Select placeholder="Elija una categoría" {...field}>
+                          ? <Select placeholder="-Seleccione categoría-" {...field}>
                               {response.map((res) => (
                                 <option key={res.id}>{res.category_id}</option>
                               ))}

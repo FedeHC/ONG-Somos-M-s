@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Center, Box, Heading, Container,
          FormControl, FormLabel, FormErrorMessage,
          Input, Button} from "@chakra-ui/react";
@@ -8,15 +8,16 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
 import { slidesList as getSlides,
-         createSlides, updateSlides } from "../../../services/slidesServices";
+         createSlides, updateSlides, deleteSlides } from "../../../services/slidesServices";
 
 
 const SlideForm = ({form}) => {
   // STATE
   const [response, setResponse] = useState([]);
 
-  // ID
+  // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
+  const location = useLocation().pathname.toLocaleLowerCase();
 
   // SLIDES ARRAY/OBJECT
   useEffect(() => {
@@ -26,6 +27,30 @@ const SlideForm = ({form}) => {
     }  
     fetchData();
   }, [id]);
+
+  // HANDLER
+  const submitHandler = (values) => {
+    if(location.includes("create"))
+      createSlides(values);
+    else if(location.includes("edit"))
+      updateSlides(values, id)
+    else if(location.includes("delete"))
+      deleteSlides(values, id)
+    else
+      return;
+  };
+
+  // FORM TITLE
+  const formTitle = () => {
+    if(location.includes("create"))
+      return "Creando";
+    else if(location.includes("edit"))
+      return "Editando";
+    else if(location.includes("delete"))
+      return "Borrando";
+    else
+      return "";
+  };
 
   // SCHEMA
   const formSchema = Yup.object().shape({
@@ -55,14 +80,13 @@ const SlideForm = ({form}) => {
     <Formik initialValues={initialValues}
             enableReinitialize
             validationSchema={formSchema}
-            onSubmit={(values) => id
-              ? updateSlides(values, id)
-              : createSlides(values)}>
+            onSubmit={(values) => submitHandler(values)}>
       {(formik) => (
         // FORM
         <Form>
-          <Container maxW="2xl">
-            <Box mt={20}
+          <Container>
+            <Box width="xl"
+                 mt={20}
                  mb={20}
                  p={10}
                  borderRadius={10}
@@ -75,7 +99,7 @@ const SlideForm = ({form}) => {
                       p={3}
                       borderRadius={10}>
                 <Heading size="xl"
-                        color="white">{id ? "Editando" : "Creando"} Slide</Heading>
+                        color="white">{formTitle()} Slide</Heading>
               </Center>
 
               {/* NAME INPUT */}

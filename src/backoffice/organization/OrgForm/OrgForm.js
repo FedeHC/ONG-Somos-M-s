@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Center, Box, Heading, Container,
          FormControl, FormLabel, FormErrorMessage,
          Input, Textarea, Button} from "@chakra-ui/react";
@@ -14,6 +14,9 @@ function OrgForm() {
   // STATE
   const [respose, setResponse] = useState(null);
 
+  // URL
+  const location = useLocation().pathname.toLocaleLowerCase();
+
   // ORGANIZATION ARRAY/OBJECT
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +25,14 @@ function OrgForm() {
     }  
     fetchData();
     }, []);
+
+  // HANDLER
+  const submitHandler = (values) => {
+    if(location.includes("edit"))
+      editOrg(values)
+    else
+      return;
+  };
 
   // SCHEMA:
   const formSchema = Yup.object().shape({
@@ -59,12 +70,13 @@ function OrgForm() {
     <Formik initialValues={initialValues}
             enableReinitialize
             validationSchema={formSchema}
-            onSubmit={(values) => editOrg(values)}>
+            onSubmit={(values) => submitHandler(values)}>
       {(formik) => (
         // FORM
         <Form>
-          <Container maxW="2xl">
-            <Box mt={20}
+          <Container>
+            <Box width="xl"
+                 mt={20}
                  mb={20}
                  p={10}
                  borderRadius={10}

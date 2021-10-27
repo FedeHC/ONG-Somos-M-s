@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Center, Box, Heading, Container,
          FormControl, FormLabel, FormErrorMessage,
          Input, Button} from "@chakra-ui/react";
@@ -7,15 +7,16 @@ import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
-import { getTestimonials, createTestimony, updateTestimony} from "../../../services/apiTestimonials";
+import { getTestimonials, createTestimony, updateTestimony, deleteTestimony } from "../../../services/apiTestimonials";
 
 
 const TestimonialForm = () => {
   // STATE
   const [response, setResponse] = useState([]);
 
-  // ID
+  // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
+  const location = useLocation().pathname.toLocaleLowerCase();
 
   // TESTIMONIALS ARRAY/OBJECT
   useEffect(() => {
@@ -25,6 +26,30 @@ const TestimonialForm = () => {
     }  
     fetchData();
     }, [id]);
+
+  // HANDLER
+  const submitHandler = (values) => {
+    if(location.includes("create"))
+      createTestimony(values);
+    else if(location.includes("edit"))
+      updateTestimony(values, id)
+    else if(location.includes("delete"))
+      deleteTestimony(values, id)
+    else
+      return;
+  };
+
+  // FORM TITLE
+  const formTitle = () => {
+    if(location.includes("create"))
+      return "Creando";
+    else if(location.includes("edit"))
+      return "Editando";
+    else if(location.includes("delete"))
+      return "Borrando";
+    else
+      return "";
+  };
 
     // SCHEMA
     const formSchema = Yup.object().shape({
@@ -52,14 +77,13 @@ const TestimonialForm = () => {
       <Formik initialValues={initialValues}
               enableReinitialize
               validationSchema={formSchema}
-              onSubmit={(values) => id
-                ? updateTestimony(values, id)
-                : createTestimony(values)}>
+              onSubmit={(values) => submitHandler(values)}>
         {(formik) => (
           // FORM
           <Form>
-            <Container maxW="2xl">
-              <Box mt={20}
+            <Container>
+              <Box width="xl"
+                   mt={20}
                    mb={20}
                    p={10}
                    borderRadius={10}

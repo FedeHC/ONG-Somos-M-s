@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Center, Box, Heading, Container,
          FormControl, FormLabel, FormErrorMessage,
          Input, Button} from "@chakra-ui/react";
@@ -7,15 +7,16 @@ import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
-import { getCategories, createCategory, updateCategory } from "../../services/apiCategories";
+import { getCategories, createCategory, updateCategory, deleteCategory } from "../../services/apiCategories";
 
 
 const CategoriesForm = () => {
   // STATE
   const [response, setResponse] = useState([]);
 
-  // ID
+  // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
+  const location = useLocation().pathname.toLocaleLowerCase();
 
   // CATEGORIES ARRAY/OBJECT
   useEffect(() => {
@@ -26,18 +27,42 @@ const CategoriesForm = () => {
     fetchData();
     }, [id]);
 
-    // SCHEMA
-    const formSchema = Yup.object().shape({
-      name: Yup.string().required("Requerido").min(3, "Se requieren 3 caracteres como mínimo"),
-      description: Yup.string().required("Requerido"),
-      image: Yup.mixed().required("Requerido")
-                        .test("type",
-                              "Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg",
-                              (file) => {
-                                return (file && (file.type === "image/png" ||
-                                                 file.type === "image/jpg" ||
-                                                 file.type === "image/jpeg"));})
-    });
+  // HANDLER
+  const submitHandler = (values) => {
+    if(location.includes("create"))
+      createCategory(values);
+    else if(location.includes("edit"))
+      updateCategory(values, id)
+    else if(location.includes("delete"))
+      deleteCategory(values, id)
+    else
+      return;
+  };
+
+  // FORM TITLE
+  const formTitle = () => {
+    if(location.includes("create"))
+      return "Creando";
+    else if(location.includes("edit"))
+      return "Editando";
+    else if(location.includes("delete"))
+      return "Borrando";
+    else
+      return "";
+  };
+  
+  // SCHEMA
+  const formSchema = Yup.object().shape({
+    name: Yup.string().required("Requerido").min(3, "Se requieren 3 caracteres como mínimo"),
+    description: Yup.string().required("Requerido"),
+    image: Yup.mixed().required("Requerido")
+                      .test("type",
+                            "Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg",
+                            (file) => {
+                              return (file && (file.type === "image/png" ||
+                                                file.type === "image/jpg" ||
+                                                file.type === "image/jpeg"));})
+  });
 
   // INITIAL FORMIK VALUES
   const initialValues = {
@@ -52,14 +77,13 @@ const CategoriesForm = () => {
       <Formik initialValues={initialValues}
               enableReinitialize
               validationSchema={formSchema}
-              onSubmit={(values) => id
-                ? updateCategory(values, id)
-                : createCategory(values)}>
+              onSubmit={(values) => submitHandler(values)}>
         {(formik) => (
           // FORM
           <Form>
-            <Container maxW="2xl">
-              <Box mt={20}
+            <Container>
+              <Box width="xl"
+                   mt={20}
                    mb={20}
                    p={10}
                    borderRadius={10}
@@ -72,7 +96,7 @@ const CategoriesForm = () => {
                         p={3}
                         borderRadius={10}>
                   <Heading size="xl"
-                          color="white">{id ? "Editando" : "Creando"} categoría</Heading>
+                          color="white">{formTitle()} categoría</Heading>
                 </Center>
 
                 {/* NAME INPUT */}
