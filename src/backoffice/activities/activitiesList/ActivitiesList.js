@@ -14,11 +14,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ActivitiesList = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const { actividadesList, loading, error } = useSelector(
-  //   state => state.actividades,
-  // );
+  const { actividadesList, loading, error } = useSelector(
+    state => state.actividades,
+  );
 
   // const handleEdit = activity => {
   //   dispatch(setActividades(activity));
@@ -43,7 +43,7 @@ const ActivitiesList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {/* {actividadesList.length > 0
+          {actividadesList.length > 0
             ? actividadesList.map(activity => (
                 <Tr>
                   <Td>{activity.name}</Td>
@@ -72,7 +72,7 @@ const ActivitiesList = () => {
                   </Td>
                 </Tr>
               ))
-            : 'no se encontaron actividades'} */}
+            : 'no se encontaron actividades'}
         </Tbody>
       </Table>
     </div>
