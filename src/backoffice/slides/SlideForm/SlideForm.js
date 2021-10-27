@@ -1,119 +1,163 @@
-import React from "react";
-import {Formik, Form, ErrorMessage} from "formik";
-import * as Yup from "yup";
-import {CKEditor} from "@ckeditor/ckeditor5-react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Center, Box, Heading, Container,
+         FormControl, FormLabel, FormErrorMessage,
+         Input, Button} from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import {
-  useCreateSlide,
-  useEditSlide,
-} from "../../../services/slidesServices";
+import * as Yup from "yup";
+import { slidesList as getSlides,
+         createSlides, updateSlides } from "../../../services/slidesServices";
 
-const MAX_FILE_SIZE = 10485760;
 
 const SlideForm = ({form}) => {
-  const initialValues = {
-    name: form?.name ? form.name : "",
-    order: form?.order ? form.order : "",
-    description: form?.description ? form.description : "",
-    image: form?.image ? form.image : "",
-  };
+  // STATE
+  const [response, setResponse] = useState([]);
 
-  const schema = Yup.object().shape({
-    name: Yup.string()
-      .required("Este campo es requerido.")
-      .min(4, "Debe contener al menos 4 caracteres."),
-    order: Yup.number().required("Este campo es requerido"),
-    description: Yup.string().required("Este campo es requerido."),
-    image: Yup.mixed()
-      .required("Este campo es requerido.")
-      .test(
-        "fileSize",
-        "El archivo es mayor a 10 MB",
-        (file) => file && file.size <= MAX_FILE_SIZE
-      )
-      .test("type", "Sólo PNG y JPG", (file) => {
-        return (
-          file &&
-          (file.type === "image/jpeg" ||
-            file.type === "image/jpg" ||
-            file.type === "image/png")
-        );
-      }),
+  // ID
+  const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
+
+  // SLIDES ARRAY/OBJECT
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getSlides(id);
+      setResponse(result.data?.data);
+    }  
+    fetchData();
+  }, [id]);
+
+  // SCHEMA
+  const formSchema = Yup.object().shape({
+    name: Yup.string().required("Requerido").min(4, "Se requieren 4 caracteres como mínimo"),
+    order: Yup.number().required("Requerido"),
+    description: Yup.string().required("Requerido"),
+    image: Yup.mixed().required("Requerido")
+                      .test("type",
+                            "Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg",
+                            (file) => {
+                              return (file && (file.type === "image/png" ||
+                                                file.type === "image/jpg" ||
+                                                file.type === "image/jpeg"));})
   });
 
-  const submitHandler = async (values) => {
-    if (form && form.id) {
-      // useEditSlide(REACT_APP_ENDPOINT_SLIDES_EDIT + form.id, values);
-    } else {
-      // useCreateSlide(REACT_APP_ENDPOINT_SLIDES_CREATE, values);
-    }
+  // INITIAL FORMIK VALUES
+  const initialValues = {
+    name: response?.name || "",
+    order: response?.order || "",
+    description: response?.description || "",
+    image: response?.image || "",
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={submitHandler}
-    >
-      {(formik) => {
-        return (
-          <Form>
-            <label>Nombre</label>
-            <div>
-              <input
-                isRequired
-                type="text"
-                name="name"
-                placeholder="Tu nombre acá"
-              />
-              <ErrorMessage name="name" component="div" className="error"/>
-            </div>
+    <Center>
+    {/* FORMIK */}
+    <Formik initialValues={initialValues}
+            enableReinitialize
+            validationSchema={formSchema}
+            onSubmit={(values) => id
+              ? updateSlides(values, id)
+              : createSlides(values)}>
+      {(formik) => (
+        // FORM
+        <Form>
+          <Container maxW="2xl">
+            <Box mt={20}
+                 mb={20}
+                 p={10}
+                 borderRadius={10}
+                 boxShadow="dark-lg">
 
-            <label>Order</label>
-            <div>
-              <input type="number" name="order"/>
-              <ErrorMessage name="order" component="div" className="error"/>
-            </div>
+              {/* TITLE */}
+              <Center bg="#00214d"
+                      mt={0}
+                      mb={10}
+                      p={3}
+                      borderRadius={10}>
+                <Heading size="xl"
+                        color="white">{id ? "Editando" : "Creando"} Slide</Heading>
+              </Center>
 
-            <label name="descripcion">Descripción</label>
-            <CKEditor
-              editor={ClassicEditor}
-              id="description"
-              name="description"
-              data={initialValues.description}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                formik.setFieldValue("description", data);
-              }}
-            />
-            <ErrorMessage
-              name="description"
-              component="div"
-              className="error"
-            />
+              {/* NAME INPUT */}
+              <Field name="name">
+                {({ field, form }) => (
+                  <>
+                    <FormControl isInvalid={form.errors.name && form.touched.name}
+                                mb={5}>
+                      <FormLabel htmlFor="name">Nombre:</FormLabel>
+                      <Input {...field}
+                            variant="flushed" />
+                      <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                    </FormControl>
+                  </>
+                )}
+              </Field>
 
-            <label name="image">Imágen</label>
-            <div>
-              <input
-                isRequired
-                id="image"
-                name="image"
-                type="file"
-                onChange={(event) => {
-                  const files = event.target.files;
-                  let myFiles = Array.from(files);
-                  formik.setFieldValue("image", myFiles[0]);
-                }}
-              />
-            </div>
+              {/* ORDER INPUT */}
+              <Field name="order">
+                {({ field, form }) => (
+                  <>
+                    <FormControl isInvalid={form.errors.order && form.touched.order}
+                                 mb={5}>
+                      <FormLabel htmlFor="order">Orden:</FormLabel>
+                      <Input {...field}
+                             variant="flushed" />
+                      <FormErrorMessage>{form.errors.order}</FormErrorMessage>
+                    </FormControl>
+                  </>
+                )}
+              </Field>
 
-            <ErrorMessage name="image" component="div" className="error"/>
+              {/* DESCRIPTION INPUT */}
+              <Field name="description"
+                    mt={5}>
+                {({ form }) =>
+                  <FormControl isInvalid={form.errors.description && form.touched.description} 
+                               mb={5}>
+                    <FormLabel htmlFor="description">Descripción:</FormLabel>
+                    <CKEditor editor={ClassicEditor}
+                              data={formik.values.description}
+                              onChange={(event, editor) => {
+                                const data = editor.getData();
+                                formik.setFieldValue("description", data);
+                              }} />
+                    <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+                  </FormControl>
+                }
+              </Field>
 
-            <button type="submit">Submit</button>
-          </Form>
-        );
-      }}
+              {/* IMAGE INPUT */}
+              <Field name="image">
+                {({ form }) => (
+                  <FormControl isInvalid={form.errors.image && form.touched.image}
+                              mb={5}>
+                    <FormLabel>Imagen:</FormLabel>
+                    <Input id="image"
+                           type="file"
+                           variant="flushed"
+                           onChange={(event) => {
+                             const files = event.target.files;
+                             let myFiles = Array.from(files);
+                             form.setFieldValue("image", myFiles[0]);
+                           }} />
+                    <FormErrorMessage>{form.errors.image}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              {/* SEND BUTTON */}
+              <Button mt={4}
+                      mb={10}
+                      width="100%"
+                      colorScheme="blue"
+                      bg="#00214d"
+                      type="submit">Enviar</Button>
+            </Box>
+          </Container>
+        </Form>
+      )}
     </Formik>
+  </Center>
   );
 };
 

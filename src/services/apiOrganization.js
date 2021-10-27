@@ -3,11 +3,9 @@ import { methodPostPrivate } from "./privateApiService";
 
 
 export const showOrg = async() => {
-  const response = await methodGetPublic("organization");
-  return response;
+  return await methodGetPublic("organization");
 };
 
 export const editOrg = async(body) => {
-  const response = await methodPostPrivate("organization", body);
-  return response;
+  return await methodPostPrivate("organization", body);
 };
