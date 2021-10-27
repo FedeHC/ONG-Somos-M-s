@@ -20,6 +20,6 @@ export const updateMember = async (body, id) => {
 };
 
 // DELETE
-export const deleteMembers = async (id) => {
+export const deleteMember = async (id) => {
   return await methodDeletePrivate(endPoint, id);
 };

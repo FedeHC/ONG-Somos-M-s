@@ -2,7 +2,7 @@ import { methodGetPublic } from "./publicApiService";
 import { methodPostPrivate, methodPutPrivate, methodDeletePrivate } from "./privateApiService";
 
 
-const endPoint = process.env.REACT_APP_ENDPOINT_ACTIVITIES;
+const endPoint = process.env.REACT_APP_ENDPOINT_NEWS;
 
 // GET
 export const getNews = async (id = null) => {
