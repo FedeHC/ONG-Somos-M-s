@@ -5,6 +5,7 @@ import { getNews } from "../../services/apiNews";
 import Video from "./videoPlayer/Video";
 import { Heading } from "@chakra-ui/react"
 import { useSelector } from "react-redux";
+import TitleScreen from "../../features/titleScreen/Title";
 
 
 const News = () => {
@@ -13,8 +14,8 @@ const News = () => {
 
   return (
     <div className="novedades-container">
-      <div>
-        <Heading>Últimas novedades</Heading>
+      <div style={{width:"95vw"}}>
+        <TitleScreen title={"Novedades"} />
       </div>
       <div className="video-container">
        <Video />

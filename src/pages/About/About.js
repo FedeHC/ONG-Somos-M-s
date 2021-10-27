@@ -1,12 +1,12 @@
 import React from 'react';
 import './about.scss';
 import { Heading, Text, Box } from '@chakra-ui/react';
-import Title from '../../features/title/Title';
 import LinkedinCard from './LinkedinCard';
 import { TwitterTweet } from 'react-social-plugins';
 import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
+import TitleScreen from '../../features/titleScreen/Title';
 
 const About = () => {
   const { name, short_description, long_description } = useSelector(
@@ -14,7 +14,9 @@ const About = () => {
   );
   return (
     <>
-      <Title text={name} />
+      <div style={{width:"95vw",margin:"auto"}}>
+      <TitleScreen title={"Nosotros"}/>
+      </div>
 
       <div className="aboutContainer">
         <div className="TextContainer">

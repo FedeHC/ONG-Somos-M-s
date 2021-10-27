@@ -50,7 +50,7 @@ const NewsScreen = ({history}) => {
                 <Tr key={novedad.id}>
                   <Td>{novedad.name}</Td>
                   <Td>
-                    <img className="profilePhoto" src={novedad.image} alt="" />
+                    <img className="profilePhoto" width="70px" src={novedad.image} alt="" />
                   </Td>
                   <Td>{novedad.created_at}</Td>
                   <Td>

@@ -49,7 +49,7 @@ const SlidesScreen = ({history}) => {
                 <Tr key={slide.id}>
                   <Td>{slide.name}</Td>
                   <Td>
-                    <img className="profilePhoto" src={slide.image} alt="" />
+                    <img className="profilePhoto" width="70px" src={slide.image} alt="" />
                   </Td>
                   <Td>{slide.created_at}</Td>
                   <Td>

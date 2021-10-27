@@ -47,7 +47,7 @@ const MemberList = ({history}) => {
                 <Tr key={member.id}>
                   <Td>{member.name}</Td>
                   <Td>
-                    <img className="profilePhoto" src={member.image} alt="" width="50px" />
+                    <img className="profilePhoto" src={member.image} alt="" width="70px" />
                   </Td>
                   <Td>
                     <Button

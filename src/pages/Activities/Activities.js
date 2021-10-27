@@ -1,10 +1,10 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Container, Flex, VStack } from "@chakra-ui/react";
-import Title from "../../features/title/Title";
+import TitleScreen from "../../features/titleScreen/Title";
 
 
-const Activities = ({ mainTitle }) => {
+const Activities = () => {
   return (
     <ChakraProvider>
       <Container>
@@ -15,8 +15,10 @@ const Activities = ({ mainTitle }) => {
             alignItems="center">
 
             {/* MAIN TITLE */}
-            <Title text={mainTitle} />
-
+            <div style={{width:"95vw"}}>
+            <TitleScreen title={"Actividades"} />
+            </div>
+     
             {/* Activities go from here */}
 
           </VStack>

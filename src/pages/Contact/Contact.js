@@ -3,13 +3,13 @@ import { GrInstagram } from "react-icons/gr";
 import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import FormContact from "./form contacto/FormContact";
-import Title from "../../features/title/Title";
 import Mapview from "./map/MapView";
 import { convertFloat } from "./map/arrayToFloat";
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
 
 import "./map/map.css";
 import "./contact.scss";
+import TitleScreen from "../../features/titleScreen/Title";
 
 const Contact = () => {
   let objeto = {
@@ -23,7 +23,9 @@ const Contact = () => {
   };
   return (
     <>
-      <Title text="Contacto" />
+    <div style={{width:"95vw",margin:"auto"}}>
+      <TitleScreen title={"Contacto"} />
+    </div>
 
       <div className="contactContainer">
         <div id="info">
