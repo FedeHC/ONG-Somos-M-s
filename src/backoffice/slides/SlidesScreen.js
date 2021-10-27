@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from '@chakra-ui/react';
 import {
   AiTwotoneEdit,

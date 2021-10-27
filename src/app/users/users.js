@@ -4,9 +4,8 @@ import { getUsers } from '../../services/apiUsers';
 export const getUserThunk = createAsyncThunk(
   'users/getUserThunk',
 
-  async (dispatch, getState) => {
-    const { data } = await getUsers();
-    return data;
+  async () => {
+    return  await getUsers();
   },
 );
 
@@ -14,26 +13,32 @@ const users = createSlice({
   name: 'users',
 
   initialState: {
-    users: [],
-
-    status: null,
+    usersList: [],
+    userActive:{},
+    loading:false,
+    error:null
   },
-
+  reducers:{
+    setUser(state, action){
+        state.userActive = action.payload;
+    }
+  },
   extraReducers: {
     [getUserThunk.pending]: (state, action) => {
-      state.status = 'loading';
+      state.loading = true;
     },
 
     [getUserThunk.fulfilled]: (state, action) => {
-      state.status = 'success';
-
-      state.users = action.payload.data;
+      state.usersList = action.payload.data.data;
+      state.loading = false;
     },
 
     [getUserThunk.rejected]: (state, action) => {
-      state.status = 'failed';
+      state.error = action.payload;
+      state.loading = false;
     },
   },
 });
 
+export const { setUser } = users.actions;
 export default users.reducer;
