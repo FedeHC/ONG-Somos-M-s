@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import { Box } from '@chakra-ui/react';
-import { mapStyles, bounceTransition } from '../features/AnimatedSwitch/AnimatedSwitch';
+import {
+  mapStyles,
+  bounceTransition,
+} from '../features/AnimatedSwitch/AnimatedSwitch';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import { useDispatch } from 'react-redux';
@@ -14,38 +17,35 @@ import { getSliceThunk } from '../app/slides/slides';
 import { getUserThunk } from '../app/users/users';
 import { getNovedades } from '../app/novedades/novedadesReducer';
 
-
 const AppRouter = () => {
   const ifPrivateURL = window.location.href.toLowerCase().includes('backoffice')
-                       ? true
-                       : false;
+    ? true
+    : false;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getNosotros());
-      dispatch(getNovedades());
-      dispatch(getCategorias());
-      dispatch(getActividades());
-      dispatch(getMemberThunk());
-      dispatch(getSliceThunk());
-      dispatch(getUserThunk());
+    dispatch(getNosotros());
+    dispatch(getNovedades());
+    /*     dispatch(getCategorias());
+     */ dispatch(getActividades());
+    dispatch(getMemberThunk());
+    dispatch(getSliceThunk());
+    dispatch(getUserThunk());
   }, [dispatch]);
 
   return (
     <Box display="flex" flexDirection="column">
       <Box>
         <Router>
-          <AnimatedSwitch atEnter={bounceTransition.atEnter}
-                          atLeave={bounceTransition.atLeave}
-                          atActive={bounceTransition.atActive}
-                          mapStyles={mapStyles}
-                          className="route-wrapper">
-
-            {ifPrivateURL
-              ? <PrivateRoutes />
-              : <PublicRoutes />}
-
+          <AnimatedSwitch
+            atEnter={bounceTransition.atEnter}
+            atLeave={bounceTransition.atLeave}
+            atActive={bounceTransition.atActive}
+            mapStyles={mapStyles}
+            className="route-wrapper"
+          >
+            {ifPrivateURL ? <PrivateRoutes /> : <PublicRoutes />}
           </AnimatedSwitch>
         </Router>
       </Box>

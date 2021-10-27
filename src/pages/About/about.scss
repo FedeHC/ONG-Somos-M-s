@@ -11,7 +11,6 @@
 
 .aboutText {
   width: 50%;
-  
 }
 
 .tweetsSection {
@@ -23,6 +22,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-left: 5rem;
   padding-right: 5rem;
   margin-top: 2rem;
@@ -34,19 +34,24 @@
   padding: 2rem;
 }
 
-.cardText {
-  padding-top: 3rem;
+.CardContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.textCard {
+  font-size: 1.5rem;
 }
 
 .linkedinCard {
-  grid-area: linkedinCard;
   padding: 2rem;
   border-bottom: solid 1px rgb(207, 207, 207);
   border-radius: 6px;
-  display: grid;
   margin: 0;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'card1 card1Text';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .social-container {
@@ -81,4 +86,24 @@ a.social {
 
 a.social:hover {
   transform: translateY(-2px);
+}
+
+@media (max-width: 450px) {
+  .tweetsSection {
+    padding-left: 0.5rem;
+    padding-right: 0;
+  }
+
+  .tweets {
+    display: grid;
+    padding-left: 5rem;
+    padding-right: 0;
+  }
+
+  .tweet {
+    width: 50%;
+  }
+  a.social {
+    margin: 1rem 1rem;
+  }
 }

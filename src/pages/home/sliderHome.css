@@ -21,27 +21,48 @@
 .slick-next::before {
   display: none;
 }
-.icon{
+.icon {
   color: gray;
   font-size: 50px;
 }
-.icon:hover{
+.icon:hover {
   transition: all ease 0.3s;
   color: black;
-  text-shadow: 0px 0px 50px rgba(0,0,0,1);
+  text-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
   transform: scale(1.5);
 }
-.imageCard{
+.imageCard {
   position: relative;
 }
-img{
+img {
   position: relative;
 }
-.textContainer{
+.textContainer {
   position: absolute;
   bottom: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.09) ,rgba(0, 0, 0, 0.150),rgba(0, 0, 0, 0.400), rgba(0, 0, 0, 0.600), rgba(0, 0, 0, 0.700),rgba(0, 0, 0, 0.750), rgba(0, 0, 0, 0.800), rgba(0, 0, 0, 0.850), rgba(0, 0, 0, 0.800), rgba(0, 0, 0, 0.950), rgba(0, 0, 0, 0.950), rgb(0, 0, 0));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.01),
+    rgba(0, 0, 0, 0.09),
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.95),
+    rgba(0, 0, 0, 0.95),
+    rgb(0, 0, 0)
+  );
   width: 100%;
   color: aliceblue;
-  padding: 0 2rem;
+  padding: 2rem;
 }
+
+/* .sliderStyles {
+  width: '100%';
+  height: '70vh';
+}
+ */

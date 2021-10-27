@@ -46,10 +46,7 @@ const About = () => {
         </div>
 
         <div className="linkedinCard">
-          <div className="card1">
-            <LinkedinCard />
-          </div>
-          <div className="cardText">
+          <div>
             <Heading
               lineHeight={1.1}
               fontWeight={400}
@@ -72,10 +69,14 @@ const About = () => {
                 Nueva Cuenta!
               </Text>
             </Heading>
-            <Text fontSize="3xl" color={'gray.500'}>
+            <Box color="gray.500" fontSize="lg" textAlign={['center']}>
+              {' '}
               Con el objetivo de llegar a más gente que quiera colaborar en este
               hermoso proyecto, creamos una nueva cuenta en Linkedin, siguenos!
-            </Text>
+            </Box>
+          </div>
+          <div className="card1">
+            <LinkedinCard />
           </div>
         </div>
         <div className="info">

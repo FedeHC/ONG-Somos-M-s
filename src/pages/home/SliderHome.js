@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from '@chakra-ui/react';
 
 //react slide
 import Slider from 'react-slick';
@@ -12,14 +13,12 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 //data example
 const data = [
   {
-    image: "https://pbs.twimg.com/media/FCaaiStWYAUQQJX?format=jpg&name=medium" ,
+    image: 'https://pbs.twimg.com/media/FCaaiStWYAUQQJX?format=jpg&name=medium',
     title: 'Talleres de verano',
-    description:
-      'Dimos comienzo a los nuevos talleres de dibujo y pintura',
+    description: 'Dimos comienzo a los nuevos talleres de dibujo y pintura',
   },
   {
-    image:
-      'https://pbs.twimg.com/media/FCaK4JuXIAMMioA?format=jpg&name=small',
+    image: 'https://pbs.twimg.com/media/FCaK4JuXIAMMioA?format=jpg&name=small',
     title: 'Jornada de juegos en el parque Avellaneda',
     description:
       'Reportamos un éxito en evento realizado en nuestro aniversario',
@@ -31,11 +30,9 @@ const data = [
     description:
       'Los más chicos ya pudieron estrenar la nueva pileta luego de los arreglos',
   },
-
 ];
 
 const Sliderhome = () => {
-
   const PreviousBtn = props => {
     const { className, onClick } = props;
     return (
@@ -60,6 +57,8 @@ const Sliderhome = () => {
     infinite: true,
     prevArrow: <PreviousBtn />,
     nextArrow: <NextBtn />,
+    /*     adaptiveHeight: true,
+     */
   };
 
   return (
@@ -70,11 +69,13 @@ const Sliderhome = () => {
             <img
               src={item.image}
               alt=""
-              style={{ width: '100%', height: '40vh' }}
+              style={{ width: '100%', height: '70vh' }}
+              /*                 className="sliderStyles"
+               */
             />
             <div className="textContainer">
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
+              <Text fontSize="3xl">{item.title}</Text>
+              <Text fontSize="xl">{item.description}</Text>
             </div>
           </div>
         ))}

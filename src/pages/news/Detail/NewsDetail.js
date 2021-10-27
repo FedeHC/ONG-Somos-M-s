@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Box, SimpleGrid, Divider } from "@chakra-ui/react";
-import "./NewsDetail.scss";
-import Title from "../../../features/title/Title";
-import { getNews } from "../../../services/apiNews";
+import React, { useEffect, useState } from 'react';
+import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
+import './NewsDetail.scss';
+import Title from '../../../features/title/Title';
+import { getNews } from '../../../services/apiNews';
 
-const NewsDetail = (props) => {
+const NewsDetail = props => {
   const [news, setNews] = useState({});
 
   useEffect(() => {
     let url = window.location.href;
-    let id = url.substring(url.lastIndexOf("/") + 1);
-    getNews(id).then((response) => setNews(response.data.data));
+    let id = url.substring(url.lastIndexOf('/') + 1);
+    getNews(id).then(response => setNews(response.data.data));
   }, []);
   return (
     <>
-      <Title
-        text={news.name}
-        /*         image="https://fondosmil.com/fondo/17010.jpg"
-         */
-      />
+      <Title text={news.name} />
       <SimpleGrid
         columns={1}
         minChildWidth="250px"
@@ -33,7 +29,10 @@ const NewsDetail = (props) => {
           <div className="newsText">
             <p className="title">Detalles de novedad</p>
             <Divider />
-            <p className="content">{news.content}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: news.content }}
+              className="content"
+            />
           </div>
         </Box>
       </SimpleGrid>
