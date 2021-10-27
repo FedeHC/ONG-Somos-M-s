@@ -9,7 +9,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoria } from '../../../app/categorias/categoriasReducer';
 
-const CategoriesBackOffice = ({history}) => {
+const CategoriesBackOffice = ({ history }) => {
   const dispatch = useDispatch();
   const { categoriasList, loading, error } = useSelector(
     state => state.categorias,
@@ -17,7 +17,7 @@ const CategoriesBackOffice = ({history}) => {
 
   const handleEdit = category => {
     dispatch(setCategoria(category));
-    history.replace("/backoffice/categories/edit");
+    history.replace('/backoffice/categories/edit');
   };
   return (
     <div>

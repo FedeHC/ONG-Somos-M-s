@@ -11,8 +11,14 @@ const novedadeSlice = createSlice({
   name:"novedades",
   initialState:{
    novedadesList:[],
+   novedadACtive:{},
    loading:false,
    error:null
+  },
+  reducers:{
+   setNovedad(state,action){
+      state.novedadACtive = action.payload;
+   }
   },
   extraReducers:{
     //get
@@ -30,5 +36,5 @@ const novedadeSlice = createSlice({
   }
 });
 
-
+export const  { setNovedad } = novedadeSlice.actions;
 export default novedadeSlice.reducer;
