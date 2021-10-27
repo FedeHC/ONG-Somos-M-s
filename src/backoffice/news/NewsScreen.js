@@ -1,56 +1,72 @@
-import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, Button, Link as LinkChk } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import "./NewsScreen.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from '@chakra-ui/react';
+import {
+  AiTwotoneEdit,
+  AiOutlineClose,
+  AiFillPlusCircle,
+} from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setNovedad } from '../../app/novedades/novedadesReducer';
 
-
-const NewsScreen = () => {
-   const {novedadesList, loading, error} = useSelector(state => state.novedades);
+const NewsScreen = ({history}) => {
+  const dispatch = useDispatch();
+  const { novedadesList, loading, error } = useSelector(
+    state => state.novedades,
+  );
+  const handleEdit = (novedad) =>{
+    dispatch(setNovedad(novedad));
+    history.push(`/backoffice/news/edit/${novedad.id}`);
+  }
 
   return (
     <div>
-      {/* <Link to="/backoffice/news/create">
-        <LinkChk >
-          <Button colorScheme="teal">Crear novedad</Button>
-        </LinkChk>
-      </Link> */}
+      <Box display="flex" mt="2" justifyContent="flex-start">
+        <Link to="/backoffice/news/create">
+          <Button
+            rightIcon={<AiFillPlusCircle />}
+            colorScheme="blue"
+            bgColor={'#00214D'}
+            variant="solid"
+            m={3}
+          >
+            Crear Novedad
+          </Button>
+        </Link>
+      </Box>
       <div className="container">
-        <Table size="lg" variant="striped" colorScheme="teal">
+        <Table size="lg" variant="striped" colorScheme="blue">
           <Thead>
-            <Tr className="trTop">
-              <Th>Nombre</Th>
-              <Th>Imagen</Th>
-              <Th>Fecha</Th>
-              <Th>Acciones</Th>
+            <Tr bg={'#00214D'}>
+              <Th color="white">Name</Th>
+              <Th color="white">Image</Th>
+              <Th color="white">createdAt</Th>
+              <Th color="white">Acciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {!loading
-              ? novedadesList.map((news) => (
-                  <Tr key={news.id}>
-                    <Td>{news.name}</Td>
-                    <Td>
-                      <img className="profilePhoto" src={news.image} alt="" />
-                    </Td>
-                    <Td>{news.created_at}</Td>
-                    <Td className="buttonField">
-                      <Link href={process.env.REACT_APP_ENDPOINT_NEWS_EDIT + news.id}>
-                        <Button className="EditButton"
-                                colorScheme="yellow"
-                                variant="solid">Editar</Button>
-                      </Link>
-                      <Link href={process.env.REACT_APP_ENDPOINT_NEWS_DELETE + news.id}>
-                        <Button colorScheme="red"
-                                variant="solid">Eliminar</Button>
-                      </Link>
-                    </Td>
-                  </Tr>
-                ))
-              : <Tr>
-                  <Td colSpan={4}>cargando...</Td>
+            {!loading &&
+              novedadesList.map(novedad => (
+                <Tr key={novedad.id}>
+                  <Td>{novedad.name}</Td>
+                  <Td>
+                    <img className="profilePhoto" width="70px" src={novedad.image} alt="" />
+                  </Td>
+                  <Td>{novedad.created_at}</Td>
+                  <Td>
+                    <Button
+                      colorScheme="yellow"
+                      variant="solid"
+                      onClick={() => handleEdit(novedad)}
+                    >
+                      <AiTwotoneEdit />
+                    </Button>
+                    <Button ml={5} colorScheme="red" variant="solid">
+                      <AiOutlineClose />
+                    </Button>
+                  </Td>
                 </Tr>
-            }
+              ))}
           </Tbody>
         </Table>
       </div>

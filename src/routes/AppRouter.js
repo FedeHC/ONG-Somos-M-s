@@ -27,8 +27,8 @@ const AppRouter = () => {
   useEffect(() => {
     dispatch(getNosotros());
     dispatch(getNovedades());
-    /*     dispatch(getCategorias());
-     */ dispatch(getActividades());
+    dispatch(getCategorias());
+    dispatch(getActividades());
     dispatch(getMemberThunk());
     dispatch(getSliceThunk());
     dispatch(getUserThunk());

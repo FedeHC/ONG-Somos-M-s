@@ -1,18 +1,28 @@
-import { methodPostPrivate, methodPutPrivate } from "./privateApiService";
-import { methodGetPublic } from "./publicApiService"
-const endpointCategories = process.env.REACT_APP_ENDPOINT_CATEGORIES;
+import { methodGetPublic } from './publicApiService';
+import {
+  methodPostPrivate,
+  methodPutPrivate,
+  methodDeletePrivate,
+} from './privateApiService';
 
-export const getCategories = async(id = null) => {
-  const resp = await methodGetPublic(endpointCategories, id);
-  return resp;
+const endPoint = process.env.REACT_APP_ENDPOINT_CATEGORIES || 'categories';
+
+// GET
+export const getCategories = async (id = null) => {
+  return await methodGetPublic(endPoint, id);
 };
 
-export const postCategory = async(body) => {
-  const resp = await methodPostPrivate(endpointCategories, body);
-  return resp;
+// POST
+export const createCategory = async body => {
+  return await methodPostPrivate(endPoint, body);
 };
 
-export const putCategory = async(idCategory , body) => {
-  const resp = await methodPutPrivate(endpointCategories, idCategory, body);
-  return resp;
+// PUT
+export const updateCategory = async (id, body) => {
+  return await methodPutPrivate(endPoint, id, body);
+};
+
+// DELETE
+export const deleteCategory = async id => {
+  return await methodDeletePrivate(`${endPoint}/${id}`, id);
 };

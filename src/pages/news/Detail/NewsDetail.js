@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
 import './NewsDetail.scss';
-import Title from '../../../features/title/Title';
+import TitleScreen from '../../../features/titleScreen/Title';
 import { getNews } from '../../../services/apiNews';
 
 const NewsDetail = props => {
@@ -14,7 +14,7 @@ const NewsDetail = props => {
   }, []);
   return (
     <>
-      <Title text={news.name} />
+      <TitleScreen title={news.name} />
       <SimpleGrid
         columns={1}
         minChildWidth="250px"

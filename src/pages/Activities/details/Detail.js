@@ -1,33 +1,39 @@
-import React from "react";
-// import Title from "../Title.js";
-import { Box, SimpleGrid } from "@chakra-ui/react";
-// import "./NewsDetail.scss";
+import React, { useEffect, useState } from 'react';
+import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
+import './Detail.scss';
+import TitleScreen from '../../../features/titleScreen/Title';
+import { getNews } from '../../../services/apiNews';
+import { useSelector } from 'react-redux';
 
-const ActivitiesDetail = (props) => {
-  let objetoPrueba = {
-    titulo: "actividad",
-    textoActividad:
-      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis, nisi vel laoreet condimentum, velit lacus aliquet lectus, non finibus enim turpis id augue. Sed venenatis sapien ac justo porttitor euismod. Phasellus lobortis eu justo ac euismod. Vivamus at metus et sapien malesuada aliquam ac eget odio. Pellentesque quis varius urna. ",
-    imagen:
-      "https://educowebmedia.blob.core.windows.net/educowebmedia/educospain/media/images/blog/ong-y-ods.jpg",
-  };
+const ActivityDetail = props => {
+  const { actividadDetail } = useSelector(state => state.actividades);
+
   return (
     <>
-      {/* <Title
-        text={objetoPrueba.titulo}
-        image="https://fondosmil.com/fondo/17010.jpg" 
-      /> */}
-      <SimpleGrid columns={2} spacing={50} margin={20} className="simpleGrid">
-        <Box height="80px" padding="10px">
-          <img src={objetoPrueba.imagen} className="newsImage" alt="" />
+      <TitleScreen title={actividadDetail.name} />
+      <SimpleGrid
+        columns={1}
+        minChildWidth="250px"
+        spacing={50}
+        margin={20}
+        className="simpleGrid"
+      >
+        <Box height="100%" padding="10px">
+          <img src={actividadDetail.image} className="newsImage" alt="" />
         </Box>
-        <Box height="80px" padding="10px">
-          <h1>Detalles de actividad</h1>
-          <h3>{objetoPrueba.textoActividad}</h3>
+        <Box padding="10px">
+          <div className="newsText">
+            <p className="title">Detalles de novedad</p>
+            <Divider />
+            <p
+              dangerouslySetInnerHTML={{ __html: actividadDetail.description }}
+              className="content"
+            />
+          </div>
         </Box>
       </SimpleGrid>
     </>
   );
 };
 
-export default ActivitiesDetail;
+export default ActivityDetail;

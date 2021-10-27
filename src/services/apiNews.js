@@ -1,22 +1,29 @@
-import { methodGetPublic } from "./publicApiService";
-import { methodPostPrivate, methodPutPrivate, methodDeletePrivate } from "./privateApiService";
+import { methodGetPublic } from './publicApiService';
+import {
+  methodPostPrivate,
+  methodPutPrivate,
+  methodDeletePrivate,
+} from './privateApiService';
 
+const endPoint = process.env.REACT_APP_ENDPOINT_NEWS || 'news';
 
+// GET
 export const getNews = async (id = null) => {
-  if(id)
-    return await methodGetPublic("news", id);
-  else
-    return await methodGetPublic("news?limit=10");  // Limit results to 10.
+  if (id) return await methodGetPublic(endPoint, id);
+  else return await methodGetPublic(`${endPoint}?limit=10`); // Limit results to 10.
 };
 
-export const createNews = async (body) => {
-  return await methodPostPrivate("news", body);
+// POST
+export const createNews = async body => {
+  return await methodPostPrivate(endPoint, body);
 };
 
+// PUT
 export const updateNews = async (body, id) => {
-  return await methodPutPrivate("news", id, body);
+  return await methodPutPrivate(endPoint, id, body);
 };
 
-export const deleteNews = async (id) => {
-  return await methodDeletePrivate("news", id);
+// DELETE
+export const deleteNews = async id => {
+  return await methodDeletePrivate(endPoint, id);
 };

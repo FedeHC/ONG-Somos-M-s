@@ -5,24 +5,24 @@ import {
   methodDeletePrivate,
 } from './privateApiService';
 
-const endPoint = process.env.REACT_APP_ENDPOINT_ACTIVITIES || 'activities';
+const endPoint = process.env.REACT_APP_ENDPOINT_PROJECTS || 'projects';
 
 // GET
-export const showActivities = async (id = null) => {
+export const getProjects = async (id = null) => {
   return await methodGetPublic(endPoint, id);
 };
 
 // POST
-export const createActivity = async body => {
+export const createProject = async body => {
   return await methodPostPrivate(endPoint, body);
 };
 
 // PUT
-export const updateActivity = async (body, id) => {
+export const updateProject = async (body, id) => {
   return await methodPutPrivate(endPoint, id, body);
 };
 
 // DELETE
-export const deleteActivity = async id => {
+export const deleteProject = async id => {
   return await methodDeletePrivate(`${endPoint}/${id}`, id);
 };
