@@ -1,8 +1,10 @@
 .sidebar {
     background-color: #00214D;
     width: 14rem;
-    height: calc(100vh - 52px);
+    height: 100%;
     border-right: 1px solid gray;
+    position: absolute; 
+    z-index: 3;
 }
 
 .sidebar ul {

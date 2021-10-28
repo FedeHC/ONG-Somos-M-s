@@ -7,7 +7,7 @@ const Backoffice = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       
     </div>
   );

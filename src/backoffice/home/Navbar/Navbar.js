@@ -20,7 +20,7 @@ const Navbar = () => {
 
     { menu === true ? (
         <div className="flex">
-          <Sidebar />
+          <Sidebar setMenu={setMenu}/>
         </div>
       ) : null
     
