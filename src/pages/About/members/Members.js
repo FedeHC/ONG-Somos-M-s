@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Member from './Member';
 
 import "./members.css";
@@ -6,58 +7,17 @@ import "./members.css";
 
 
 //data example
-const listMembers = [
-  {
-   name:"tes1",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
-  {
-   name:"tes2",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
-  {
-   name:"tes3",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
-  {
-   name:"tes4",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
-  {
-   name:"tes5",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
-  {
-   name:"tes6",
-   image:"https://thispersondoesnotexist.com/image",
-   description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. In fugit iste porro animi repudiandae sapiente magnam, voluptates incidunt! Repudiandae, recusandae?",
-   facebookUrl:"https://www.facebook.com/",
-   linkedinUrl:"https://ar.linkedin.com/"
-  },
- ]
 
 const Members = () => {
+  
+  const {membersList, loading, error} = useSelector(state => state.members);
+  
  return (
   <div className="containerMembers">
-    { 
-      listMembers.map(member => 
+    { !loading &&
+      membersList.map(member => 
         <Member 
-          key={member.name}
+          key={member.id}
           name={member.name} 
           image={member.image}
           description={member.description}

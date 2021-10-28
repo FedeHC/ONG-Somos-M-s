@@ -1,13 +1,14 @@
-import { methodGetPublic } from "./publicApiService";
-import { methodPostPrivate } from "./privateApiService";
+import { methodGetPublic } from './publicApiService';
+import { methodPostPrivate } from './privateApiService';
 
+const endPoint = process.env.REACT_APP_ENDPOINT_ORGANIZATION || 'organization';
 
-export const showOrg = async() => {
-  const response = await methodGetPublic("organization");
-  return response;
+// GET
+export const showOrg = async () => {
+  return await methodGetPublic(endPoint);
 };
 
-export const editOrg = async(body) => {
-  const response = await methodPostPrivate("organization", body);
-  return response;
+// POST
+export const editOrg = async body => {
+  return await methodPostPrivate(endPoint, body);
 };

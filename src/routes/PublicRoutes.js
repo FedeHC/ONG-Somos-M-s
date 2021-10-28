@@ -10,7 +10,7 @@ import Contact from '../pages/Contact/Contact';
 import Donations from '../pages/donations';
 import Gracias from '../pages/gracias';
 import Activities from '../pages/Activities/Activities';
-import ActivitiesDetail from '../pages/Activities/details/Detail';
+import ActivityDetail from '../pages/Activities/details/Detail';
 import LoginForm from '../pages/login/LoginForm';
 import { Register } from '../pages/register/Register';
 import Page404 from '../pages/404/404Page';
@@ -30,7 +30,7 @@ function PublicRoutes() {
         <Route exact path="/donar" component={Donations} />
         <Route exact path="/gracias" component={Gracias} />
         <Route exact path="/actividades" component={Activities} />
-        <Route exact path="/actividades/:id" component={ActivitiesDetail} />
+        <Route exact path="/actividades/:id" component={ActivityDetail} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/register" component={Register} />
         <Route component={Page404} />

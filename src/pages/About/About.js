@@ -1,12 +1,13 @@
 import React from 'react';
 import './about.scss';
-import { Heading, Text, Box } from '@chakra-ui/react';
-import Title from '../../features/title/Title';
+import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
 import { TwitterTweet } from 'react-social-plugins';
 import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
+import TitleScreen from '../../features/titleScreen/Title';
+import Members from './members/Members';
 
 const About = () => {
   const { name, short_description, long_description } = useSelector(
@@ -14,7 +15,9 @@ const About = () => {
   );
   return (
     <>
-      <Title text={name} />
+      <div style={{ width: '95vw', margin: 'auto' }}>
+        <TitleScreen title={'Nosotros'} />
+      </div>
 
       <div className="aboutContainer">
         <div className="TextContainer">
@@ -46,10 +49,7 @@ const About = () => {
         </div>
 
         <div className="linkedinCard">
-          <div className="card1">
-            <LinkedinCard />
-          </div>
-          <div className="cardText">
+          <div>
             <Heading
               lineHeight={1.1}
               fontWeight={400}
@@ -72,10 +72,14 @@ const About = () => {
                 Nueva Cuenta!
               </Text>
             </Heading>
-            <Text fontSize="3xl" color={'gray.500'}>
+            <Box color="gray.500" fontSize="lg" textAlign={['center']}>
+              {' '}
               Con el objetivo de llegar a más gente que quiera colaborar en este
               hermoso proyecto, creamos una nueva cuenta en Linkedin, siguenos!
-            </Text>
+            </Box>
+          </div>
+          <div className="card1">
+            <LinkedinCard />
           </div>
         </div>
         <div className="info">
@@ -92,6 +96,11 @@ const About = () => {
             <TweetEmbed className="tweet" id="1452000630755659777" />
           </div>
         </div>
+        <hr />
+        <Center>
+          <Heading m={'auto'}>Miembros del Team</Heading>
+        </Center>
+        <Members />
       </div>
     </>
   );

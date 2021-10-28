@@ -1,17 +1,5 @@
-import React, { useEffect } from 'react';
-import {
-  Container,
-  VStack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Button,
-  Image,
-  Box,
-} from '@chakra-ui/react';
+import React from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
   AiOutlineClose,
@@ -19,55 +7,57 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getList } from '../../reducers/slides';
+import { setSlide } from '../../app/slides/slides';
 
-const SlidesScreen = () => {
+const SlidesScreen = ({history}) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getList());
-  }, []);
-
-  const { slides } = useSelector(state => state.slides);
+ 
+   const {slidesList, loading, errror} = useSelector(state => state.slides);
+  const handleEdit = (slide) =>{
+      dispatch(setSlide(slide));
+      history.push(`/backoffice/slides/edit/${slide.id}`);
+  }
 
   return (
-    <VStack mt="2rem">
-      <Container maxW="container.xl">
-        <Box display="flex" mt="2" justifyContent="flex-start">
-          <Link to="/backoffice/slides/create">
-            <Button
-              rightIcon={<AiFillPlusCircle />}
-              colorScheme="teal"
-              variant="solid"
-            >
-              Crear Slide
-            </Button>
-          </Link>
-        </Box>
-        <div className="container">
-          <Table size="lg" variant="striped" colorScheme="teal">
-            <Thead>
-              <Tr className="trTop">
-                <Th>Title</Th>
-                <Th>Image</Th>
-                <Th>order</Th>
-                <Th>Acciones</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {slides?.map((slide, i) => (
-                <Tr key={i}>
+    <div>
+      <Box display="flex" mt="2" justifyContent="flex-start">
+        <Link to="/backoffice/slides/create">
+          <Button
+            rightIcon={<AiFillPlusCircle />}
+            colorScheme="blue"
+            bgColor={'#00214D'}
+            variant="solid"
+            m={3}
+          >
+            Crear Slide
+          </Button>
+        </Link>
+      </Box>
+      <div className="container">
+        <Table size="lg" variant="striped" colorScheme="blue">
+          <Thead>
+            <Tr bg={'#00214D'}>
+              <Th color="white">Name</Th>
+              <Th color="white">Image</Th>
+              <Th color="white">createdAt</Th>
+              <Th color="white">Acciones</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {!loading &&
+              slidesList.map(slide => (
+                <Tr key={slide.id}>
                   <Td>{slide.name}</Td>
                   <Td>
-                    <Image
-                      htmlWidth="200px"
-                      src={slide.image}
-                      alt="Segun Adebayo"
-                    />
+                    <img className="profilePhoto" width="70px" src={slide.image} alt="" />
                   </Td>
-                  <Td>{slide.order}</Td>
+                  <Td>{slide.created_at}</Td>
                   <Td>
-                    <Button colorScheme="yellow" variant="solid">
+                    <Button
+                      colorScheme="yellow"
+                      variant="solid"
+                      onClick={() => handleEdit(slide)}
+                    >
                       <AiTwotoneEdit />
                     </Button>
                     <Button ml={5} colorScheme="red" variant="solid">
@@ -76,11 +66,10 @@ const SlidesScreen = () => {
                   </Td>
                 </Tr>
               ))}
-            </Tbody>
-          </Table>
-        </div>
-      </Container>
-    </VStack>
+          </Tbody>
+        </Table>
+      </div>
+    </div>
   );
 };
 
