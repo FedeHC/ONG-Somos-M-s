@@ -1,19 +1,16 @@
 import React from 'react';
 import './activitiesList.scss';
+import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from '@chakra-ui/react';
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Button,
-} from '@chakra-ui/react';
+  AiTwotoneEdit,
+  AiOutlineClose,
+  AiFillPlusCircle,
+} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActividades } from '../../../reducers/actividadesReducer';
-const ActivitiesList = () => {
+import { setActividades } from '../../../app/actividades/actividadesReducer';
+
+const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
 
   const { actividadesList, loading, error } = useSelector(
@@ -22,59 +19,60 @@ const ActivitiesList = () => {
 
   const handleEdit = activity => {
     dispatch(setActividades(activity));
+    history.push(`/backoffice/activities/edit/${activity.id}`);
   };
 
   return (
-    <div className="activityList">
-      <div className="header">
-        <p>Lista de actividades</p>
-        <Link className="link-button" to="/backoffice/activities/create">
-          <Button colorScheme="blue">Crear Actividad</Button>
+    <div>
+      <Box display="flex" mt="2" justifyContent="flex-start">
+        <Link to="/backoffice/activities/create">
+          <Button
+            rightIcon={<AiFillPlusCircle />}
+            colorScheme="blue"
+            bgColor={'#00214D'}
+            variant="solid"
+            m={3}
+          >
+            Crear Actividad
+          </Button>
         </Link>
-      </div>
-      <Table variant="simple" size="sm" className="table">
-        <TableCaption>Actividades actuales</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>Nombre</Th>
-            <Th>Foto de descripción</Th>
-            <Th>Fecha de creación</Th>
-            <Th className="acciones">Acciones</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {actividadesList.length > 0
-            ? actividadesList.map(activity => (
-                <Tr>
+      </Box>
+      <div className="container">
+        <Table size="lg" variant="striped" colorScheme="blue">
+          <Thead>
+            <Tr bg={'#00214D'}>
+              <Th color="white">Name</Th>
+              <Th color="white">Image</Th>
+              <Th color="white">createdAt</Th>
+              <Th color="white">Acciones</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {!loading &&
+              actividadesList.map(activity => (
+                <Tr key={activity.id}>
                   <Td>{activity.name}</Td>
                   <Td>
-                    <img
-                      className="activityPhoto"
-                      src={activity.image}
-                      alt=""
-                    />
+                    <img className="profilePhoto" width="70px" src={activity.image} alt="" />
                   </Td>
                   <Td>{activity.created_at}</Td>
-
-                  <Td className="buttonField">
+                  <Td>
                     <Button
-                      className="EditButton"
                       colorScheme="yellow"
                       variant="solid"
                       onClick={() => handleEdit(activity)}
                     >
-                      Editar
+                      <AiTwotoneEdit />
                     </Button>
-
-                    <Button colorScheme="red" variant="solid">
-                      Eliminar
+                    <Button ml={5} colorScheme="red" variant="solid">
+                      <AiOutlineClose />
                     </Button>
                   </Td>
                 </Tr>
-              ))
-            : 'no se encontaron actividades'}
-        </Tbody>
-      </Table>
+              ))}
+          </Tbody>
+        </Table>
+      </div>
     </div>
   );
 };

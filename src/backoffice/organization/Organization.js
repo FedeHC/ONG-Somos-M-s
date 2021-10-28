@@ -2,24 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Button, Image } from "@chakra-ui/react";
-import { showOrg } from "../../services/apiOrganization";
+import { useSelector } from 'react-redux';
+
 
 
 const Organization = () => {
-  const [orgData, setOrgData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await showOrg();
-        setOrgData(response.data.data);
-      }
-      catch(error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, []);
+  
+  const {nosotros, loading, error} = useSelector(state => state.nosotros);
 
   return (
     <Container maxW={'7xl'}>
@@ -41,13 +30,16 @@ const Organization = () => {
                             bottom: 1,
                             left: 0,
                             bg: '#3289fc',
-                            zIndex: -1 }}>{orgData?.name}</Text>
+                            zIndex: -1 }}>{nosotros.name}</Text>
             <br />
           </Heading>
-          <Text >{orgData?.short_description}</Text>
+          <Text >{nosotros.short_description}</Text>
+          <Text 
+          dangerouslySetInnerHTML={{ __html: nosotros.long_description }}
+          ></Text>
           <Stack spacing={{ base: 4, sm: 6 }}
                  direction={{ base: 'column', sm: 'row' }}>
-            <Link to={process.env.REACT_APP_ENDPOINT_ORGANIZATION_EDIT}>
+            <Link to="/backoffice/organization/edit">
               <Button rounded={'full'}
                       size={'lg'}
                       fontWeight={'normal'}
@@ -64,17 +56,15 @@ const Organization = () => {
               position={'relative'}
               w={'full'}>
           <Box position={'relative'}
-               height={'300px'}
+               height={'200px'}
                rounded={'2xl'}
                boxShadow={'2xl'}
-               width={'full'}
+               width={'200px'}
                overflow={'hidden'}>
-            <Image alt={'Hero Image'}
-                   fit={'cover'}
-                   align={'center'}
+            <Image alt={'logo Image'}
                    w={'100%'}
                    h={'100%'}
-                   src={orgData?.logo} />
+                   src={nosotros.logo} />
           </Box>
         </Flex>
       </Stack>

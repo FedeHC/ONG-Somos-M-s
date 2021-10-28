@@ -37,8 +37,9 @@ const Member = (props) => {
         <Text
           textAlign={'center'}
           color={useColorModeValue('gray.700', 'gray.400')}
-          px={3}>
-          {props.description}
+          px={3}
+          dangerouslySetInnerHTML={{ __html: props.description }}
+          >
         </Text>
 
         <Stack mt={8} direction={'row'} spacing={4}>

@@ -7,7 +7,7 @@ import Mark from './Mark';
 
 const Mapview = (props) => {
 
- const [state, setState] = useState({
+ const [state] = useState({
   currentLocation: props.address,
   zoom: 16,
   });

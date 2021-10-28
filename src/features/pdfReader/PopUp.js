@@ -11,10 +11,11 @@ const PopUp = ({ setaceptarTerminos }) => {
     myInput.setAttribute("style", "visibility: hidden");
     setaceptarTerminos(true);
   };
+
   return (
     <Popup
       trigger={
-        <a href="#" className="ModalButton">
+        <a href="#top" className="ModalButton">
           Ver términos y condiciones
         </a>
       }

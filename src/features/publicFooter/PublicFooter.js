@@ -1,29 +1,33 @@
 import React from "react";
+import Logo from "../assets/images/logo-ngo.png";
+
 import { Box, chakra, Container, Stack,
-         Link, Text, Image,
+          Text, Image,
          useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
 import { PUBLIC_LINKS, SOCIAL_LINKS } from "../publicLinks/PublicLinks";
+import { Link } from "react-router-dom";
 
 
 const SocialButton = ({ children, label, href, }) => {
   return (
-    <chakra.button bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                  rounded={'full'}
-                  w={8}
-                  h={8}
-                  cursor={'pointer'}
-                  as={'a'}
-                  href={href}
-                  display={'inline-flex'}
-                  alignItems={'center'}
-                  justifyContent={'center'}
-                  transition={'background 0.3s ease'}
-                  _hover={{
-                    bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-                  }}>
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
+    <Link href={href}>
+      <chakra.button bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+                    rounded={'full'}
+                    w={8}
+                    h={8}
+                    cursor={'pointer'}
+                    as={'a'}
+                    display={'inline-flex'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                    transition={'background 0.3s ease'}
+                    _hover={{
+                      bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+                    }}>
+        <VisuallyHidden>{label}</VisuallyHidden>
+        {children}
+      </chakra.button>
+    </Link>
   );
 };
 
@@ -41,14 +45,14 @@ const PublicFooter = () => {
                  align={'center'}>
 
         {/* LOGO */}
-        <Image src={process.env.REACT_APP_ENDPOINT_NGO_LOGO}
-                 w="100px"
-                 alt="Logo Somos Más" />
+        <Image src={Logo}
+               w="100px"
+               alt="Logo Somos Más" />
 
         {/* PUBLIC LINKS */}
         <Stack direction={'row'} spacing={6}>
           {PUBLIC_LINKS.map( (publicLink) =>
-            <Link href={publicLink.href}>{publicLink.label}</Link>
+            <Link to={publicLink.href}>{publicLink.label}</Link>
            )}
         </Stack>
       </Container>
