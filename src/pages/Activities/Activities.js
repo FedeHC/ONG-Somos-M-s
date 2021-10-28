@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Activities.css';
 import CardNews from '../../features/cardNews/';
 import Card from '../../features/card/Card';
-import { getNews } from '../../services/apiNews';
 import { Heading, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setActividadDetail } from '../../app/actividades/actividadesReducer';
-
-/* import Card from './Card';
- */ import TitleScreen from '../../features/titleScreen/Title';
+import TitleScreen from '../../features/titleScreen/Title';
+import ErrorAlert from '../../features/errorAlert/errorAlert';
+import { Spinner } from '../../features/spinner';
 
 const News = () => {
   const { actividadesList, loading, error } = useSelector(
@@ -26,13 +25,13 @@ const News = () => {
   return (
     <div className="novedades-container">
       <div style={{ width: '95vw' }}>
-        <TitleScreen title={'Novedades'} />
+        <TitleScreen title={'Actividades'} />
       </div>
 
       <div className="containerCard">
         {loading ? (
-          <div>cargando...</div>
-        ) : (
+          <Spinner />
+        ) : actividadesList ? (
           actividadesList.map(news => (
             <Link to={`/actividades/${news.id}`}>
               <div onClick={() => callDispatch(news)}>
@@ -40,6 +39,8 @@ const News = () => {
               </div>
             </Link>
           ))
+        ) : (
+          <ErrorAlert />
         )}
       </div>
     </div>
