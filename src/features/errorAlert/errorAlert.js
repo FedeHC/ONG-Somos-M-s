@@ -1,15 +1,28 @@
 import React from 'react';
-import { Alert } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+} from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
-const errorAlert = () => {
+const ErrorAlert = () => {
   return (
-    <Alert status="error">
-      <AlertIcon />
-      <AlertTitle mr={2}>Oops! Ocurrió un error!</AlertTitle>
-      <AlertDescription>Recarga la página por favor!</AlertDescription>
-      <CloseButton position="absolute" right="8px" top="8px" />
-    </Alert>
+    <Box
+      height="50vh"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Alert w="60%" status="error">
+        <AlertIcon mr={4} />
+        <AlertTitle mr={2}>Oops! Ocurrió un error!</AlertTitle>
+        <AlertDescription>Recarga la página por favor!</AlertDescription>
+      </Alert>
+    </Box>
   );
 };
 
-export default errorAlert;
+export default ErrorAlert;
