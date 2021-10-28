@@ -1,4 +1,4 @@
-.pageContainer {
+/* .pageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,15 +17,15 @@
 }
 .form__container {
   width: 35vw;
-}
+} */
 
 .msg__error {
   height: 15px;
 }
 
-.btn__signup {
+/* .btn__signup {
   margin-top: 1.5rem;
-}
+} */
 
 .mensajeError {
   color: #e74c3c;

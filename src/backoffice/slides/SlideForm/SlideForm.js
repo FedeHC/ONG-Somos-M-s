@@ -14,6 +14,8 @@ import { slidesList as getSlides,
 const SlideForm = ({form}) => {
   // STATE
   const [response, setResponse] = useState([]);
+  const [selectedFile, setSelectedFile] = useState();
+  const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
@@ -149,7 +151,7 @@ const SlideForm = ({form}) => {
                   </FormControl>
                 }
               </Field>
-
+              
               {/* IMAGE INPUT */}
               <Field name="image">
                 {({ form }) => (
@@ -163,12 +165,14 @@ const SlideForm = ({form}) => {
                              const files = event.target.files;
                              let myFiles = Array.from(files);
                              form.setFieldValue("image", myFiles[0]);
+                             setSelectedFile(myFiles[0]);
                            }} />
                     <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-
+              {selectedFile &&  <img src={URL.createObjectURL(selectedFile)} /> }
+              {!selectedFile && <img src={response?.image} /> }
               {/* SEND BUTTON */}
               <Button mt={4}
                       mb={10}

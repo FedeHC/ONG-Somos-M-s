@@ -17,7 +17,7 @@ const CategoriesBackOffice = ({ history }) => {
 
   const handleEdit = category => {
     dispatch(setCategoria(category));
-    history.push('/backoffice/categories/edit');
+    history.push(`/backoffice/categories/edit/${category.id}`);
   };
   return (
     <div>

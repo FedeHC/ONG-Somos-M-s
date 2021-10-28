@@ -15,7 +15,7 @@ const SlidesScreen = ({history}) => {
    const {slidesList, loading, errror} = useSelector(state => state.slides);
   const handleEdit = (slide) =>{
       dispatch(setSlide(slide));
-      history.push("/backoffice/slides/edit");
+      history.push(`/backoffice/slides/edit/${slide.id}`);
   }
 
   return (

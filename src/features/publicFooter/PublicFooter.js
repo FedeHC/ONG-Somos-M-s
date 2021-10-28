@@ -1,9 +1,11 @@
 import React from "react";
 import Logo from "../assets/images/logo-ngo.png";
+
 import { Box, chakra, Container, Stack,
-         Link, Text, Image,
+          Text, Image,
          useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
 import { PUBLIC_LINKS, SOCIAL_LINKS } from "../publicLinks/PublicLinks";
+import { Link } from "react-router-dom";
 
 
 const SocialButton = ({ children, label, href, }) => {
@@ -50,7 +52,7 @@ const PublicFooter = () => {
         {/* PUBLIC LINKS */}
         <Stack direction={'row'} spacing={6}>
           {PUBLIC_LINKS.map( (publicLink) =>
-            <Link href={publicLink.href}>{publicLink.label}</Link>
+            <Link to={publicLink.href}>{publicLink.label}</Link>
            )}
         </Stack>
       </Container>

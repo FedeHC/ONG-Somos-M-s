@@ -3,16 +3,21 @@ import { Button } from '@chakra-ui/button';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import CardNews from '../../features/cardNews';
 import Slider from './SliderHome.js';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {setNovedadDetail} from "../../app/novedades/novedadesReducer"
+import { Link } from 'react-router-dom';
 import './home.css';
 
-const Home = () => {
-  const { nosotros } = useSelector(state => state.nosotros);
+const Home = ({ history }) => {
+  const dispatch = useDispatch();
 
+  const { loading:loadingNosotros, error:errorNosotros, nosotros } = useSelector(state => state.nosotros);
   const { loading, error, novedadesList } = useSelector(
     state => state.novedades,
   );
-  const removed = novedadesList;
+  const callDispatch = (news) =>{
+     dispatch(setNovedadDetail(news));
+  }
 
   return (
     <div>
@@ -25,7 +30,13 @@ const Home = () => {
           {loading ? (
             <div>cargando...</div>
           ) : (
-            novedadesList.map(news => <CardNews key={news.id} news={news} />)
+            novedadesList.map(news => (
+              <Link key={news.id} to={`novedades/${news.id}`}>
+                <div onClick={() => callDispatch(news)}>
+                  <CardNews key={news.id} news={news} />
+                </div>
+              </Link>
+            ))
           )}
         </div>
         <div className="btn__container">
@@ -33,6 +44,7 @@ const Home = () => {
             rightIcon={<ArrowForwardIcon />}
             color="white"
             variant="outline"
+            onClick={() => history.push('/novedades')}
             _hover={{
               background: 'white',
               color: 'black',

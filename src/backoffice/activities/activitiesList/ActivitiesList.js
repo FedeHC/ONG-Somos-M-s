@@ -19,7 +19,7 @@ const ActivitiesList = ({ history }) => {
 
   const handleEdit = activity => {
     dispatch(setActividades(activity));
-    history.push('/backoffice/activities/edit');
+    history.push(`/backoffice/activities/edit/${activity.id}`);
   };
 
   return (

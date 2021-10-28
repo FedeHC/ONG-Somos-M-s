@@ -37,8 +37,8 @@ const News = () => {
           <div>cargando...</div>
         ) : (
           novedadesList.map(news => (
-            <Link to={`novedades/${news.id}`}>
-              <div onClick={() => callDispatch(news)}>
+            <Link key={news.id} to={`novedades/${news.id}`}>
+              <div  onClick={() => callDispatch(news)}>
                 <CardNews key={news.id} news={news} />
               </div>
             </Link>

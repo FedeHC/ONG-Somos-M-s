@@ -106,14 +106,15 @@ const DesktopNav = () => {
                    placement={'bottom-start'}>
             <PopoverTrigger>
               <Link to={navItem.href ?? '#'}>
-                <LinkChakra p={2}
+                {/* <LinkChakra p={2}
                             fontSize={'sm'}
                             fontWeight={500}
                             color={linkColor}
                             _hover={{
                               textDecoration: 'none',
                               color: linkHoverColor,
-                            }}>{navItem.label}</LinkChakra>
+                            }}>{navItem.label}</LinkChakra> */}
+                            {navItem.label}
               </Link>
             </PopoverTrigger>
 
@@ -185,7 +186,8 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href })=> {
+const MobileNavItem = ({ children,label , href })=> {
+  console.log(children);
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Stack spacing={4} onClick={children && onToggle}>

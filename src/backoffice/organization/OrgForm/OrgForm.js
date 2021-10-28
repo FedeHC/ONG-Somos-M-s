@@ -13,6 +13,7 @@ import { showOrg, editOrg } from "../../../services/apiOrganization";
 function OrgForm() {
   // STATE
   const [respose, setResponse] = useState(null);
+  const [imgSrc, setImgSrc] = useState();
 
   // URL
   const location = useLocation().pathname.toLocaleLowerCase();
@@ -120,12 +121,14 @@ function OrgForm() {
                             const files = event.target.files;
                             let myFiles = Array.from(files);
                             form.setFieldValue("logo", myFiles[0]);
+                            setImgSrc(myFiles[0]);
                           }} />
                     <FormErrorMessage>{form.errors.logo}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
-
+               {imgSrc && <img src={URL.createObjectURL(imgSrc)} alt="" />}
+               {!imgSrc && <img src={respose?.logo} />}
               {/* SHORT DESCRIPTION INPUT */}
               <Field name="short_description"
                     mt={5}>

@@ -15,6 +15,8 @@ const regMatch = /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_
 const MemberForm = () => {
   // STATE
   const [response, setResponse] = useState([]);
+  const [selectedFile, setSelectedFile] = useState();
+  const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
@@ -133,11 +135,14 @@ const MemberForm = () => {
                               const files = event.target.files;
                               let myFiles = Array.from(files);
                               form.setFieldValue("image", myFiles[0]);
+                              setSelectedFile(myFiles[0]);
                             }} />
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
+                {selectedFile &&  <img src={URL.createObjectURL(selectedFile)} /> }
+                {!selectedFile && <img src={response?.image} /> }
 
                 {/* DESCRIPTION INPUT */}
                 <Field name="description"
