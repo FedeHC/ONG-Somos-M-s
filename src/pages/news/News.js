@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './News.css';
 import CardNews from '../../features/cardNews/';
 import Card from '../../features/card/Card';
-import { Spinner } from '../../features/spinner';
 import { getNews } from '../../services/apiNews';
 import Video from './videoPlayer/Video';
 import { Heading, Text } from '@chakra-ui/react';
@@ -11,7 +10,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setNovedadDetail } from '../../app/novedades/novedadesReducer';
 import TitleScreen from '../../features/titleScreen/Title';
-import { Alert } from '@chakra-ui/react';
+import { Spinner } from '../../features/spinner';
+import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const News = () => {
   const { novedadesList, loading, error } = useSelector(
@@ -35,9 +35,7 @@ const News = () => {
       <div className="containerCard">
         {loading ? (
           <Spinner />
-        ) : error ? (
-          <Alert />
-        ) : (
+        ) : novedadesList ? (
           novedadesList.map(news => (
             <Link key={news.id} to={`novedades/${news.id}`}>
               <div onClick={() => callDispatch(news)}>
@@ -45,6 +43,8 @@ const News = () => {
               </div>
             </Link>
           ))
+        ) : (
+          <ErrorAlert />
         )}
       </div>
     </div>
