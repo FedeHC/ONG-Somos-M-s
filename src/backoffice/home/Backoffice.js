@@ -6,8 +6,7 @@ import Navbar from './Navbar/Navbar';
 const Backoffice = () => {
 
   return (
-    <div>
-      {/* <Navbar /> */}
+    <div className="backoffice">
       
     </div>
   );
