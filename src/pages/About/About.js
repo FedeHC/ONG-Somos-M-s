@@ -1,12 +1,13 @@
 import React from 'react';
 import './about.scss';
-import { Heading, Text, Box } from '@chakra-ui/react';
+import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
 import { TwitterTweet } from 'react-social-plugins';
 import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
 import TitleScreen from '../../features/titleScreen/Title';
+import Members from './members/Members';
 
 const About = () => {
   const { name, short_description, long_description } = useSelector(
@@ -14,8 +15,8 @@ const About = () => {
   );
   return (
     <>
-      <div style={{width:"95vw",margin:"auto"}}>
-      <TitleScreen title={"Nosotros"}/>
+      <div style={{ width: '95vw', margin: 'auto' }}>
+        <TitleScreen title={'Nosotros'} />
       </div>
 
       <div className="aboutContainer">
@@ -95,6 +96,11 @@ const About = () => {
             <TweetEmbed className="tweet" id="1452000630755659777" />
           </div>
         </div>
+        <hr />
+        <Center>
+          <Heading m={'auto'}>Miembros del Team</Heading>
+        </Center>
+        <Members />
       </div>
     </>
   );
