@@ -22,7 +22,7 @@ import Page404 from '../pages/404/404Page';
 import Navbar from '../backoffice/home/Navbar/Navbar';
 
 
-function PrivateRoutes() {
+function PrivateRoutes() { 
   return (
     <>
       {/* NAVBAR & SIDEBAR*/}

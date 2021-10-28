@@ -12,7 +12,7 @@ const Sidebar = ({setMenu}) => {
           <Link to={route.path}>
             <div onClick={() => {
               setMenu(false)
-            }}>
+            }}> 
               <li>{route.name}</li>
             </div>
           </Link>

@@ -16,7 +16,7 @@ const Navbar = () => {
               <RiMenuFoldFill className="icon" onClick={() => setMenu(!menu)} />
               )}
      
-    </div>
+    </div> 
 
     { menu === true ? (
         <div className="flex">
