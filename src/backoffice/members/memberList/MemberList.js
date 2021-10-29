@@ -32,6 +32,11 @@ const MemberList = ({ history }) => {
     history.push(`/backoffice/members/edit/${member.id}`);
   };
   
+  // search filter
+  const filteredMembers = search.length < 3 
+                         ? membersList
+                         : membersList.filter(member => member.name.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="space-between" alignContent="center" m={5} p={3} >
@@ -82,8 +87,8 @@ const MemberList = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              membersList.map(member => (
+            {filteredMembers &&
+              filteredMembers.map(member => (
                 <Tr key={member.id}>
                   <Td>{member.name}</Td>
                   <Td>
