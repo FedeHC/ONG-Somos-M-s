@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import {
   Table,
   Thead,
@@ -10,10 +10,7 @@ import {
   Box,
   Input,
   Stack,
-  Container,
-  Heading,
   FormControl,
-  Text,
   useColorModeValue
 } from '@chakra-ui/react';
 import {
@@ -21,7 +18,7 @@ import {
   AiOutlineClose,
   AiFillPlusCircle,
 } from 'react-icons/ai';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoria } from '../../../app/categorias/categoriasReducer';
 
@@ -40,6 +37,10 @@ const CategoriesBackOffice = ({ history }) => {
     history.push(`/backoffice/categories/edit/${category.id}`);
   };
 
+  // search filter
+  const filteredCategories = search.length < 3 ? categoriasList : 
+    categoriasList.filter(category => category.name.
+                toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div>
@@ -94,8 +95,8 @@ const CategoriesBackOffice = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              categoriasList.map(category => (
+            {filteredCategories &&
+              filteredCategories.map(category => (
                 <Tr key={category.id}>
                   <Td>{category.name}</Td>
                   <Td>{category.created_at}</Td>
