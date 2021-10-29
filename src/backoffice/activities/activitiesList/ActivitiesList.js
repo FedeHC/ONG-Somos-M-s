@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './activitiesList.scss';
 import {
   Table,
@@ -25,6 +25,7 @@ import { setActividades } from '../../../app/actividades/actividadesReducer';
 
 const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
 
   const { actividadesList, loading, error } = useSelector(
     state => state.actividades,
@@ -60,6 +61,8 @@ const ActivitiesList = ({ history }) => {
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+              onChange={ (e)=>setSearch(e.target.value) }
             />
           </FormControl>
         </Stack>
