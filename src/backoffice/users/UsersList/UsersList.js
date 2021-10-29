@@ -24,13 +24,21 @@ import { Link } from 'react-router-dom';
 
 const UsersList = ({ history }) => {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
-  
+  const [search, setSearch] = useState('');
+
   const { usersList, loading, error } = useSelector(state => state.users);
   const handleEdit = user => {
     dispatch(setUser(user));
     history.push(`/backoffice/users/edit/${user.id}`);
   };
+
+  // search filter
+  const filteredUsers =
+    search.length < 3
+      ? usersList
+      : usersList.filter(user =>
+          user.name.toLowerCase().includes(search.toLowerCase()),
+        );
 
   return (
     <div>
@@ -64,7 +72,7 @@ const UsersList = ({ history }) => {
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
               value={search}
-                onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
@@ -89,8 +97,8 @@ const UsersList = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              usersList.map(user => (
+            {filteredUsers &&
+              filteredUsers.map(user => (
                 <Tr key={user.id}>
                   <Td>{user.name}</Td>
 
