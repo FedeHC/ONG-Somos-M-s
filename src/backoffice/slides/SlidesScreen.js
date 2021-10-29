@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   Thead,
@@ -24,6 +24,7 @@ import { setSlide } from '../../app/slides/slides';
 
 const SlidesScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
 
   const { slidesList, loading, errror } = useSelector(state => state.slides);
   const handleEdit = slide => {
@@ -63,6 +64,8 @@ const SlidesScreen = ({ history }) => {
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
