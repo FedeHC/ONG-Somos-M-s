@@ -32,6 +32,14 @@ const SlidesScreen = ({ history }) => {
     history.push(`/backoffice/slides/edit/${slide.id}`);
   };
 
+  // search filter
+  const filteredSlides =
+    search.length < 3
+      ? slidesList
+      : slidesList.filter(slide =>
+          slide.name.toLowerCase().includes(search.toLowerCase()),
+        );
+
   return (
     <div>
       <Box
@@ -59,7 +67,6 @@ const SlidesScreen = ({ history }) => {
                 color: 'gray.400',
               }}
               borderColor={useColorModeValue('#00214D', 'gray.700')}
-              id={'email'}
               type={'text'}
               autoComplete="off"
               placeholder={'Buscar...'}
@@ -91,8 +98,8 @@ const SlidesScreen = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              slidesList.map(slide => (
+            {filteredSlides &&
+              filteredSlides.map(slide => (
                 <Tr key={slide.id}>
                   <Td>{slide.name}</Td>
                   <Td>
