@@ -18,8 +18,14 @@ const nosotrosSlice = createSlice({
   name: 'nosotros',
   initialState: {
     nosotros: {},
+    contactos: {},
     loading: null,
     error: null,
+  },
+  reducers: {
+    createContacto(state, action) {
+      state.contacto = state.contacto.push(action.payload);
+    },
   },
   extraReducers: {
     //get
@@ -47,5 +53,7 @@ const nosotrosSlice = createSlice({
     },
   },
 });
+
+export const { createContacto } = nosotrosSlice.actions;
 
 export default nosotrosSlice.reducer;
