@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   Thead,
@@ -19,17 +19,19 @@ import {
   AiFillPlusCircle,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { deleteMembers } from '../../../services/apiMembers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMember } from '../../../app/members/members';
 
 const MemberList = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
   const { membersList, loading, error } = useSelector(state => state.members);
   const handleEdit = member => {
     dispatch(setMember(member));
     history.push(`/backoffice/members/edit/${member.id}`);
   };
+  
   return (
     <div>
       <Box display="flex" mt="2" justifyContent="space-between" alignContent="center" m={5} p={3} >
@@ -54,6 +56,8 @@ const MemberList = ({ history }) => {
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+                onChange={(e) => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
