@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './activitiesList.scss';
-import { Table, Thead, Tbody, Tr, Th, Td, Button, Box } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+  Box,
+  FormControl,
+  Stack,
+  Input,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
   AiOutlineClose,
@@ -21,6 +34,7 @@ import {
 
 const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
 
   const { actividadesList, loading, error } = useSelector(
     state => state.actividades,
@@ -34,22 +48,62 @@ const ActivitiesList = ({ history }) => {
   const handleDelete = id => {
     questionAlert('estás seguro de eliminar esta actividad?').then(result => {
       if (result) {
-        /*         dispatch(deleteActividad(id));
-         */ errorAlert();
+        dispatch(deleteActividad(id));
+        successAlert();
       }
     });
   };
+  // search filter
+  const filteredActivities =
+    search.length < 3
+      ? actividadesList
+      : actividadesList.filter(activity =>
+          activity.name.toLowerCase().includes(search.toLowerCase()),
+        );
 
   return (
     <div>
-      <Box display="flex" mt="2" justifyContent="flex-start">
+      <Box
+        display="flex"
+        mt="2"
+        justifyContent="space-between"
+        alignContent="center"
+        m={5}
+        p={3}
+      >
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          as={'form'}
+          spacing={'12px'}
+          width={'100%'}
+          me={6}
+        >
+          <FormControl>
+            <Input
+              variant={'solid'}
+              width="100%"
+              borderWidth={1}
+              color={'gray.800'}
+              _placeholder={{
+                color: 'gray.400',
+              }}
+              borderColor={useColorModeValue('#00214D', 'gray.700')}
+              id={'email'}
+              type={'text'}
+              autoComplete="off"
+              placeholder={'Buscar...'}
+              aria-label={'Buscar...'}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </FormControl>
+        </Stack>
         <Link to="/backoffice/activities/create">
           <Button
             rightIcon={<AiFillPlusCircle />}
             colorScheme="blue"
             bgColor={'#00214D'}
             variant="solid"
-            m={3}
           >
             Crear Actividad
           </Button>
@@ -66,8 +120,8 @@ const ActivitiesList = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              actividadesList.map(activity => (
+            {filteredActivities &&
+              filteredActivities.map(activity => (
                 <Tr key={activity.id}>
                   <Td>{activity.name}</Td>
                   <Td>

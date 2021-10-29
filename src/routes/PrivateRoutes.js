@@ -19,11 +19,13 @@ import UserForm from '../backoffice/users/UserForm/UserForm';
 import TestimonialForm from '../backoffice/testimonials/testimonialForm/TestimonialForm';
 import { FormProjects } from '../backoffice/projects/FormProjects/FormProjects';
 import Page404 from '../pages/404/404Page';
+import Navbar from '../backoffice/home/Navbar/Navbar';
 
 function PrivateRoutes() {
   return (
     <>
       {/* NAVBAR & SIDEBAR*/}
+      <Navbar />
       {/* <PrivateNavBar /> */}
       {/* <SideBar /> */}
 

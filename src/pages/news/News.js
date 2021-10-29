@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setNovedadDetail } from '../../app/novedades/novedadesReducer';
-
-/* import Card from './Card';
- */ import TitleScreen from '../../features/titleScreen/Title';
+import TitleScreen from '../../features/titleScreen/Title';
+import { Spinner } from '../../features/spinner';
+import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const News = () => {
   const { novedadesList, loading, error } = useSelector(
@@ -34,15 +34,17 @@ const News = () => {
       </div>
       <div className="containerCard">
         {loading ? (
-          <div>cargando...</div>
-        ) : (
+          <Spinner />
+        ) : novedadesList ? (
           novedadesList.map(news => (
             <Link key={news.id} to={`novedades/${news.id}`}>
-              <div  onClick={() => callDispatch(news)}>
+              <div onClick={() => callDispatch(news)}>
                 <CardNews key={news.id} news={news} />
               </div>
             </Link>
           ))
+        ) : (
+          <ErrorAlert />
         )}
       </div>
     </div>

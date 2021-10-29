@@ -1,26 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { methodGetPublic } from '../../services/publicApiService';
-import { slidesList } from '../../services/slidesServices';
 
 export const getSliceThunk = createAsyncThunk(
   'slides/getSliceThunk',
   async () => {
-    return await methodGetPublic("slides");
+    return await methodGetPublic('slides');
   },
 );
 
 const slides = createSlice({
   name: 'slides',
   initialState: {
-    slidesList:[],
-    slideActive:{},
+    slidesList: [],
+    slideActive: {},
     loading: false,
-    error:null,
+    error: null,
   },
-  reducers:{
-    setSlide(state,action){
+  reducers: {
+    setSlide(state, action) {
       state.slideActive = action.payload;
-   }
+    },
   },
   extraReducers: {
     [getSliceThunk.pending]: (state, action) => {
@@ -37,5 +36,5 @@ const slides = createSlice({
   },
 });
 
-export const {setSlide} = slides.actions;
+export const { setSlide } = slides.actions;
 export default slides.reducer;

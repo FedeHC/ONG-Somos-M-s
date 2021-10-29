@@ -2,7 +2,6 @@ import React from 'react';
 import './about.scss';
 import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
-import { TwitterTweet } from 'react-social-plugins';
 import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
@@ -10,7 +9,7 @@ import TitleScreen from '../../features/titleScreen/Title';
 import Members from './members/Members';
 
 const About = () => {
-  const { name, short_description, long_description } = useSelector(
+  const { name, long_description } = useSelector(
     state => state.nosotros.nosotros,
   );
   return (

@@ -15,21 +15,12 @@ import { Formik, Form, Field } from 'formik';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as Yup from 'yup';
-import {
-  showActivities as getActivities,
-  createActivity,
-  updateActivity,
-  deleteActivity,
-} from '../../../services/apiActivities';
+import { showActivities as getActivities } from '../../../services/apiActivities';
 import {
   createActividad,
   editActividad,
 } from '../../../app/actividades/actividadesReducer';
-import {
-  errorAlert,
-  questionAlert,
-  successAlert,
-} from '../../../features/alert/alert';
+import { questionAlert, successAlert } from '../../../features/alert/alert';
 
 const FormActivities = () => {
   // STATE
