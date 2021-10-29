@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   Thead,
@@ -24,6 +24,8 @@ import { Link } from 'react-router-dom';
 
 const UsersList = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+  
   const { usersList, loading, error } = useSelector(state => state.users);
   const handleEdit = user => {
     dispatch(setUser(user));
@@ -61,6 +63,8 @@ const UsersList = ({ history }) => {
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+                onChange={(e) => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
