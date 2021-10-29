@@ -17,6 +17,7 @@ import { Box } from '@chakra-ui/react';
 import { Center } from '@chakra-ui/react';
 import { postContact } from '../../../services/ApiContact';
 import { createContacto } from '../../../app/nosotros/nosotrosReducer';
+import { errorAlert, successAlert } from '../../../features/alert/alert';
 
 // validation
 const ContactSchema = Yup.object().shape({
@@ -45,6 +46,7 @@ const Formcontact = () => {
           validationSchema={ContactSchema}
           onSubmit={async (values, { resetForm }) => {
             dispatch(createContacto);
+            successAlert();
             resetForm({});
           }}
         >
