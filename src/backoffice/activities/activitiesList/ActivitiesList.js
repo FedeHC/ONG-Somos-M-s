@@ -8,7 +8,16 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActividades } from '../../../app/actividades/actividadesReducer';
+import {
+  setActividades,
+  deleteActividad,
+} from '../../../app/actividades/actividadesReducer';
+
+import {
+  errorAlert,
+  questionAlert,
+  successAlert,
+} from '../../../features/alert/alert';
 
 const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
@@ -20,6 +29,15 @@ const ActivitiesList = ({ history }) => {
   const handleEdit = activity => {
     dispatch(setActividades(activity));
     history.push(`/backoffice/activities/edit/${activity.id}`);
+  };
+
+  const handleDelete = id => {
+    questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+      if (result) {
+        /*         dispatch(deleteActividad(id));
+         */ errorAlert();
+      }
+    });
   };
 
   return (
@@ -53,7 +71,12 @@ const ActivitiesList = ({ history }) => {
                 <Tr key={activity.id}>
                   <Td>{activity.name}</Td>
                   <Td>
-                    <img className="profilePhoto" width="70px" src={activity.image} alt="" />
+                    <img
+                      className="profilePhoto"
+                      width="70px"
+                      src={activity.image}
+                      alt=""
+                    />
                   </Td>
                   <Td>{activity.created_at}</Td>
                   <Td>
@@ -64,7 +87,12 @@ const ActivitiesList = ({ history }) => {
                     >
                       <AiTwotoneEdit />
                     </Button>
-                    <Button ml={5} colorScheme="red" variant="solid">
+                    <Button
+                      ml={5}
+                      colorScheme="red"
+                      variant="solid"
+                      onClick={() => handleDelete(activity.id)}
+                    >
                       <AiOutlineClose />
                     </Button>
                   </Td>
