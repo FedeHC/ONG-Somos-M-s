@@ -25,7 +25,7 @@ import { setActividades } from '../../../app/actividades/actividadesReducer';
 
 const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const { actividadesList, loading, error } = useSelector(
     state => state.actividades,
@@ -36,9 +36,23 @@ const ActivitiesList = ({ history }) => {
     history.push(`/backoffice/activities/edit/${activity.id}`);
   };
 
+  // search filter
+  const filteredActivities = search.length < 3
+      ? actividadesList
+      : actividadesList.filter(activity =>
+          activity.name.toLowerCase().includes(search.toLowerCase()),
+        );
+
   return (
     <div>
-      <Box display="flex" mt="2" justifyContent="space-between" alignContent="center" m={5} p={3} >
+      <Box
+        display="flex"
+        mt="2"
+        justifyContent="space-between"
+        alignContent="center"
+        m={5}
+        p={3}
+      >
         <Stack
           direction={{ base: 'column', md: 'row' }}
           as={'form'}
@@ -62,7 +76,7 @@ const ActivitiesList = ({ history }) => {
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
               value={search}
-              onChange={ (e)=>setSearch(e.target.value) }
+              onChange={e => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
@@ -88,8 +102,8 @@ const ActivitiesList = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              actividadesList.map(activity => (
+            {filteredActivities &&
+              filteredActivities.map(activity => (
                 <Tr key={activity.id}>
                   <Td>{activity.name}</Td>
                   <Td>
