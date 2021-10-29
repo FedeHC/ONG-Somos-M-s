@@ -1,73 +1,83 @@
-import React from "react";
-import "./homeForm.scss";
+import React from 'react';
+import './homeForm.scss';
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Heading,
-} from "@chakra-ui/react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Formik, Form, Field } from "formik";
-import { Button } from "@chakra-ui/react";
-import * as Yup from "yup";
+} from '@chakra-ui/react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Formik, Form, Field } from 'formik';
+import { Button } from '@chakra-ui/react';
+import * as Yup from 'yup';
+import { editSlides } from '../../../app/slides/slides';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  errorAlert,
+  questionAlert,
+  successAlert,
+} from '../../../features/alert/alert';
 
 const SignupSchema = Yup.object().shape({
   description: Yup.string()
-    .required("Requerido")
-    .min(20, "Se requieren 20 caracteres como mínimo"),
+    .required('Requerido')
+    .min(20, 'Se requieren 20 caracteres como mínimo'),
   imageSlice1: Yup.mixed()
-    .required("Requerido")
-    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
-      return file && (file.type === "image/jpg" || file.type === "image/png");
+    .required('Requerido')
+    .test('type', 'Solo se aceptan formatos jpg y png', file => {
+      return file && (file.type === 'image/jpg' || file.type === 'image/png');
     }),
   imageSlice2: Yup.mixed()
-    .required("Requerido")
-    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
-      return file && (file.type === "image/jpg" || file.type === "image/png");
+    .required('Requerido')
+    .test('type', 'Solo se aceptan formatos jpg y png', file => {
+      return file && (file.type === 'image/jpg' || file.type === 'image/png');
     }),
   imageSlice3: Yup.mixed()
-    .required("Requerido")
-    .test("type", "Solo se aceptan formatos jpg y png", (file) => {
-      return file && (file.type === "image/jpg" || file.type === "image/png");
+    .required('Requerido')
+    .test('type', 'Solo se aceptan formatos jpg y png', file => {
+      return file && (file.type === 'image/jpg' || file.type === 'image/png');
     }),
-  textSlice1: Yup.string().required("Requerido"),
-  textSlice2: Yup.string().required("Requerido"),
-  textSlice3: Yup.string().required("Requerido"),
+  textSlice1: Yup.string().required('Requerido'),
+  textSlice2: Yup.string().required('Requerido'),
+  textSlice3: Yup.string().required('Requerido'),
 });
 
 const objeto = {
-  description: "<p>texto de prueba 111111</p>",
-  imageSlice1: "",
-  imageSlice2: "",
-  imageSlice3: "",
-  textSlice1: "texto1",
-  textSlice2: "texto2",
-  textSlice3: "texto3",
+  description: '<p>texto de prueba 111111</p>',
+  imageSlice1: '',
+  imageSlice2: '',
+  imageSlice3: '',
+  textSlice1: 'texto1',
+  textSlice2: 'texto2',
+  textSlice3: 'texto3',
 };
 /* let objeto = {};
  */
-const isObjEmpty = (obj) => {
+const isObjEmpty = obj => {
   return Object.keys(obj).length === 0;
 };
 
 const HomeForm = () => {
+  let dispatch = useDispatch();
+
   const initialValues = {
-    description: "<p>texto de prueba 111111</p>",
-    imageSlice1: "",
-    imageSlice2: "",
-    imageSlice3: "",
-    textSlice1: "",
-    textSlice2: "",
-    textSlice3: "",
+    description: '<p>texto de prueba 111111</p>',
+    imageSlice1: '',
+    imageSlice2: '',
+    imageSlice3: '',
+    textSlice1: '',
+    textSlice2: '',
+    textSlice3: '',
   };
   return (
     <Formik
       initialValues={isObjEmpty(objeto) ? initialValues : objeto}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={values => {
+        dispatch(editSlides(values));
+        successAlert();
       }}
     >
       {({ errors, touched }) => (
@@ -88,7 +98,7 @@ const HomeForm = () => {
                   value={initialValues.description}
                   onChange={(event, editor) => {
                     const data = editor.getData();
-                    form.setFieldValue("description", data);
+                    form.setFieldValue('description', data);
                   }}
                 />
                 <FormErrorMessage>{form.errors.description}</FormErrorMessage>
@@ -108,10 +118,10 @@ const HomeForm = () => {
                   id="imageSlice1"
                   name="imageSlice1"
                   type="file"
-                  onChange={(event) => {
+                  onChange={event => {
                     const files = event.target.files;
                     let myFiles = Array.from(files);
-                    form.setFieldValue("imageSlice1", myFiles[0]);
+                    form.setFieldValue('imageSlice1', myFiles[0]);
                   }}
                 />
                 <FormErrorMessage>{form.errors.imageSlice1}</FormErrorMessage>
@@ -141,10 +151,10 @@ const HomeForm = () => {
                   id="imageSlice2"
                   name="imageSlice2"
                   type="file"
-                  onChange={(event) => {
+                  onChange={event => {
                     const files = event.target.files;
                     let myFiles = Array.from(files);
-                    form.setFieldValue("imageSlice2", myFiles[0]);
+                    form.setFieldValue('imageSlice2', myFiles[0]);
                   }}
                 />
                 <FormErrorMessage>{form.errors.imageSlice2}</FormErrorMessage>
@@ -174,10 +184,10 @@ const HomeForm = () => {
                   id="imageSlice3"
                   name="imageSlice3"
                   type="file"
-                  onChange={(event) => {
+                  onChange={event => {
                     const files = event.target.files;
                     let myFiles = Array.from(files);
-                    form.setFieldValue("imageSlice3", myFiles[0]);
+                    form.setFieldValue('imageSlice3', myFiles[0]);
                   }}
                 />
                 <FormErrorMessage>{form.errors.imageSlice3}</FormErrorMessage>
