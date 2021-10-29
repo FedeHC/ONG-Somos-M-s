@@ -7,17 +7,34 @@ import {
 } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setNovedad } from '../../app/novedades/novedadesReducer';
+import {
+  setNovedad,
+  deleteNovedad,
+} from '../../app/novedades/novedadesReducer';
+import {
+  errorAlert,
+  questionAlert,
+  successAlert,
+} from '../../features/alert/alert';
 
-const NewsScreen = ({history}) => {
+const NewsScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { novedadesList, loading, error } = useSelector(
     state => state.novedades,
   );
-  const handleEdit = (novedad) =>{
+  const handleEdit = novedad => {
     dispatch(setNovedad(novedad));
     history.push(`/backoffice/news/edit/${novedad.id}`);
-  }
+  };
+
+  const handleDelete = id => {
+    questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+      if (result) {
+        dispatch(deleteNovedad(id));
+        successAlert();
+      }
+    });
+  };
 
   return (
     <div>
@@ -50,7 +67,12 @@ const NewsScreen = ({history}) => {
                 <Tr key={novedad.id}>
                   <Td>{novedad.name}</Td>
                   <Td>
-                    <img className="profilePhoto" width="70px" src={novedad.image} alt="" />
+                    <img
+                      className="profilePhoto"
+                      width="70px"
+                      src={novedad.image}
+                      alt=""
+                    />
                   </Td>
                   <Td>{novedad.created_at}</Td>
                   <Td>
@@ -61,7 +83,12 @@ const NewsScreen = ({history}) => {
                     >
                       <AiTwotoneEdit />
                     </Button>
-                    <Button ml={5} colorScheme="red" variant="solid">
+                    <Button
+                      ml={5}
+                      colorScheme="red"
+                      variant="solid"
+                      onClick={() => handleDelete(novedad.id)}
+                    >
                       <AiOutlineClose />
                     </Button>
                   </Td>
