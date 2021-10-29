@@ -34,6 +34,11 @@ const NewsScreen = ({ history }) => {
     history.push(`/backoffice/news/edit/${novedad.id}`);
   };
 
+  // search filter
+  const filteredNovedades = search.length < 3 ? novedadesList : 
+  novedadesList.filter(news => news.name.
+                toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div>
       <Box
@@ -93,8 +98,8 @@ const NewsScreen = ({ history }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {!loading &&
-              novedadesList.map(novedad => (
+            {filteredNovedades &&
+              filteredNovedades.map(novedad => (
                 <Tr key={novedad.id}>
                   <Td>{novedad.name}</Td>
                   <Td>
