@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Table,
   Thead,
@@ -24,6 +24,8 @@ import { setNovedad } from '../../app/novedades/novedadesReducer';
 
 const NewsScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+
   const { novedadesList, loading, error } = useSelector(
     state => state.novedades,
   );
@@ -64,6 +66,8 @@ const NewsScreen = ({ history }) => {
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+              onChange={ (e)=>setSearch(e.target.value) }
             />
           </FormControl>
         </Stack>
