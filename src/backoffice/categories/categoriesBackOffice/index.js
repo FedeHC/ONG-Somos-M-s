@@ -28,6 +28,7 @@ import { setCategoria } from '../../../app/categorias/categoriasReducer';
 const CategoriesBackOffice = ({ history }) => {
 
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
 
   // useSelector
   const { categoriasList, loading, error } = useSelector(
@@ -65,6 +66,8 @@ const CategoriesBackOffice = ({ history }) => {
                 autoComplete="off"
                 placeholder={'Buscar...'}
                 aria-label={'Buscar...'}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </FormControl>
           </Stack>
