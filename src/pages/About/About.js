@@ -1,18 +1,20 @@
 import React from 'react';
 import './about.scss';
+import Tweets from './tweets/Tweets';
 import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
-import { TwitterTweet } from 'react-social-plugins';
-import TweetEmbed from 'react-tweet-embed';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
 import TitleScreen from '../../features/titleScreen/Title';
 import Members from './members/Members';
+import { Spinner } from '../../features/spinner';
+import { Skeleton } from '@chakra-ui/react';
+
+import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const About = () => {
-  const { name, short_description, long_description } = useSelector(
-    state => state.nosotros.nosotros,
-  );
+  const { name, short_description, long_description, loading, error } =
+    useSelector(state => state.nosotros.nosotros);
   return (
     <>
       <div style={{ width: '95vw', margin: 'auto' }}>
@@ -21,31 +23,37 @@ const About = () => {
 
       <div className="aboutContainer">
         <div className="TextContainer">
-          <Box w="50%" /* className="aboutText" */>
-            <Text
-              as={'span'}
-              position={'relative'}
-              fontSize="6xl"
-              _after={{
-                content: "''",
-                width: 'full',
-                height: '30%',
-                position: 'absolute',
-                bottom: 1,
-                left: 0,
-                bg: 'linkedin.400',
-                zIndex: -1,
-              }}
-            >
-              {name}
-            </Text>
-            <Box
-              color="gray.500"
-              fontSize="lg"
-              textAlign={['center']}
-              dangerouslySetInnerHTML={{ __html: long_description }}
-            />
-          </Box>
+          {loading ? (
+            <Skeleton className="skeletonName" />
+          ) : error ? (
+            <ErrorAlert />
+          ) : (
+            <Box w="50%" /* className="aboutText" */>
+              <Text
+                as={'span'}
+                position={'relative'}
+                fontSize="6xl"
+                _after={{
+                  content: "''",
+                  width: 'full',
+                  height: '30%',
+                  position: 'absolute',
+                  bottom: 1,
+                  left: 0,
+                  bg: 'linkedin.400',
+                  zIndex: -1,
+                }}
+              >
+                {name}
+              </Text>
+              <Box
+                color="gray.500"
+                fontSize="lg"
+                textAlign={['center']}
+                dangerouslySetInnerHTML={{ __html: long_description }}
+              />
+            </Box>
+          )}
         </div>
 
         <div className="linkedinCard">
@@ -91,9 +99,7 @@ const About = () => {
             Nuestros últimos tweets!!
           </Text>{' '}
           <div className="tweets">
-            <TweetEmbed className="tweet" id="1452017848822509573" />
-            <TweetEmbed className="tweet" id="1452066835927556099" />
-            <TweetEmbed className="tweet" id="1452000630755659777" />
+            <Tweets />
           </div>
         </div>
         <hr />
