@@ -1,7 +1,13 @@
+.containerMembers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-.containerMembers{
- display: flex;
- justify-content: center;
- align-items: center;
- flex-wrap: wrap;
+.skeletonMember {
+  height: 310px;
+  width: 250px;
+  border-radius: 2rem;
+  margin: 1.5rem;
 }
