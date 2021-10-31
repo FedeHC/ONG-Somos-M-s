@@ -2,6 +2,13 @@
   font-size: 4rem;
   text-align: center;
 }
+
+.skeletonNews {
+  height: 361px;
+  width: 250px;
+  border-radius: 2rem;
+}
+
 .news__container {
   width: 100%;
   background-color: #00214d;
