@@ -5,22 +5,27 @@ import { slidesList } from '../../services/slidesServices';
 export const getSliceThunk = createAsyncThunk(
   'slides/getSliceThunk',
   async () => {
-    return await methodGetPublic("slides");
+    return await methodGetPublic('slides');
   },
 );
 
 const slides = createSlice({
   name: 'slides',
   initialState: {
-    slidesList:[],
-    slideActive:{},
+    slidesList: [],
+    slideActive: {},
     loading: false,
-    error:null,
+    error: null,
   },
-  reducers:{
-    setSlide(state,action){
+  reducers: {
+    setSlide(state, action) {
       state.slideActive = action.payload;
-   }
+    },
+    editSlides(state, action) {
+      state.slidesList = state.slidesList.filter(
+        slice => slice.id === action.payload,
+      );
+    },
   },
   extraReducers: {
     [getSliceThunk.pending]: (state, action) => {
@@ -37,5 +42,5 @@ const slides = createSlice({
   },
 });
 
-export const {setSlide} = slides.actions;
+export const { setSlide, editSlides } = slides.actions;
 export default slides.reducer;
