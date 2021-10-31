@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { methodGetPublic } from '../../services/publicApiService';
-import { slidesList } from '../../services/slidesServices';
 
 export const getSliceThunk = createAsyncThunk(
   'slides/getSliceThunk',

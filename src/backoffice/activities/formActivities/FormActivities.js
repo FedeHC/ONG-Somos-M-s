@@ -15,12 +15,12 @@ import { Formik, Form, Field } from 'formik';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as Yup from 'yup';
+import { showActivities as getActivities } from '../../../services/apiActivities';
 import {
-  showActivities as getActivities,
-  createActivity,
-  updateActivity,
-  deleteActivity,
-} from '../../../services/apiActivities';
+  createActividad,
+  editActividad,
+} from '../../../app/actividades/actividadesReducer';
+import { questionAlert, successAlert } from '../../../features/alert/alert';
 
 const FormActivities = () => {
   // STATE
@@ -43,18 +43,19 @@ const FormActivities = () => {
 
   // HANDLER
   const submitHandler = values => {
-    if (location.includes('create')) createActivity(values);
-    else if (location.includes('edit')) updateActivity(values, id);
-    else if (location.includes('delete')) deleteActivity(values, id);
-    else return;
+    if (location.includes('create')) {
+      createActividad(values);
+      successAlert();
+    } else if (location.includes('edit')) {
+      editActividad(values, id);
+      successAlert();
+    }
   };
-
 
   // FORM TITLE
   const formTitle = () => {
     if (location.includes('create')) return 'Creando';
     else if (location.includes('edit')) return 'Editando';
-    else if (location.includes('delete')) return 'Borrando';
     else return '';
   };
 
@@ -179,8 +180,10 @@ const FormActivities = () => {
                     </FormControl>
                   )}
                 </Field>
-                {selectedFile &&  <img src={URL.createObjectURL(selectedFile)} /> }
-                {!selectedFile && <img src={response?.image} /> }
+                {selectedFile && (
+                  <img src={URL.createObjectURL(selectedFile)} />
+                )}
+                {!selectedFile && <img src={response?.image} />}
                 {/* SEND BUTTON */}
                 <Button
                   mt={4}

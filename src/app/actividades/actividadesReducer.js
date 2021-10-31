@@ -1,10 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { showActivities } from '../../services/apiActivities';
+import { showActivities, updateActivity } from '../../services/apiActivities';
 
 export const getActividades = createAsyncThunk(
   'actividades/getActividades',
   async () => {
     return await showActivities();
+  },
+);
+
+export const editActividades = createAsyncThunk(
+  'actividades/editActividades',
+  async (body, id) => {
+    return await updateActivity(body, id);
   },
 );
 
@@ -24,6 +31,19 @@ const actividadesSlice = createSlice({
     setActividadDetail(state, action) {
       state.actividadDetail = action.payload;
     },
+    createActividad(state, action) {
+      state.actividadesList = state.actividadesList.push(action.payload);
+    },
+    deleteActividad(state, action) {
+      state.actividadesList = state.actividadesList.filter(
+        actividad => actividad.id !== action.payload,
+      );
+    },
+    editActividad(state, action) {
+      state.actividadesList = state.actividadesList.filter(
+        actividad => actividad.id === action.payload,
+      );
+    },
   },
   extraReducers: {
     //get
@@ -41,5 +61,11 @@ const actividadesSlice = createSlice({
   },
 });
 
-export const { setActividades, setActividadDetail } = actividadesSlice.actions;
+export const {
+  setActividades,
+  setActividadDetail,
+  deleteActividad,
+  createActividad,
+  editActividad,
+} = actividadesSlice.actions;
 export default actividadesSlice.reducer;
