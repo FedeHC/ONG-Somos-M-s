@@ -24,6 +24,21 @@ const novedadeSlice = createSlice({
     setNovedadDetail(state, action) {
       state.novedadDetail = action.payload;
     },
+    createNovedad(state, action) {
+      state.novedadesList = state.novedadesList.push(action.payload);
+    },
+
+    deleteNovedad(state, action) {
+      state.novedadesList = state.novedadesList.filter(
+        actividad => actividad.id !== action.payload,
+      );
+    },
+
+    editNovedad(state, action) {
+      state.novedadesList = state.novedadesList.filter(
+        actividad => actividad.id === action.payload,
+      );
+    },
   },
   extraReducers: {
     //get
@@ -41,5 +56,11 @@ const novedadeSlice = createSlice({
   },
 });
 
-export const { setNovedad, setNovedadDetail } = novedadeSlice.actions;
+export const {
+  setNovedad,
+  setNovedadDetail,
+  createNovedad,
+  deleteNovedad,
+  editNovedad,
+} = novedadeSlice.actions;
 export default novedadeSlice.reducer;

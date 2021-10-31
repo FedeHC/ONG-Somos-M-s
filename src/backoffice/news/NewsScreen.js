@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   Thead,
@@ -20,11 +20,19 @@ import {
 } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setNovedad } from '../../app/novedades/novedadesReducer';
+import {
+  setNovedad,
+  deleteNovedad,
+} from '../../app/novedades/novedadesReducer';
+import {
+  errorAlert,
+  questionAlert,
+  successAlert,
+} from '../../features/alert/alert';
 
 const NewsScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const { novedadesList, loading, error } = useSelector(
     state => state.novedades,
@@ -34,10 +42,21 @@ const NewsScreen = ({ history }) => {
     history.push(`/backoffice/news/edit/${novedad.id}`);
   };
 
+  const handleDelete = id => {
+    questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+      if (result) {
+        dispatch(deleteNovedad(id));
+        successAlert();
+      }
+    });
+  };
   // search filter
-  const filteredNovedades = search.length < 3 ? novedadesList : 
-  novedadesList.filter(news => news.name.
-                toLowerCase().includes(search.toLowerCase()));
+  const filteredNovedades =
+    search.length < 3
+      ? novedadesList
+      : novedadesList.filter(news =>
+          news.name.toLowerCase().includes(search.toLowerCase()),
+        );
 
   return (
     <div>
@@ -72,7 +91,7 @@ const NewsScreen = ({ history }) => {
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
               value={search}
-              onChange={ (e)=>setSearch(e.target.value) }
+              onChange={e => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
@@ -119,7 +138,12 @@ const NewsScreen = ({ history }) => {
                     >
                       <AiTwotoneEdit />
                     </Button>
-                    <Button ml={5} colorScheme="red" variant="solid">
+                    <Button
+                      ml={5}
+                      colorScheme="red"
+                      variant="solid"
+                      onClick={() => handleDelete(novedad.id)}
+                    >
                       <AiOutlineClose />
                     </Button>
                   </Td>
