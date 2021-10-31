@@ -7,14 +7,14 @@ import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
 import TitleScreen from '../../features/titleScreen/Title';
 import Members from './members/Members';
-import { Spinner } from '../../features/spinner';
 import { Skeleton } from '@chakra-ui/react';
 
 import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const About = () => {
-  const { name, short_description, long_description, loading, error } =
+  const { name, long_description, loading, error } =
     useSelector(state => state.nosotros.nosotros);
+
   return (
     <>
       <div style={{ width: '95vw', margin: 'auto' }}>

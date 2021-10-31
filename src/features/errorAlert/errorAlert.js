@@ -4,7 +4,6 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CloseButton,
 } from '@chakra-ui/react';
 import { Box } from '@chakra-ui/react';
 

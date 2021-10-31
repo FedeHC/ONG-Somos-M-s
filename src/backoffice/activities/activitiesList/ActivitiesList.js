@@ -21,7 +21,16 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActividades } from '../../../app/actividades/actividadesReducer';
+import {
+  setActividades,
+  deleteActividad,
+} from '../../../app/actividades/actividadesReducer';
+
+import {
+  errorAlert,
+  questionAlert,
+  successAlert,
+} from '../../../features/alert/alert';
 
 const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
@@ -36,8 +45,17 @@ const ActivitiesList = ({ history }) => {
     history.push(`/backoffice/activities/edit/${activity.id}`);
   };
 
+  const handleDelete = id => {
+    questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+      if (result) {
+        dispatch(deleteActividad(id));
+        successAlert();
+      }
+    });
+  };
   // search filter
-  const filteredActivities = search.length < 3
+  const filteredActivities =
+    search.length < 3
       ? actividadesList
       : actividadesList.filter(activity =>
           activity.name.toLowerCase().includes(search.toLowerCase()),
@@ -123,7 +141,12 @@ const ActivitiesList = ({ history }) => {
                     >
                       <AiTwotoneEdit />
                     </Button>
-                    <Button ml={5} colorScheme="red" variant="solid">
+                    <Button
+                      ml={5}
+                      colorScheme="red"
+                      variant="solid"
+                      onClick={() => handleDelete(activity.id)}
+                    >
                       <AiOutlineClose />
                     </Button>
                   </Td>
