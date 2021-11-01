@@ -103,6 +103,21 @@ const PublicNavBar = () => {
               Registrarse
             </Button>
           </Link>
+           {/* Logout */}
+          <Link to="/register">
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={300}
+              color={'white'}
+              bg={'red'}
+              _hover={{
+                bg: 'red.800',
+              }}
+            >
+              Logout
+            </Button>
+          </Link>
         </Stack>
       </Flex>
 
