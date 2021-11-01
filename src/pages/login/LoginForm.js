@@ -16,6 +16,8 @@ import { Formik, Form, Field } from 'formik';
 import { Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import './loginForm.scss';
+import { startLogin } from '../../app/auth/authReducer';
+import { useDispatch } from 'react-redux';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('email Invalido').required('Requerido'),
@@ -28,7 +30,9 @@ const SignupSchema = Yup.object().shape({
     .matches(/(?=\w*[a-z])/, 'al menos 1 letra requerida'),
 });
 
-const LoginForm = ({history}) => (
+const LoginForm = ({history}) => {
+  const dispatch = useDispatch();
+  return(
   <Flex
     minH={'100vh'}
     align={'center'}
@@ -56,7 +60,7 @@ const LoginForm = ({history}) => (
             }}
             validationSchema={SignupSchema}
             onSubmit={values => {
-              console.log(values);
+              dispatch(startLogin(values));
             }}
           >
             {({ errors, touched }) => (
@@ -107,6 +111,6 @@ const LoginForm = ({history}) => (
       </Box>
     </Stack>
   </Flex>
-);
+)};
 
 export default LoginForm;
