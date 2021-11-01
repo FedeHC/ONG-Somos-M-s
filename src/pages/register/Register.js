@@ -19,6 +19,8 @@ import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
+import { registerUSer } from '../../services/apiAuth';
+import { successAlert } from '../../features/alert/alert';
 
 export const Register = ({history}) => {
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
@@ -56,10 +58,16 @@ export const Register = ({history}) => {
                 passwordConfirmation: '',
               }}
               validationSchema={signupSchema}
-              onSubmit={values => {
+              onSubmit={async (values, { resetForm }) => {
                 if (aceptarTerminos) {
                   const values0 = Object.assign(values, mapLocation);
-                  console.log(values0);
+                  const {name, email, password} = values;
+                  const resp = await registerUSer("auth/new", {name, email, password});
+                  if(!resp.error){
+                  successAlert(resp.data.data.message, "Ingresá con tu nueva cuenta");
+                  resetForm({});
+                  history.push("/login");
+                  }
                 } else {
                   mostrarErrorTyc();
                 }
