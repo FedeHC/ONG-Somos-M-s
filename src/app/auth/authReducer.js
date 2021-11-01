@@ -18,6 +18,13 @@ const authSlice = createSlice({
     error:null,
     checking:true,
   },
+  reducers:{
+    setLogout(state, action){
+        state.logged = false;
+        state.loading = false;
+        state.checking = false;
+    }
+  },
   extraReducers:{
     [startLogin.pending]:(state, action)=>{
        state.loading = true;
@@ -43,5 +50,5 @@ const authSlice = createSlice({
 });
 
 
-
+export const { setLogout } = authSlice.actions;
 export default authSlice.reducer;
