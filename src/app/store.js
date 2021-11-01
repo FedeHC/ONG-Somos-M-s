@@ -7,9 +7,11 @@ import categoriasReducer from "./categorias/categoriasReducer";
 import members from "./members/members";
 import slides from "./slides/slides";
 import users from './users/users';
+import auth from './auth/authReducer';
 
 export default configureStore({
   reducer: {
+    auth,
     novedades,
     nosotros,
     actividades,
