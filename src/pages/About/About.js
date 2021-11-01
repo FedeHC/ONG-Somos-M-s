@@ -1,6 +1,6 @@
 import React from 'react';
 import './about.scss';
-import Tweets from './tweets/Tweets';
+// import Tweets from './tweets/Tweets';
 import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
 import SocialFollow from './SocialFollow';
@@ -99,7 +99,7 @@ const About = () => {
             Nuestros últimos tweets!!
           </Text>{' '}
           <div className="tweets">
-            <Tweets />
+            {/* <Tweets /> */}
           </div>
         </div>
         <hr />
