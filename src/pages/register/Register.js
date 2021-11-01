@@ -50,6 +50,7 @@ export const Register = ({history}) => {
           <Stack spacing={4}>
             <Formik
               initialValues={{
+                name:'',
                 email: '',
                 password: '',
                 passwordConfirmation: '',
@@ -58,7 +59,6 @@ export const Register = ({history}) => {
               onSubmit={values => {
                 if (aceptarTerminos) {
                   const values0 = Object.assign(values, mapLocation);
-                  alert(JSON.stringify(values0));
                   console.log(values0);
                 } else {
                   mostrarErrorTyc();
@@ -67,6 +67,18 @@ export const Register = ({history}) => {
             >
               {({ isSubmitting, handleSubmit }) => (
                 <Form className={styles.form__container}>
+                  <Field name="name">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.name && form.touched.name}
+                        isRequired
+                      >
+                        <FormLabel htmlFor="name">Nombre: </FormLabel>
+                        <Input {...field} type="text" id="name" placeholder="nombre" />
+                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
                   <Field name="email">
                     {({ field, form }) => (
                       <FormControl
