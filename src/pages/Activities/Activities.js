@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Activities.css';
 import CardNews from '../../features/cardNews/';
 import { FormControl,
@@ -26,7 +26,12 @@ const News = () => {
 
   const [search, setSearch] = useState("");
 
-
+  const filteredActivities =
+    search.length < 3
+      ? actividadesList
+      : actividadesList.filter(activity =>
+          activity.name.toLowerCase().includes(search.toLowerCase()),
+        );
 
 
   return (
@@ -34,9 +39,6 @@ const News = () => {
       <div style={{ width: '95vw' }}>
         <TitleScreen title={'Actividades'} />
       </div>
-      
-
-      <div className="containerCard">
       <Stack
           direction={{ base: 'column', md: 'row' }}
           as={'form'}
@@ -65,10 +67,13 @@ const News = () => {
             />
           </FormControl>
         </Stack>
+      
+
+      <div className="containerCard">
         {loading ? (
           <Spinner />
-        ) : actividadesList ? (
-          actividadesList.map(news => (
+        ) : filteredActivities ? (
+          filteredActivities.map(news => (
             <Link to={`/actividades/${news.id}`}>
               <div onClick={() => callDispatch(news)}>
                 <CardNews key={news.id} news={news} />
