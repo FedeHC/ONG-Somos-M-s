@@ -16,6 +16,11 @@ import {
   PopoverContent,
   useColorModeValue,
   useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -24,11 +29,12 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../app/auth/authReducer';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
+  const {logged, user} = useSelector(state => state.auth);
   const handleLogout = () =>{
      dispatch(setLogout());
   }
@@ -78,8 +84,9 @@ const PublicNavBar = () => {
           direction={'row'}
           spacing={3}
         >
-          {/* LOGIN */}
-          <Link to="/login">
+         { !logged 
+           ? ( 
+            <> <Link to="/login">
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
@@ -94,7 +101,6 @@ const PublicNavBar = () => {
             </Button>
           </Link>
 
-          {/* REGISTER */}
           <Link to="/register">
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
@@ -108,21 +114,20 @@ const PublicNavBar = () => {
             >
               Registrarse
             </Button>
-          </Link>
-           {/* Logout */}
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={300}
-              color={'white'}
-              bg={'red'}
-              onClick={handleLogout}
-              _hover={{
-                bg: 'red.800',
-              }}
-            >
-              Logout
-            </Button>
+          </Link> </> )
+            :( <Menu>
+                <MenuButton as={Button} _hover={{bg:"blue.800"}} color="white" bg={"#00214d"}>
+                  {user.name}
+                </MenuButton>
+                <MenuList>
+                  <MenuGroup title="Perfil">
+                    <MenuItem
+                     onClick={handleLogout} 
+                     color="red.800" >Logout</MenuItem>
+                  </MenuGroup>
+                </MenuList>
+              </Menu>)
+            }
         </Stack>
       </Flex>
 
