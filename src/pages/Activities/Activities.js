@@ -43,9 +43,9 @@ const News = () => {
           direction={{ base: 'column', md: 'row' }}
           as={'form'}
           spacing={'12px'}
-          width={'100%'}
-          me={6}
-          ms={6}
+          width={'95vw'}
+          me={12}
+          ms={12}
           mb={6}
         >
           <FormControl>
