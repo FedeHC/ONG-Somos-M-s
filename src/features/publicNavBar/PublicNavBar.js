@@ -24,8 +24,14 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
+import { useDispatch } from 'react-redux';
+import { setLogout } from '../../app/auth/authReducer';
 
 const PublicNavBar = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () =>{
+     dispatch(setLogout());
+  }
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -103,6 +109,20 @@ const PublicNavBar = () => {
               Registrarse
             </Button>
           </Link>
+           {/* Logout */}
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={300}
+              color={'white'}
+              bg={'red'}
+              onClick={handleLogout}
+              _hover={{
+                bg: 'red.800',
+              }}
+            >
+              Logout
+            </Button>
         </Stack>
       </Flex>
 

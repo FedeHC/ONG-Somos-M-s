@@ -19,6 +19,8 @@ import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
+import { registerUSer } from '../../services/apiAuth';
+import { successAlert } from '../../features/alert/alert';
 
 export const Register = ({history}) => {
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
@@ -50,16 +52,22 @@ export const Register = ({history}) => {
           <Stack spacing={4}>
             <Formik
               initialValues={{
+                name:'',
                 email: '',
                 password: '',
                 passwordConfirmation: '',
               }}
               validationSchema={signupSchema}
-              onSubmit={values => {
+              onSubmit={async (values, { resetForm }) => {
                 if (aceptarTerminos) {
                   const values0 = Object.assign(values, mapLocation);
-                  alert(JSON.stringify(values0));
-                  console.log(values0);
+                  const {name, email, password} = values;
+                  const resp = await registerUSer("auth/new", {name, email, password});
+                  if(!resp.error){
+                  successAlert(resp.data.data.message, "Ingresá con tu nueva cuenta");
+                  resetForm({});
+                  history.push("/login");
+                  }
                 } else {
                   mostrarErrorTyc();
                 }
@@ -67,6 +75,18 @@ export const Register = ({history}) => {
             >
               {({ isSubmitting, handleSubmit }) => (
                 <Form className={styles.form__container}>
+                  <Field name="name">
+                    {({ field, form }) => (
+                      <FormControl
+                        isInvalid={form.errors.name && form.touched.name}
+                        isRequired
+                      >
+                        <FormLabel htmlFor="name">Nombre: </FormLabel>
+                        <Input {...field} type="text" id="name" placeholder="nombre" />
+                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
                   <Field name="email">
                     {({ field, form }) => (
                       <FormControl
