@@ -16,6 +16,7 @@ import { getMemberThunk } from '../app/members/members';
 import { getSliceThunk } from '../app/slides/slides';
 import { getUserThunk } from '../app/users/users';
 import { getNovedades } from '../app/novedades/novedadesReducer';
+import { startRenew } from '../app/auth/authReducer';
 
 const AppRouter = () => {
   const ifPrivateURL = window.location.href.toLowerCase().includes('backoffice')
@@ -32,6 +33,7 @@ const AppRouter = () => {
     dispatch(getMemberThunk());
     dispatch(getSliceThunk());
     dispatch(getUserThunk());
+    dispatch(startRenew());
   }, [dispatch]);
 
   return (
