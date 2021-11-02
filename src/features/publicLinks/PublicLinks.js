@@ -8,7 +8,8 @@ export const PUBLIC_LINKS = [
   { label: "Actividades", href: '/actividades' },
   { label: "Novedades",   href: '/novedades' },
   { label: "Testimonios", href: '/testimonios' },
-  { label: "Contacto",    href: '/contacto' }
+  { label: "Contacto",    href: '/contacto' },
+  { label: "Landing", href: '/landing'}
 ];
 
 export const SOCIAL_LINKS = [

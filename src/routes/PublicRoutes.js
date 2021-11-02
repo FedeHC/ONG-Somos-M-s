@@ -14,6 +14,7 @@ import ActivityDetail from '../pages/Activities/details/Detail';
 import LoginForm from '../pages/login/LoginForm';
 import { Register } from '../pages/register/Register';
 import Page404 from '../pages/404/404Page';
+import Landing from '../pages/landing/Landing';
 
 function PublicRoutes() {
   return (
@@ -33,6 +34,7 @@ function PublicRoutes() {
         <Route exact path="/actividades/:id" component={ActivityDetail} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/landing" component={Landing} />
         <Route component={Page404} />
       </Switch>
       {/* FOOTER */}
