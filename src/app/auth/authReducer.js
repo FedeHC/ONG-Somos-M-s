@@ -5,7 +5,9 @@ import { loginUser } from '../../services/apiAuth';
 export const startLogin = createAsyncThunk(
 	"auth/startLogin",
 	async (body) => {
-		  return await loginUser("auth/login", body);
+		  const resp = await loginUser("auth/login", body);
+      localStorage.setItem("token", resp.data.data.token);
+      return resp;
 	});
 
 const authSlice = createSlice({
@@ -26,6 +28,7 @@ const authSlice = createSlice({
         state.user = {};
         state.token = null;
         state.error = null;
+        localStorage.removeItem("token");
     }
   },
   extraReducers:{
