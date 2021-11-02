@@ -52,6 +52,11 @@
 
 @media(min-width: 1240px){
   .header{
-    background-color: #00214d98;
+    background-color: #00214d57;
+  }
+  .slogan{
+    color: white;
+    position: relative;
+    top: 3px;
   }
 }
