@@ -24,6 +24,11 @@ const News = () => {
     dispatch(setActividadDetail(actividad));
   };
 
+  const [search, setSearch] = useState("");
+
+
+
+
   return (
     <div className="novedades-container">
       <div style={{ width: '95vw' }}>
@@ -51,11 +56,12 @@ const News = () => {
                 color: 'gray.400',
               }}
               borderColor={useColorModeValue('#00214D', 'gray.700')}
-              id={'email'}
               type={'text'}
               autoComplete="off"
               placeholder={'Buscar...'}
               aria-label={'Buscar...'}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
             />
           </FormControl>
         </Stack>
