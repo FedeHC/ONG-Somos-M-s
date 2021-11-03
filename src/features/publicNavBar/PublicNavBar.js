@@ -34,10 +34,10 @@ import { setLogout } from '../../app/auth/authReducer';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
-  const {logged, user} = useSelector(state => state.auth);
-  const handleLogout = () =>{
-     dispatch(setLogout());
-  }
+  const { logged, user } = useSelector(state => state.auth);
+  const handleLogout = () => {
+    dispatch(setLogout());
+  };
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -84,50 +84,60 @@ const PublicNavBar = () => {
           direction={'row'}
           spacing={3}
         >
-         { !logged 
-           ? ( 
-            <> <Link to="/login">
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={300}
-              color={'black'}
-              bg={'#bae8e8'}
-              _hover={{
-                bg: 'cyan.100',
-              }}
-            >
-              Login
-            </Button>
-          </Link>
-
-          <Link to="/register">
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={300}
-              color={'white'}
-              bg={'#00214d'}
-              _hover={{
-                bg: 'blue.800',
-              }}
-            >
-              Registrarse
-            </Button>
-          </Link> </> )
-            :( <Menu>
-                <MenuButton as={Button} _hover={{bg:"blue.800"}} color="white" bg={"#00214d"}>
-                  {user.name}
-                </MenuButton>
-                <MenuList>
-                  <MenuGroup title="Perfil">
-                    <MenuItem
-                     onClick={handleLogout} 
-                     color="red.800" >Logout</MenuItem>
-                  </MenuGroup>
-                </MenuList>
-              </Menu>)
-            }
+          {!logged ? (
+            <>
+              {' '}
+              <Link to="/login">
+                <Button
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize={'sm'}
+                  fontWeight={300}
+                  color={'black'}
+                  bg={'#bae8e8'}
+                  _hover={{
+                    bg: 'cyan.100',
+                  }}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize={'sm'}
+                  fontWeight={300}
+                  color={'white'}
+                  bg={'#00214d'}
+                  _hover={{
+                    bg: 'blue.800',
+                  }}
+                >
+                  Registrarse
+                </Button>
+              </Link>{' '}
+            </>
+          ) : (
+            <Menu>
+              <MenuButton
+                as={Button}
+                _hover={{ bg: 'blue.800' }}
+                color="white"
+                bg={'#00214d'}
+              >
+                {user.name}
+              </MenuButton>
+              <MenuList>
+                <MenuGroup title="Perfil">
+                  <Link to="/backoffice">
+                    <MenuItem color="blue.800">Backoffice</MenuItem>
+                  </Link>
+                  <MenuItem onClick={handleLogout} color="red.800">
+                    Logout
+                  </MenuItem>
+                </MenuGroup>
+              </MenuList>
+            </Menu>
+          )}
         </Stack>
       </Flex>
 
