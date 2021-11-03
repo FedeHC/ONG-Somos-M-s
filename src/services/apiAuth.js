@@ -23,3 +23,16 @@ export const registerUSer = async (endpoint, body) => {
    return resp;
  }
 };
+
+export const revalidationUser = async (endpoint) => {
+ const resp={data:null,error:null};
+ const token = localStorage.getItem("token" || "");
+ try {
+   resp.data =  await axios.get(`${url}/${endpoint}`,{headers:{"x-token":token}});
+   return resp;
+ } catch (error) {
+   resp.error = error;
+   return resp;
+ }
+};
+

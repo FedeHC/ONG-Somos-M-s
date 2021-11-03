@@ -59,8 +59,9 @@ const LoginForm = ({history}) => {
               password: '',
             }}
             validationSchema={SignupSchema}
-            onSubmit={values => {
+            onSubmit={(values, { resetForm }) => {
               dispatch(startLogin(values));
+              resetForm({});
             }}
           >
             {({ errors, touched }) => (
