@@ -12,6 +12,7 @@ import {
   FormControl,
   Input,
   useColorModeValue,
+  Select,
 } from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
@@ -23,22 +24,30 @@ import { setUser } from '../../../app/users/users';
 import { Link } from 'react-router-dom';
 
 const UsersList = ({ history }) => {
+  const [typeSearch, settypeSearch] = useState(false);
   const dispatch = useDispatch();
+  const [rol, setRol] = useState('Todo');
   const [search, setSearch] = useState('');
 
   const { usersList, loading, error } = useSelector(state => state.users);
+
   const handleEdit = user => {
     dispatch(setUser(user));
     history.push(`/backoffice/users/edit/${user.id}`);
   };
 
   // search filter
-  const filteredUsers =
-    search.length < 3
+  const filteredUsers = typeSearch
+    ? rol === 'Todo'
       ? usersList
-      : usersList.filter(user =>
-          user.name.toLowerCase().includes(search.toLowerCase()),
-        );
+      : rol === 'regular'
+      ? usersList.filter(user => user.role_id === 1)
+      : usersList.filter(user => user.role_id === 0)
+    : search.length < 3
+    ? usersList
+    : usersList.filter(user =>
+        user.name.toLowerCase().includes(search.toLowerCase()),
+      );
 
   return (
     <div>
@@ -57,25 +66,46 @@ const UsersList = ({ history }) => {
           width={'100%'}
           me={6}
         >
-          <FormControl>
-            <Input
-              variant={'solid'}
-              width="100%"
-              borderWidth={1}
-              color={'gray.800'}
-              _placeholder={{
-                color: 'gray.400',
-              }}
-              borderColor={useColorModeValue('#00214D', 'gray.700')}
-              type={'text'}
-              autoComplete="off"
-              placeholder={'Buscar...'}
-              aria-label={'Buscar...'}
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </FormControl>
+          {typeSearch ? (
+            <Select
+              onChange={e => setRol(e.target.value)}
+              placeholder="Selecciona rol"
+            >
+              <option value="Todo">Todo</option>
+              <option value="admin">Administrador</option>
+              <option value="regular">Usuario Regular</option>
+            </Select>
+          ) : (
+            <FormControl>
+              <Input
+                variant={'solid'}
+                width="100%"
+                borderWidth={1}
+                color={'gray.800'}
+                _placeholder={{
+                  color: 'gray.400',
+                }}
+                /* borderColor={useColorModeValue('#00214D', 'gray.700')} */
+                type={'text'}
+                autoComplete="off"
+                placeholder={'Buscar...'}
+                aria-label={'Buscar...'}
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+            </FormControl>
+          )}
         </Stack>
+        <Button
+          colorScheme="yellow"
+          bgColor={'#ECC948'}
+          variant="solid"
+          onClick={() => settypeSearch(!typeSearch)}
+          p={5}
+          mr={2}
+        >
+          {typeSearch ? 'Filtro por nombre' : 'Filtro por rol'}
+        </Button>
         <Link to="/backoffice/users/create">
           <Button
             rightIcon={<AiFillPlusCircle />}
