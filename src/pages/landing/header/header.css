@@ -1,0 +1,62 @@
+@media (max-width: 360px) {
+  .header {
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+  }
+  .logoOng{
+    display: none;
+  }
+  .logo {
+    width: 45px;
+    height: 40px;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+  }
+  .slogan {
+    display: none;
+  }
+  
+}
+
+@media (max-width: 576px){
+  .header {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+  }
+  .logos {
+    display: flex;
+  }
+  .slogan{
+    display: none;
+  }
+}
+
+@media (min-width: 1200px){
+  .header{
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+  }
+  .logos{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .logos .slogan{
+    font-family: 'Montserrat';
+  }
+}
+
+@media(min-width: 1240px){
+  .header{
+    background-color: #00214d57;
+  }
+  .slogan{
+    color: white;
+    position: relative;
+    top: 3px;
+  }
+}
