@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Activities.css';
 import CardNews from '../../features/cardNews/';
-import Card from '../../features/card/Card';
-import { Heading, Text } from '@chakra-ui/react';
+import { FormControl,
+  Stack,
+  Input,
+  useColorModeValue, } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -22,17 +24,56 @@ const News = () => {
     dispatch(setActividadDetail(actividad));
   };
 
+  const [search, setSearch] = useState("");
+
+  const filteredActivities =
+    search.length < 3
+      ? actividadesList
+      : actividadesList.filter(activity =>
+          activity.name.toLowerCase().includes(search.toLowerCase()),
+        );
+
+
   return (
     <div className="novedades-container">
       <div style={{ width: '95vw' }}>
         <TitleScreen title={'Actividades'} />
       </div>
+      <Stack
+          direction={{ base: 'column', md: 'row' }}
+          as={'form'}
+          spacing={'12px'}
+          width={'95vw'}
+          me={12}
+          ms={12}
+          mb={6}
+        >
+          <FormControl>
+            <Input
+              variant={'solid'}
+              width="100%"
+              borderWidth={1}
+              color={'gray.800'}
+              _placeholder={{
+                color: 'gray.400',
+              }}
+              borderColor={useColorModeValue('#00214D', 'gray.700')}
+              type={'text'}
+              autoComplete="off"
+              placeholder={'Buscar...'}
+              aria-label={'Buscar...'}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </FormControl>
+        </Stack>
+      
 
       <div className="containerCard">
         {loading ? (
           <Spinner />
-        ) : actividadesList ? (
-          actividadesList.map(news => (
+        ) : filteredActivities ? (
+          filteredActivities.map(news => (
             <Link to={`/actividades/${news.id}`}>
               <div onClick={() => callDispatch(news)}>
                 <CardNews key={news.id} news={news} />
