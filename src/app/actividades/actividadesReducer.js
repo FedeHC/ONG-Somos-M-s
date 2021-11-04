@@ -32,7 +32,7 @@ const actividadesSlice = createSlice({
       state.actividadDetail = action.payload;
     },
     createActividad(state, action) {
-      state.actividadesList = state.actividadesList.push(action.payload);
+      state.actividadesList = [action.payload, ...state.actividadesList]
     },
     deleteActividad(state, action) {
       state.actividadesList = state.actividadesList.filter(
@@ -40,8 +40,10 @@ const actividadesSlice = createSlice({
       );
     },
     editActividad(state, action) {
-      state.actividadesList = state.actividadesList.filter(
-        actividad => actividad.id === action.payload,
+      state.actividadesList = state.actividadesList.map(
+        actividad => actividad.id === action.payload.id
+                      ? action.payload
+                      : actividad
       );
     },
   },

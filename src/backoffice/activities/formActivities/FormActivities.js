@@ -21,12 +21,13 @@ import {
   editActividad,
 } from '../../../app/actividades/actividadesReducer';
 import { /* questionAlert, */ successAlert } from '../../../features/alert/alert';
+import { useDispatch } from 'react-redux';
 
-const FormActivities = () => {
+const FormActivities = ({history}) => {
+  const dispatch = useDispatch();
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  // const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
@@ -44,12 +45,20 @@ const FormActivities = () => {
   // HANDLER
   const submitHandler = values => {
     if (location.includes('create')) {
-      createActividad(values);
+      values.created_at = "2021-11-04T16:52:26.000000Z";
+      values.image = URL.createObjectURL(selectedFile);
+      values.id = values.name;
+      dispatch(createActividad(values));
       successAlert();
     } else if (location.includes('edit')) {
-      editActividad(values, id);
+      const objNew = response;
+      objNew.name = values.name;
+      objNew.description = values.description;
+      objNew.image = typeof(values.image) === "string" ? values.image : URL.createObjectURL(selectedFile);
+      dispatch(editActividad(objNew));
       successAlert();
     }
+    history.push("/backoffice/activities");
   };
 
   // FORM TITLE
@@ -65,20 +74,6 @@ const FormActivities = () => {
       .required('Requerido')
       .min(3, 'Se requieren 3 caracteres como mínimo'),
     description: Yup.string().required('Requerido'),
-    image: Yup.mixed()
-      .required('Requerido')
-      .test(
-        'type',
-        'Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg',
-        file => {
-          return (
-            file &&
-            (file.type === 'image/png' ||
-              file.type === 'image/jpg' ||
-              file.type === 'image/jpeg')
-          );
-        },
-      ),
   });
 
   // INITIAL FORMIK VALUES
@@ -176,7 +171,6 @@ const FormActivities = () => {
                           setSelectedFile(myFiles[0]);
                         }}
                       />
-                      <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
