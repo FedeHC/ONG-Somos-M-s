@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React /*, { useState, useEffect } */ from 'react';
 import { Link } from "react-router-dom"
 import { Box, Container, Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Button, Image } from "@chakra-ui/react";
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const Organization = () => {
   
-  const {nosotros, loading, error} = useSelector(state => state.nosotros);
+  const {nosotros /*, loading, error */} = useSelector(state => state.nosotros);
 
   return (
     <Container maxW={'7xl'}>

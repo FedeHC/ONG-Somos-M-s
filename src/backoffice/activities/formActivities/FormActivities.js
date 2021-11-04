@@ -20,13 +20,13 @@ import {
   createActividad,
   editActividad,
 } from '../../../app/actividades/actividadesReducer';
-import { questionAlert, successAlert } from '../../../features/alert/alert';
+import { /* questionAlert, */ successAlert } from '../../../features/alert/alert';
 
 const FormActivities = () => {
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  const [imgIncomming, setImgIncomming] = useState();
+  // const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
@@ -181,9 +181,9 @@ const FormActivities = () => {
                   )}
                 </Field>
                 {selectedFile && (
-                  <img src={URL.createObjectURL(selectedFile)} />
+                  <img src={URL.createObjectURL(selectedFile)} alt="Imagen del archivo" />
                 )}
-                {!selectedFile && <img src={response?.image} />}
+                {!selectedFile && <img src={response?.image} alt="Imagen del archivo" />}
                 {/* SEND BUTTON */}
                 <Button
                   mt={4}

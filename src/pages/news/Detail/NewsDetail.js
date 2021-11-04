@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React /*, { useEffect, useState } */ from 'react';
 import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
 import './NewsDetail.scss';
 import TitleScreen from '../../../features/titleScreen/Title';
 import ErrorAlert from '../../../features/errorAlert/errorAlert';
-import { getNews } from '../../../services/apiNews';
+// import { getNews } from '../../../services/apiNews';
 import { useSelector } from 'react-redux';
 import { Spinner } from '../../../features/spinner';
 
 const NewsDetail = props => {
-  const { novedadDetail, loading, error } = useSelector(
+  const { novedadDetail, loading, /* error */ } = useSelector(
     state => state.novedades,
   );
 

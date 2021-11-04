@@ -18,13 +18,13 @@ import {
 } from '@chakra-ui/react';
 import {
   getNews,
-  createNews,
-  updateNews,
-  deleteNews,
+  // createNews,
+  // updateNews,
+  // deleteNews,
 } from '../../../services/apiNews';
 import {
-  errorAlert,
-  questionAlert,
+  // errorAlert,
+  // questionAlert,
   successAlert,
 } from '../../../features/alert/alert';
 import {
@@ -36,7 +36,7 @@ const FormNovedades = () => {
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  const [imgIncomming, setImgIncomming] = useState();
+  // const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
@@ -54,10 +54,8 @@ const FormNovedades = () => {
   // HANDLER
   const submitHandler = values => {
     if (location.includes('create')) {
-      {
-        createNovedad(values);
-        successAlert();
-      }
+      createNovedad(values);
+      successAlert();
     } else if (location.includes('edit')) {
       editNovedad(values, id);
       successAlert();
@@ -218,9 +216,9 @@ const FormNovedades = () => {
                   )}
                 </Field>
                 {selectedFile && (
-                  <img src={URL.createObjectURL(selectedFile)} />
+                  <img src={URL.createObjectURL(selectedFile)} alt="Imagen del archivo" />
                 )}
-                {!selectedFile && <img src={response?.image} />}
+                {!selectedFile && <img src={response?.image} alt="Imagen del archivo" />}
                 {/* SEND BUTTON */}
                 <Button
                   mt={5}

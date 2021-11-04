@@ -8,7 +8,7 @@ import Slider from './SliderHome.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNovedadDetail } from '../../app/novedades/novedadesReducer';
 import { Link } from 'react-router-dom';
-import { Spinner } from '../../features/spinner';
+//import { Spinner } from '../../features/spinner';
 import { Skeleton } from '@chakra-ui/react';
 import ErrorAlert from '../../features/errorAlert/errorAlert';
 
@@ -16,11 +16,13 @@ const Home = ({ history }) => {
   const dispatch = useDispatch();
 
   const {
+    // eslint-disable-next-line
     loading: loadingNosotros,
+    // eslint-disable-next-line
     error: errorNosotros,
     nosotros,
   } = useSelector(state => state.nosotros);
-  const { loading, error, novedadesList } = useSelector(
+  const { loading, /* error, */ novedadesList } = useSelector(
     state => state.novedades,
   );
   const callDispatch = news => {

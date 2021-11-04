@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Member from './Member';
-import { Spinner } from '../../../features/spinner';
+// import { Spinner } from '../../../features/spinner';
 import ErrorAlert from '../../../features/errorAlert/errorAlert';
 import { Skeleton } from '@chakra-ui/react';
 
@@ -10,7 +10,7 @@ import './members.css';
 //data example
 
 const Members = () => {
-  const { membersList, loading, error } = useSelector(state => state.members);
+  const { membersList, loading, /* error */ } = useSelector(state => state.members);
 
   return (
     <div className="containerMembers">

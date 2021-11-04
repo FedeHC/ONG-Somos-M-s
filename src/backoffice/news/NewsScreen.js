@@ -25,7 +25,7 @@ import {
   deleteNovedad,
 } from '../../app/novedades/novedadesReducer';
 import {
-  errorAlert,
+  // errorAlert,
   questionAlert,
   successAlert,
 } from '../../features/alert/alert';
@@ -34,7 +34,7 @@ const NewsScreen = ({ history }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
 
-  const { novedadesList, loading, error } = useSelector(
+  const { novedadesList, /* loading, error */ } = useSelector(
     state => state.novedades,
   );
   const handleEdit = novedad => {

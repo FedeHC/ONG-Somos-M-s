@@ -27,7 +27,7 @@ import {
 } from '../../../app/actividades/actividadesReducer';
 
 import {
-  errorAlert,
+  // errorAlert,
   questionAlert,
   successAlert,
 } from '../../../features/alert/alert';
@@ -36,7 +36,7 @@ const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
 
-  const { actividadesList, loading, error } = useSelector(
+  const { actividadesList, /* loading, error */ } = useSelector(
     state => state.actividades,
   );
 

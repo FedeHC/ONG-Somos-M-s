@@ -11,7 +11,7 @@ import {
   Stack,
   FormControl,
   Input,
-  useColorModeValue,
+  /* useColorModeValue, */
   Select,
 } from '@chakra-ui/react';
 import {
@@ -29,7 +29,7 @@ const UsersList = ({ history }) => {
   const [rol, setRol] = useState('Todo');
   const [search, setSearch] = useState('');
 
-  const { usersList, loading, error } = useSelector(state => state.users);
+  const { usersList, /* loading, error */ } = useSelector(state => state.users);
 
   const handleEdit = user => {
     dispatch(setUser(user));

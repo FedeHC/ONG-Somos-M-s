@@ -7,7 +7,7 @@ import { Spinner } from '../../../features/spinner';
 import { useSelector } from 'react-redux';
 
 const ActivityDetail = props => {
-  const { actividadDetail, loading, error } = useSelector(
+  const { actividadDetail, loading, /*error*/ } = useSelector(
     state => state.actividades,
   );
 

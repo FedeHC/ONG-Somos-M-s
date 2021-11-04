@@ -20,7 +20,7 @@ const Content = () => {
       </div>
       <div className="counter">
         <Counter />
-        <img src={Fondo} className="image" />
+        <img src={Fondo} className="image" alt="Imagen fondo"/>
       </div>
     </div>
   );

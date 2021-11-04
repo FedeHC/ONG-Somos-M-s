@@ -16,7 +16,7 @@ const MemberForm = () => {
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  const [imgIncomming, setImgIncomming] = useState();
+  // const [imgIncomming, setImgIncomming] = useState();
 
   // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
@@ -141,8 +141,8 @@ const MemberForm = () => {
                     </FormControl>
                   )}
                 </Field>
-                {selectedFile &&  <img src={URL.createObjectURL(selectedFile)} /> }
-                {!selectedFile && <img src={response?.image} /> }
+                {selectedFile &&  <img src={URL.createObjectURL(selectedFile)} alt="Imagen del archivo" /> }
+                {!selectedFile && <img src={response?.image} alt="Imagen del archivo" /> }
 
                 {/* DESCRIPTION INPUT */}
                 <Field name="description"

@@ -13,10 +13,10 @@ import { Formik, Form, Field } from 'formik';
 import { Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { editSlides } from '../../../app/slides/slides';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, /* useSelector */ } from 'react-redux';
 import {
-  errorAlert,
-  questionAlert,
+  // errorAlert,
+  // questionAlert,
   successAlert,
 } from '../../../features/alert/alert';
 

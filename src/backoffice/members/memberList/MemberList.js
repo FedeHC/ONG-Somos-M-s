@@ -26,7 +26,7 @@ const MemberList = ({ history }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
 
-  const { membersList, loading, error } = useSelector(state => state.members);
+  const { membersList, /* loading, error */ } = useSelector(state => state.members);
   const handleEdit = member => {
     dispatch(setMember(member));
     history.push(`/backoffice/members/edit/${member.id}`);

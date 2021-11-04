@@ -14,7 +14,7 @@ import ErrorAlert from '../../features/errorAlert/errorAlert';
 import { Spinner } from '../../features/spinner';
 
 const News = () => {
-  const { actividadesList, loading, error } = useSelector(
+  const { actividadesList, loading, /* error */ } = useSelector(
     state => state.actividades,
   );
 

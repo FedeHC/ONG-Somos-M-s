@@ -1,9 +1,7 @@
 import React from 'react';
-
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-
 import { Heading } from '@chakra-ui/layout';
 import {
   FormControl,
@@ -15,9 +13,9 @@ import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
 import { Box } from '@chakra-ui/react';
 import { Center } from '@chakra-ui/react';
-import { postContact } from '../../../services/ApiContact';
+// import { postContact } from '../../../services/ApiContact';
 import { createContacto } from '../../../app/nosotros/nosotrosReducer';
-import { errorAlert, successAlert } from '../../../features/alert/alert';
+import { /* errorAlert, */ successAlert } from '../../../features/alert/alert';
 
 // validation
 const ContactSchema = Yup.object().shape({

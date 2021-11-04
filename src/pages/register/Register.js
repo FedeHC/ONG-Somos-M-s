@@ -11,7 +11,7 @@ import {
   Box,
   Stack,
   Text,
-  useColorModeValue,
+  /* useColorModeValue, */
   Heading,
   Link,
 } from '@chakra-ui/react';
@@ -24,6 +24,7 @@ import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
 
 export const Register = ({ history }) => {
+  // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
   const [mapLocation, setMapLocation] = useState('');
@@ -70,7 +71,7 @@ export const Register = ({ history }) => {
                   validationSchema={signupSchema}
                   onSubmit={async (values, { resetForm }) => {
                     if (aceptarTerminos) {
-                      const values0 = Object.assign(values, mapLocation);
+                      // const values0 = Object.assign(values, mapLocation);
                       const { name, email, password } = values;
                       const resp = await registerUSer('auth/new', {
                         name,

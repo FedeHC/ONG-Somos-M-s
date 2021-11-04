@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TweetEmbed from 'react-tweet-embed';
-import { Spinner } from '../../../features/spinner';
-import ErrorAlert from '../../../features/errorAlert/errorAlert';
+// import { Spinner } from '../../../features/spinner';
+// import ErrorAlert from '../../../features/errorAlert/errorAlert';
 import { Skeleton } from '@chakra-ui/react';
 import './tweets.scss';
 

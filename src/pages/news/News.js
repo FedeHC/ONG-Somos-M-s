@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React /*, { useEffect, useState } */ from 'react';
 import './News.css';
 import CardNews from '../../features/cardNews/';
-import Card from '../../features/card/Card';
-import { getNews } from '../../services/apiNews';
+// import Card from '../../features/card/Card';
+// import { getNews } from '../../services/apiNews';
 import Video from './videoPlayer/Video';
-import { Heading, Text } from '@chakra-ui/react';
+// import { Heading, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ import { Spinner } from '../../features/spinner';
 import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const News = () => {
-  const { novedadesList, loading, error } = useSelector(
+  const { novedadesList, loading, /* error */ } = useSelector(
     state => state.novedades,
   );
 

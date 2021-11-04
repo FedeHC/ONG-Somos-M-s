@@ -10,7 +10,7 @@ import {
   Stack,
   Text,
   Link,
-  useColorModeValue,
+  /* useColorModeValue, */
   Box,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
@@ -33,6 +33,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginForm = ({ history }) => {
+  // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
