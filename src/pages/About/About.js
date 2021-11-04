@@ -1,6 +1,6 @@
 import React from 'react';
 import './about.scss';
-// import Tweets from './tweets/Tweets';
+import Tweets from './tweets/Tweets';
 import { Heading, Text, Box, Center } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
 import SocialFollow from './SocialFollow';
@@ -12,8 +12,9 @@ import { Skeleton } from '@chakra-ui/react';
 import ErrorAlert from '../../features/errorAlert/errorAlert';
 
 const About = () => {
-  const { name, long_description, loading, error } =
-    useSelector(state => state.nosotros.nosotros);
+  const { name, long_description, loading, error } = useSelector(
+    state => state.nosotros.nosotros,
+  );
 
   return (
     <>
@@ -99,7 +100,7 @@ const About = () => {
             Nuestros últimos tweets!!
           </Text>{' '}
           <div className="tweets">
-            {/* <Tweets /> */}
+            <Tweets />
           </div>
         </div>
         <hr />

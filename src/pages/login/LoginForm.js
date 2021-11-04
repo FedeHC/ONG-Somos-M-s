@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   FormControl,
   FormLabel,
@@ -18,6 +19,7 @@ import * as Yup from 'yup';
 import './loginForm.scss';
 import { startLogin } from '../../app/auth/authReducer';
 import { useDispatch } from 'react-redux';
+import { Spinner } from '../../features/spinner';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('email Invalido').required('Requerido'),
@@ -30,88 +32,106 @@ const SignupSchema = Yup.object().shape({
     .matches(/(?=\w*[a-z])/, 'al menos 1 letra requerida'),
 });
 
-const LoginForm = ({history}) => {
-  const dispatch = useDispatch();
-  return(
-  <Flex
-    minH={'100vh'}
-    align={'center'}
-    justify={'center'}
-    bg={useColorModeValue('gray.50', 'gray.800')}
-  >
-    <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-      <Stack align={'center'}>
-        <Heading fontSize={'4xl'}>¡Ingresa a Somos Más!!</Heading>
-        <Text fontSize={'lg'} color={'gray.600'}>
-        ¿No tienes una cuenta?<Link color={'blue.400'} onClick={()=>history.push("/register")} > Crear una</Link> ✌️
-        </Text>
-      </Stack>
-      <Box
-        rounded={'lg'}
-        bg={useColorModeValue('white', 'gray.700')}
-        boxShadow="dark-lg"
-        p={8}
-      >
-        <Stack spacing={4}>
-          <Formik
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={(values, { resetForm }) => {
-              dispatch(startLogin(values));
-              resetForm({});
-            }}
-          >
-            {({ errors, touched }) => (
-              <Form className="loginForm">
-                <Field name="email">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.email && form.touched.email}
-                    >
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <Input {...field} id="email" placeholder="email" />
-                      <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="password">
-                  {({ field, form }) => (
-                    <FormControl
-                      isInvalid={form.errors.password && form.touched.password}
-                    >
-                      <FormLabel htmlFor="password">Contraseña</FormLabel>
-                      <Input
-                        {...field}
-                        type="password"
-                        id="password"
-                        placeholder="contraseña"
-                      />
-                      <FormErrorMessage>
-                        {form.errors.password}
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
+const LoginForm = ({ history }) => {
+  const { logged: isAuth, loading } = useSelector(state => state.auth);
 
-                <Button
-                  mt={4}
-                  width="100%"
-                  colorScheme="blue"
-                  bg="#00214d"
-                  type="submit"
+  const dispatch = useDispatch();
+  return (
+    <>
+      {loading ? (
+        <Box
+          height="100vh"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Spinner />
+        </Box>
+      ) : (
+        <Flex minH={'100vh'} align={'center'} justify={'center'}>
+          <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+            <Stack align={'center'}>
+              <Heading fontSize={'4xl'}>¡Ingresa a Somos Más!!</Heading>
+              <Text fontSize={'lg'} color={'gray.600'}>
+                ¿No tienes una cuenta?
+                <Link
+                  color={'blue.400'}
+                  onClick={() => history.push('/register')}
                 >
-                  Ingresar
-                </Button>
-              </Form>
-            )}
-          </Formik>
-        </Stack>
-      </Box>
-    </Stack>
-  </Flex>
-)};
+                  {' '}
+                  Crear una
+                </Link>{' '}
+                ✌️
+              </Text>
+            </Stack>
+            <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
+              <Stack spacing={4}>
+                <Formik
+                  initialValues={{
+                    email: '',
+                    password: '',
+                  }}
+                  validationSchema={SignupSchema}
+                  onSubmit={(values, { resetForm }) => {
+                    dispatch(startLogin(values));
+                    resetForm({});
+                  }}
+                >
+                  {({ errors, touched }) => (
+                    <Form className="loginForm">
+                      <Field name="email">
+                        {({ field, form }) => (
+                          <FormControl
+                            isInvalid={form.errors.email && form.touched.email}
+                          >
+                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <Input {...field} id="email" placeholder="email" />
+                            <FormErrorMessage>
+                              {form.errors.email}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Field name="password">
+                        {({ field, form }) => (
+                          <FormControl
+                            isInvalid={
+                              form.errors.password && form.touched.password
+                            }
+                          >
+                            <FormLabel htmlFor="password">Contraseña</FormLabel>
+                            <Input
+                              {...field}
+                              type="password"
+                              id="password"
+                              placeholder="contraseña"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.password}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Button
+                        mt={4}
+                        width="100%"
+                        colorScheme="blue"
+                        bg="#00214d"
+                        type="submit"
+                      >
+                        Ingresar
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+              </Stack>
+            </Box>
+          </Stack>
+        </Flex>
+      )}
+    </>
+  );
+};
 
 export default LoginForm;

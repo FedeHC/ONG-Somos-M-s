@@ -31,10 +31,11 @@ import {
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../app/auth/authReducer';
+import { Skeleton } from '@chakra-ui/react';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
-  const { logged, user } = useSelector(state => state.auth);
+  const { logged, user, loading } = useSelector(state => state.auth);
   const handleLogout = () => {
     dispatch(setLogout());
   };
@@ -84,7 +85,9 @@ const PublicNavBar = () => {
           direction={'row'}
           spacing={3}
         >
-          {!logged ? (
+          {loading ? (
+            <Skeleton padding="1rem" width="100px" />
+          ) : !logged ? (
             <>
               {' '}
               <Link to="/login">
