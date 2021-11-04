@@ -36,6 +36,7 @@ function PublicRoutes() {
         <Route exact path="/gracias" component={Gracias} />
         <Route exact path="/actividades" component={Activities} />
         <Route exact path="/actividades/:id" component={ActivityDetail} />
+
         <ProtectedRoute
           isAuth={!isAuth}
           exact
@@ -43,6 +44,12 @@ function PublicRoutes() {
           component={LoginForm}
         />
         <Route exact path="/register" component={Register} />
+        <ProtectedRoute
+          isAuth={!isAuth}
+          exact
+          path="/register"
+          component={Register}
+        />
         <Route exact path="/landing" component={Landing} />
         <Route component={Page404} />
       </Switch>
