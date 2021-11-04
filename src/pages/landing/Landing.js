@@ -1,8 +1,12 @@
 import React from 'react';
+import Content from './content/content';
 import Header from './header/header'; 
 const Landing = () => {
     return (
-        <Header />
+        <React.Fragment>
+            <Header />
+            <Content />
+        </React.Fragment>
     )
 }
 
