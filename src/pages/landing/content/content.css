@@ -51,7 +51,7 @@
     padding: 1em;
     text-align: center;
   }
-  section p:first-child,
+  .timer section p:first-child,
   .timer div:last-child span,
   small {
     font-size: 2em;
@@ -95,7 +95,7 @@
     padding: 1em;
     text-align: center;
   }
-  section p:first-child,
+  .timer section p:first-child,
   .timer div:last-child span,
   small {
     font-size: 2em;
@@ -148,7 +148,7 @@
     padding: 1em;
     text-align: center;
   }
-  section p:first-child,
+  .timer section p:first-child,
   .timer div:last-child span,
   small {
     font-size: 2em;

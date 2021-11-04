@@ -20,7 +20,7 @@ const CardNews = ({ news }) => {
       rounded={'md'}
       p={6}
       overflow={'hidden'}
-      mb={3}
+      mb={8}
       mt={3}
       mx={3}
     >
