@@ -131,6 +131,9 @@ const PublicNavBar = () => {
               </MenuButton>
               <MenuList>
                 <MenuGroup title="Perfil">
+                  <Link to="/backoffice">
+                    <MenuItem color="blue.800">Backoffice</MenuItem>
+                  </Link>
                   <MenuItem onClick={handleLogout} color="red.800">
                     Logout
                   </MenuItem>
