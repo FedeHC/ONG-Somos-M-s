@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import PublicNavBar from '../features/publicNavBar/PublicNavBar';
 import PublicFooter from '../features/publicFooter/PublicFooter';
 import Home from '../pages/home';
@@ -15,8 +16,11 @@ import LoginForm from '../pages/login/LoginForm';
 import { Register } from '../pages/register/Register';
 import Page404 from '../pages/404/404Page';
 import Landing from '../pages/landing/Landing';
+import ProtectedRoute from './ProtectedRoute';
 
 function PublicRoutes() {
+  const { logged: isAuth } = useSelector(state => state.auth);
+
   return (
     <>
       {/* NAVBAR */}
@@ -32,7 +36,12 @@ function PublicRoutes() {
         <Route exact path="/gracias" component={Gracias} />
         <Route exact path="/actividades" component={Activities} />
         <Route exact path="/actividades/:id" component={ActivityDetail} />
-        <Route exact path="/login" component={LoginForm} />
+        <ProtectedRoute
+          isAuth={!isAuth}
+          exact
+          path="/login"
+          component={LoginForm}
+        />
         <Route exact path="/register" component={Register} />
         <Route exact path="/landing" component={Landing} />
         <Route component={Page404} />
