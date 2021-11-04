@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 
 import "./donations.css";
-import Mercadopago from "./MercadoPago";
 
 const DonationsSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
@@ -58,7 +57,7 @@ const Donations = ({ text }) => {
             }}
             validationSchema={DonationsSchema}
             onSubmit={(values) => {
-              setPagar(true);
+              window.open("https://mpago.la/1He3ULx","__blank");
             }}
           >
             {({ errors, touched }) => (
