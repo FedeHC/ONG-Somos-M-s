@@ -73,8 +73,8 @@ const News = () => {
         {loading ? (
           <Spinner />
         ) : filteredActivities ? (
-          filteredActivities.map(news => (
-            <Link to={`/actividades/${news.id}`}>
+          filteredActivities.map((news, index) => (
+            <Link key={index} to={`/actividades/${news.id}`}>
               <div onClick={() => callDispatch(news)}>
                 <CardNews key={news.id} news={news} />
               </div>

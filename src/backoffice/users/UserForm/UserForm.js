@@ -123,9 +123,8 @@ const UserForm = () => {
                                  mb={5}>
                       <FormLabel htmlFor="role">Rol:</FormLabel>
                         <Select {...field}
-                                    placeholder="-Seleccione rol-">
-                              <option value="Usuario"
-                                      selected="selected">Usuario</option>
+                                placeholder="-Seleccione rol-">
+                              <option value="Usuario">Usuario</option>
                               <option value="Administrador">Administrador</option>
                          </Select>
                       <FormErrorMessage>{form.errors.role}</FormErrorMessage>
