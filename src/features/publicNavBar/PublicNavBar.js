@@ -1,26 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/logo-ngo.png';
-import {
-  Box,
-  Flex,
-  Stack,
-  Text,
-  IconButton,
-  Button,
-  Collapse,
-  Icon,
-  Image,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useDisclosure,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Flex, Stack,
+  Text, IconButton, Button, Collapse, Icon, Image,
+  Popover, PopoverTrigger, PopoverContent,
+  useColorModeValue, useDisclosure,
+  Menu, MenuButton, MenuList, MenuItem, MenuGroup,
+  Skeleton
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -28,10 +14,10 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
+import Logo from '../assets/images/logo-ngo.png';
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../app/auth/authReducer';
-import { Skeleton } from '@chakra-ui/react';
+
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
@@ -253,10 +239,10 @@ const MobileNav = () => {
 const MobileNavItem = ({ children, label, href }) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <Stack spacing={4}
+           onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
         href={href ?? '#'}
         justify={'space-between'}
         align={'center'}
