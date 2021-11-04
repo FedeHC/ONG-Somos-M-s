@@ -33,7 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../app/auth/authReducer';
 import { Skeleton } from '@chakra-ui/react';
 
-const PublicNavBar = ({history}) => {
+const PublicNavBar = () => {
   const dispatch = useDispatch();
   const { logged, user, loading } = useSelector(state => state.auth);
 
@@ -133,7 +133,9 @@ const PublicNavBar = ({history}) => {
               </MenuButton>
               <MenuList>
                 <MenuGroup title="Perfil">
-                  <MenuItem color="blue.800">Donar</MenuItem>
+                  <Link to="/donar">
+                    <MenuItem  color="blue.800">Donar</MenuItem>
+                  </Link>
                   <Link to="/backoffice">
                     <MenuItem color="blue.800">Backoffice</MenuItem>
                   </Link>

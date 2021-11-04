@@ -85,10 +85,7 @@ const Donations = ({ text }) => {
                     </FormControl>
                   )}
                 </Field>
-                {
-                  pagar 
-                   ? <Mercadopago />
-                   : <Button
+                   <Button
                       mb={errors.email ? "27px" : 0}
                       ml={4}
                       color="white"
@@ -103,7 +100,6 @@ const Donations = ({ text }) => {
                     >
                       Contribuir
                     </Button>
-                }
               </Form>
             )}
           </Formik>
