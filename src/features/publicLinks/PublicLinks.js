@@ -7,7 +7,7 @@ export const PUBLIC_LINKS = [
   { label: "Nosotros",    href: '/nosotros' },
   { label: "Actividades", href: '/actividades' },
   { label: "Novedades",   href: '/novedades' },
-  { label: "Testimonios", href: '/testimonios' },
+  // { label: "Testimonios", href: '/testimonios' },
   { label: "Contacto",    href: '/contacto' },
   { label: "Landing", href: '/landing'}
 ];

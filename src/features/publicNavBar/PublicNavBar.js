@@ -157,8 +157,8 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {PUBLIC_LINKS.map(navItem => (
-        <Box key={navItem.label}>
+      {PUBLIC_LINKS.map((navItem, index) => (
+        <Box key={navItem.label ?? index}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Link to={navItem.href ?? '#'}>
@@ -184,8 +184,8 @@ const DesktopNav = () => {
                 minW={'sm'}
               >
                 <Stack>
-                  {navItem.children.map(child => (
-                    <DesktopSubNav key={child.label} {...child} />
+                  {navItem.children.map((child, index) => (
+                    <DesktopSubNav key={child.label ?? index} {...child} />
                   ))}
                 </Stack>
               </PopoverContent>
@@ -201,7 +201,7 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
-      to={href}
+      to={href ?? '#'}
       role={'group'}
       display={'block'}
       p={2}
@@ -243,8 +243,8 @@ const MobileNav = () => {
       p={4}
       display={{ md: 'none' }}
     >
-      {PUBLIC_LINKS.map(navItem => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+      {PUBLIC_LINKS.map((navItem, index) => (
+        <MobileNavItem key={navItem.label ?? index} {...navItem} />
       ))}
     </Stack>
   );
@@ -291,8 +291,8 @@ const MobileNavItem = ({ children, label, href }) => {
           align={'start'}
         >
           {children &&
-            children.map(child => (
-              <Link key={child.label} py={2} to={child.href}>
+            children.map((child, index) => (
+              <Link key={child.label ?? index} py={2} to={child.href ?? '#'}>
                 {child.label}
               </Link>
             ))}

@@ -1,32 +1,33 @@
 import React from "react";
 import Logo from "../assets/images/logo-ngo.png";
-
-import { Box, chakra, Container, Stack,
-          Text, Image,
+import { Box, Container, Stack,
+         Button, Text, Image, Link,
          useColorModeValue, VisuallyHidden } from '@chakra-ui/react';
 import { PUBLIC_LINKS, SOCIAL_LINKS } from "../publicLinks/PublicLinks";
-import { Link } from "react-router-dom";
+import { Link as ReachLink } from "react-router-dom";
 
 
-const SocialButton = ({ children, label, href, }) => {
+const SocialButton = ({ href, label, logo }) => {
   return (
-    <Link href={href}>
-      <chakra.button bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                    rounded={'full'}
-                    w={8}
-                    h={8}
-                    cursor={'pointer'}
-                    as={'a'}
-                    display={'inline-flex'}
-                    alignItems={'center'}
-                    justifyContent={'center'}
-                    transition={'background 0.3s ease'}
-                    _hover={{
-                      bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-                    }}>
+    <Link // as={ReachLink}
+          href={href}
+          isExternal>
+      <Button bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+              // as={"a"}
+              rounded={'full'}
+              w={12}
+              h={12}
+              cursor={'pointer'}
+              display={'inline-flex'}
+              alignItems={'center'}
+              justifyContent={'center'}
+              transition={'background 0.3s ease'}
+              _hover={{
+                bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+              }}>
         <VisuallyHidden>{label}</VisuallyHidden>
-        {children}
-      </chakra.button>
+        {logo}
+      </Button>
     </Link>
   );
 };
@@ -51,8 +52,9 @@ const PublicFooter = () => {
 
         {/* PUBLIC LINKS */}
         <Stack direction={'row'} spacing={6}>
-          {PUBLIC_LINKS.map( (publicLink) =>
-            <Link to={publicLink.href}>{publicLink.label}</Link>
+          {PUBLIC_LINKS.map((publicLink, index) =>
+            <ReachLink key={index}
+                       to={publicLink.href}>{publicLink.label}</ReachLink>
            )}
         </Stack>
       </Container>
@@ -76,12 +78,12 @@ const PublicFooter = () => {
                  spacing={6}>
 
             {/* SOCIAL LINKS */}
-            {SOCIAL_LINKS.map( (socialLink) =>
-              <span style={{backgroundColor:"#19375f", borderRadius:"20px"}}>
+            {SOCIAL_LINKS.map((socialLink, index) =>
+              <span key={index}
+                    style={{backgroundColor:"#19375f", borderRadius:"20px"}}>
                 <SocialButton label={socialLink.label}
-                              href={socialLink.href}>
-                  {socialLink.component}
-                </SocialButton>
+                              href={socialLink.href}
+                              logo={socialLink.component} />
               </span>
             )}
           </Stack>
