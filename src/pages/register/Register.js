@@ -15,7 +15,7 @@ import {
   Heading,
   Link,
 } from '@chakra-ui/react';
-import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
+import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
