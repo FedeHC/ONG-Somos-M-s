@@ -17,17 +17,19 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as Yup from 'yup';
 import { showActivities as getActivities } from '../../../services/apiActivities';
 import {
-  createActividad,
-  editActividad,
+  postActividades,
+  putActividades,
 } from '../../../app/actividades/actividadesReducer';
 import { /* questionAlert, */ successAlert } from '../../../features/alert/alert';
 import { useDispatch } from 'react-redux';
+import { getBase64FomFile } from '../../../helper/convertImage';
 
 const FormActivities = ({history}) => {
   const dispatch = useDispatch();
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
+  const [imgSv, setImgSv] = useState("");
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
@@ -45,17 +47,12 @@ const FormActivities = ({history}) => {
   // HANDLER
   const submitHandler = values => {
     if (location.includes('create')) {
-      values.created_at = "2021-11-04T16:52:26.000000Z";
-      values.image = URL.createObjectURL(selectedFile);
-      values.id = values.name;
-      dispatch(createActividad(values));
+      values.image = imgSv;
+      dispatch(postActividades(values));
       successAlert();
     } else if (location.includes('edit')) {
-      const objNew = response;
-      objNew.name = values.name;
-      objNew.description = values.description;
-      objNew.image = typeof(values.image) === "string" ? values.image : URL.createObjectURL(selectedFile);
-      dispatch(editActividad(objNew));
+      values.image = imgSv;
+      dispatch(putActividades({values, id}));
       successAlert();
     }
     history.push("/backoffice/activities");
@@ -169,6 +166,9 @@ const FormActivities = ({history}) => {
                           let myFiles = Array.from(files);
                           form.setFieldValue('image', myFiles[0]);
                           setSelectedFile(myFiles[0]);
+                          getBase64FomFile(myFiles[0], function(base64){
+                           setImgSv(base64);
+                          });
                         }}
                       />
                     </FormControl>
