@@ -22,9 +22,11 @@ import { setLogout } from '../../app/auth/authReducer';
 const PublicNavBar = () => {
   const dispatch = useDispatch();
   const { logged, user, loading } = useSelector(state => state.auth);
+
   const handleLogout = () => {
     dispatch(setLogout());
   };
+
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -117,6 +119,9 @@ const PublicNavBar = () => {
               </MenuButton>
               <MenuList>
                 <MenuGroup title="Perfil">
+                  <Link to="/donar">
+                    <MenuItem  color="blue.800">Donar</MenuItem>
+                  </Link>
                   <Link to="/backoffice">
                     <MenuItem color="blue.800">Backoffice</MenuItem>
                   </Link>
