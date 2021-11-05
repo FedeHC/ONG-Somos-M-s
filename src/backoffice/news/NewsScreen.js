@@ -23,6 +23,8 @@ import { Link } from 'react-router-dom';
 import {
   setNovedad,
   deleteNovedad,
+  deleteNovedades,
+  setNovedadesDelete,
 } from '../../app/novedades/novedadesReducer';
 import {
   // errorAlert,
@@ -45,7 +47,8 @@ const NewsScreen = ({ history }) => {
   const handleDelete = id => {
     questionAlert('estás seguro de eliminar esta actividad?').then(result => {
       if (result) {
-        dispatch(deleteNovedad(id));
+        dispatch(deleteNovedades(id));
+        dispatch(setNovedadesDelete(id));
         successAlert();
       }
     });

@@ -14,6 +14,7 @@ export const startLogin = createAsyncThunk(
 export const startRegister = createAsyncThunk(
 	"auth/startRegister",
 	async (body) => {
+      console.log(body);
 		  const resp = await registerUSer("register", body);
       localStorage.setItem("token",resp.data.data.data.token);
       return resp;
