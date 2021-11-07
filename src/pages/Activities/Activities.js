@@ -49,13 +49,13 @@ const News = () => {
         as={'form'}
         spacing={'12px'}
         width={'60vw'}
-        mt="150px"
+        mt="50px"
         me={12}
         ms={12}
-        mb={6}
+        mb={3}
       >
         <Text color={'linkedin.500'} fontSize="2xl">
-          Buscar...
+          Buscar por título
         </Text>
         <FormControl>
           <Input

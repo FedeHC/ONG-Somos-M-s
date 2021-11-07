@@ -62,7 +62,7 @@ const UsersList = ({ history }) => {
           >
             {typeSearch ? (
               <Select
-                width="50%"
+                width="100%"
                 onChange={e => setRol(e.target.value)}
                 placeholder="Selecciona rol"
               >
@@ -74,7 +74,7 @@ const UsersList = ({ history }) => {
               <FormControl>
                 <Input
                   variant={'solid'}
-                  width="50%"
+                  width="100%"
                   borderWidth={1}
                   color={'gray.800'}
                   _placeholder={{
@@ -113,7 +113,7 @@ const UsersList = ({ history }) => {
           </Link>
         </Flex>
 
-        <Box>
+        <Box width="60vw">
           <Table size="lg" variant="striped" colorScheme="blue">
             <Thead>
               <Tr bg={'#00214D'}>
@@ -128,7 +128,7 @@ const UsersList = ({ history }) => {
                   <Tr key={user.id}>
                     <Td fontWeight="600">{user.name}</Td>
 
-                    <Td fontWeight="600">{user.email}</Td>
+                    <Td fontWeight="600">{user.email.substring(0, 18)}</Td>
                     <Td>
                       <Button
                         colorScheme="yellow"

@@ -7,13 +7,13 @@ import ToyLogo from '../content/ToyLogo.png';
 const Header = ({ title, logo }) => {
   return (
     <div className="header">
-      <div /* className="logos" */>
+      <div className="logos">
         <img
           src={logo === 'school' ? Logo : ToyLogo}
-          /*           className="logo"
-           */ alt="Logo"
+          className="headerLogo"
+          alt="Logo"
         />
-        <img src={LogoOng} /* className="logoOng" */ alt="Logo ONG" />
+        <img src={LogoOng} className="headerLogoOng" alt="Logo ONG" />
         <p className="slogan">{title}</p>
       </div>
     </div>

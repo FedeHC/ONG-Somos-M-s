@@ -29,10 +29,22 @@ const Organization = () => {
   return (
     <Flex justifyContent="center">
       <Box width="60%">
+        <Flex justifyContent="center">
+          <Text m={3} borderBottom="1px " borderColor="gray.700" fontSize="3xl">
+            Información de la ONG
+          </Text>
+        </Flex>
+        <Text m={3} color={'linkedin.500'} fontSize="xl">
+          Texto de bienvenida:
+        </Text>
+        <Text fontSize="4xl">{nosotros.welcome_text}</Text>
+        <Text m={3} color={'linkedin.500'} fontSize="xl">
+          Nombre de la ONG:
+        </Text>
         <Heading
           lineHeight={1.1}
           fontWeight={600}
-          fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
+          fontSize={{ base: '2xl', sm: '4xl', lg: '6xl' }}
         >
           <Text
             as={'span'}
@@ -51,74 +63,84 @@ const Organization = () => {
             {nosotros.name}
           </Text>
           <br />
-        </Heading>
-        <Text>{nosotros.short_description}</Text>
+        </Heading>{' '}
+        <Text m={3} color={'linkedin.500'} fontSize="xl">
+          Descripción corta:
+        </Text>
+        <Text p={2} borderRadius="10px" bgColor="#3289fc">
+          {nosotros.short_description}
+        </Text>
+        <Text m={3} color={'linkedin.500'} fontSize="xl">
+          Descripción larga:
+        </Text>
         <Text
           p={2}
           borderRadius="10px"
-          bgColor="red"
+          bgColor="#3289fc"
           dangerouslySetInnerHTML={{ __html: nosotros.long_description }}
         ></Text>
-        <SimpleGrid columns={2} spacing={10}>
+        <SimpleGrid my={8} columns={2} spacing={8}>
           <Box
             position={'relative'}
-            height={'200px'}
+            height={'230px'}
             rounded={'2xl'}
             boxShadow={'2xl'}
-            width={'200px'}
+            width={'230px'}
             overflow={'hidden'}
           >
+            <Text color={'linkedin.500'} fontSize="xl">
+              Logo de la página:
+            </Text>
             <Image
               alt={'logo Image'}
               w={'100%'}
-              h={'100%'}
+              h={'80%'}
               src={nosotros.logo}
             />
           </Box>
           <Box>
-            {/* <Text rightIcon={<BsFacebook />}>{nosotros.facebook_url}</Text>
-            <Text rightIcon={<BsLinkedin />}>{nosotros.linkedin_url}</Text>
-            <Text rightIcon={<BsInstagram />}>{nosotros.instagram_url}</Text>
-            <Text rightIcon={<BsTwitter />}>{nosotros.twitter_url}</Text>
-            <Text rightIcon={<BsTelephoneFill />}>{nosotros.cellphone}</Text>
-            <Text>{nosotros.welcome_text}</Text> */}
-            <UnorderedList className="list">
+            <Text m={3} color={'linkedin.500'} fontSize="xl">
+              Info de redes sociales:
+            </Text>
+            <UnorderedList className="orgList">
               <ListItem className="listItem">
-                <ListIcon as={MdCheckCircle} color="green.500" />
-                <BsFacebook className="facebook" />
+                <BsLinkedin m={2} className="facebook" />:{' '}
+                {nosotros.linkedin_url}
+              </ListItem>
+              <ListItem className="listItem">
+                <BsFacebook m={2} className="facebook" />:{' '}
                 {nosotros.facebook_url}
               </ListItem>
               <ListItem>
-                <BsInstagram className="instagram" />
+                <BsInstagram m={2} className="instagram" />:{' '}
                 {nosotros.instagram_url}
               </ListItem>
               <ListItem>
-                <BsTwitter className="phone" />
-                {nosotros.twitter_url}
+                <BsTwitter m={2} className="phone" />: {nosotros.twitter_url}
+              </ListItem>
+              <ListItem>
+                <BsTelephoneFill m={2} className="phone" />:{' '}
+                {nosotros.cellphone}
               </ListItem>
             </UnorderedList>
-
-            {/* <UnorderedList>
-  <ListItem>Lorem ipsum dolor sit amet</ListItem>
-  <ListItem>Consectetur adipiscing elit</ListItem>
-  <ListItem>Integer molestie lorem at massa</ListItem>
-  <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-</UnorderedList> */}
           </Box>
         </SimpleGrid>
-        <Link to="/backoffice/organization/edit">
-          <Button
-            rounded={'full'}
-            size={'lg'}
-            fontWeight={'normal'}
-            px={6}
-            colorScheme={'#00214D'}
-            bg={'#00214D'}
-            _hover={{ bg: '#00214D.100' }}
-          >
-            Editar
-          </Button>
-        </Link>
+        <Flex justifyContent="center">
+          <Link to="/backoffice/organization/edit">
+            <Button
+              rounded={'full'}
+              size={'lg'}
+              fontWeight={'normal'}
+              px={6}
+              colorScheme={'#00214D'}
+              bg={'#00214D'}
+              _hover={{ bg: '#00214D.100' }}
+              mb={8}
+            >
+              Editar
+            </Button>
+          </Link>
+        </Flex>
       </Box>
     </Flex>
   );

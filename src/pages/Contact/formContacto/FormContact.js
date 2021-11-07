@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { Heading } from '@chakra-ui/layout';
+import { Text } from '@chakra-ui/layout';
 import {
   FormControl,
   FormErrorMessage,
@@ -16,6 +16,7 @@ import { Center } from '@chakra-ui/react';
 // import { postContact } from '../../../services/ApiContact';
 import { createContacto } from '../../../app/nosotros/nosotrosReducer';
 import { /* errorAlert, */ successAlert } from '../../../features/alert/alert';
+import '../contact.scss';
 
 // validation
 const ContactSchema = Yup.object().shape({
@@ -32,7 +33,7 @@ const Formcontact = () => {
   let dispatch = useDispatch();
 
   return (
-    <Box p={4} borderWidth="1px" rounded="lg">
+    <Box className="form-contact" p={4} borderWidth="1px" rounded="lg">
       <Center>
         <Formik
           initialValues={{
@@ -49,8 +50,10 @@ const Formcontact = () => {
           }}
         >
           {formik => (
-            <Form className="form-contact">
-              <Heading m={4}>Contactate con nosotros</Heading>
+            <Form>
+              <Text fontSize="4xl" color={'linkedin.500'} m={4}>
+                Contactate con nosotros
+              </Text>
               <Field name="name">
                 {({ field, form }) => (
                   <FormControl
@@ -100,7 +103,14 @@ const Formcontact = () => {
                 )}
               </Field>
 
-              <Button mt={4} colorScheme="teal" type="submit">
+              <Button
+                w="100%"
+                mt={6}
+                mb={6}
+                bgColor="#00214d"
+                color="white"
+                type="submit"
+              >
                 Enviar
               </Button>
             </Form>

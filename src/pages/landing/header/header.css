@@ -1,36 +1,6 @@
-@media (max-width: 360px) {
-  .header {
-    padding: 5px;
-    width: 100%;
-    height: 50px;
-  }
-  .logoOng {
-    display: none;
-  }
-  .logo {
-    width: 45px;
-    height: 40px;
-    margin-left: 0 auto;
-    margin-right: 0 auto;
-  }
-  .slogan {
-    display: none;
-  }
-}
-
-@media (max-width: 576px) {
-  .header {
-    display: flex;
-    width: 100%;
-    height: 50px;
-    padding: 5px;
-  }
-  .logos {
-    display: flex;
-  }
-  .slogan {
-    display: none;
-  }
+.headerLogoOng,
+.headerLogo {
+  height: 40px;
 }
 
 @media (min-width: 1200px) {
@@ -51,11 +21,11 @@
 
 @media (min-width: 1240px) {
   .header {
-    background-color: #c1c1c1;
+    background-color: #00a0dc;
   }
   .slogan {
     color: white;
     position: relative;
-    top: 3px;
+    top: 6px;
   }
 }

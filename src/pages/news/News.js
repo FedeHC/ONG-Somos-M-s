@@ -59,7 +59,7 @@ const News = () => {
         mb={2}
       >
         <Text color={'linkedin.500'} fontSize="2xl">
-          Buscar...
+          Buscar por título
         </Text>
         <FormControl>
           <Input
