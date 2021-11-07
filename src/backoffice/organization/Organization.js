@@ -16,8 +16,8 @@ import {
   BsInstagram,
   BsTwitter,
   BsFacebook,
-  BsLinkedin,
-  BsTelephoneFill,
+  // BsLinkedin,
+  // BsTelephoneFill,
 } from 'react-icons/bs';
 import { MdCheckCircle } from 'react-icons/md';
 
@@ -126,7 +126,6 @@ const Organization = () => {
 
 export default Organization;
 
-{
   /* <ul className="list">
             <li className="listItem">
               <FaFacebookSquare className="facebook" />
@@ -144,4 +143,3 @@ export default Organization;
               <FaPhoneAlt className="phone" /> Telefono: {objeto.phone}
             </li>
           </ul> */
-}

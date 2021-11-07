@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React /*, { useState } */ from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -19,7 +19,7 @@ const DonationsSchema = Yup.object().shape({
   email: Yup.string().email("email Invalido").required("Requerido"),
 });
 const Donations = ({ text }) => {
-  const [pagar, setPagar] = useState(false);
+  // const [pagar, setPagar] = useState(false);
   const textToShow = text ? text : "Esto es un texto de prueba";
   return (
     <Flex

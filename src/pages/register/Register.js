@@ -19,8 +19,8 @@ import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
-import { registerUSer } from '../../services/apiAuth';
-import { successAlert } from '../../features/alert/alert';
+// import { registerUSer } from '../../services/apiAuth';
+// import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
 import { startRegister } from '../../app/auth/authReducer';
 
