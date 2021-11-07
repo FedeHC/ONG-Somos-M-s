@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import { Box } from '@chakra-ui/react';
 import {
@@ -17,14 +20,12 @@ import { getSliceThunk } from '../app/slides/slides';
 import { getUserThunk } from '../app/users/users';
 import { getNovedades } from '../app/novedades/novedadesReducer';
 import { startRenew } from '../app/auth/authReducer';
+import Private from './Private';
 
 const AppRouter = () => {
-  const ifPrivateURL = window.location.href.toLowerCase().includes('backoffice')
-    ? true
-    : false;
 
   const dispatch = useDispatch();
-  const {checking} = useSelector(state => state.auth);
+  const { checking } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(getNosotros());
@@ -37,26 +38,30 @@ const AppRouter = () => {
     dispatch(startRenew());
   }, [dispatch]);
 
-  if(checking){
-    return(
-      <div>espere...</div>
-    )
+  if (checking) {
+    return <div>espere...</div>;
   }
 
   return (
     <Box display="flex" flexDirection="column">
       <Box>
-        <Router>
-          <AnimatedSwitch
+      <Router>
+        <div>
+            <AnimatedSwitch
             atEnter={bounceTransition.atEnter}
             atLeave={bounceTransition.atLeave}
             atActive={bounceTransition.atActive}
             mapStyles={mapStyles}
             className="route-wrapper"
           >
-            {ifPrivateURL ? <PrivateRoutes /> : <PublicRoutes />}
-          </AnimatedSwitch>
-        </Router>
+          <Private
+            path='/backoffice'
+            component={PrivateRoutes}
+          />
+            <Route path="/" component={PublicRoutes} />
+            </AnimatedSwitch>
+        </div>
+      </Router>
       </Box>
     </Box>
   );

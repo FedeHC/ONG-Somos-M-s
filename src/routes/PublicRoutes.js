@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PublicNavBar from '../features/publicNavBar/PublicNavBar';
 import PublicFooter from '../features/publicFooter/PublicFooter';
@@ -18,6 +18,7 @@ import Page404 from '../pages/404/404Page';
 import LandingSchool from '../pages/landing/LandingSchool';
 import LandingToys from '../pages/landing/LandingToys';
 import ProtectedRoute from './ProtectedRoute';
+import PrivateRoutes from './PrivateRoutes';
 
 function PublicRoutes() {
   const { logged: isAuth } = useSelector(state => state.auth);
@@ -25,6 +26,7 @@ function PublicRoutes() {
     <>
       {/* NAVBAR */}
       <PublicNavBar />
+      <div>
       <Switch>
         {/* PUBLIC ROUTES */}
         <Route exact path="/" component={Home} />
@@ -38,6 +40,9 @@ function PublicRoutes() {
         <Route exact path="/actividades/:id" component={ActivityDetail} />
         <Route exact path="/landing/school" component={LandingSchool} />
         <Route exact path="/landing/toys" component={LandingToys} />
+        <Route exact path="/404" component={Page404} />
+
+       
         <ProtectedRoute
           isAuth={!isAuth}
           exact
@@ -50,8 +55,9 @@ function PublicRoutes() {
           path="/register"
           component={Register}
         />
-        <Route component={Page404} />
+        <Redirect to="/404" />
       </Switch>
+      </div>
       {/* FOOTER */}
       <PublicFooter />
     </>
