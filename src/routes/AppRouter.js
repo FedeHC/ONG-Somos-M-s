@@ -17,6 +17,7 @@ import { getSliceThunk } from '../app/slides/slides';
 import { getUserThunk } from '../app/users/users';
 import { getNovedades } from '../app/novedades/novedadesReducer';
 import { startRenew } from '../app/auth/authReducer';
+import AppSpinner from './AppSpinner';
 
 const AppRouter = () => {
   const ifPrivateURL = window.location.href.toLowerCase().includes('backoffice')
@@ -24,7 +25,7 @@ const AppRouter = () => {
     : false;
 
   const dispatch = useDispatch();
-  const {checking} = useSelector(state => state.auth);
+  const { checking } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(getNosotros());
@@ -37,10 +38,8 @@ const AppRouter = () => {
     dispatch(startRenew());
   }, [dispatch]);
 
-  if(checking){
-    return(
-      <div>espere...</div>
-    )
+  if (checking) {
+    return <AppSpinner />;
   }
 
   return (

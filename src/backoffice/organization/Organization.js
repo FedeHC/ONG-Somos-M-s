@@ -1,4 +1,5 @@
 import React /*, { useState, useEffect } */ from 'react';
+import './organization.css';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -8,7 +9,6 @@ import {
   SimpleGrid,
   UnorderedList,
   ListItem,
-  ListIcon,
 } from '@chakra-ui/layout';
 import { Button, Image } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ import {
   BsLinkedin,
   BsTelephoneFill,
 } from 'react-icons/bs';
-import { MdCheckCircle } from 'react-icons/md';
+import { GrEdit } from 'react-icons/gr';
 
 const Organization = () => {
   const { nosotros /*, loading, error */ } = useSelector(
@@ -104,21 +104,21 @@ const Organization = () => {
             </Text>
             <UnorderedList className="orgList">
               <ListItem className="listItem">
-                <BsLinkedin m={2} className="facebook" />:{' '}
+                <BsLinkedin m={2} className="linkedin" />:{' '}
                 {nosotros.linkedin_url}
               </ListItem>
               <ListItem className="listItem">
                 <BsFacebook m={2} className="facebook" />:{' '}
                 {nosotros.facebook_url}
               </ListItem>
-              <ListItem>
+              <ListItem className="listItem">
                 <BsInstagram m={2} className="instagram" />:{' '}
                 {nosotros.instagram_url}
               </ListItem>
-              <ListItem>
-                <BsTwitter m={2} className="phone" />: {nosotros.twitter_url}
+              <ListItem className="listItem">
+                <BsTwitter m={2} className="twitter" />: {nosotros.twitter_url}
               </ListItem>
-              <ListItem>
+              <ListItem className="listItem">
                 <BsTelephoneFill m={2} className="phone" />:{' '}
                 {nosotros.cellphone}
               </ListItem>
@@ -128,14 +128,17 @@ const Organization = () => {
         <Flex justifyContent="center">
           <Link to="/backoffice/organization/edit">
             <Button
-              rounded={'full'}
+              borderRadius="10px"
               size={'lg'}
               fontWeight={'normal'}
               px={6}
-              colorScheme={'#00214D'}
-              bg={'#00214D'}
-              _hover={{ bg: '#00214D.100' }}
-              mb={8}
+              /*               colorScheme={'#00214D'}
+               */ /* bg={'#00214D'} */
+              /*               _hover={{ bg: '#00214D.100' }}
+               */ mb={8}
+              rightIcon={<GrEdit />}
+              colorScheme="blue"
+              variant="outline"
             >
               Editar
             </Button>
@@ -147,23 +150,3 @@ const Organization = () => {
 };
 
 export default Organization;
-
-{
-  /* <ul className="list">
-            <li className="listItem">
-              <FaFacebookSquare className="facebook" />
-              Facebook: www.facebook.com/{objeto.facebook}
-            </li>
-            <li>
-              <GrInstagram className="instagram" />
-              Instagram: www.instagram.com/{objeto.instagram}
-            </li>
-            <li>
-              <FiMail className="mail" />
-              Mail: {objeto.mail}
-            </li>
-            <li>
-              <FaPhoneAlt className="phone" /> Telefono: {objeto.phone}
-            </li>
-          </ul> */
-}

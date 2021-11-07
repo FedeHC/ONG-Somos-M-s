@@ -99,8 +99,8 @@ const PublicNavBar = () => {
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
-                  color={'black'}
-                  bg={'#bae8e8'}
+                  color={'gray.800'}
+                  bg={'linkedin.200'}
                   _hover={{
                     bg: 'cyan.100',
                   }}

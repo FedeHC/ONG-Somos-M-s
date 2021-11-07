@@ -13,7 +13,7 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 //data example
 const data = [
   {
-    image: 'https://pbs.twimg.com/media/FCaaiStWYAUQQJX?format=jpg&name=medium',
+    image: 'https://www.esneca.com/wp-content/uploads/que-es-una-ong.jpg',
     title: 'Talleres de verano',
     description: 'Dimos comienzo a los nuevos talleres de dibujo y pintura',
   },

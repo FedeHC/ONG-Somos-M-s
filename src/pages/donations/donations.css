@@ -1,8 +1,8 @@
-.email___container{
-    display: flex;
-    align-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+.email___container {
+  display: flex;
 }
 
-.email__field{
-    width: 25rem;
+.email__field {
+  width: 25rem;
 }
