@@ -17,16 +17,19 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as Yup from 'yup';
 import { showActivities as getActivities } from '../../../services/apiActivities';
 import {
-  createActividad,
-  editActividad,
+  postActividades,
+  putActividades,
 } from '../../../app/actividades/actividadesReducer';
 import { /* questionAlert, */ successAlert } from '../../../features/alert/alert';
+import { useDispatch } from 'react-redux';
+import { getBase64FomFile } from '../../../helper/convertImage';
 
-const FormActivities = () => {
+const FormActivities = ({history}) => {
+  const dispatch = useDispatch();
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  // const [imgIncomming, setImgIncomming] = useState();
+  const [imgSv, setImgSv] = useState("");
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
@@ -44,12 +47,15 @@ const FormActivities = () => {
   // HANDLER
   const submitHandler = values => {
     if (location.includes('create')) {
-      createActividad(values);
+      values.image = imgSv;
+      dispatch(postActividades(values));
       successAlert();
     } else if (location.includes('edit')) {
-      editActividad(values, id);
+      values.image = imgSv;
+      dispatch(putActividades({values, id}));
       successAlert();
     }
+    history.push("/backoffice/activities");
   };
 
   // FORM TITLE
@@ -65,20 +71,6 @@ const FormActivities = () => {
       .required('Requerido')
       .min(3, 'Se requieren 3 caracteres como mínimo'),
     description: Yup.string().required('Requerido'),
-    image: Yup.mixed()
-      .required('Requerido')
-      .test(
-        'type',
-        'Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg',
-        file => {
-          return (
-            file &&
-            (file.type === 'image/png' ||
-              file.type === 'image/jpg' ||
-              file.type === 'image/jpeg')
-          );
-        },
-      ),
   });
 
   // INITIAL FORMIK VALUES
@@ -174,9 +166,11 @@ const FormActivities = () => {
                           let myFiles = Array.from(files);
                           form.setFieldValue('image', myFiles[0]);
                           setSelectedFile(myFiles[0]);
+                          getBase64FomFile(myFiles[0], function(base64){
+                           setImgSv(base64);
+                          });
                         }}
                       />
-                      <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>

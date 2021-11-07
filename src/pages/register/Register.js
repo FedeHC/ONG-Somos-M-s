@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import {
   FormControl,
@@ -15,15 +15,17 @@ import {
   Heading,
   Link,
 } from '@chakra-ui/react';
-import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
+import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
 import { registerUSer } from '../../services/apiAuth';
 import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
+import { startRegister } from '../../app/auth/authReducer';
 
 export const Register = ({ history }) => {
+  const dispatch = useDispatch();
   // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
@@ -73,19 +75,8 @@ export const Register = ({ history }) => {
                     if (aceptarTerminos) {
                       // const values0 = Object.assign(values, mapLocation);
                       const { name, email, password } = values;
-                      const resp = await registerUSer('auth/new', {
-                        name,
-                        email,
-                        password,
-                      });
-                      if (!resp.error) {
-                        successAlert(
-                          resp.data.data.message,
-                          'Ingresá con tu nueva cuenta',
-                        );
-                        resetForm({});
-                        history.push('/login');
-                      }
+                      dispatch(startRegister({name,email,password}));
+                      history.replace("/");
                     } else {
                       mostrarErrorTyc();
                     }

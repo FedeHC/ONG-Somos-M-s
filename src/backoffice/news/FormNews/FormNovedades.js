@@ -18,30 +18,30 @@ import {
 } from '@chakra-ui/react';
 import {
   getNews,
-  // createNews,
-  // updateNews,
-  // deleteNews,
 } from '../../../services/apiNews';
 import {
-  // errorAlert,
-  // questionAlert,
   successAlert,
 } from '../../../features/alert/alert';
 import {
   createNovedad,
   editNovedad,
+  postNovedades,
+  putNovedades,
 } from '../../../app/novedades/novedadesReducer';
+import { useDispatch } from 'react-redux';
+import { getBase64FomFile } from '../../../helper/convertImage';
 
-const FormNovedades = () => {
+const FormNovedades = ({history}) => {
+  const dispatch = useDispatch();
   // STATE
   const [response, setResponse] = useState([]);
   const [selectedFile, setSelectedFile] = useState();
-  // const [imgIncomming, setImgIncomming] = useState();
+  const [imgSv, setImgSv] = useState("");
+
 
   // ID & URL
   const { id } = useParams(); // Get id if exists in URL, otherwise null/undefined.
   const location = useLocation().pathname.toLocaleLowerCase();
-
   // NEWS ARRAY/OBJECT
   useEffect(() => {
     const fetchData = async () => {
@@ -53,12 +53,16 @@ const FormNovedades = () => {
 
   // HANDLER
   const submitHandler = values => {
-    if (location.includes('create')) {
-      createNovedad(values);
+    if (location.includes('create')){
+      values.image = imgSv;
+      dispatch(postNovedades(values));
       successAlert();
+      history.push("/backoffice/news");
     } else if (location.includes('edit')) {
-      editNovedad(values, id);
+      values.image = imgSv;
+      dispatch(putNovedades({values, id}));
       successAlert();
+      history.push("/backoffice/news");
     }
   };
 
@@ -76,7 +80,6 @@ const FormNovedades = () => {
     content: Yup.string().required('Requerido'),
     category: Yup.string().required('Requerido'),
     image: Yup.mixed()
-      .required('Requerido')
       .test(
         'type',
         'Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg',
@@ -90,7 +93,6 @@ const FormNovedades = () => {
         },
       ),
   });
-
   // INITIAL FORMIK VALUES
   const initialValues = {
     name: response?.name || '',
@@ -209,6 +211,9 @@ const FormNovedades = () => {
                           let myFiles = Array.from(files);
                           formik.setFieldValue('image', myFiles[0]);
                           setSelectedFile(myFiles[0]);
+                          getBase64FomFile(myFiles[0], function(base64){
+                           setImgSv(base64);
+                          });
                         }}
                       />
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>

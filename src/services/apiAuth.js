@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "https://note-app-back-end.herokuapp.com/api";
+const url = "http://ongapi.alkemy.org/api";
 
 export const loginUser = async (endpoint, body) => {
  const resp={data:null,error:null};
@@ -28,7 +28,7 @@ export const revalidationUser = async (endpoint) => {
  const resp={data:null,error:null};
  const token = localStorage.getItem("token" || "");
  try {
-   resp.data =  await axios.get(`${url}/${endpoint}`,{headers:{"x-token":token}});
+   resp.data =  await axios.get(`${url}/${endpoint}`,{headers:{"Authorization":`Bearer${token}`}});
    return resp;
  } catch (error) {
    resp.error = error;

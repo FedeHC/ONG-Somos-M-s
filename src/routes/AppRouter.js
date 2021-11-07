@@ -8,7 +8,7 @@ import {
 } from '../features/AnimatedSwitch/AnimatedSwitch';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getNosotros } from '../app/nosotros/nosotrosReducer';
 import { getCategorias } from '../app/categorias/categoriasReducer';
 import { getActividades } from '../app/actividades/actividadesReducer';
@@ -24,6 +24,7 @@ const AppRouter = () => {
     : false;
 
   const dispatch = useDispatch();
+  const {checking} = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(getNosotros());
@@ -35,6 +36,12 @@ const AppRouter = () => {
     dispatch(getUserThunk());
     dispatch(startRenew());
   }, [dispatch]);
+
+  if(checking){
+    return(
+      <div>espere...</div>
+    )
+  }
 
   return (
     <Box display="flex" flexDirection="column">

@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setActividades,
   deleteActividad,
+  deleteActividades,
 } from '../../../app/actividades/actividadesReducer';
 
 import {
@@ -49,6 +50,7 @@ const ActivitiesList = ({ history }) => {
   const handleDelete = id => {
     questionAlert('estás seguro de eliminar esta actividad?').then(result => {
       if (result) {
+        dispatch(deleteActividades(id));
         dispatch(deleteActividad(id));
         successAlert();
       }
