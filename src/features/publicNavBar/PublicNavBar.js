@@ -34,6 +34,7 @@ import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
 import { setLogout } from '../../app/auth/authReducer';
 import { FiLogIn } from 'react-icons/fi';
 import { IoMdLogIn } from 'react-icons/io';
+import { FaUserAlt } from 'react-icons/fa';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
@@ -130,13 +131,14 @@ const PublicNavBar = () => {
                 _hover={{ bg: 'blue.800' }}
                 color="white"
                 bg={'#00214d'}
+                rightIcon={<FaUserAlt />}
               >
                 {user.name}
               </MenuButton>
               <MenuList>
                 <MenuGroup title="Perfil">
                   <Link to="/donar">
-                    <MenuItem  color="blue.800">Donar</MenuItem>
+                    <MenuItem color="blue.800">Donar</MenuItem>
                   </Link>
                   <Link to="/backoffice">
                     <MenuItem color="blue.800">Backoffice</MenuItem>
