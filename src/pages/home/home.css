@@ -1,4 +1,5 @@
 .title__main {
+  padding: 30px 0 0 0;
   font-size: 4rem;
   text-align: center;
   color: #616161;
@@ -13,6 +14,7 @@
 .news__container {
   width: 100%;
   background-color: #00214d;
+  padding: 40px 0 40px 0;
 }
 .news__container h3 {
   font-size: 3rem;
