@@ -8,6 +8,7 @@ import {
   Heading,
   Flex,
   Stack,
+  VStack,
   Text,
   Link,
   /* useColorModeValue, */
@@ -52,21 +53,21 @@ const LoginForm = ({ history }) => {
         <Flex minH={'100vh'} align={'center'} justify={'center'}>
           <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
             <Stack align={'center'}>
-              <Heading fontSize={'4xl'}>¡Ingresa a Somos Más!!</Heading>
+              <Heading fontSize={'4xl'}>Ingresa a Somos Más</Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
-                ¿No tienes una cuenta?
+                ¿No tenés una cuenta?
                 <Link
                   color={'blue.400'}
                   onClick={() => history.push('/register')}
                 >
                   {' '}
-                  Crear una
+                  Crear una cuenta
                 </Link>{' '}
                 ✌️
               </Text>
             </Stack>
-            <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
-              <Stack spacing={4}>
+            <VStack spacing={10}>
+              <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
                 <Formik
                   initialValues={{
                     email: '',
@@ -90,6 +91,7 @@ const LoginForm = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.email}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -110,6 +112,7 @@ const LoginForm = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.password}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -126,8 +129,8 @@ const LoginForm = ({ history }) => {
                     </Form>
                   )}
                 </Formik>
-              </Stack>
-            </Box>
+              </Box>
+            </VStack>
           </Stack>
         </Flex>
       )}
