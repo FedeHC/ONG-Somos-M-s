@@ -31,6 +31,7 @@ const Home = ({ history }) => {
 
   return (
     <div>
+     <div style={{height:"100vh",display:"flex",flexDirection:"column",justifyContent:"space-around",marginBottom:"-35px"}}>
       {loading ? (
         <Box
           height="5rem"
@@ -46,7 +47,7 @@ const Home = ({ history }) => {
         <ErrorAlert />
       )}
       <Slider />
-
+      </div>
       <section className="news__container">
         <h3>Ultimas Novedades</h3>
         <div className="news__flex">
