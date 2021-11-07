@@ -15,7 +15,8 @@ import ActivityDetail from '../pages/Activities/details/Detail';
 import LoginForm from '../pages/login/LoginForm';
 import { Register } from '../pages/register/Register';
 import Page404 from '../pages/404/404Page';
-import Landing from '../pages/landing/Landing';
+import LandingSchool from '../pages/landing/LandingSchool';
+import LandingToys from '../pages/landing/LandingToys';
 import ProtectedRoute from './ProtectedRoute';
 
 function PublicRoutes() {
@@ -35,7 +36,8 @@ function PublicRoutes() {
         <Route exact path="/gracias" component={Gracias} />
         <Route exact path="/actividades" component={Activities} />
         <Route exact path="/actividades/:id" component={ActivityDetail} />
-        <Route exact path="/landing" component={Landing} />
+        <Route exact path="/landing/school" component={LandingSchool} />
+        <Route exact path="/landing/toys" component={LandingToys} />
         <ProtectedRoute
           isAuth={!isAuth}
           exact

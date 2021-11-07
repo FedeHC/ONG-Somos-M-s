@@ -4,7 +4,7 @@
     width: 100%;
     height: 50px;
   }
-  .logoOng{
+  .logoOng {
     display: none;
   }
   .logo {
@@ -16,10 +16,9 @@
   .slogan {
     display: none;
   }
-  
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
   .header {
     display: flex;
     width: 100%;
@@ -29,32 +28,32 @@
   .logos {
     display: flex;
   }
-  .slogan{
+  .slogan {
     display: none;
   }
 }
 
-@media (min-width: 1200px){
-  .header{
+@media (min-width: 1200px) {
+  .header {
     width: 100%;
     height: 50px;
     padding: 5px;
   }
-  .logos{
+  .logos {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
   }
-  .logos .slogan{
+  .logos .slogan {
     font-family: 'Montserrat';
   }
 }
 
-@media(min-width: 1240px){
-  .header{
-    background-color: #00214d57;
+@media (min-width: 1240px) {
+  .header {
+    background-color: #c1c1c1;
   }
-  .slogan{
+  .slogan {
     color: white;
     position: relative;
     top: 3px;

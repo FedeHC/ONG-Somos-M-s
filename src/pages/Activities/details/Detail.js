@@ -1,15 +1,21 @@
-import React from 'react';
-import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { Box, SimpleGrid, Divider, Text, Button } from '@chakra-ui/react';
 import './Detail.scss';
 import TitleScreen from '../../../features/titleScreen/Title';
 import ErrorAlert from '../../../features/errorAlert/errorAlert';
 import { Spinner } from '../../../features/spinner';
 import { useSelector } from 'react-redux';
-
+import { BsArrowLeftCircle } from 'react-icons/bs';
+import { useHistory } from 'react-router-dom';
 const ActivityDetail = props => {
-  const { actividadDetail, loading, /*error*/ } = useSelector(
+  const { actividadDetail, loading /*error*/ } = useSelector(
     state => state.actividades,
   );
+  const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -37,15 +43,32 @@ const ActivityDetail = props => {
             </Box>
             <Box padding="10px">
               <div className="newsText">
-                <p className="title">Detalles de actividad</p>
+                <Text color={'gray.700'} className="title">
+                  Detalles de actividad
+                </Text>
                 <Divider />
-                <p
+                <Text
+                  color={'gray.500'}
                   dangerouslySetInnerHTML={{
                     __html: actividadDetail.description,
                   }}
                   className="content"
                 />
               </div>
+              <Button
+                mt={10}
+                leftIcon={<BsArrowLeftCircle />}
+                _hover={{
+                  background: '#00214D',
+                  color: 'white',
+                }}
+                color="#00214D"
+                variant="outline"
+                borderColor="#00214D"
+                onClick={() => history.goBack()}
+              >
+                Volver
+              </Button>
             </Box>
           </SimpleGrid>
         </>

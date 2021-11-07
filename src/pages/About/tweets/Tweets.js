@@ -11,7 +11,7 @@ const Tweets = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 7000);
+    }, 6000);
     return () => clearTimeout(timer);
   }, []);
   return (

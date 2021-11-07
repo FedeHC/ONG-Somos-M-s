@@ -1,12 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Flex, Stack,
-  Text, IconButton, Button, Collapse, Icon, Image,
-  Popover, PopoverTrigger, PopoverContent,
-  useColorModeValue, useDisclosure,
-  Menu, MenuButton, MenuList, MenuItem, MenuGroup,
-  Skeleton
+import {
+  Box,
+  Flex,
+  Stack,
+  Text,
+  IconButton,
+  Button,
+  Collapse,
+  Icon,
+  Image,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  useColorModeValue,
+  useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  Skeleton,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -17,7 +32,8 @@ import {
 import Logo from '../assets/images/logo-ngo.png';
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
 import { setLogout } from '../../app/auth/authReducer';
-
+import { FiLogIn } from 'react-icons/fi';
+import { IoMdLogIn } from 'react-icons/io';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
@@ -80,12 +96,12 @@ const PublicNavBar = () => {
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
-                  fontWeight={300}
                   color={'black'}
                   bg={'#bae8e8'}
                   _hover={{
                     bg: 'cyan.100',
                   }}
+                  rightIcon={<FiLogIn />}
                 >
                   Login
                 </Button>
@@ -94,12 +110,12 @@ const PublicNavBar = () => {
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
-                  fontWeight={300}
                   color={'white'}
                   bg={'#00214d'}
                   _hover={{
                     bg: 'blue.800',
                   }}
+                  rightIcon={<IoMdLogIn />}
                 >
                   Registrarse
                 </Button>
@@ -239,8 +255,7 @@ const MobileNav = () => {
 const MobileNavItem = ({ children, label, href }) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
-    <Stack spacing={4}
-           onClick={children && onToggle}>
+    <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
         href={href ?? '#'}

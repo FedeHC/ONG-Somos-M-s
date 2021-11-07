@@ -1,13 +1,14 @@
 import React from 'react';
-// import Sidebar from './Sidebar/Sidebar';
-import './Backoffice.css'; 
-// import Navbar from './Navbar/Navbar';
+import './Backoffice.css';
 
 const Backoffice = () => {
-
   return (
     <div className="backoffice">
-      
+      <div className="backgroundBackoffice">
+        <div className="title-styles">
+          <h3>Bienvenido a Backoffice</h3>
+        </div>
+      </div>
     </div>
   );
 };

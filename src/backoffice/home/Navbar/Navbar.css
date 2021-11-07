@@ -1,27 +1,28 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .navbar {
-    background-color: #00214D;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid gray;
+  background-color: #00214d;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid gray;
 }
 
 .icon {
-    color: white;
-    font-size: 20px;
-    position: relative;
-    top: 5px;
-    cursor: pointer;
-    transition: 2s;
+  color: white;
+  font-size: 30px;
+  position: relative;
+  top: 5px;
+  cursor: pointer;
+  transition: 2s;
+  margin-right: 2rem;
 }
 
-.icon:hover{
-    color: rgba(255, 255, 255, 0.74);
+.icon:hover {
+  color: rgba(255, 255, 255, 0.74);
 }
 
-.flex{
-    display: flex;
+.flex {
+  display: flex;
 }

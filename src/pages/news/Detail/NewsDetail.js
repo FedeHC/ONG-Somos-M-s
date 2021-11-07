@@ -1,16 +1,23 @@
-import React /*, { useEffect, useState } */ from 'react';
-import { Box, SimpleGrid, Divider } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Box, SimpleGrid, Divider, Button, Text } from '@chakra-ui/react';
 import './NewsDetail.scss';
 import TitleScreen from '../../../features/titleScreen/Title';
 import ErrorAlert from '../../../features/errorAlert/errorAlert';
-// import { getNews } from '../../../services/apiNews';
 import { useSelector } from 'react-redux';
 import { Spinner } from '../../../features/spinner';
+import { BsArrowLeftCircle } from 'react-icons/bs';
 
 const NewsDetail = props => {
-  const { novedadDetail, loading, /* error */ } = useSelector(
+  const { novedadDetail, loading /* error */ } = useSelector(
     state => state.novedades,
   );
+
+  let history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -38,13 +45,30 @@ const NewsDetail = props => {
             </Box>
             <Box padding="10px">
               <div className="newsText">
-                <p className="title">Detalles de novedad</p>
+                <Text color={'gray.700'} className="title">
+                  Detalles de novedad
+                </Text>
                 <Divider />
-                <p
+                <Text
+                  color={'gray.500'}
                   dangerouslySetInnerHTML={{ __html: novedadDetail.content }}
                   className="content"
                 />
               </div>
+              <Button
+                mt={10}
+                leftIcon={<BsArrowLeftCircle />}
+                _hover={{
+                  background: '#00214D',
+                  color: 'white',
+                }}
+                color="#00214D"
+                variant="outline"
+                borderColor="#00214D"
+                onClick={() => history.goBack()}
+              >
+                Volver
+              </Button>
             </Box>
           </SimpleGrid>
         </>
