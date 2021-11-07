@@ -19,8 +19,8 @@ import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
-import { registerUSer } from '../../services/apiAuth';
-import { successAlert } from '../../features/alert/alert';
+// import { registerUSer } from '../../services/apiAuth';
+// import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
 import { startRegister } from '../../app/auth/authReducer';
 
@@ -50,13 +50,13 @@ export const Register = ({ history }) => {
           <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
             <Stack align={'center'}>
               <Heading fontSize={'4xl'}>
-                ¡Create una cuenta en Somos Más!!
+                Registrate en Somos Más
               </Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
-                ¿ya tienes una cuenta?{' '}
+                ¿Ya tenés una cuenta?{' '}
                 <Link color={'blue.400'} onClick={() => history.push('/login')}>
                   {' '}
-                  Ingresá en Somos Mas
+                  Ingresá a Somos Mas
                 </Link>{' '}
                 ✌️
               </Text>
@@ -99,6 +99,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.name}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -113,6 +114,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.email}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -136,6 +138,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage className={styles.msg__error}>
                               {form.errors.password}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -160,6 +163,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.passwordConfirmation}
                             </FormErrorMessage>
+                            <br/>
                           </FormControl>
                         )}
                       </Field>

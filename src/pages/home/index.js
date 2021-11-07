@@ -38,7 +38,9 @@ const Home = ({ history }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <Skeleton width="80%" mt={'2rem'} padding="3rem" />
+          <Skeleton width="80%"
+                    mt={'2rem'}
+                    padding="3rem" />
         </Box>
       ) : nosotros ? (
         <h1 className="title__main">{nosotros.welcome_text}</h1>

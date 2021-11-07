@@ -56,7 +56,7 @@ const novedadeSlice = createSlice({
     },
     setNovedadesDelete(state, action) {
       state.novedadesList = state.novedadesList.filter(
-        novedad => novedad.id != action.payload,
+        novedad => novedad.id !== action.payload,
       );
     },
   },

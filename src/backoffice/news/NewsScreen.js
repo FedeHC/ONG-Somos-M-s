@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   setNovedad,
-  deleteNovedad,
+  // deleteNovedad,
   deleteNovedades,
   setNovedadesDelete,
 } from '../../app/novedades/novedadesReducer';
