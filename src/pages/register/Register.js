@@ -13,7 +13,7 @@ import {
   Text,
   /* useColorModeValue, */
   Heading,
-  Link,
+  Link as LinkChakra,
 } from '@chakra-ui/react';
 import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
@@ -23,10 +23,10 @@ import styles from './register.module.css';
 // import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
 import { startRegister } from '../../app/auth/authReducer';
+import { Link } from 'react-router-dom';
 
-export const Register = ({ history }) => {
+export const Register = () => {
   const dispatch = useDispatch();
-  // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
   const [mapLocation, setMapLocation] = useState('');
@@ -54,10 +54,12 @@ export const Register = ({ history }) => {
               </Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
                 ¿Ya tenés una cuenta?{' '}
-                <Link color={'blue.400'} onClick={() => history.push('/login')}>
+                <LinkChakra color={'blue.400'}>
                   {' '}
+                  <Link >
                   Ingresá a Somos Mas
-                </Link>{' '}
+                  </Link>
+                </LinkChakra>{' '}
                 ✌️
               </Text>
             </Stack>

@@ -8,12 +8,11 @@ import {
   Heading,
   Flex,
   Stack,
-  VStack,
   Text,
-  Link,
-  /* useColorModeValue, */
+  Link as LinKChakra,
   Box,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
@@ -33,8 +32,7 @@ const SignupSchema = Yup.object().shape({
     .matches(/(?=\w*[a-z])/, 'al menos 1 letra requerida'),
 });
 
-const LoginForm = ({ history }) => {
-  // eslint-disable-next-line
+const LoginForm = () => {
   const { logged: isAuth, loading } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
@@ -56,18 +54,19 @@ const LoginForm = ({ history }) => {
               <Heading fontSize={'4xl'}>Ingresa a Somos Más</Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
                 ¿No tenés una cuenta?
-                <Link
+                <LinKChakra
                   color={'blue.400'}
-                  onClick={() => history.push('/register')}
                 >
+                 <Link to="/register">
                   {' '}
                   Crear una cuenta
-                </Link>{' '}
+                 </Link >
+                </LinKChakra>{' '}
                 ✌️
               </Text>
             </Stack>
-            <VStack spacing={10}>
               <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
+                <Stack spacing={10}>
                 <Formik
                   initialValues={{
                     email: '',
@@ -129,8 +128,8 @@ const LoginForm = ({ history }) => {
                     </Form>
                   )}
                 </Formik>
+            </Stack>
               </Box>
-            </VStack>
           </Stack>
         </Flex>
       )}
