@@ -24,5 +24,5 @@ export const updateCategory = async (id, body) => {
 
 // DELETE
 export const deleteCategory = async id => {
-  return await methodDeletePrivate(`${endPoint}/${id}`, id);
+  return await methodDeletePrivate(endPoint, id);
 };

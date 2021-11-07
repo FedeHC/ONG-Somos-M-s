@@ -73,10 +73,9 @@ export const Register = ({ history }) => {
                   validationSchema={signupSchema}
                   onSubmit={async (values, { resetForm }) => {
                     if (aceptarTerminos) {
-                      // const values0 = Object.assign(values, mapLocation);
                       const { name, email, password } = values;
                       dispatch(startRegister({name,email,password}));
-                      history.replace("/");
+                      resetForm({});
                     } else {
                       mostrarErrorTyc();
                     }

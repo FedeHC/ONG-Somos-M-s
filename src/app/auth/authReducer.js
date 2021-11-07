@@ -71,6 +71,27 @@ const authSlice = createSlice({
        state.checking = false;
        state.logged = false;
     },
+    //register
+    [startRegister.pending]:(state, action)=>{
+       state.loading = true;
+    },
+    [startRegister.fulfilled]:(state, action)=>{
+       state.loading = false;
+       if(!action.payload.error){
+         state.user = action.payload.data.data.data.user;
+         state.token = action.payload.data.data.data.token;
+        }else{
+          state.error = action.payload.error;
+        }
+        state.checking = false;
+        state.logged = true;
+    },
+    [startRegister.rejected]:(state, action)=>{
+       state.loading = false;
+       state.error = action.payload;
+       state.checking = false;
+       state.logged = false;
+    },
     //revalidation
     [startRenew.pending]:(state, action)=>{
        state.loading = true;
