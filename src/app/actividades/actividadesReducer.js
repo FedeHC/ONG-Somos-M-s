@@ -9,7 +9,7 @@ export const getActividades = createAsyncThunk(
 );
 
 export const putActividades = createAsyncThunk(
-  'novedades/putActividades',
+  'actividades/putActividades',
   async datos => {
     const { values, id } = datos;
     const resp = await updateActivity(values, id);
@@ -18,7 +18,7 @@ export const putActividades = createAsyncThunk(
 );
 
 export const postActividades = createAsyncThunk(
-  'novedades/postActividades',
+  'actividades/postActividades',
   async values => {
     const resp = await createActivity(values);
     return resp;
@@ -26,7 +26,7 @@ export const postActividades = createAsyncThunk(
 );
 
 export const deleteActividades = createAsyncThunk(
-  'novedades/deleteActividades',
+  'actividades/deleteActividades',
   async id => {
     const resp = await deleteActivity(id);
     return resp;

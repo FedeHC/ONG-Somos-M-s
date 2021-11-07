@@ -21,7 +21,8 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoria } from '../../../app/categorias/categoriasReducer';
+import { deleteCategorias, deleteCategories, setCategoria } from '../../../app/categorias/categoriasReducer';
+import { questionAlert, successAlert } from '../../../features/alert/alert';
 
 const CategoriesBackOffice = ({ history }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,22 @@ const CategoriesBackOffice = ({ history }) => {
     dispatch(setCategoria(category));
     history.push(`/backoffice/categories/edit/${category.id}`);
   };
+  // questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+  //   if (result) {
+  //     dispatch(deleteActividades(id));
+  //     dispatch(deleteActividad(id));
+  //     successAlert();
+  //   }
+  // });
+  const handleDelete = (id)=>{
+    questionAlert('estás seguro de eliminar esta actividad?').then(result => {
+      if (result) {
+          dispatch(deleteCategorias(id));
+          dispatch(deleteCategories(id));
+          successAlert();
+        }
+      });
+  }
 
   // search filter
   const filteredCategories =
@@ -112,7 +129,12 @@ const CategoriesBackOffice = ({ history }) => {
                       >
                         <AiTwotoneEdit />
                       </Button>
-                      <Button ml={5} colorScheme="red" variant="solid">
+                      <Button
+                       ml={5} 
+                       colorScheme="red" 
+                       variant="solid"
+                       onClick={()=> handleDelete(category.id)}
+                       >
                         <AiOutlineClose />
                       </Button>
                     </Td>

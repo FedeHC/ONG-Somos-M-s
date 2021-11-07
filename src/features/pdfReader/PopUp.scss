@@ -42,11 +42,13 @@
 }
 
 .ModalButton {
+  display: block;
   background-color: #319795;
   color: #ffffff;
   font-size: 1rem;
   border-radius: 0.375rem;
   font-weight: 600;
   padding: 0.6rem;
-  margin: 1rem;
+  text-align: center;
+  margin: 0;
 }

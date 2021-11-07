@@ -23,8 +23,8 @@ import {
   successAlert,
 } from '../../../features/alert/alert';
 import {
-  createNovedad,
-  editNovedad,
+  // createNovedad,
+  // editNovedad,
   postNovedades,
   putNovedades,
 } from '../../../app/novedades/novedadesReducer';
