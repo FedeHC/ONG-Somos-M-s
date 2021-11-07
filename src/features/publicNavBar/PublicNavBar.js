@@ -131,6 +131,7 @@ const PublicNavBar = () => {
                 _hover={{ bg: 'blue.800' }}
                 color="white"
                 bg={'#00214d'}
+                _active={{ bg: '##171923' }}
                 rightIcon={<FaUserAlt />}
               >
                 {user.name}

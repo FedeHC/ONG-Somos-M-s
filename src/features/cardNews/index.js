@@ -10,7 +10,6 @@ import {
 import './card.scss';
 
 const CardNews = ({ news }) => {
-
   return (
     <Box
       maxW={'320px'}
@@ -25,7 +24,11 @@ const CardNews = ({ news }) => {
       mx={3}
     >
       <Box h={'210px'} bg={'white.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
-        <Image src={news.image} layout={'fill'} />
+        <Image
+          src={news.image}
+          minH="210px"
+          maxH="210px" /* layout={'fill'} */
+        />
       </Box>
       <Stack>
         <Heading
@@ -36,6 +39,7 @@ const CardNews = ({ news }) => {
           {news.name}
         </Heading>
         <Text
+          minH="72px"
           className="textCard"
           dangerouslySetInnerHTML={{ __html: news.content }}
           color={'gray.500'}

@@ -64,6 +64,7 @@ const Navbar = () => {
                 background: 'white',
                 color: '#00214D',
               }}
+              _active={{ bg: '##171923' }}
               as={Button}
               color="white"
               variant="outline"

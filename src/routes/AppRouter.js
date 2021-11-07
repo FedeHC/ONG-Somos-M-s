@@ -35,6 +35,10 @@ const AppRouter = () => {
     dispatch(startRenew());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (checking) {
     return <AppSpinner />;
   }
