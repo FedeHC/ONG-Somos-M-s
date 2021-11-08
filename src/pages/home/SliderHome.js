@@ -13,12 +13,14 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 //data example
 const data = [
   {
-    image: 'https://images.pexels.com/photos/9826019/pexels-photo-9826019.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    image:
+      'https://images.pexels.com/photos/9826019/pexels-photo-9826019.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     title: 'Talleres de verano',
     description: 'Dimos comienzo a los nuevos talleres de dibujo y pintura',
   },
   {
-    image: 'https://images.pexels.com/photos/7551760/pexels-photo-7551760.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    image:
+      'https://images.pexels.com/photos/7551760/pexels-photo-7551760.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     title: 'Jornada de juegos en el parque Avellaneda',
     description:
       'Reportamos un éxito en evento realizado en nuestro aniversario',
@@ -52,7 +54,7 @@ const Sliderhome = () => {
 
   const settings = {
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     initialSlide: 1,
     infinite: true,
     prevArrow: <PreviousBtn />,
@@ -62,7 +64,7 @@ const Sliderhome = () => {
   };
 
   return (
-    <div style={{width:"100%"}} className="carousel">
+    <div style={{ width: '100%' }} className="carousel">
       <Slider {...settings}>
         {data.map(item => (
           <div key={item.title}>
