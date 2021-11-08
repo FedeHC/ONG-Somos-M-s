@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import {
   FormControl,
@@ -11,19 +11,22 @@ import {
   Box,
   Stack,
   Text,
-  useColorModeValue,
+  /* useColorModeValue, */
   Heading,
-  Link,
+  Link as LinkChakra,
 } from '@chakra-ui/react';
-import { signupSchema, mostrarErrorTyc } from '../../config/signupSchema';
+import { signupSchema, mostrarErrorTyc } from './signupSchema';
 import GoogleMaps from '../../features/googleMaps/GoogleMaps';
 import PopUp from '../../features/pdfReader/PopUp';
 import styles from './register.module.css';
-import { registerUSer } from '../../services/apiAuth';
-import { successAlert } from '../../features/alert/alert';
+// import { registerUSer } from '../../services/apiAuth';
+// import { successAlert } from '../../features/alert/alert';
 import { Spinner } from '../../features/spinner';
+import { startRegister } from '../../app/auth/authReducer';
+import { Link } from 'react-router-dom';
 
-export const Register = ({ history }) => {
+export const Register = () => {
+  const dispatch = useDispatch();
   const { logged: isAuth, loading } = useSelector(state => state.auth);
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
   const [mapLocation, setMapLocation] = useState('');
@@ -47,14 +50,16 @@ export const Register = ({ history }) => {
           <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
             <Stack align={'center'}>
               <Heading fontSize={'4xl'}>
-                ¡Create una cuenta en Somos Más!!
+                Registrate en Somos Más
               </Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
-                ¿ya tienes una cuenta?{' '}
-                <Link color={'blue.400'} onClick={() => history.push('/login')}>
+                ¿Ya tenés una cuenta?{' '}
+                <LinkChakra color={'blue.400'}>
                   {' '}
-                  Ingresá en Somos Mas
-                </Link>{' '}
+                  <Link >
+                  Ingresá a Somos Mas
+                  </Link>
+                </LinkChakra>{' '}
                 ✌️
               </Text>
             </Stack>
@@ -70,21 +75,9 @@ export const Register = ({ history }) => {
                   validationSchema={signupSchema}
                   onSubmit={async (values, { resetForm }) => {
                     if (aceptarTerminos) {
-                      const values0 = Object.assign(values, mapLocation);
                       const { name, email, password } = values;
-                      const resp = await registerUSer('auth/new', {
-                        name,
-                        email,
-                        password,
-                      });
-                      if (!resp.error) {
-                        successAlert(
-                          resp.data.data.message,
-                          'Ingresá con tu nueva cuenta',
-                        );
-                        resetForm({});
-                        history.push('/login');
-                      }
+                      dispatch(startRegister({name,email,password}));
+                      resetForm({});
                     } else {
                       mostrarErrorTyc();
                     }
@@ -108,6 +101,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.name}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -122,6 +116,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.email}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -145,6 +140,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage className={styles.msg__error}>
                               {form.errors.password}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -169,6 +165,7 @@ export const Register = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.passwordConfirmation}
                             </FormErrorMessage>
+                            <br/>
                           </FormControl>
                         )}
                       </Field>

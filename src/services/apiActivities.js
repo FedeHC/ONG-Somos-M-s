@@ -24,5 +24,5 @@ export const updateActivity = async (body, id) => {
 
 // DELETE
 export const deleteActivity = async id => {
-  return await methodDeletePrivate(`${endPoint}/${id}`, id);
+  return await methodDeletePrivate(endPoint, id);
 };

@@ -10,7 +10,7 @@ const endPoint = process.env.REACT_APP_ENDPOINT_NEWS || 'news';
 // GET
 export const getNews = async (id = null) => {
   if (id) return await methodGetPublic(endPoint, id);
-  else return await methodGetPublic(`${endPoint}?limit=10`); // Limit results to 10.
+  else return await methodGetPublic(endPoint);
 };
 
 // POST

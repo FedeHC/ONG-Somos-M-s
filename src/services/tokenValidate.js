@@ -1,5 +1,5 @@
-export const tokenValidate = (tokenName=process.env.REACT_APP_NGO_TOKEN) => {
-  const token = localStorage.getItem(tokenName);
+export const tokenValidate = () => {
+  const token = localStorage.getItem("token");
   let Header = null;
 
   if (token !== null) {

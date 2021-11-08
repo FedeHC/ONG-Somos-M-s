@@ -13,19 +13,21 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 //data example
 const data = [
   {
-    image: 'https://pbs.twimg.com/media/FCaaiStWYAUQQJX?format=jpg&name=medium',
+    image:
+      'https://images.pexels.com/photos/9826019/pexels-photo-9826019.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     title: 'Talleres de verano',
     description: 'Dimos comienzo a los nuevos talleres de dibujo y pintura',
   },
   {
-    image: 'https://pbs.twimg.com/media/FCaK4JuXIAMMioA?format=jpg&name=small',
+    image:
+      'https://images.pexels.com/photos/7551760/pexels-photo-7551760.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     title: 'Jornada de juegos en el parque Avellaneda',
     description:
       'Reportamos un éxito en evento realizado en nuestro aniversario',
   },
   {
     image:
-      'https://pbs.twimg.com/media/FCbHF2pWYAAyy58?format=jpg&name=900x900',
+      'https://images.pexels.com/photos/7294558/pexels-photo-7294558.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     title: 'Reinauguración de la pileta del club',
     description:
       'Los más chicos ya pudieron estrenar la nueva pileta luego de los arreglos',
@@ -62,7 +64,7 @@ const Sliderhome = () => {
   };
 
   return (
-    <div style={{ margin: '30px' }} className="carousel">
+    <div style={{ width: '100%' }} className="carousel">
       <Slider {...settings}>
         {data.map(item => (
           <div key={item.title}>

@@ -1,0 +1,29 @@
+.facebook {
+  color: #4267b2;
+  margin-bottom: 0.5rem;
+}
+.instagram {
+  color: #833ab4;
+  margin-bottom: 0.5rem;
+}
+.mail {
+  color: red;
+  margin-bottom: 0.5rem;
+}
+.phone {
+  color: #4267b2;
+  margin-bottom: 0.5rem;
+}
+.linkedin {
+  color: #1da1f2;
+  margin-bottom: 0.5rem;
+}
+.twitter {
+  margin-bottom: 0.5rem;
+
+  color: #1da1f2;
+}
+
+.orgList {
+  list-style: none !important;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './about.scss';
 import Tweets from './tweets/Tweets';
-import { Heading, Text, Box, Center } from '@chakra-ui/react';
+import { Heading, Text, Box, Center, SimpleGrid } from '@chakra-ui/react';
 import LinkedinCard from './LinkedinCard';
 import SocialFollow from './SocialFollow';
 import { useSelector } from 'react-redux';
@@ -56,13 +56,24 @@ const About = () => {
             </Box>
           )}
         </div>
-
-        <div className="linkedinCard">
-          <div>
+        {/*         <div className="linkedinCard">
+         */}{' '}
+        <SimpleGrid
+          columns={1}
+          minChildWidth="250px"
+          spacing={50}
+          margin={20}
+          className="simpleGrid"
+        >
+          <div className="card1">
+            <LinkedinCard />
+          </div>
+          <Box mt="6rem">
             <Heading
               lineHeight={1.1}
               fontWeight={400}
               fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
+              mb="2.5rem"
             >
               <Text
                 as={'span'}
@@ -81,20 +92,23 @@ const About = () => {
                 Nueva Cuenta!
               </Text>
             </Heading>
-            <Box color="gray.500" fontSize="lg" textAlign={['center']}>
+            <Box
+              width="80%"
+              color="gray.500"
+              fontSize="2xl"
+              textAlign={['center']}
+            >
               {' '}
               Con el objetivo de llegar a más gente que quiera colaborar en este
               hermoso proyecto, creamos una nueva cuenta en Linkedin, siguenos!
             </Box>
-          </div>
-          <div className="card1">
-            <LinkedinCard />
-          </div>
-        </div>
+          </Box>
+        </SimpleGrid>
+        {/*         </div>
+         */}{' '}
         <div className="info">
           <SocialFollow />
         </div>
-
         <div className="tweetsSection">
           <Text fontSize="3xl" color={'blue.400'} as={'span'}>
             Nuestros últimos tweets!!

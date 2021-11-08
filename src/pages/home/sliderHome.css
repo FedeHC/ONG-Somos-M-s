@@ -1,3 +1,9 @@
+.carousel {
+  margin-top: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .carousel .slick-arrow.slick-prev,
 .carousel .slick-arrow.slick-next {
   width: 50px;
@@ -7,6 +13,7 @@
   justify-content: center;
   z-index: 1;
 }
+
 .carousel .slick-prev {
   left: 0;
   border-top-right-radius: 7px;

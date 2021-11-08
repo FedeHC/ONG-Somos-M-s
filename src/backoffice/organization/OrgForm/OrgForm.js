@@ -127,8 +127,8 @@ function OrgForm() {
                   </FormControl>
                 )}
               </Field>
-               {imgSrc && <img src={URL.createObjectURL(imgSrc)} alt="" />}
-               {!imgSrc && <img src={respose?.logo} />}
+               {imgSrc && <img src={URL.createObjectURL(imgSrc)} alt="Imagen del archivo" />}
+               {!imgSrc && <img src={respose?.logo} alt="Imagen del archivo" />}
               {/* SHORT DESCRIPTION INPUT */}
               <Field name="short_description"
                     mt={5}>

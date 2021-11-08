@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './activitiesList.scss';
-import {
+/* import './activitiesList.scss';
+ */ import {
   Table,
   Thead,
   Tbody,
@@ -13,6 +13,7 @@ import {
   Stack,
   Input,
   useColorModeValue,
+  Flex,
 } from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
@@ -24,10 +25,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setActividades,
   deleteActividad,
+  deleteActividades,
 } from '../../../app/actividades/actividadesReducer';
 
 import {
-  errorAlert,
+  // errorAlert,
   questionAlert,
   successAlert,
 } from '../../../features/alert/alert';
@@ -36,7 +38,7 @@ const ActivitiesList = ({ history }) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
 
-  const { actividadesList, loading, error } = useSelector(
+  const { actividadesList /* loading, error */ } = useSelector(
     state => state.actividades,
   );
 
@@ -48,6 +50,7 @@ const ActivitiesList = ({ history }) => {
   const handleDelete = id => {
     questionAlert('estás seguro de eliminar esta actividad?').then(result => {
       if (result) {
+        dispatch(deleteActividades(id));
         dispatch(deleteActividad(id));
         successAlert();
       }
@@ -62,100 +65,97 @@ const ActivitiesList = ({ history }) => {
         );
 
   return (
-    <div>
-      <Box
-        display="flex"
-        mt="2"
-        justifyContent="space-between"
-        alignContent="center"
-        m={5}
-        p={3}
-      >
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          as={'form'}
-          spacing={'12px'}
-          width={'100%'}
-          me={6}
-        >
-          <FormControl>
-            <Input
-              variant={'solid'}
-              width="100%"
-              borderWidth={1}
-              color={'gray.800'}
-              _placeholder={{
-                color: 'gray.400',
-              }}
-              borderColor={useColorModeValue('#00214D', 'gray.700')}
-              id={'email'}
-              type={'text'}
-              autoComplete="off"
-              placeholder={'Buscar...'}
-              aria-label={'Buscar...'}
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </FormControl>
-        </Stack>
-        <Link to="/backoffice/activities/create">
-          <Button
-            rightIcon={<AiFillPlusCircle />}
-            colorScheme="blue"
-            bgColor={'#00214D'}
-            variant="solid"
+    <Flex justifyContent="center">
+      <Box mt="2" m={5} p={3}>
+        <Flex justifyContent="space-between" mb="3rem">
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            as={'form'}
+            spacing={'12px'}
+            width={'100%'}
+            me={6}
           >
-            Crear Actividad
-          </Button>
-        </Link>
+            <FormControl>
+              <Input
+                variant={'solid'}
+                width="100%"
+                borderWidth={1}
+                color={'gray.800'}
+                _placeholder={{
+                  color: 'gray.400',
+                }}
+                borderColor={useColorModeValue('#00214D', 'gray.700')}
+                id={'email'}
+                type={'text'}
+                autoComplete="off"
+                placeholder={'Buscar...'}
+                aria-label={'Buscar...'}
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+            </FormControl>
+          </Stack>
+          <Link to="/backoffice/activities/create">
+            <Button
+              rightIcon={<AiFillPlusCircle />}
+              colorScheme="blue"
+              bgColor={'#00214D'}
+              variant="solid"
+            >
+              Crear Actividad
+            </Button>
+          </Link>
+        </Flex>
+        <Box width="60vw">
+          <Table size="lg" variant="striped" colorScheme="blue">
+            <Thead>
+              <Tr bg={'#00214D'}>
+                <Th color="white">Nombre</Th>
+                <Th color="white">Imagen</Th>
+                <Th color="white">Creado</Th>
+                <Th color="white">Acciones</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {filteredActivities &&
+                filteredActivities.map(activity => (
+                  <Tr key={activity.id}>
+                    <Td fontWeight="600">{activity.name}</Td>
+                    <Td>
+                      <img
+                        className="profilePhoto"
+                        width="70px"
+                        src={activity.image}
+                        alt=""
+                      />
+                    </Td>
+                    <Td fontWeight="600">
+                      {activity.created_at.substring(0, 10)}
+                    </Td>
+                    <Td>
+                      <Button
+                        colorScheme="yellow"
+                        variant="solid"
+                        onClick={() => handleEdit(activity)}
+                      >
+                        <AiTwotoneEdit />
+                      </Button>
+                      <Button
+                        ml={5}
+                        colorScheme="red"
+                        variant="solid"
+                        onClick={() => handleDelete(activity.id)}
+                      >
+                        <AiOutlineClose />
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+        </Box>
       </Box>
-      <div className="container">
-        <Table size="lg" variant="striped" colorScheme="blue">
-          <Thead>
-            <Tr bg={'#00214D'}>
-              <Th color="white">Name</Th>
-              <Th color="white">Image</Th>
-              <Th color="white">createdAt</Th>
-              <Th color="white">Acciones</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredActivities &&
-              filteredActivities.map(activity => (
-                <Tr key={activity.id}>
-                  <Td>{activity.name}</Td>
-                  <Td>
-                    <img
-                      className="profilePhoto"
-                      width="70px"
-                      src={activity.image}
-                      alt=""
-                    />
-                  </Td>
-                  <Td>{activity.created_at}</Td>
-                  <Td>
-                    <Button
-                      colorScheme="yellow"
-                      variant="solid"
-                      onClick={() => handleEdit(activity)}
-                    >
-                      <AiTwotoneEdit />
-                    </Button>
-                    <Button
-                      ml={5}
-                      colorScheme="red"
-                      variant="solid"
-                      onClick={() => handleDelete(activity.id)}
-                    >
-                      <AiOutlineClose />
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-          </Tbody>
-        </Table>
-      </div>
-    </div>
+    </Flex>
   );
 };
 

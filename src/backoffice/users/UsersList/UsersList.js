@@ -11,8 +11,8 @@ import {
   Stack,
   FormControl,
   Input,
-  useColorModeValue,
   Select,
+  Flex,
 } from '@chakra-ui/react';
 import {
   AiTwotoneEdit,
@@ -29,7 +29,7 @@ const UsersList = ({ history }) => {
   const [rol, setRol] = useState('Todo');
   const [search, setSearch] = useState('');
 
-  const { usersList, loading, error } = useSelector(state => state.users);
+  const { usersList /* loading, error */ } = useSelector(state => state.users);
 
   const handleEdit = user => {
     dispatch(setUser(user));
@@ -50,107 +50,104 @@ const UsersList = ({ history }) => {
       );
 
   return (
-    <div>
-      <Box
-        display="flex"
-        mt="2"
-        justifyContent="space-between"
-        alignContent="center"
-        m={5}
-        p={3}
-      >
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          as={'form'}
-          spacing={'12px'}
-          width={'100%'}
-          me={6}
-        >
-          {typeSearch ? (
-            <Select
-              onChange={e => setRol(e.target.value)}
-              placeholder="Selecciona rol"
-            >
-              <option value="Todo">Todo</option>
-              <option value="admin">Administrador</option>
-              <option value="regular">Usuario Regular</option>
-            </Select>
-          ) : (
-            <FormControl>
-              <Input
-                variant={'solid'}
-                width="100%"
-                borderWidth={1}
-                color={'gray.800'}
-                _placeholder={{
-                  color: 'gray.400',
-                }}
-                /* borderColor={useColorModeValue('#00214D', 'gray.700')} */
-                type={'text'}
-                autoComplete="off"
-                placeholder={'Buscar...'}
-                aria-label={'Buscar...'}
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </FormControl>
-          )}
-        </Stack>
-        <Button
-          colorScheme="yellow"
-          bgColor={'#ECC948'}
-          variant="solid"
-          onClick={() => settypeSearch(!typeSearch)}
-          p={5}
-          mr={2}
-        >
-          {typeSearch ? 'Filtro por nombre' : 'Filtro por rol'}
-        </Button>
-        <Link to="/backoffice/users/create">
-          <Button
-            rightIcon={<AiFillPlusCircle />}
-            colorScheme="blue"
-            bgColor={'#00214D'}
-            variant="solid"
+    <Flex justifyContent="center">
+      <Box mt="2" m={5} p={3}>
+        <Flex justifyContent="space-between" mb="3rem">
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            as={'form'}
+            spacing={'12px'}
+            width={'50%'}
+            me={6}
           >
-            Crear usuario
+            {typeSearch ? (
+              <Select
+                width="100%"
+                onChange={e => setRol(e.target.value)}
+                placeholder="Selecciona rol"
+              >
+                <option value="Todo">Todo</option>
+                <option value="admin">Administrador</option>
+                <option value="regular">Usuario Regular</option>
+              </Select>
+            ) : (
+              <FormControl>
+                <Input
+                  variant={'solid'}
+                  width="100%"
+                  borderWidth={1}
+                  color={'gray.800'}
+                  _placeholder={{
+                    color: 'gray.400',
+                  }}
+                  /* borderColor={useColorModeValue('#00214D', 'gray.700')} */
+                  type={'text'}
+                  autoComplete="off"
+                  placeholder={'Buscar...'}
+                  aria-label={'Buscar...'}
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                />
+              </FormControl>
+            )}
+          </Stack>
+          <Button
+            colorScheme="yellow"
+            bgColor={'#ECC948'}
+            variant="solid"
+            onClick={() => settypeSearch(!typeSearch)}
+            p={5}
+            mr={2}
+          >
+            {typeSearch ? 'Filtro por nombre' : 'Filtro por rol'}
           </Button>
-        </Link>
-      </Box>
-      <div className="container">
-        <Table size="lg" variant="striped" colorScheme="blue">
-          <Thead>
-            <Tr bg={'#00214D'}>
-              <Th color="white">Name</Th>
-              <Th color="white">Email</Th>
-              <Th color="white">Acciones</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredUsers &&
-              filteredUsers.map(user => (
-                <Tr key={user.id}>
-                  <Td>{user.name}</Td>
+          <Link to="/backoffice/users/create">
+            <Button
+              rightIcon={<AiFillPlusCircle />}
+              colorScheme="blue"
+              bgColor={'#00214D'}
+              variant="solid"
+            >
+              Crear usuario
+            </Button>
+          </Link>
+        </Flex>
 
-                  <Td>{user.email}</Td>
-                  <Td>
-                    <Button
-                      colorScheme="yellow"
-                      variant="solid"
-                      onClick={() => handleEdit(user)}
-                    >
-                      <AiTwotoneEdit />
-                    </Button>
-                    <Button ml={5} colorScheme="red" variant="solid">
-                      <AiOutlineClose />
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-          </Tbody>
-        </Table>
-      </div>
-    </div>
+        <Box width="60vw">
+          <Table size="lg" variant="striped" colorScheme="blue">
+            <Thead>
+              <Tr bg={'#00214D'}>
+                <Th color="white">Nombre</Th>
+                <Th color="white">Email</Th>
+                <Th color="white">Acciones</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {filteredUsers &&
+                filteredUsers.map(user => (
+                  <Tr key={user.id}>
+                    <Td fontWeight="600">{user.name}</Td>
+
+                    <Td fontWeight="600">{user.email.substring(0, 18)}</Td>
+                    <Td>
+                      <Button
+                        colorScheme="yellow"
+                        variant="solid"
+                        onClick={() => handleEdit(user)}
+                      >
+                        <AiTwotoneEdit />
+                      </Button>
+                      <Button ml={5} colorScheme="red" variant="solid">
+                        <AiOutlineClose />
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+            </Tbody>
+          </Table>
+        </Box>
+      </Box>
+    </Flex>
   );
 };
 

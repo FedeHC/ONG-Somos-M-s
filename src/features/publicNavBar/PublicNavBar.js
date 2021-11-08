@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../assets/images/logo-ngo.png';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Flex,
@@ -21,6 +21,7 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
+  Skeleton,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -28,10 +29,12 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
+import Logo from '../assets/images/logo-ngo.png';
 import { PUBLIC_LINKS } from '../publicLinks/PublicLinks';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../app/auth/authReducer';
-import { Skeleton } from '@chakra-ui/react';
+import { FiLogIn } from 'react-icons/fi';
+import { IoMdLogIn } from 'react-icons/io';
+import { FaUserAlt } from 'react-icons/fa';
 
 const PublicNavBar = () => {
   const dispatch = useDispatch();
@@ -96,12 +99,12 @@ const PublicNavBar = () => {
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
-                  fontWeight={300}
-                  color={'black'}
-                  bg={'#bae8e8'}
+                  color={'gray.800'}
+                  bg={'linkedin.200'}
                   _hover={{
                     bg: 'cyan.100',
                   }}
+                  rightIcon={<FiLogIn />}
                 >
                   Login
                 </Button>
@@ -110,12 +113,12 @@ const PublicNavBar = () => {
                 <Button
                   display={{ base: 'none', md: 'inline-flex' }}
                   fontSize={'sm'}
-                  fontWeight={300}
                   color={'white'}
                   bg={'#00214d'}
                   _hover={{
                     bg: 'blue.800',
                   }}
+                  rightIcon={<IoMdLogIn />}
                 >
                   Registrarse
                 </Button>
@@ -128,13 +131,15 @@ const PublicNavBar = () => {
                 _hover={{ bg: 'blue.800' }}
                 color="white"
                 bg={'#00214d'}
+                _active={{ bg: '##171923' }}
+                rightIcon={<FaUserAlt />}
               >
                 {user.name}
               </MenuButton>
               <MenuList>
                 <MenuGroup title="Perfil">
                   <Link to="/donar">
-                    <MenuItem  color="blue.800">Donar</MenuItem>
+                    <MenuItem color="blue.800">Donar</MenuItem>
                   </Link>
                   <Link to="/backoffice">
                     <MenuItem color="blue.800">Backoffice</MenuItem>
@@ -162,8 +167,8 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {PUBLIC_LINKS.map(navItem => (
-        <Box key={navItem.label}>
+      {PUBLIC_LINKS.map((navItem, index) => (
+        <Box key={navItem.label ?? index}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Link to={navItem.href ?? '#'}>
@@ -189,8 +194,8 @@ const DesktopNav = () => {
                 minW={'sm'}
               >
                 <Stack>
-                  {navItem.children.map(child => (
-                    <DesktopSubNav key={child.label} {...child} />
+                  {navItem.children.map((child, index) => (
+                    <DesktopSubNav key={child.label ?? index} {...child} />
                   ))}
                 </Stack>
               </PopoverContent>
@@ -206,7 +211,7 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
-      to={href}
+      to={href ?? '#'}
       role={'group'}
       display={'block'}
       p={2}
@@ -248,8 +253,8 @@ const MobileNav = () => {
       p={4}
       display={{ md: 'none' }}
     >
-      {PUBLIC_LINKS.map(navItem => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+      {PUBLIC_LINKS.map((navItem, index) => (
+        <MobileNavItem key={navItem.label ?? index} {...navItem} />
       ))}
     </Stack>
   );
@@ -261,7 +266,6 @@ const MobileNavItem = ({ children, label, href }) => {
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
         href={href ?? '#'}
         justify={'space-between'}
         align={'center'}
@@ -296,8 +300,8 @@ const MobileNavItem = ({ children, label, href }) => {
           align={'start'}
         >
           {children &&
-            children.map(child => (
-              <Link key={child.label} py={2} to={child.href}>
+            children.map((child, index) => (
+              <Link key={child.label ?? index} py={2} to={child.href ?? '#'}>
                 {child.label}
               </Link>
             ))}

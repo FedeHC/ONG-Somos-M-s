@@ -5,6 +5,7 @@ import { FiMail } from 'react-icons/fi';
 import FormContact from './formContacto/FormContact';
 import Mapview from './map/MapView';
 import { convertFloat } from './map/arrayToFloat';
+import { Text } from '@chakra-ui/react';
 import {
   Alert,
   AlertDescription,
@@ -34,7 +35,9 @@ const Contact = () => {
 
       <div className="contactContainer">
         <div id="info">
-          <p className="listTitle">Envianos un mensaje</p>
+          <Text fontSize="3xl" color={'linkedin.500'} mb={1}>
+            Envianos un mensaje
+          </Text>
           <h1>Nos interesa saber tu opinión sobre nuestras actividades!</h1>
           <ul className="list">
             <li className="listItem">
@@ -55,7 +58,9 @@ const Contact = () => {
           </ul>
         </div>
         <div id="map">
-          <h1>Encuentranos en un mapa!</h1>
+          <Text p={1} color={'linkedin.500'} fontSize="3xl">
+            Encuentranos en un mapa!
+          </Text>
           {objeto.address ? (
             <Mapview address={convertFloat(objeto.address)} />
           ) : (

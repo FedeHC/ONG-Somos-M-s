@@ -1,18 +1,18 @@
 .sidebar {
-    background-color: #00214D;
-    width: 14rem;
-    height: 100%;
-    border-right: 1px solid gray;
-    position: absolute; 
-    z-index: 3;
-} 
+  background-color: #00214d;
+  width: 14rem;
+  height: 100vh;
+  border-right: 1px solid gray;
+  position: absolute;
+  z-index: 3;
+}
 
 .sidebar ul {
-    list-style: none;
-    padding: 1rem 2rem;
+  list-style: none;
+  padding: 1rem 2rem;
 }
 
 .sidebar ul li {
-    margin-bottom: 1rem;
-    color: white;
+  margin-bottom: 1rem;
+  color: white;
 }

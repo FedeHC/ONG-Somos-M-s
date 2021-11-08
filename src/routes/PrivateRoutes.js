@@ -28,7 +28,7 @@ function PrivateRoutes() {
       <Navbar />
       {/* <PrivateNavBar /> */}
       {/* <SideBar /> */}
-
+      <div>
       {/* ROUTES */}
       <Switch>
         <Route exact path="/backoffice" component={Backoffice} />
@@ -101,8 +101,9 @@ function PrivateRoutes() {
         <Route exact path="/backoffice/users" component={UsersList} />
         <Route exact path="/backoffice/users/create" component={UserForm} />
         <Route exact path="/backoffice/users/edit/:id" component={UserForm} />
-        <Route component={Page404} />
+        <Route path="*" component={Page404} />
       </Switch>
+      </div>
     </>
   );
 }

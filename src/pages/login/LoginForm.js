@@ -9,10 +9,10 @@ import {
   Flex,
   Stack,
   Text,
-  Link,
-  useColorModeValue,
+  Link as LinKChakra,
   Box,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
@@ -32,7 +32,7 @@ const SignupSchema = Yup.object().shape({
     .matches(/(?=\w*[a-z])/, 'al menos 1 letra requerida'),
 });
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
   const { logged: isAuth, loading } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
@@ -51,21 +51,22 @@ const LoginForm = ({ history }) => {
         <Flex minH={'100vh'} align={'center'} justify={'center'}>
           <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
             <Stack align={'center'}>
-              <Heading fontSize={'4xl'}>¡Ingresa a Somos Más!!</Heading>
+              <Heading fontSize={'4xl'}>Ingresa a Somos Más</Heading>
               <Text fontSize={'lg'} color={'gray.600'}>
-                ¿No tienes una cuenta?
-                <Link
+                ¿No tenés una cuenta?
+                <LinKChakra
                   color={'blue.400'}
-                  onClick={() => history.push('/register')}
                 >
+                 <Link to="/register">
                   {' '}
-                  Crear una
-                </Link>{' '}
+                  Crear una cuenta
+                 </Link >
+                </LinKChakra>{' '}
                 ✌️
               </Text>
             </Stack>
-            <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
-              <Stack spacing={4}>
+              <Box rounded={'lg'} boxShadow="dark-lg" p={8}>
+                <Stack spacing={10}>
                 <Formik
                   initialValues={{
                     email: '',
@@ -89,6 +90,7 @@ const LoginForm = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.email}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -109,6 +111,7 @@ const LoginForm = ({ history }) => {
                             <FormErrorMessage>
                               {form.errors.password}
                             </FormErrorMessage>
+                            <br/><br/>
                           </FormControl>
                         )}
                       </Field>
@@ -125,8 +128,8 @@ const LoginForm = ({ history }) => {
                     </Form>
                   )}
                 </Formik>
-              </Stack>
-            </Box>
+            </Stack>
+              </Box>
           </Stack>
         </Flex>
       )}

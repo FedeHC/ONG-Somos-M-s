@@ -2,7 +2,7 @@ import axios from "axios";
 import { tokenValidate } from "./tokenValidate";
 
 
-const url = process.env.REACT_APP_ENDPOINT_MAIN_URL;
+const url = process.env.REACT_APP_ENDPOINT_MAIN_URL ;
 
 // POST
 export const methodPostPrivate = async (endpoint, body, id = null) => {

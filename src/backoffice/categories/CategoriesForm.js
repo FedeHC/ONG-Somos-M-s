@@ -7,12 +7,18 @@ import { Formik, Form, Field } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import * as Yup from "yup";
-import { getCategories, createCategory, updateCategory, deleteCategory } from "../../services/apiCategories";
+import { getCategories} from "../../services/apiCategories";
+import { useDispatch } from "react-redux";
+import { getBase64FomFile } from "../../helper/convertImage";
+import { postCategorias, putCategorias } from "../../app/categorias/categoriasReducer";
+import { successAlert } from "../../features/alert/alert";
 
 
-const CategoriesForm = () => {
+const CategoriesForm = ({history}) => {
+  const dispatch = useDispatch();
   // STATE
   const [response, setResponse] = useState([]);
+  const [imgSv, setImgSv] = useState("");
 
   // ID & URL
   const { id } = useParams();   // Get id if exists in URL, otherwise null/undefined.
@@ -29,14 +35,16 @@ const CategoriesForm = () => {
 
   // HANDLER
   const submitHandler = (values) => {
-    if(location.includes("create"))
-      createCategory(values);
-    else if(location.includes("edit"))
-      updateCategory(values, id)
-    else if(location.includes("delete"))
-      deleteCategory(values, id)
-    else
-      return;
+    if (location.includes('create')) {
+      values.image = imgSv;
+      dispatch(postCategorias(values))
+      successAlert();
+    } else if (location.includes('edit')) {
+      values.image = imgSv;
+      dispatch(putCategorias({values, id}));
+      successAlert();
+    }
+    history.push("/backoffice/categories");
   };
 
   // FORM TITLE
@@ -55,13 +63,6 @@ const CategoriesForm = () => {
   const formSchema = Yup.object().shape({
     name: Yup.string().required("Requerido").min(3, "Se requieren 3 caracteres como mínimo"),
     description: Yup.string().required("Requerido"),
-    image: Yup.mixed().required("Requerido")
-                      .test("type",
-                            "Formato de imagen incorrecto. Solo acepta archivos .png, .jpg o .jpeg",
-                            (file) => {
-                              return (file && (file.type === "image/png" ||
-                                                file.type === "image/jpg" ||
-                                                file.type === "image/jpeg"));})
   });
 
   // INITIAL FORMIK VALUES
@@ -145,6 +146,9 @@ const CategoriesForm = () => {
                               const files = event.target.files;
                               let myFiles = Array.from(files);
                               form.setFieldValue("image", myFiles[0]);
+                              getBase64FomFile(myFiles[0], function(base64){
+                              setImgSv(base64);
+                              });
                             }} />
                       <FormErrorMessage>{form.errors.image}</FormErrorMessage>
                     </FormControl>

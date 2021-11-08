@@ -8,8 +8,8 @@ const Sidebar = ({setMenu}) => {
   return (
     <div className="sidebar animate__animated animate__backInLeft">
       <ul>
-        {routes.map(route => (
-          <Link to={route.path}>
+        {routes.map((route, index) => (
+          <Link key={index} to={route.path}>
             <div onClick={() => {
               setMenu(false)
             }}> 

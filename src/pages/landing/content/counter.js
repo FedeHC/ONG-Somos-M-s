@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Text } from '@chakra-ui/react';
 import './content.css';
 
-const Counter = () => {
+const Counter = ({ date }) => {
   const [timerDays, setTimerDays] = useState('00');
   const [timerHours, setTimerHours] = useState('00');
   const [timerMinutes, setTimerMinutes] = useState('00');
@@ -10,7 +11,7 @@ const Counter = () => {
   let interval = useRef();
 
   const startTimer = () => {
-    const countDownDate = new Date('April 4 2022 00:00:00').getTime();
+    const countDownDate = date;
 
     interval = setInterval(() => {
       const now = new Date().getTime();
@@ -37,6 +38,7 @@ const Counter = () => {
   useEffect(() => {
     startTimer();
     return () => {
+      // eslint-disable-next-line
       clearInterval(interval.current);
     };
   });
@@ -46,31 +48,23 @@ const Counter = () => {
       <section className="timer">
         <div>
           <section>
-            <p>{timerDays}</p>
-            <p>
-              <small>Días</small>
-            </p>
+            <Text>{timerDays}</Text>
+            <Text color="gray.500">Días</Text>
           </section>
           <span>:</span>
           <section>
-            <p>{timerHours}</p>
-            <p>
-              <small>Horas</small>
-            </p>
+            <Text>{timerHours}</Text>
+            <Text color="gray.500">Horas</Text>
           </section>
           <span>:</span>
           <section>
-            <p>{timerMinutes}</p>
-            <p>
-              <small>Minutos</small>
-            </p>
+            <Text>{timerMinutes}</Text>
+            <Text color="gray.500">Minutos</Text>
           </section>
           <span>:</span>
           <section>
-            <p>{timerSeconds}</p>
-            <p>
-              <small>Segundos</small>
-            </p>
+            <Text>{timerSeconds}</Text>
+            <Text color="gray.500">Segundos</Text>
           </section>
         </div>
       </section>
