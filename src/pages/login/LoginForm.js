@@ -33,6 +33,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();

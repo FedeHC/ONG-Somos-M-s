@@ -27,6 +27,7 @@ import { Link } from 'react-router-dom';
 
 export const Register = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line
   const { logged: isAuth, loading } = useSelector(state => state.auth);
   const [aceptarTerminos, setaceptarTerminos] = useState(false);
   const [mapLocation, setMapLocation] = useState('');
