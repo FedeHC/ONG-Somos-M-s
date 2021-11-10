@@ -3,7 +3,7 @@
 
 Este proyecto fue desarrollado en React a lo largo de 6 semanas junto con un equipo de 5 compañeros durante la aceleración de Alkemy Labs, con el fin de estar *job ready* al simular un entorno real de trabajo junto con un mentor.
 
-![Imagen](https://i.ibb.co/tcFyLFt/grabacion.gif)
+<img src="https://i.ibb.co/tcFyLFt/grabacion.gif" />
 
 Librerías destacadas del proyecto:
 - [Chakra UI](https://chakra-ui.com/), [Bootstrap](https://react-bootstrap.github.io/) como librerías UI.
